@@ -1,6 +1,6 @@
-import filterForm from './form';
-import filterVarieties from './variety';
-import {filterName, checkMegaPokeName } from './name';
+import filterForm from './form.mjs';
+import filterVarieties from './variety.mjs';
+import { filterName, checkMegaPokeName } from './name.mjs';
 
 const POKE_URL = 'https://pokeapi.co/api/v2/pokemon/';
 
@@ -17,15 +17,18 @@ async function fetchPoke(url, names, no) {
 
   return formData.map(({ sprity, form }) => {
     const { name, form: checkedForm } = checkMegaPokeName(nameData, form);
+    const key = `${id}-${form.en}`;
+    const sprityPiece = sprity.split('/').at(-1);
 
     return {
       id,
       no,
-      sprity,
+      key,
       name,
       types,
+      sprity: sprityPiece,
       form: checkedForm,
-    }
+    };
   });
 }
 
@@ -43,10 +46,10 @@ async function getPokeData(no) {
   return [].concat(...pokes);
 }
 
-async function getPokes(index) {
+export default async function getPokes(no) {
   const result = [];
 
-  const start = (index * 100) + 1;
+  const start = (no * 100) + 1;
   const end = start + 100;
 
   for (let i = start; i < end; i += 1) {
@@ -55,8 +58,8 @@ async function getPokes(index) {
     }
     result.push(getPokeData(i));
   }
+  const pokes = await Promise.all(result);
 
-  return [].concat(...(await Promise.all(result)));
+  return [].concat(...pokes);
+  // return [].concat(...(await Promise.all(result)));
 }
-
-export default getPokes;

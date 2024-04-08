@@ -3,8 +3,6 @@ const defaultFormSpecies = [
   'koraidon',
   'miraidon',
   'average',
-  // 'pumpkaboo',
-  // 'gourgeist',
 ];
 
 const exclusionFormSpecies = [
@@ -48,16 +46,6 @@ function translateFormNameKo(form, formNames) {
   if (form === 'paldea') {
     return '팔데아의 모습';
   }
-
-  // if (form === 'paldea-combat-breed') {
-  //   return '팔데아의 모습 / 컴뱃종';
-  // }
-  // if (form === 'paldea-blaze-breed') {
-  //   return '팔데아의 모습 / 블레이즈종';
-  // }
-  // if (form === 'paldea-aqua-breed') {
-  //   return '팔데아의 모습 / 워터종';
-  // }
 
   if (form === 'male') {
     return '수컷의 모습';
@@ -170,8 +158,8 @@ async function getForm(formUrl) {
       form: {
         en: 'Paldean Form / Blaze Breed',
         ko: '팔데아의 모습 / 블레이즈종',
-      }
-    }
+      },
+    };
   }
 
   if (formName === 'paldea-combat-breed') {
@@ -181,7 +169,7 @@ async function getForm(formUrl) {
         en: 'Paldean Form / Combat Breed',
         ko: '팔데아의 모습 / 컴뱃종',
       },
-    }
+    };
   }
 
   if (formName === 'paldea-aqua-breed') {
@@ -200,8 +188,8 @@ async function getForm(formUrl) {
       form: {
         en: 'Galarian Form / Zen Mode',
         ko: '가라르의 모습 / 달마 모드',
-      }
-    }
+      },
+    };
   }
 
   if (pokemon?.name === 'terapagos') {
@@ -211,7 +199,7 @@ async function getForm(formUrl) {
         en: 'Normal Form',
         ko: '노말폼',
       },
-    }
+    };
   }
 
   const formNameKo = translateFormNameKo(form, formNames);
@@ -225,7 +213,7 @@ async function getForm(formUrl) {
   };
 }
 
-async function filterForm(nameEn, sprites, forms) {
+export default async function filterForm(nameEn, sprites, forms) {
   const sprity = sprites?.front_default;
 
   if (exclusionFormSpecies.includes(nameEn)) {
@@ -258,11 +246,9 @@ async function filterForm(nameEn, sprites, forms) {
   }
 
   const pokeForms = await Promise.all(forms.map((form) => getForm(form.url)));
-  
+
   return pokeForms.map((form) => ({
     sprity: form.sprity || sprity,
     form: form.form,
   }));
 }
-
-export default filterForm;

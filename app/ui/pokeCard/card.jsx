@@ -1,14 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
 import typesKo from '@/app/translations/tpye';
-// import { formKo } from '../../translations/form';
 
 export default function Card({
   name, sprity, types, id, no, form,
 }) {
-  // const sprity_url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-  // const formText = formKo[transform(form)] || form;
-
+  const sprityUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${sprity}`;
   const isBlockFormText = form.en === 'default' ? 'hidden' : 'block';
 
   return (
@@ -16,7 +13,7 @@ export default function Card({
       <div className="text-sm text-slate-600 font-medium">No.{no} id.{id}</div>
       <div className="flex justify-center my-0.5">
         <Image
-          src={sprity}
+          src={sprityUrl}
           alt={name.en}
           width={85}
           height={85}

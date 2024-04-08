@@ -5,7 +5,7 @@ function findLanguageName(names, targetLanguage) {
 export function filterName(names) {
   const nameEn = findLanguageName(names, 'en');
 
-  if (nameEn.toLowerCase() === 'percharunt') {
+  if (nameEn.toLowerCase() === 'pecharunt') {
     return {
       en: nameEn,
       ko: '복숭악동',
@@ -21,7 +21,6 @@ export function filterName(names) {
 }
 
 export function checkMegaPokeName(name, form) {
-  console.log('name: ', name, 'form:', form);
   if (form?.en?.includes('Mega')) {
     return {
       form: {
@@ -37,5 +36,5 @@ export function checkMegaPokeName(name, form) {
   return {
     form,
     name,
-  }
+  };
 }
