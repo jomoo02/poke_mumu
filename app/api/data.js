@@ -4,8 +4,8 @@ import PokeModel from '../models/Poke.mjs';
 
 export async function fetchPokes(index) {
   try {
-    const start = (index * 200) + 1;
-    const end = start + 200 - 1;
+    const start = (index * 240) + 1;
+    const end = start + 240 - 1;
     const result = await PokeModel
       .find(
         { order: { $gte: start, $lte: end } },
