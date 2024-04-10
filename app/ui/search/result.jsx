@@ -1,8 +1,9 @@
 import React from 'react';
 import SearchPoke from './poke';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
+import { checkTextNumberType } from '@/app/lib/utils';
 
-export default function SearchResult({ result }) {
+export default function SearchResult({ searchText, result }) {
   const { localPokes, savePokeLocal } = useLocalStorage();
 
   const handleClick = (poke) => {
@@ -18,7 +19,7 @@ export default function SearchResult({ result }) {
   const renderPokeItem = (poke) => (
     <div
       key={poke.key}
-      className="h-[50px]"
+      className="h-[50px] py-1 first:pt-0.5 first:h-[48px]"
       onClick={() => handleClick(poke)}
       onKeyDown={(e) => handleKeyDown(e, poke)}
       tabIndex={0}
@@ -35,14 +36,28 @@ export default function SearchResult({ result }) {
     </div>
   );
 
-  const searchPokes = result.length === 0
+  const searchPokes = !searchText
     ? localPokes.map(renderPokeItem)
     : result.map(renderPokeItem);
 
+  const isTextNumber = checkTextNumberType(searchText);
+
+  const h3Text = !searchText ? '최근 검색한 포켓몬' : (
+    <div className="flex gap-x-1">
+      <div className={`flex gap-x-1 ${isTextNumber ? 'flex-row-reverse' : ''}`}>
+        <span className="text-slate-600">
+          {isTextNumber ? `${searchText}` : `${searchText}`}
+        </span>
+        <span>{isTextNumber ? '도감번호' : '(이)가 포함된' }</span>
+      </div>
+      <span>포켓몬</span>
+    </div>
+  );
+
   return (
     <div className="bg-white max-h-[250px] overflow-auto border rounded-b-md">
-      <h3 className="text-slate-500 px-2 text-sm h-6">최근 검색한 포켓몬</h3>
-      <div>{searchPokes}</div>
+      <h3 className="text-slate-500 px-2 text-sm h-6 flex items-center">{h3Text}</h3>
+      <div className="grid grid-cols-1 divide-y">{searchPokes}</div>
     </div>
   );
 }

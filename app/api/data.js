@@ -1,6 +1,7 @@
 'use server';
 
 import PokeModel from '../models/Poke.mjs';
+import { checkTextNumberType } from '../lib/utils';
 
 export async function fetchPokes(index) {
   try {
@@ -60,8 +61,9 @@ const filterById = (pokes) => {
 
 export async function fetchSearchPokes(text) {
   try {
-    const parseIntText = Number.parseInt(text, 10);
-    const query = Number.isNaN(parseIntText) ? { 'name.ko': { $regex: text, $options: 'i' } } : { no: parseIntText };
+    const isTextNumber = checkTextNumberType(text);
+    const query = isTextNumber ? { no: Number(text) } : { 'name.ko': { $regex: text, $options: 'i' } };
+
     const projection = {
       name: 1,
       id: 1,

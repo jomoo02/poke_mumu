@@ -6,7 +6,7 @@ import { fetchSearchPokes } from '../../api/data';
 import SearchResult from './result';
 
 export default function Search() {
-  const [searhText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -15,8 +15,8 @@ export default function Search() {
   }, 300);
 
   const fetchSearch = async () => {
-    if (searhText) {
-      const data = await fetchSearchPokes(searhText);
+    if (searchText) {
+      const data = await fetchSearchPokes(searchText);
       setSearchResult(data);
     } else {
       setSearchResult([]);
@@ -31,7 +31,7 @@ export default function Search() {
 
   useEffect(() => {
     fetchSearch();
-  }, [searhText]);
+  }, [searchText]);
 
   useEffect(() => {
     window.addEventListener('click', onClickEvent);
@@ -54,7 +54,7 @@ export default function Search() {
       {isFocused
         ? (
           <div className="flex flex-col absolute top-8 w-full">
-            <SearchResult result={searchResult} />
+            <SearchResult searchText={searchText} result={searchResult} />
           </div>
         )
         : null}

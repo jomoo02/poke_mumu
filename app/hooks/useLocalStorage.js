@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
+const KEY = 'poke_local';
 
 export default function useLocalStorage() {
-  const KEY = 'poke_local';
-  const [localPokes, setLocalPokes] = useState(
-    JSON.parse(window.localStorage.getItem(KEY)) || [],
-  );
-
   const getPokeLocal = () => JSON.parse(window.localStorage.getItem(KEY)) || [];
+  const [localPokes, setLocalPokes] = useState(getPokeLocal());
 
   const filterPoke = (id, pokes) => pokes.filter(({ id: localPokeId }) => {
     if (localPokeId !== id) {
@@ -25,7 +23,6 @@ export default function useLocalStorage() {
 
   return {
     localPokes,
-    getPokeLocal,
     savePokeLocal,
   };
 }

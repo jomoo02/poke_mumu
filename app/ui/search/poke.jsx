@@ -9,7 +9,7 @@ export default function SearchPoke({
   const formText = form.en === 'default' ? '' : form.ko;
 
   return (
-    <div className="px-3 py-1">
+    <div className="px-3">
       <div className="flex justify-between items-center">
         <div className="grid w-[240px] grid-cols-4 items-center">
           <Image
