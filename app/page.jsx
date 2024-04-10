@@ -6,6 +6,9 @@ export default async function Home() {
   await connectMongoose();
 
   return (
-    <CardList />
+    <div>
+      <CardList />
+    </div>
+
   );
 }

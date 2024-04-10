@@ -7,10 +7,11 @@ export default function Card({
 }) {
   const sprityUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${sprity}`;
   const isBlockFormText = form.en === 'default' ? 'hidden' : 'block';
+  const pokeNoText = `No.${no}`;
 
   return (
     <div className="border-2 border-slate-400 w-56 h-56 p-3 flex flex-col">
-      <div className="text-sm text-slate-600 font-medium">No.{no} id.{id}</div>
+      <div className="text-sm text-slate-600 font-medium">{pokeNoText}</div>
       <div className="flex justify-center my-0.5">
         <Image
           src={sprityUrl}

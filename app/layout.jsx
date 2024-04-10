@@ -3,6 +3,7 @@ import './styles/globals.css';
 import './styles/type.css';
 import React from 'react';
 import ClienClientProvidertPor from './client-provider';
+import Search from './ui/search/search';
 
 const inter = Inter({ subsets: ['latin'] });
 // const notoSansKr = Noto_Sans_KR({ subsets: ['latin']});
@@ -16,8 +17,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <header>Poke MuMu</header>
         <ClienClientProvidertPor>
+          <header>
+            <div className="flex bg-orange-400 h-28 w-full justify-center">
+              <div className="w-2/5 flex justify-center items-center">
+                <Search />
+              </div>
+            </div>
+          </header>
           {children}
         </ClienClientProvidertPor>
       </body>
