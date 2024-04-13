@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6  */
+/*썸네일 애니메이션*/
+@keyframes post-ani {
+  25% {
+      transform: rotate(3deg) scale(1.1);
+  }
+
+  50% {
+      transform: rotate(0deg) scale(1);
+  }
+
+  75% {
+      transform: rotate(-3deg) scale(1.1);
+  }
+}
+
+.test:hover {
+	animation: post-ani 0.9s linear infinite;
+}

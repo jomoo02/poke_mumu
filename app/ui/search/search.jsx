@@ -39,7 +39,6 @@ export default function Search() {
 
   useEffect(() => {
     window.addEventListener('click', onClickEvent);
-    console.log('hello');
 
     return (() => {
       window.removeEventListener('click', onClickEvent);
@@ -47,7 +46,7 @@ export default function Search() {
   }, []);
 
   return (
-    <div className="relative flex justify-center items-center search w-full">
+    <div className="relative justify-center items-center search w-full hidden sm:flex">
       <input
         type="text"
         onChange={handleSearch}

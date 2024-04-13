@@ -1,5 +1,5 @@
 .type {
-  @apply text-white px-2 py-0.5 rounded-lg text-sm font-semibold;
+  @apply text-white px-2 py-0.5 rounded-md xs:rounded-lg text-xs xs:text-[13px] xs:leading-[18px] sm:text-sm;
 }
 
 .normal {

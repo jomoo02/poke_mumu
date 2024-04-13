@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
         <ClientProvider>
           <LanguageProvider>
             <header className="mb-4">
-              <div className="flex bg-orange-400 h-20 w-full justify-between items-center px-10">
+              <div className="flex bg-orange-400 h-20 w-full justify-between items-center px-2.5 xs:px-6 sm:px-8">
                 <h3 className="text-white text-xl font-black">Poke MuMu</h3>
                 <div className="w-4/5 flex justify-center items-center">
                   <Search />
@@ -29,7 +29,10 @@ export default function RootLayout({ children }) {
                 <ThemeToggleButton />
               </div>
             </header>
-            {children}
+            <main className="px-1 xs:px-4 sm:px-7">
+              {children}
+            </main>
+
           </LanguageProvider>
         </ClientProvider>
       </body>
