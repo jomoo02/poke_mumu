@@ -2,8 +2,10 @@ import React from 'react';
 import SearchPoke from './poke';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
 import { checkTextNumberType } from '@/app/lib/utils';
+import { useLanguage } from '@/app/language-provider';
 
 export default function SearchResult({ searchText, result }) {
+  const { language } = useLanguage();
   const { localPokes, savePokeLocal } = useLocalStorage();
 
   const handleClick = (poke) => {
@@ -19,7 +21,7 @@ export default function SearchResult({ searchText, result }) {
   const renderPokeItem = (poke) => (
     <div
       key={poke.key}
-      className="h-[50px] py-1 first:pt-0.5 first:h-[48px]"
+      className="h-[80px] py-1 first:h-[79px] border-t"
       onClick={() => handleClick(poke)}
       onKeyDown={(e) => handleKeyDown(e, poke)}
       tabIndex={0}
@@ -42,7 +44,7 @@ export default function SearchResult({ searchText, result }) {
 
   const isTextNumber = checkTextNumberType(searchText);
 
-  const h3Text = !searchText ? '최근 검색한 포켓몬' : (
+  const h3TextKo = !searchText ? '최근 검색한 포켓몬' : (
     <div className="flex gap-x-1">
       <div className={`flex gap-x-1 ${isTextNumber ? 'flex-row-reverse' : ''}`}>
         <span className="text-slate-600">
@@ -54,10 +56,23 @@ export default function SearchResult({ searchText, result }) {
     </div>
   );
 
+  const h3TextEn = !searchText ? 'Recently searched Pokemon' : (
+    <div className="flex gap-x-1">
+      <div className="flex gap-x-1">
+        <span>{isTextNumber ? 'Pokedex is' : 'Pokemon containing' }</span>
+        <span className="text-slate-600">
+          {isTextNumber ? `${searchText}` : `${searchText}`}
+        </span>
+      </div>
+    </div>
+  );
+
+  const h3Text = language === 'ko' ? h3TextKo : h3TextEn;
+
   return (
     <div className="bg-white max-h-[250px] overflow-auto border rounded-b-md">
-      <h3 className="text-slate-500 px-2 text-sm h-6 flex items-center">{h3Text}</h3>
-      <div className="grid grid-cols-1 divide-y">{searchPokes}</div>
+      <h3 className="text-slate-500 px-2 text-xs h-7 flex items-center font-medium">{h3Text}</h3>
+      <div className="">{searchPokes}</div>
     </div>
   );
 }
