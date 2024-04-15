@@ -6,6 +6,7 @@ import ClientProvider from './client-provider';
 import { LanguageProvider } from './language-provider';
 import Search from './ui/search/search';
 import ThemeToggleButton from './ui/theme-toggle-button';
+import SearchMobile from './ui/search/search-mobile';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,7 +24,10 @@ export default function RootLayout({ children }) {
             <header className="mb-4">
               <div className="flex bg-orange-400 h-20 w-full justify-between items-center px-2.5 xs:px-6 sm:px-8">
                 <h3 className="text-white text-xl font-black">Poke MuMu</h3>
-                <div className="w-4/5 flex justify-center items-center">
+                <div className="flex lg:hidden">
+                  <SearchMobile />
+                </div>
+                <div className="w-3/5 lg:w-1/2 xl:w-2/5 hidden lg:flex justify-center items-center">
                   <Search />
                 </div>
                 <ThemeToggleButton />
@@ -32,7 +36,6 @@ export default function RootLayout({ children }) {
             <main className="px-1 xs:px-4 sm:px-7">
               {children}
             </main>
-
           </LanguageProvider>
         </ClientProvider>
       </body>

@@ -2,14 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
+import { createPortal } from 'react-dom';
 import { fetchSearchPokes } from '@/app/api/search';
 import SearchResult from './result';
 import { useLanguage } from '@/app/language-provider';
 
-export default function Search() {
+export default function SearchMobile() {
   const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState([]);
-  const [isFocused, setIsFocused] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const { language } = useLanguage();
 
   const inputPlaceholder = language === 'ko' ? '도감 번호 또는 포켓몬 이름' : 'Pokedex number or Pokemon name';
@@ -27,40 +28,31 @@ export default function Search() {
     }
   };
 
-  const onClickEvent = (e) => {
-    if (!e.target.closest('.search')) {
-      setIsFocused(false);
-    }
-  };
-
   useEffect(() => {
     fetchSearch();
   }, [searchText]);
 
-  useEffect(() => {
-    window.addEventListener('click', onClickEvent);
-
-    return (() => {
-      window.removeEventListener('click', onClickEvent);
-    });
-  }, []);
-
   return (
-    <div className="relative justify-center items-center search w-full hidden md:flex">
-      <input
-        type="text"
-        onChange={handleSearch}
-        onFocus={() => setIsFocused(true)}
-        placeholder={inputPlaceholder}
-        className={`w-full rounded-md px-2 py-0.5 text-sm h-8 focus:outline-none border ${isFocused ? 'rounded-b-none border-b-0' : ''}`}
-      />
-      {isFocused
-        ? (
-          <div className="flex flex-col absolute top-8 w-full">
+    <div className="bg-blue-200">
+      <button onClick={() => setShowModal(true)} type="button">
+        show
+      </button>
+      {showModal && createPortal(
+        <div className="absolute top-0 justify-center items-center w-full bg-blue-400 z-20">
+          <button onClick={() => setShowModal(false)} type="button">bttn</button>
+          <input
+            type="text"
+            onChange={handleSearch}
+            placeholder={inputPlaceholder}
+            className="w-full rounded-md px-2 py-0.5 text-sm h-8 focus:outline-none border"
+          />
+          <div className="flex flex-col w-full">
             <SearchResult searchText={searchText} result={searchResult} />
           </div>
-        )
-        : null}
+        </div>,
+        document.body,
+      )}
+
     </div>
   );
 }

@@ -70,7 +70,7 @@ export default function SearchResult({ searchText, result }) {
   const h3Text = language === 'ko' ? h3TextKo : h3TextEn;
 
   return (
-    <div className="bg-white max-h-[300px] overflow-auto border rounded-b-md z-10">
+    <div className="bg-white border rounded-b-md z-10">
       <h3 className="text-slate-500 px-2 text-xs h-7 flex items-center font-medium">{h3Text}</h3>
       <div className="">{searchPokes}</div>
     </div>
