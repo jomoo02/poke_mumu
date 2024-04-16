@@ -21,7 +21,7 @@ export default function SearchResult({ searchText, result }) {
   const renderPokeItem = (poke) => (
     <div
       key={poke.key}
-      className="h-[80px] py-1 first:h-[79px] border-t"
+      className="h-[80px] py-1 first:h-[79px]"
       onClick={() => handleClick(poke)}
       onKeyDown={(e) => handleKeyDown(e, poke)}
       tabIndex={0}
@@ -70,9 +70,10 @@ export default function SearchResult({ searchText, result }) {
   const h3Text = language === 'ko' ? h3TextKo : h3TextEn;
 
   return (
-    <div className="bg-white border rounded-b-md z-10">
-      <h3 className="text-slate-500 px-2 text-xs h-7 flex items-center font-medium">{h3Text}</h3>
-      <div className="">{searchPokes}</div>
+    <div className="bg-white border rounded-b-md flex-1  flex flex-col">
+      <div className="text-slate-500 flex-initial px-2 text-xs h-7 flex items-center font-medium">{h3Text}</div>
+      <div className="flex-1 overflow-y-auto">{searchPokes}</div>
+      <div className="h-[20px]">footer</div>
     </div>
   );
 }

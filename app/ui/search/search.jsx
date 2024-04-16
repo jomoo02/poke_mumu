@@ -1,66 +1,33 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
-import { fetchSearchPokes } from '@/app/api/search';
-import SearchResult from './result';
+import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useLanguage } from '@/app/language-provider';
+// import Modal from './modal';
+import SearchMobile from './search-mobile';
 
 export default function Search() {
-  const [searchText, setSearchText] = useState('');
-  const [searchResult, setSearchResult] = useState([]);
-  const [isFocused, setIsFocused] = useState(false);
   const { language } = useLanguage();
-
+  const [showModal, setShowModal] = useState(false);
   const inputPlaceholder = language === 'ko' ? '도감 번호 또는 포켓몬 이름' : 'Pokedex number or Pokemon name';
 
-  const handleSearch = useDebouncedCallback((e) => {
-    setSearchText(e.target.value);
-  }, 300);
-
-  const fetchSearch = async () => {
-    if (searchText) {
-      const data = await fetchSearchPokes(searchText);
-      setSearchResult(data);
-    } else {
-      setSearchResult([]);
-    }
-  };
-
-  const onClickEvent = (e) => {
-    if (!e.target.closest('.search')) {
-      setIsFocused(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchSearch();
-  }, [searchText]);
-
-  useEffect(() => {
-    window.addEventListener('click', onClickEvent);
-
-    return (() => {
-      window.removeEventListener('click', onClickEvent);
-    });
-  }, []);
+  const handleOpenModal = () => (setShowModal(true));
+  const handleCloseModal = () => (setShowModal(false));
 
   return (
-    <div className="relative justify-center items-center search w-full hidden md:flex">
-      <input
-        type="text"
-        onChange={handleSearch}
-        onFocus={() => setIsFocused(true)}
-        placeholder={inputPlaceholder}
-        className={`w-full rounded-md px-2 py-0.5 text-sm h-8 focus:outline-none border ${isFocused ? 'rounded-b-none border-b-0' : ''}`}
-      />
-      {isFocused
-        ? (
-          <div className="flex flex-col absolute top-8 w-full">
-            <SearchResult searchText={searchText} result={searchResult} />
-          </div>
-        )
-        : null}
+    <div>
+      <button type="button" onClick={handleOpenModal}>
+        <div className="hidden lg:block bg-white border rounded-md">
+          {inputPlaceholder}
+        </div>
+        <div className="block lg:hidden">
+          btnIcon
+        </div>
+      </button>
+      {showModal ? createPortal(
+        <SearchMobile closeModal={handleCloseModal} />,
+        document.body,
+      ) : null}
     </div>
   );
 }

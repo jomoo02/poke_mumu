@@ -2,16 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { createPortal } from 'react-dom';
 import { fetchSearchPokes } from '@/app/api/search';
 import SearchResult from './result';
 import { useLanguage } from '@/app/language-provider';
 
-export default function SearchMobile() {
+export default function SearchMobile({ closeModal }) {
   const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState([]);
-  const [showModal, setShowModal] = useState(false);
   const { language } = useLanguage();
+  const htmlOverflowClass = 'overflow-y-hidden';
 
   const inputPlaceholder = language === 'ko' ? '도감 번호 또는 포켓몬 이름' : 'Pokedex number or Pokemon name';
 
@@ -32,27 +31,40 @@ export default function SearchMobile() {
     fetchSearch();
   }, [searchText]);
 
-  return (
-    <div className="bg-blue-200">
-      <button onClick={() => setShowModal(true)} type="button">
-        show
-      </button>
-      {showModal && createPortal(
-        <div className="absolute top-0 justify-center items-center w-full bg-blue-400 z-20">
-          <button onClick={() => setShowModal(false)} type="button">bttn</button>
-          <input
-            type="text"
-            onChange={handleSearch}
-            placeholder={inputPlaceholder}
-            className="w-full rounded-md px-2 py-0.5 text-sm h-8 focus:outline-none border"
-          />
-          <div className="flex flex-col w-full">
-            <SearchResult searchText={searchText} result={searchResult} />
-          </div>
-        </div>,
-        document.body,
-      )}
+  useEffect(() => {
+    const htmlTag = document.querySelector('body');
+    htmlTag.classList.add(htmlOverflowClass);
 
+    return () => {
+      htmlTag.classList.remove(htmlOverflowClass);
+    };
+  }, []);
+
+  return (
+    <div className="backdrop-blur-sm bg-gray-200/30 z-20 fixed top-0 w-screen h-dvh">
+      <div className="lg:py-10">
+        <div className="flex flex-col items-center h-dvh lg:h-[500px]">
+          <div className="h-full w-full lg:w-3/5 ">
+            <div className="flex flex-col bg-white w-full h-full">
+              <div className="h-9 flex w-full">
+                <input
+                  type="text"
+                  onChange={handleSearch}
+                  placeholder={inputPlaceholder}
+                  className="w-full rounded-md px-2 py-0.5 text-sm h-8 focus:outline-none border"
+                />
+                <button onClick={closeModal} type="button">
+                  close
+                </button>
+              </div>
+              <div className="h-[calc(100dvh-2.3rem)] lg:h-full w-full flex">
+                <SearchResult searchText={searchText} result={searchResult} />
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

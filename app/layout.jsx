@@ -4,9 +4,8 @@ import './styles/type.css';
 import React from 'react';
 import ClientProvider from './client-provider';
 import { LanguageProvider } from './language-provider';
-import Search from './ui/search/search';
 import ThemeToggleButton from './ui/theme-toggle-button';
-import SearchMobile from './ui/search/search-mobile';
+import Search from './ui/search/search';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,12 +21,9 @@ export default function RootLayout({ children }) {
         <ClientProvider>
           <LanguageProvider>
             <header className="mb-4">
-              <div className="flex bg-orange-400 h-20 w-full justify-between items-center px-2.5 xs:px-6 sm:px-8">
+              <div className="flex bg-orange-400 h-20 w-full justify-between items-center px-2.5 xs:px-6 sm:px-8 relative">
                 <h3 className="text-white text-xl font-black">Poke MuMu</h3>
-                <div className="flex lg:hidden">
-                  <SearchMobile />
-                </div>
-                <div className="w-3/5 lg:w-1/2 xl:w-2/5 hidden lg:flex justify-center items-center">
+                <div className="">
                   <Search />
                 </div>
                 <ThemeToggleButton />
