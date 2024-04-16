@@ -5,7 +5,7 @@ import React from 'react';
 import ClientProvider from './client-provider';
 import { LanguageProvider } from './language-provider';
 import ThemeToggleButton from './ui/theme-toggle-button';
-import Search from './ui/search/search';
+import SearchPortal from './ui/search/search-portal';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,12 +21,12 @@ export default function RootLayout({ children }) {
         <ClientProvider>
           <LanguageProvider>
             <header className="mb-4">
-              <div className="flex bg-orange-400 h-20 w-full justify-between items-center px-2.5 xs:px-6 sm:px-8 relative">
+              <div className="flex bg-orange-400 h-20 w-full justify-between items-center px-2.5 xs:px-6 sm:px-8 lg:px-12 relative">
                 <h3 className="text-white text-xl font-black">Poke MuMu</h3>
-                <div className="">
-                  <Search />
+                <div className="flex gap-x-2 xs:gap-x-6 items-center h-11">
+                  <SearchPortal />
+                  <ThemeToggleButton />
                 </div>
-                <ThemeToggleButton />
               </div>
             </header>
             <main className="px-1 xs:px-4 sm:px-7">

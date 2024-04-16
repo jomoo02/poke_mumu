@@ -21,7 +21,7 @@ export default function SearchResult({ searchText, result }) {
   const renderPokeItem = (poke) => (
     <div
       key={poke.key}
-      className="h-[80px] py-1 first:h-[79px]"
+      className="h-[75px] xs:px-2 py-0.5"
       onClick={() => handleClick(poke)}
       onKeyDown={(e) => handleKeyDown(e, poke)}
       tabIndex={0}
@@ -38,9 +38,13 @@ export default function SearchResult({ searchText, result }) {
     </div>
   );
 
-  const searchPokes = !searchText
-    ? localPokes.map(renderPokeItem)
-    : result.map(renderPokeItem);
+  const searchPokes = (
+    <div className="grid grid-cols-1 divide-y gap-y-1">
+      {!searchText
+        ? localPokes.map(renderPokeItem)
+        : result.map(renderPokeItem)}
+    </div>
+  );
 
   const isTextNumber = checkTextNumberType(searchText);
 
@@ -70,10 +74,9 @@ export default function SearchResult({ searchText, result }) {
   const h3Text = language === 'ko' ? h3TextKo : h3TextEn;
 
   return (
-    <div className="bg-white border rounded-b-md flex-1  flex flex-col">
-      <div className="text-slate-500 flex-initial px-2 text-xs h-7 flex items-center font-medium">{h3Text}</div>
-      <div className="flex-1 overflow-y-auto">{searchPokes}</div>
-      <div className="h-[20px]">footer</div>
+    <div className="flex-1 flex flex-col overflow-y-auto">
+      <div className="text-slate-500 flex-initial px-3 text-xs min-h-7 h-7 flex items-center font-medium">{h3Text}</div>
+      <div className="flex-1">{searchPokes}</div>
     </div>
   );
 }

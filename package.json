@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
     "@tanstack/react-query": "^5.28.14",
     "dotenv": "^16.4.5",
     "mongoose": "^8.2.4",
