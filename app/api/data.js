@@ -26,9 +26,11 @@ export async function fetchPokes(index) {
       .find(query, projection)
       .sort({ no: 1, id: 1 })
       .lean();
+    console.log('result: ', result);
 
     return result;
   } catch (error) {
+    console.log('error 발생!');
     console.error(error);
     return [];
   }
