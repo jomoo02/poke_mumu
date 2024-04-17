@@ -4,10 +4,11 @@ import { connectMongoose } from './api/db/connect.mjs';
 
 export default async function Home() {
   await connectMongoose();
+  console.log('success');
 
   return (
     <div>
-      <CardList />
+      {/* <CardList /> */}
     </div>
 
   );

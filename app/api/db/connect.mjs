@@ -5,7 +5,7 @@ export async function connectMongoose() {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('db connect');
   } catch (error) {
-    console.error('db connect erorr!', error);
+    console.log('db connect erorr!', error);
   }
 }
 
@@ -14,6 +14,6 @@ export async function disconnectMongoose() {
     await mongoose.disconnect();
     console.log('db disconnect');
   } catch (error) {
-    console.error('db disconnect erorr!', error);
+    console.log('db disconnect erorr!', error);
   }
 }
