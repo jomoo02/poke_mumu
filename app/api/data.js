@@ -5,8 +5,10 @@ import PokeModel from '../models/Poke.mjs';
 export async function fetchPokes(index) {
   console.log('fetch');
   try {
-    const start = (index * 240) + 1;
-    const end = start + 240 - 1;
+    // const start = (index * 240) + 1;
+    // const end = start + 240 - 1;
+    const start = 1;
+    const end = 6;
 
     const query = { order: { $gte: start, $lte: end } };
     const projection = {
