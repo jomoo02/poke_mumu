@@ -2,6 +2,7 @@
 
 import { checkTextLanguageKo, checkTextNumberType } from '../lib/utils';
 import PokeModel from '../models/Poke.mjs';
+import dbConnect from './db/connect';
 
 function filterById(pokes) {
   const idSet = new Set();
@@ -46,6 +47,8 @@ function decideSearchQuery(text) {
 
 export async function fetchSearchPokes(text) {
   try {
+    await dbConnect();
+
     const query = decideSearchQuery(text);
 
     const projection = {

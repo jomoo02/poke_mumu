@@ -1,17 +1,16 @@
 'use server';
 
 import PokeModel from '../models/Poke.mjs';
-import { connectMongoose, disconnectMongoose } from './db/connect.mjs';
+// import { connectMongoose, disconnectMongoose } from './db/connect.mjs';
+import dbConnect from './db/connect';
 
 export async function fetchPokes(index) {
   console.log('fetch');
   try {
-    await connectMongoose();
+    await dbConnect();
+
     const start = (index * 240) + 1;
     const end = start + 240 - 1;
-    // const start = 1;
-    // const end = 6;
-
     const query = { order: { $gte: start, $lte: end } };
     const projection = {
       name: 1,
@@ -29,13 +28,12 @@ export async function fetchPokes(index) {
       .sort({ no: 1, id: 1 })
       .lean();
     console.log('result: ', result);
-    await disconnectMongoose();
 
     return result;
   } catch (error) {
     console.log('error 발생!');
     console.error(error);
-    await disconnectMongoose();
+
     return [];
   }
 }
