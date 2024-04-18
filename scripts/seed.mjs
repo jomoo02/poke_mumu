@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import PokeModel from '../app/models/Poke.mjs';
 import getPokes from './pokeapi/poke.mjs';
-import { connectMongoose, disconnectMongoose } from '../app/api/db/connect.js';
+import { connectMongoose, disconnectMongoose } from '../app/api/db/connectMongoose.mjs';
 
 dotenv.config({ path: '.env.local' });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import typesKo from '@/app/translations/tpye';
+import typesKo from '@/app/translations/type';
 import { useLanguage } from '@/app/language-provider';
 
 export default function SearchPoke({

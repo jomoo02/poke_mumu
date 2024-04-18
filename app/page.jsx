@@ -1,7 +1,7 @@
 import React from 'react';
 import CardList from './ui/pokeCard/card-list';
 
-export default async function Home() {
+export default function Home() {
   return (
     <div>
       <CardList />

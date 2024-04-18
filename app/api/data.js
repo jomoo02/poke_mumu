@@ -1,8 +1,7 @@
 'use server';
 
 import PokeModel from '../models/Poke.mjs';
-// import { connectMongoose, disconnectMongoose } from './db/connect.mjs';
-import dbConnect from './db/connect';
+import dbConnect from './db/connect.ts';
 
 export async function fetchPokes(index) {
   console.log('fetch');
