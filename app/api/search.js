@@ -50,7 +50,6 @@ export async function fetchSearchPokes(text) {
     await dbConnect();
 
     const query = decideSearchQuery(text);
-
     const projection = {
       name: 1,
       id: 1,
