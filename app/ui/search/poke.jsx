@@ -1,10 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import typesKo from '@/app/translations/type';
 import { useLanguage } from '@/app/language-provider';
+import useLocalStorage from '@/app/hooks/useLocalStorage';
 
 export default function SearchPoke({
-  no, name, types, form, sprity,
+  no, name, types, form, sprity, id, closeModal,
 }) {
   const { language } = useLanguage();
   const sprityUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${sprity}`;
@@ -13,35 +15,60 @@ export default function SearchPoke({
   const pokeNameMain = language === 'ko' ? name.ko : name.en;
   const pokeNameSub = language === 'ko' ? name.en : name.ko;
   const noText = `no.${no}`;
+  const pokeData = {
+    no, name, types, form, sprity, id,
+  };
 
   const pokeType = (type) => (language === 'ko' ? typesKo[type] : type);
+
+  const { savePokeLocal } = useLocalStorage();
+
+  const handleClick = (poke) => {
+    savePokeLocal(poke);
+    closeModal();
+  };
+
+  const handleKeyDown = (e, poke) => {
+    if (e.key === 'Enter') {
+      savePokeLocal(poke);
+      closeModal();
+    }
+  };
 
   return (
     <div className="px-2.5 sm:px-3 md:px-4 h-full">
       <div className="flex h-full justify-between items-center">
-        <div className="grid w-[185px] xs:w-[250px] sm:w-[250px] md:w-[325px] xl:w-[350px] grid-cols-4 items-center h-full">
-          <span className="text-[10px] xs:text-[12px] sm:text-[13px] text-slate-600/95 font-semibold">
-            {noText}
-          </span>
-          <div className="w-[40px] h-[40px] xs:w-[50px] xs:h-[50px] xl:w-[60px] xl:h-[60px] relative">
-            <Image
-              src={sprityUrl}
-              alt={name.en}
-              fill
-              sizes="40px"
-              style={{
-                objectFit: 'contain',
-              }}
-            />
-          </div>
-          <div className={`flex h-full py-1 flex-col col-span-2 px-1 xl:px-2.5 ${pokeForm ? 'justify-around' : 'justify-center'}`}>
-            <div className="leading-[20px] flex justify-center flex-col">
-              <div className="text-[12px] xs:text-[14px] text-slate-600 font-semibold truncate">{pokeNameMain}</div>
-              <div className="text-[12px] xs:text-[14px] text-slate-600 font-semibold truncate">{pokeNameSub}</div>
+        <Link
+          href={`/${id}`}
+          onClick={() => handleClick(pokeData)}
+          onKeyDown={(e) => handleKeyDown(e, pokeData)}
+          tabIndex={0}
+          prefetch
+        >
+          <div className="grid w-[185px] xs:w-[250px] sm:w-[250px] md:w-[325px] xl:w-[350px] grid-cols-4 items-center h-full">
+            <span className="text-[10px] xs:text-[12px] sm:text-[13px] text-slate-600/95 font-semibold">
+              {noText}
+            </span>
+            <div className="w-[40px] h-[40px] xs:w-[50px] xs:h-[50px] xl:w-[60px] xl:h-[60px] relative">
+              <Image
+                src={sprityUrl}
+                alt={name.en}
+                fill
+                sizes="40px"
+                style={{
+                  objectFit: 'contain',
+                }}
+              />
             </div>
-            <div className="text-[11.5px] xs:text-xs leading-[18px] font-medium text-slate-500/90 truncate">{pokeForm}</div>
+            <div className={`flex h-full py-1 flex-col col-span-2 px-1 xl:px-2.5 ${pokeForm ? 'justify-around' : 'justify-center'}`}>
+              <div className="leading-[20px] flex justify-center flex-col">
+                <div className="text-[12px] xs:text-[14px] text-slate-600 font-semibold truncate">{pokeNameMain}</div>
+                <div className="text-[12px] xs:text-[14px] text-slate-600 font-semibold truncate">{pokeNameSub}</div>
+              </div>
+              <div className="text-[11.5px] xs:text-xs leading-[18px] font-medium text-slate-500/90 truncate">{pokeForm}</div>
+            </div>
           </div>
-        </div>
+        </Link>
         <div className="flex flex-col sm:flex-row gap-y-1 items-center sm:gap-x-2 md:gap-x-3 w-[62px] sm:w-[132px] md:w-[145px] lg:w-[140px] xl:w-[158px]">
           {types.map((type) => (
             <div

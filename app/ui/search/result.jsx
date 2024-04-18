@@ -1,32 +1,17 @@
 import React from 'react';
-import SearchPoke from './poke';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
 import { checkTextNumberType } from '@/app/lib/utils';
 import { useLanguage } from '@/app/language-provider';
+import SearchPoke from './poke';
 
-export default function SearchResult({ searchText, result }) {
+export default function SearchResult({ searchText, result, closeModal }) {
   const { language } = useLanguage();
-  const { localPokes, savePokeLocal } = useLocalStorage();
-
-  const handleClick = (poke) => {
-    savePokeLocal(poke);
-  };
-
-  const handleKeyDown = (e, poke) => {
-    if (e.key === 'Enter') {
-      savePokeLocal(poke);
-    }
-  };
+  const { localPokes } = useLocalStorage();
 
   const renderPokeItem = (poke) => (
     <div
-      key={poke.key}
+      key={poke.id}
       className="h-[75px] xs:px-2 py-0.5"
-      onClick={() => handleClick(poke)}
-      onKeyDown={(e) => handleKeyDown(e, poke)}
-      tabIndex={0}
-      role="button"
-      aria-label="button"
     >
       <SearchPoke
         no={poke.no}
@@ -34,6 +19,8 @@ export default function SearchResult({ searchText, result }) {
         types={poke.types}
         form={poke.form}
         sprity={poke.sprity}
+        id={poke.id}
+        closeModal={closeModal}
       />
     </div>
   );

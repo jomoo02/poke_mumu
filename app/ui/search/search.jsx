@@ -74,9 +74,12 @@ export default function Search({ closeModal }) {
                 </button>
               </div>
               <div className="h-[calc(100dvh-2.3rem)] flex-1 overflow-hidden w-full flex">
-                <SearchResult searchText={searchText} result={searchResult} />
+                <SearchResult
+                  searchText={searchText}
+                  result={searchResult}
+                  closeModal={closeModal}
+                />
               </div>
-
             </div>
           </div>
         </div>

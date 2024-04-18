@@ -61,5 +61,4 @@ export default async function getPokes(no) {
   const pokes = await Promise.all(result);
 
   return [].concat(...pokes);
-  // return [].concat(...(await Promise.all(result)));
 }

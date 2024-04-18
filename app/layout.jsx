@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import './styles/globals.css';
 import './styles/type.css';
 import React from 'react';
+import Link from 'next/link';
 import ClientProvider from './client-provider';
 import { LanguageProvider } from './language-provider';
 import ThemeToggleButton from './ui/theme-toggle-button';
@@ -22,7 +23,7 @@ export default function RootLayout({ children }) {
           <LanguageProvider>
             <header className="mb-4">
               <div className="flex bg-orange-400 h-20 w-full justify-between items-center px-2.5 xs:px-6 sm:px-8 lg:px-12 relative">
-                <h3 className="text-white text-xl font-black">Poke MuMu</h3>
+                <Link href="/"><h2 className="text-white text-xl font-black">Poke MuMu</h2></Link>
                 <div className="flex gap-x-2 xs:gap-x-6 items-center h-11">
                   <SearchPortal />
                   <ThemeToggleButton />
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
             <main className="px-1 xs:px-4 sm:px-7">
               {children}
             </main>
+            <footer className="h-32" />
           </LanguageProvider>
         </ClientProvider>
       </body>

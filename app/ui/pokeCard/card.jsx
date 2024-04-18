@@ -1,7 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import typesKo from '@/app/translations/type';
 import { useLanguage } from '@/app/language-provider';
+import useLocalStorage from '@/app/hooks/useLocalStorage';
 
 export default function Card({
   name, sprity, types, id, no, form,
@@ -15,23 +17,30 @@ export default function Card({
 
   const getLanguageType = (type) => (language === 'ko' ? typesKo[type] : type);
 
+  const { savePokeLocal } = useLocalStorage();
+  const pokeData = {
+    name, sprity, types, id, no, form,
+  };
+
   return (
     <div className="border-2 rounded-md border-slate-400 w-full h-[108px] xs:h-52 sm:h-56 px-2 py-2 xs:px-3 xs:py-3 flex xs:flex-col gap-x-1 xs:gap-x-0">
       <div className="w-1/2 xs:w-full">
         <div className="text-sm text-slate-600 font-medium">{pokeNoText}</div>
         <div className="flex w-full my-1 pr-2 xs:pr-0 justify-center">
-          <div className="w-[64px] h-[64px] xs:w-20 xs:h-20 xl:w-[84px] xl:h-[84px] relative test">
-            <Image
-              src={sprityUrl}
-              alt={name.en}
-              fill
-              sizes="80px"
-              style={{
-                objectFit: 'contain',
-              }}
-              priority
-            />
-          </div>
+          <Link href={`/${id}`} onClick={() => savePokeLocal(pokeData)}>
+            <div className="w-[64px] h-[64px] xs:w-20 xs:h-20 xl:w-[84px] xl:h-[84px] relative test">
+              <Image
+                src={sprityUrl}
+                alt={name.en}
+                fill
+                sizes="80px"
+                style={{
+                  objectFit: 'contain',
+                }}
+                priority
+              />
+            </div>
+          </Link>
         </div>
       </div>
       <div className="flex flex-col justify-between flex-1">
