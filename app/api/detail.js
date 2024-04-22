@@ -3,6 +3,7 @@
 import { filterName, checkMegaPokeName } from '../../scripts/pokeapi/name.mjs';
 import filterAbilities from './detail/abilities';
 import filterStats from './detail/stats';
+import filterMoves from './detail/moves';
 
 const POKE_URL = 'https://pokeapi.co/api/v2/pokemon';
 
@@ -20,7 +21,7 @@ export default async function fetchPokeDetail(id) {
     types: typesObj,
     abilities: abilitiesObj,
     stats: statsObj,
-    moves,
+    moves: movesObj,
   } = data;
 
   const { names, id: no } = await getPokeSpecies(species.url);
@@ -29,6 +30,7 @@ export default async function fetchPokeDetail(id) {
   const types = typesObj.map(({ type }) => type.name);
   const abilities = await filterAbilities(abilitiesObj);
   const stats = filterStats(statsObj);
+  const moves = filterMoves(movesObj);
 
   return {
     no,
@@ -37,5 +39,6 @@ export default async function fetchPokeDetail(id) {
     types,
     abilities,
     stats,
+    moves,
   };
 }
