@@ -37,7 +37,7 @@ export default function Card({
                 style={{
                   objectFit: 'contain',
                 }}
-                priority
+                loading="lazy"
               />
             </div>
           </Link>
