@@ -25,7 +25,7 @@ function Chain({
         </div>
       )}
       <div>
-        {name}
+        {`${name} - ${id}`}
         <Image
           src={sprityUrl}
           width={30}

@@ -1,6 +1,7 @@
 'use server';
 
 import { fetchPokes } from '../data.js';
+import editEvolutionChains from './evolution-edit.js';
 
 function pickPokeIdAndNo(pokes) {
   const res = pokes.map(({ id, no }) => ({ id, no }));
@@ -42,7 +43,7 @@ function pickEvolutionDetailInfo(details) {
       }
 
       return acc;
-    }, { trggier: '', condition: [] });
+    }, { trigger: '', condition: [] });
   };
   return details.map((detail) => pickConditions(detail));
 }
@@ -89,7 +90,9 @@ export default async function fetchEvolutionTree() {
     const pickedPokes = await setEvolutionChainLink(pickPokeIdAndNo(pokes));
     const chainDatas = (await Promise.all(pickedPokes.map((poke) => pickEvolutionData(poke))))
       .map((data, index) => ({ chainIndex: index + 1, chain: data }));
-    return chainDatas;
+
+    console.log(chainDatas[6]);
+    return editEvolutionChains(chainDatas);
   } catch (error) {
     console.log(error);
     return [];
