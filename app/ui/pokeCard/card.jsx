@@ -11,7 +11,7 @@ export default function Card({
   const { language } = useLanguage();
   const sprityUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${sprity}`;
   const isBlockFormText = form.en === 'default' ? 'hidden' : 'block';
-  const pokeNoText = `No.${no}`;
+  const pokeNoText = `No.${no}, id.${id}`;
   const pokeName = language === 'ko' ? name.ko : name.en;
   const pokeForm = language === 'ko' ? form.ko : form.en;
 
@@ -26,7 +26,7 @@ export default function Card({
     <div className="border-2 rounded-md border-slate-400 w-full h-[108px] xs:h-52 sm:h-56 px-2 py-2 xs:px-3 xs:py-3 flex xs:flex-col gap-x-1 xs:gap-x-0">
       <div className="w-1/2 xs:w-full">
         <div className="text-sm text-slate-600 font-medium">{pokeNoText}</div>
-        <div className="flex w-full my-1 pr-2 xs:pr-0 justify-center">
+        <div className="flex w-full my-1 pr-2 xs:pr-0 justify-center poke-card">
           <Link href={`/${id}`} onClick={() => savePokeLocal(pokeData)}>
             <div className="w-[64px] h-[64px] xs:w-20 xs:h-20 xl:w-[84px] xl:h-[84px] relative">
               <Image
