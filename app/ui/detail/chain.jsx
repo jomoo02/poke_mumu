@@ -1,8 +1,7 @@
 import React from 'react';
-import fetchEvolutionTree from '@/app/api/detail/evolution';
 import Image from 'next/image';
 
-export function Chain({
+export default function Chain({
   name, to, detail, id,
 }) {
   const sprityUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
@@ -46,26 +45,6 @@ export function Chain({
           ))}
         </div>
       )}
-    </div>
-  );
-}
-
-export default async function ChainPage() {
-  // const chains = await fetchEvolutionTree();
-
-  return (
-    <div className="grid divide-y">
-      {chains.map(({ chain, chainIndex, ids }) => (
-        <div key={chainIndex}>
-          <div className="text-2xl">{chainIndex}</div>
-          <div>{...ids}</div>
-          {chain.map(({
-            name, to, detail, id,
-          }) => (
-            <Chain key={name} name={name} to={to} detail={detail} id={id} />
-          ))}
-        </div>
-      ))}
     </div>
   );
 }

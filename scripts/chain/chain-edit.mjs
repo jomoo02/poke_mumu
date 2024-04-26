@@ -147,6 +147,40 @@ const chain15 = {
   ],
 };
 
+const chain21 = {
+  chainIndex: 21,
+  chain: [
+    {
+      name: 'diglett',
+      to: [{
+        name: '',
+        to: [],
+        detail: [{
+          trigger: 'level-up',
+          condition: [['min_level', 26]],
+        }],
+        id: '51',
+      }],
+      detail: [],
+      id: '50',
+    },
+    {
+      name: 'diglett',
+      to: [{
+        name: '',
+        to: [],
+        detail: [{
+          trigger: 'level-up',
+          condition: [['min_level', 26]],
+        }],
+        id: '10106',
+      }],
+      detail: [],
+      id: '10105',
+    },
+  ],
+};
+
 const chain22 = {
   chainIndex: 22,
   chain: [
@@ -193,6 +227,34 @@ const chain22 = {
       id: '10161',
     },
   ],
+};
+
+const chain24 = {
+  chainIndex: 24,
+  chain: [{
+    name: 'mankey',
+    to: [{
+      name: 'primeape',
+      to: [{
+        name: 'annihilape',
+        to: [],
+        detail: [{
+          trigger: 'level-up',
+          condition: [
+            ['other', '분노의주먹을 20번 사용 후 레벨업'],
+          ],
+        }],
+        id: '979',
+      }],
+      detail: [{
+        trigger: 'level-up',
+        condition: [['min_level', 28]],
+      }],
+      id: '57',
+    }],
+    detail: [],
+    id: '56',
+  }],
 };
 
 const chain25 = {
@@ -901,6 +963,59 @@ const chain134 = {
   ],
 };
 
+const chain144 = {
+  chainIndex: 144,
+  chain: [{
+    name: 'nincada',
+    to: [
+      {
+        name: 'ninjask',
+        to: [],
+        detail: [{
+          trigger: 'level-up',
+          condition: [['min_level', 20]],
+        }],
+        id: '291',
+      },
+      {
+        name: 'shedinja',
+        to: [],
+        detail: [{
+          trigger: 'other',
+          condition: [['other', 'empty spot in party, Pokeball in bag']],
+        }],
+        id: '292',
+      },
+    ],
+    detail: [],
+    id: '290',
+  }],
+};
+
+const chain178 = {
+  chainIndex: 178,
+  chain: [{
+    name: 'feebas',
+    to: [{
+      name: 'milotic',
+      to: [],
+      detail: [
+        {
+          trigger: 'level-up',
+          condition: [['min_beauty', 'max']],
+        },
+        {
+          trigger: 'trade',
+          condition: [['held_item', 'prism-scale']],
+        },
+      ],
+      id: '350',
+    }],
+    detail: [],
+    id: '349',
+  }],
+};
+
 const chain250 = {
   chainIndex: 250,
   chain: [
@@ -1092,6 +1207,35 @@ const chain283 = {
   ],
 };
 
+const chain309 = {
+  chainIndex: 309,
+  chain: [{
+    name: 'pawniard',
+    to: [{
+      name: 'bisharp',
+      to: [{
+        name: 'kingambit',
+        to: [],
+        detail: [{
+          trigger: 'level-up',
+          condition: [[
+            'other',
+            "defeat 3 Bisharp that are holding Leader's Crest",
+          ]],
+        }],
+        id: '983',
+      }],
+      detail: [{
+        trigger: 'level-up',
+        condition: [['min_level', 52]],
+      }],
+      id: '625',
+    }],
+    detail: [],
+    id: '624',
+  }],
+};
+
 const chain311 = {
   chainIndex: 311,
   chain: [{
@@ -1121,6 +1265,41 @@ const chain311 = {
     ],
     detail: [],
     id: '627',
+  }],
+};
+
+const chain340 = {
+  chainIndex: 340,
+  chain: [{
+    name: 'espurr',
+    to: [
+      {
+        name: 'meowstic',
+        to: [],
+        detail: [{
+          trigger: 'level-up',
+          condition: [
+            ['min_level', 25],
+            ['gender', 2],
+          ],
+        }],
+        id: '678',
+      },
+      {
+        name: 'meowstic',
+        to: [],
+        detail: [{
+          trigger: 'level-up',
+          condition: [
+            ['min_level', 25],
+            ['gender', 1],
+          ],
+        }],
+        id: '10025',
+      },
+    ],
+    detail: [],
+    id: '677',
   }],
 };
 
@@ -1292,36 +1471,67 @@ const chain371 = {
   }],
 };
 
+const chain372 = {
+  chainIndex: 372,
+  chain: [{
+    name: 'crabrawler',
+    to: [{
+      name: 'crabominable',
+      to: [],
+      detail: [
+        {
+          trigger: 'level-up',
+          condition: [['location', 'mount-lanakila']],
+        },
+        {
+          trigger: 'use-item',
+          condition: [['item', 'ice-stone']],
+        },
+      ],
+      id: '740',
+    }],
+    detail: [],
+    id: '739',
+  }],
+};
+
 const chain375 = {
   chainIndex: 375,
-  chain: [{
-    name: 'rockruff',
-    to: [
-      {
-        name: 'lycanroc',
-        to: [],
-        detail: [{
-          trigger: 'level-up',
-          condition: [
-            ['min_level', 25],
-            ['time_of_day', 'day'],
-          ],
-        }],
-        id: '745',
-      },
-      {
-        name: 'lycanroc',
-        to: [],
-        detail: [{
-          trigger: 'level-up',
-          condition: [
-            ['min_level', 25],
-            ['time_of_day', 'night'],
-          ],
-        }],
-        id: '10126',
-      },
-      {
+  chain: [
+    {
+      name: 'rockruff',
+      to: [
+        {
+          name: 'lycanroc',
+          to: [],
+          detail: [{
+            trigger: 'level-up',
+            condition: [
+              ['min_level', 25],
+              ['time_of_day', 'day'],
+            ],
+          }],
+          id: '745',
+        },
+        {
+          name: 'lycanroc',
+          to: [],
+          detail: [{
+            trigger: 'level-up',
+            condition: [
+              ['min_level', 25],
+              ['time_of_day', 'night'],
+            ],
+          }],
+          id: '10126',
+        },
+      ],
+      detail: [],
+      id: '744',
+    },
+    {
+      name: 'rockruff(own tempo)',
+      to: [{
         name: 'lycanroc',
         to: [],
         detail: [{
@@ -1332,11 +1542,11 @@ const chain375 = {
           ],
         }],
         id: '10152',
-      },
-    ],
-    detail: [],
-    id: '744',
-  }],
+      }],
+      detail: [],
+      id: '744',
+    },
+  ],
 };
 
 const chain434 = {
@@ -1472,6 +1682,41 @@ const chain462 = {
     ],
     detail: [],
     id: '891',
+  }],
+};
+
+const chain473 = {
+  chainIndex: 473,
+  chain: [{
+    name: 'lechonk',
+    to: [
+      {
+        name: 'oinkologne',
+        to: [],
+        detail: [{
+          trigger: 'level-up',
+          condition: [
+            ['min_level', 18],
+            ['gender', 2],
+          ],
+        }],
+        id: '916',
+      },
+      {
+        name: 'oinkologne',
+        to: [],
+        detail: [{
+          trigger: 'level-up',
+          condition: [
+            ['min_level', 18],
+            ['gender', 1],
+          ],
+        }],
+        id: '10254',
+      },
+    ],
+    detail: [],
+    id: '915',
   }],
 };
 
@@ -1653,7 +1898,9 @@ export default function editEvolutionChains(chains) {
   editChains[9] = chain10;
   editChains[10] = chain11;
   editChains[14] = chain15;
+  editChains[20] = chain21;
   editChains[21] = chain22;
+  editChains[23] = chain24;
   editChains[24] = chain25;
   editChains[30] = chain31;
   editChains[31] = chain32;
@@ -1675,24 +1922,30 @@ export default function editEvolutionChains(chains) {
   editChains[108] = chain109;
   editChains[112] = chain113;
   editChains[133] = chain134;
+  editChains[143] = chain144;
+  editChains[177] = chain178;
   editChains[249] = chain250;
   editChains[270] = chain271;
   editChains[273] = chain274;
   editChains[278] = chain279;
   editChains[282] = chain283;
+  editChains[308] = chain309;
   editChains[310] = chain311;
+  editChains[339] = chain340;
   editChains[353] = chain354;
   editChains[357] = chain358;
   editChains[365] = chain366;
   editChains[370] = chain371;
+  editChains[371] = chain372;
   editChains[374] = chain375;
   editChains[433] = chain434;
   editChains[437] = chain438;
   editChains[456] = chain457;
   editChains[461] = chain462;
   editChains[475] = chain476;
+  editChains[472] = chain473;
   editChains[476] = chain477;
-  editChains[487] = chain487;
+  editChains[486] = chain487;
   editChains[490] = chain491;
   editChains[495] = chain496;
   editChains[519] = chain520;

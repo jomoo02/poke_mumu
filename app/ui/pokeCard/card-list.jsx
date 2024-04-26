@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { fetchPokes } from '@/app/api/data';
-import fetchEvolutionTree from '@/app/api/detail/evolution';
 import Card from './card';
 
 export default function CardList() {
@@ -21,10 +20,6 @@ export default function CardList() {
   useEffect(() => {
     fetchPoke();
   }, [pokeIndex]);
-
-  useEffect(() => {
-    fetchEvolutionTree();
-  }, []);
 
   return (
     <div className="flex w-full flex-col items-center min-h-screen">

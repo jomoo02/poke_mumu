@@ -1,7 +1,20 @@
-'use server';
+import editEvolutionChains from './chain-edit.mjs';
+import PokeModel from '../../app/models/Poke.mjs';
 
-import { fetchPokes } from '../data.js';
-import editEvolutionChains from './evolution-edit.js';
+export async function fetchPokes() {
+  try {
+    const result = await PokeModel
+      .find({})
+      .sort({ no: 1, id: 1 })
+      .lean();
+
+    return result;
+  } catch (error) {
+    console.error(error);
+
+    return [];
+  }
+}
 
 function pickPokeIdAndNo(pokes) {
   const res = pokes.map(({ id, no }) => ({ id, no }));
@@ -12,9 +25,9 @@ async function pickPokeEvolutionChainLink(id) {
   const POKE_URL = 'https://pokeapi.co/api/v2/pokemon/';
 
   try {
-    const data = await (await fetch(`${POKE_URL}${id}`)).json();
+    const data = await (await fetch(`${POKE_URL}${id}`, { cache: 'no-store' })).json();
     const { species } = data;
-    const speciesData = await (await fetch(species.url)).json();
+    const speciesData = await (await fetch(species.url, { cache: 'no-store' })).json();
 
     return speciesData.evolution_chain.url;
   } catch (error) {
@@ -25,9 +38,13 @@ async function pickPokeEvolutionChainLink(id) {
 
 async function setEvolutionChainLink(pokeIds) {
   const linkSet = new Set();
-  const linkes = await Promise.all(pokeIds.map(({ id }) => pickPokeEvolutionChainLink(id)));
 
-  linkes.forEach((link) => linkSet.add(link));
+  for (let i = 0; i < pokeIds.length; i += 100) {
+    const batch = pokeIds.slice(i, i + 100);
+    // eslint-disable-next-line no-await-in-loop
+    const links = await Promise.all(batch.map(({ id }) => pickPokeEvolutionChainLink(id)));
+    links.forEach((link) => linkSet.add(link));
+  }
 
   return [...linkSet];
 }
@@ -39,12 +56,14 @@ function pickEvolutionDetailInfo(details) {
       if (cur === 'trigger') {
         acc[cur] = detail[cur].name;
       } else if (detail[cur]) {
-        acc.condition = [...acc.condition, [cur, detail[cur]]];
+        const value = detail[cur]?.name ? detail[cur].name : detail[cur];
+        acc.condition = [...acc.condition, [cur, value]];
       }
 
       return acc;
     }, { trigger: '', condition: [] });
   };
+
   return details.map((detail) => pickConditions(detail));
 }
 
@@ -52,6 +71,7 @@ function serachRecursiveChain(chain) {
   const current = {
     name: '', to: [], detail: [], id: '',
   };
+
   current.name = chain.species.name;
   current.id = chain.species.url.split('/').at(-2);
 
@@ -66,12 +86,25 @@ function serachRecursiveChain(chain) {
   return current;
 }
 
+function pickIncludePokeIds(chain, idSet = new Set()) {
+  chain.forEach(({ to, id }) => {
+    idSet.add(id);
+    if (to.length > 0) {
+      pickIncludePokeIds(to, idSet);
+    }
+  });
+
+  return idSet;
+}
+
 async function pickEvolutionData(link) {
   try {
-    const data = await (await fetch(link)).json();
+    const data = await (await fetch(link, { cache: 'no-store' })).json();
+
     const { chain } = data;
 
     const chainInfo = [serachRecursiveChain(chain)];
+
     return chainInfo;
   } catch (error) {
     console.log(error);
@@ -79,20 +112,26 @@ async function pickEvolutionData(link) {
   }
 }
 
-export default async function fetchEvolutionTree() {
+export default async function fetchEvolutionChain() {
   try {
-    const fokePromise = [];
-    for (let i = 0; i < 6; i += 1) {
-      fokePromise.push(fetchPokes(i));
-    }
-    const pokes = (await Promise.all(fokePromise)).flat();
+    const pokes = await fetchPokes();
 
     const pickedPokes = await setEvolutionChainLink(pickPokeIdAndNo(pokes));
+
     const chainDatas = (await Promise.all(pickedPokes.map((poke) => pickEvolutionData(poke))))
       .map((data, index) => ({ chainIndex: index + 1, chain: data }));
 
-    console.log(chainDatas[6]);
-    return editEvolutionChains(chainDatas);
+    const editedEvolutionChains = editEvolutionChains(chainDatas);
+
+    const addedIdsFieldChains = editedEvolutionChains.map((chain) => {
+      const ids = pickIncludePokeIds(chain.chain);
+      return {
+        ...chain,
+        ids: [...ids],
+      };
+    });
+
+    return addedIdsFieldChains;
   } catch (error) {
     console.log(error);
     return [];
