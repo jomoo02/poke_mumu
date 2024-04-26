@@ -112,6 +112,31 @@ async function pickEvolutionData(link) {
   }
 }
 
+function addFromField(chain, from = '') {
+  return chain.map(({
+    to, id, detail, name,
+  }) => {
+    if (to.length > 0) {
+      const addedFromTo = addFromField(to, id);
+      return ({
+        id,
+        detail,
+        name,
+        from,
+        to: addedFromTo,
+      });
+    }
+
+    return ({
+      to,
+      id,
+      detail,
+      name,
+      from,
+    });
+  });
+}
+
 export default async function fetchEvolutionChain() {
   try {
     const pokes = await fetchPokes();
@@ -131,7 +156,15 @@ export default async function fetchEvolutionChain() {
       };
     });
 
-    return addedIdsFieldChains;
+    const addedFromFieldChains = addedIdsFieldChains.map((chain) => {
+      const addedChain = addFromField(chain.chain);
+      return ({
+        ...chain,
+        chain: addedChain,
+      });
+    });
+
+    return addedFromFieldChains;
   } catch (error) {
     console.log(error);
     return [];
