@@ -18,7 +18,6 @@ export default async function DetailPage({ params }) {
   const allIds = await fetchAllChainIds();
   const targetChainIndex = allIds.find(({ ids }) => ids.includes(String(id)))?.chainIndex;
   const chainData = await fetchChain(targetChainIndex);
-  console.log(chainData);
 
   return (
     <div className="grid gap-y-10">
