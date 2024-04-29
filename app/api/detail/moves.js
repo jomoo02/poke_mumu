@@ -29,30 +29,59 @@ const GEN8 = [
 ];
 const GEN9 = ['scarlet-violet'];
 
-function filterVersion(version, moves) {
-  return moves.reduce((acc, move) => {
+async function fetchMoveInfo(move) {
+  const data = await (await fetch(move.url)).json();
+  const {
+    names,
+    accuracy,
+    type,
+    power,
+    damage_class: damageClass,
+  } = data;
+
+  const findLanguageName = (targetLan) => names.find(({ language }) => (
+    language.name === targetLan))?.name;
+
+  const nameEn = findLanguageName('en');
+  const nameKo = findLanguageName('ko') || nameEn;
+
+  return {
+    accuracy,
+    power,
+    damage_class: damageClass.name,
+    type: type.name,
+    name: {
+      ko: nameKo,
+      en: nameEn,
+    },
+  };
+}
+
+async function filterVersion(version, moves) {
+  const results = await moves.reduce(async (accPromise, move) => {
+    const acc = await accPromise;
     const versionDetail = move.version_group_details.filter((detail) => (
       detail.version_group.name === version
     ));
 
     if (versionDetail.length > 0) {
-      const movesData = versionDetail.map((detailInfo) => {
+      const movesData = await Promise.all(versionDetail.map(async (detailInfo) => {
         const level = detailInfo.level_learned_at;
         const method = detailInfo.move_learn_method.name;
+        const moveInfo = await fetchMoveInfo(move.move);
         return ({
-          move: move.move,
+          move: moveInfo,
           level,
           method,
         });
-      });
+      }));
 
-      return [
-        ...acc,
-        ...movesData,
-      ];
+      return [...acc, ...movesData];
     }
     return acc;
-  }, []).sort((a, b) => a.level - b.level);
+  }, Promise.resolve([]));
+
+  return results.sort((a, b) => a.level - b.level);
 }
 
 function filterMethod(moves) {
@@ -84,7 +113,7 @@ function filterNotExist(moves) {
   });
 }
 
-export default function filterMoves(moves) {
+export default async function filterMoves(moves) {
   const genAll = [
     GEN1,
     GEN2,
@@ -97,20 +126,23 @@ export default function filterMoves(moves) {
     GEN9,
   ];
 
-  const genAllMoves = genAll.map((versions, index) => {
+  const genAllMoves = await Promise.all(genAll.map(async (versions, index) => {
     const gen = index + 1;
-    const genMoves = versions.map((version) => {
-      const versionMoves = filterMethod(filterVersion(version, moves));
+    const genMoves = await Promise.all(versions.map(async (version) => {
+      const versionMoves = filterMethod(await filterVersion(version, moves));
       return ({
         version,
         versionMoves,
       });
-    });
+    }));
+
     return ({
       gen,
       genMoves,
     });
-  });
+  }));
 
-  return filterNotExist(genAllMoves);
+  const filterdNotExistMoves = filterNotExist(genAllMoves);
+
+  return filterdNotExistMoves;
 }

@@ -1,6 +1,102 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useLanguage } from '@/app/language-provider';
+import typesKo from '@/app/translations/type';
+
+function Move({ move, children }) {
+  const { language } = useLanguage();
+  const {
+    name,
+    type,
+    power,
+    accuracy,
+    damage_class: damageClass,
+  } = move;
+
+  const nameText = language === 'ko' ? name.ko : name.en;
+  const typeText = language === 'ko' ? typesKo[type] : type;
+
+  return (
+    <div className="grid grid-cols-7 gap-x-2 divide-x">
+      <div>{children}</div>
+      <div className="col-span-2">{nameText}</div>
+      <div className="px-2">
+        <div className={`${type} rounded-md text-white font-medium text-center`}>
+          {typeText}
+        </div>
+      </div>
+      <div>{damageClass}</div>
+      <div>{power}</div>
+      <div>{accuracy}</div>
+    </div>
+  );
+}
+
+function MethodMoves({ method, moves }) {
+  console.log(moves);
+  const METHOD_TEXT_MAP = {
+    'level-up': '레벨 업으로 익히는 기술',
+    egg: '교배를 통해 유전 받을 수 있는 기술',
+    machine: '기술머신으로 익히는 기술',
+    back: '진화 전 단계에서 얻을 수 있는 기술',
+    tutor: 'NPC로부터 배울 수 있는 기술',
+  };
+  const lastGridMap = {
+    'level-up': 'level',
+    egg: 'egg',
+    machine: 'machine',
+    back: 'back',
+  };
+
+  const lastGridText = lastGridMap[method];
+
+  const methodMoves = moves.map(({ move, level, ids }) => {
+    if (method === 'level-up') {
+      return (
+        <Move
+          key={`${move.name.en}/${level}`}
+          move={move}
+        >
+          {level}
+        </Move>
+      );
+    } if (method === 'back') {
+      return (
+        <Move
+          key={`${move.name.en}/${level}`}
+          move={move}
+        >
+          {ids.map((id) => <div key={id}>{id}</div>)}
+        </Move>
+      );
+    }
+    return (
+      <Move
+        key={`${move.name.en}/${level}`}
+        move={move}
+      />
+    );
+  });
+
+  return (
+    <div>
+      <h4 className="text-xl">{METHOD_TEXT_MAP[method]}</h4>
+      <div className="grid gap-y-2">
+        <div className="grid grid-cols-7">
+          <div>{lastGridText}</div>
+          <div className="col-span-2">이름</div>
+          <div>타입</div>
+          <div>분류</div>
+          <div>위력</div>
+          <div>명중률</div>
+        </div>
+        {methodMoves}
+      </div>
+    </div>
+  );
+}
 
 function VersionMoves({ version, versionMoves }) {
   const methods = [
@@ -8,25 +104,25 @@ function VersionMoves({ version, versionMoves }) {
     'machine',
     'egg',
     'tutor',
+    'back',
   ];
 
   return (
-    <div className="my-4">
+    <div className="my-4 w-full">
       <h4 className="font-medium">
         {`${version} 버전`}
       </h4>
-      <div className="grid divide-y">
+      <div className="grid divide-y gap-y-3">
         {versionMoves && methods.map((method) => (
-          <div key={method}>
-            <h4>{method}</h4>
+          <Fragment key={method}>
             {versionMoves[method]?.length > 0
-              ? (versionMoves[method].map(({ move, level }) => (
-                <div key={`${move.name}/${level}`}>{`${level}: ${move.name}`}</div>
-              )))
-              : (
-                <div>none</div>
+              && (
+                <MethodMoves
+                  moves={versionMoves[method]}
+                  method={method}
+                />
               )}
-          </div>
+          </Fragment>
         ))}
       </div>
     </div>
@@ -57,7 +153,6 @@ function GenMoves({ gen, genMoves }) {
   return (
     <div>
       <h3 className="text-xl">{`${gen} 세대`}</h3>
-
       <div className="flex gap-x-1 border-b">
         {versions.map((version) => (
           <button

@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 
 export default function BasicInfo({ no, name, sprity }) {
+  const url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${sprity}`;
   const noText = `No. ${no}`;
   return (
     <>
@@ -10,7 +11,7 @@ export default function BasicInfo({ no, name, sprity }) {
         <span>{name.ko}</span>
       </div>
       <Image
-        src={sprity}
+        src={url}
         alt={name.en}
         width={250}
         height={250}

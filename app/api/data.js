@@ -3,6 +3,27 @@
 import PokeModel from '../models/Poke.mjs';
 import dbConnect from './db/connect.ts';
 
+export async function fetchPoke(id) {
+  try {
+    await dbConnect();
+
+    const query = { id };
+    const projection = {
+      _id: 0,
+      form: 0,
+      id: 0,
+    };
+    const result = await PokeModel
+      .findOne(query, projection)
+      .lean();
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    return '';
+  }
+}
+
 export async function fetchPokes(index) {
   try {
     await dbConnect();
