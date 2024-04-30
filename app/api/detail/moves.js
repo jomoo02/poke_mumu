@@ -29,75 +29,143 @@ const GEN8 = [
 ];
 const GEN9 = ['scarlet-violet'];
 
-async function fetchMoveInfo(move) {
-  const data = await (await fetch(move.url)).json();
+const GEN_ALL = [
+  GEN1,
+  GEN2,
+  GEN3,
+  GEN4,
+  GEN5,
+  GEN6,
+  GEN7,
+  GEN8,
+  GEN9,
+];
+
+async function fetchMoveMachine(machineUrl) {
+  const data = await (await fetch(machineUrl)).json();
+  const { id, item } = data;
+  const type = item?.name.slice(0, 2);
+  return {
+    id,
+    type,
+    name: item?.name || '',
+  };
+}
+
+function findMoveName(names) {
+  const findTargetLanguageName = (targetLan) => names.find(({ language }) => (
+    language.name === targetLan))?.name;
+
+  const en = findTargetLanguageName('en');
+  return {
+    en,
+    ko: findTargetLanguageName('ko') || en,
+  };
+}
+
+async function fetchMoveInfo(moveUrl) {
+  const data = await (await fetch(moveUrl)).json();
+
   const {
     names,
     accuracy,
     type,
     power,
+    machines,
     damage_class: damageClass,
   } = data;
 
-  const findLanguageName = (targetLan) => names.find(({ language }) => (
-    language.name === targetLan))?.name;
-
-  const nameEn = findLanguageName('en');
-  const nameKo = findLanguageName('ko') || nameEn;
+  const name = findMoveName(names);
 
   return {
     accuracy,
     power,
+    machines,
+    name,
     damage_class: damageClass.name,
     type: type.name,
-    name: {
-      ko: nameKo,
-      en: nameEn,
-    },
   };
 }
 
-async function filterVersion(version, moves) {
-  const results = await moves.reduce(async (accPromise, move) => {
+function findVersionMachine(version, machines) {
+  return machines.find((machine) => machine.version_group.name === version);
+}
+
+async function fetchVersionMachineInfo(version, machines) {
+  const versionMachineUrl = findVersionMachine(version, machines)?.machine?.url;
+
+  if (versionMachineUrl) {
+    const machineInfo = await fetchMoveMachine(versionMachineUrl);
+    return machineInfo;
+  }
+  return {
+    id: 0,
+    type: 'tm',
+    name: 'tm0',
+  };
+}
+
+async function processMoveDetails(versionDetail, version, moveUrl) {
+  const moveDetails = await Promise.all(versionDetail.map(async (detailInfo) => {
+    const {
+      level_learned_at: level,
+      move_learn_method: { name: method },
+    } = detailInfo;
+
+    const { machines, ...moveInfo } = await fetchMoveInfo(moveUrl);
+
+    if (method === 'machine') {
+      const machinInfo = await fetchVersionMachineInfo(version, machines);
+      return {
+        method,
+        move: moveInfo,
+        machine: machinInfo,
+      };
+    }
+    return {
+      move: moveInfo,
+      level,
+      method,
+    };
+  }));
+
+  return moveDetails;
+}
+
+async function filterVersion(targetVersion, moves) {
+  const result = await moves.reduce(async (accPromise, move) => {
     const acc = await accPromise;
-    const versionDetail = move.version_group_details.filter((detail) => (
-      detail.version_group.name === version
+
+    const {
+      version_group_details: versionGroupDetails,
+      move: moveInfo,
+    } = move;
+
+    const targetVersionDetails = versionGroupDetails.filter((detail) => (
+      detail.version_group.name === targetVersion
     ));
 
-    if (versionDetail.length > 0) {
-      const movesData = await Promise.all(versionDetail.map(async (detailInfo) => {
-        const level = detailInfo.level_learned_at;
-        const method = detailInfo.move_learn_method.name;
-        const moveInfo = await fetchMoveInfo(move.move);
-        return ({
-          move: moveInfo,
-          level,
-          method,
-        });
-      }));
-
+    if (targetVersionDetails.length > 0) {
+      const movesData = await processMoveDetails(targetVersionDetails, targetVersion, moveInfo.url);
       return [...acc, ...movesData];
     }
     return acc;
   }, Promise.resolve([]));
 
-  return results.sort((a, b) => a.level - b.level);
+  return result;
 }
 
 function filterMethod(moves) {
-  const methods = {
+  return moves.reduce((acc, { method, ...rest }) => {
+    acc[method].push(rest);
+    return acc;
+  }, {
     'level-up': [],
     machine: [],
     tutor: [],
     egg: [],
-  };
-
-  moves.forEach((move) => {
-    const { method } = move;
-    methods[method].push(move);
+    back: [],
   });
-
-  return methods;
 }
 
 function filterNotExist(moves) {
@@ -114,20 +182,7 @@ function filterNotExist(moves) {
 }
 
 export default async function filterMoves(moves) {
-  const genAll = [
-    GEN1,
-    GEN2,
-    GEN3,
-    GEN4,
-    GEN5,
-    GEN6,
-    GEN7,
-    GEN8,
-    GEN9,
-  ];
-
-  const genAllMoves = await Promise.all(genAll.map(async (versions, index) => {
-    const gen = index + 1;
+  const genAllMoves = await Promise.all(GEN_ALL.map(async (versions, index) => {
     const genMoves = await Promise.all(versions.map(async (version) => {
       const versionMoves = filterMethod(await filterVersion(version, moves));
       return ({
@@ -136,10 +191,10 @@ export default async function filterMoves(moves) {
       });
     }));
 
-    return ({
-      gen,
+    return {
       genMoves,
-    });
+      gen: index + 1,
+    };
   }));
 
   const filterdNotExistMoves = filterNotExist(genAllMoves);

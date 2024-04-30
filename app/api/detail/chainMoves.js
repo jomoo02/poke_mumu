@@ -80,7 +80,7 @@ function removeDuplicate(comparedBacks) {
           move: targetMove,
           ids,
         } = acc[targetMovesIndex];
-        acc[targetMovesIndex] = { ids: [...ids, backId], move: targetMove };
+        acc[targetMovesIndex] = { ids: [...new Set([...ids, backId])], move: targetMove };
       } else {
         moveSet.add(moveName);
         acc.push({ move, ids: [backId] });

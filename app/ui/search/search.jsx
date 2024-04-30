@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
+import { fetchSearchPokes } from '@/app/api/search';
+import { useLanguage } from '@/app/language-provider';
 import CloseIcon from '../icons/close';
 import SearchIcon from '../icons/search';
-import { fetchSearchPokes } from '@/app/api/search';
 import SearchResult from './result';
-import { useLanguage } from '@/app/language-provider';
 
 export default function Search({ closeModal }) {
   const [searchText, setSearchText] = useState('');
