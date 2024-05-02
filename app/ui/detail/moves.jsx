@@ -179,12 +179,7 @@ function PreEvolutionMethodMoves({ moves }) {
   const sprityUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
   const methodText = '이전 진화에서만 얻을 수 있는 기술';
 
-  const sortedMoves = [...moves].sort((a, b) => {
-    if (a.ids.length !== b.ids.length) {
-      return a.ids.length - b.ids.length;
-    }
-    return a.move.type.localeCompare(b.move.type);
-  });
+  const sortedMoves = [...moves].sort((a, b) => a.ids.length - b.ids.length);
 
   return (
     <div>
@@ -224,8 +219,6 @@ function VersionMoves({ version, versionMoves }) {
     tutor,
     'level-up': levelUp,
   } = versionMoves;
-
-  console.log(versionMoves);
 
   const allMoves = [...machine, ...egg, ...tutor, ...back, ...levelUp];
 

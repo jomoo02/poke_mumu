@@ -101,7 +101,15 @@ function addBackEggMove(moves, backEvolutionsMoves) {
   return moves.map(({ gen, genMoves }) => {
     const backTargetGenMoves = findBackGenMoves(backEvolutionsMoves, gen);
     const afterGenMoves = genMoves.map(({ version, versionMoves }, versionIndex) => {
-      const targetVersionBackMoves = backTargetGenMoves[0].backGenMoves[versionIndex].versionMoves;
+      const targetVersion = backTargetGenMoves[0].backGenMoves;
+      if (!targetVersion) {
+        return {
+          version,
+          versionMoves,
+        };
+      }
+      const targetVersionBackMoves = targetVersion[versionIndex]?.versionMoves;
+
       const addedBackEggMove = compareBackEggMove(versionMoves.egg, targetVersionBackMoves.egg);
       return {
         version,
@@ -136,6 +144,12 @@ export default async function checkBackEvolutionMoves(id, chain, moves) {
       const backTargetGenMoves = findBackGenMoves(backEvolutionsMoves, gen);
       const afterGenMoves = genMoves.map(({ version, versionMoves }, versionIndex) => {
         const comparedBacks = backTargetGenMoves.map(({ backId, backGenMoves }) => {
+          if (!backGenMoves) {
+            return {
+              backId,
+              compared: [],
+            };
+          }
           const targetVersionBackMoves = backGenMoves[versionIndex].versionMoves;
           const compared = contrastMoves(
             getAllMethodMoves(versionMoves),

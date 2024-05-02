@@ -157,7 +157,11 @@ async function filterVersion(targetVersion, moves) {
 
 function filterMethod(moves) {
   return moves.reduce((acc, { method, ...rest }) => {
-    acc[method].push(rest);
+    if (acc[method]) {
+      acc[method].push(rest);
+    } else if (method.includes('egg')) {
+      acc.egg.push(rest);
+    }
     return acc;
   }, {
     'level-up': [],
