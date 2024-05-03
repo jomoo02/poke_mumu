@@ -10,16 +10,17 @@ import Forms from '@/app/ui/detail/forms';
 import { fetchAllChainIds, fetchChain } from '@/app/api/chain';
 import { fetchPoke } from '@/app/api/data';
 import checkBackEvolutionMoves from '@/app/api/detail/chainMoves';
+import RouteButton from '@/app/ui/detail/route-button';
 
 export default async function DetailPage({ params }) {
-  const id = params?.id;
+  const order = params?.order;
 
   const {
-    no, name, sprity, types,
-  } = await fetchPoke(id);
+    no, name, sprity, types, id,
+  } = await fetchPoke(order);
 
   const {
-    abilities, stats, moves, forms, speciesId,
+    abilities, stats, moves, forms, speciesId, speciesName,
   } = await fetchPokeDetail(id);
 
   const allIds = await fetchAllChainIds();
@@ -34,8 +35,9 @@ export default async function DetailPage({ params }) {
 
   return (
     <div className="grid gap-y-10">
+      <RouteButton order={order} />
       <BasicInfo no={no} name={name} sprity={sprity} id={speciesId} />
-      <Forms forms={forms} />
+      <Forms forms={forms} name={speciesName} />
       <Abilities abilities={abilities} />
       <Types types={types} />
       {chainData && chainData.chain.map(({

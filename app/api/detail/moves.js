@@ -1,3 +1,5 @@
+import { svMachine } from '../../lib/machineNumber';
+
 const GEN1 = ['red-blue', 'yellow'];
 const GEN2 = ['gold-silver', 'crystal'];
 const GEN3 = [
@@ -185,6 +187,43 @@ function filterNotExist(moves) {
   });
 }
 
+function addMachineNumber(moves) {
+  const target = { gen: 9, version: 'scarlet-violet' };
+
+  const targetGenMoves = moves.find(({ gen }) => gen === target.gen)?.genMoves;
+  if (targetGenMoves) {
+    console.log('pass 1', targetGenMoves);
+    const targetVersionMoves = targetGenMoves.find(({ version }) => (
+      version === target.version))?.versionMoves;
+    if (targetVersionMoves) {
+      console.log('pass 2');
+      const machineMoves = targetVersionMoves.machine;
+      const after = machineMoves.map(({ machine, move }) => {
+        const moveNameKo = move.name.ko;
+        const machineNumber = svMachine[moveNameKo];
+        if (machineNumber) {
+          return {
+            move,
+            machine: {
+              id: machineNumber,
+              type: 'tm',
+              name: `tm${machineNumber}`,
+            },
+          };
+        }
+        return {
+          move,
+          machine,
+        };
+      });
+      console.log('after', after);
+
+      targetVersionMoves.machine = after;
+    }
+  }
+  return moves;
+}
+
 export default async function filterMoves(moves) {
   const genAllMoves = await Promise.all(GEN_ALL.map(async (versions, index) => {
     const genMoves = await Promise.all(versions.map(async (version) => {
@@ -202,6 +241,7 @@ export default async function filterMoves(moves) {
   }));
 
   const filterdNotExistMoves = filterNotExist(genAllMoves);
+  addMachineNumber(filterdNotExistMoves);
 
   return filterdNotExistMoves;
 }

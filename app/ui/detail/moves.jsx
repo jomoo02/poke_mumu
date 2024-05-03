@@ -293,6 +293,7 @@ function GenMoves({ gen, genMoves }) {
 }
 
 export default function Moves({ moves }) {
+  console.log(moves);
   const gens = moves.map(({ gen }) => gen);
   const [targetGen, setTargetGen] = useState(gens.at(-1));
   const [genMoves, setGenMoves] = useState(moves.find(({ gen }) => gen === gens.at(-1)).genMoves);

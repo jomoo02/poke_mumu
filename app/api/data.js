@@ -3,15 +3,14 @@
 import PokeModel from '../models/Poke.mjs';
 import dbConnect from './db/connect.ts';
 
-export async function fetchPoke(id) {
+export async function fetchPoke(order) {
   try {
     await dbConnect();
 
-    const query = { id };
+    const query = { order };
     const projection = {
       _id: 0,
       form: 0,
-      id: 0,
     };
     const result = await PokeModel
       .findOne(query, projection)
@@ -39,6 +38,7 @@ export async function fetchPokes(index) {
       no: 1,
       form: 1,
       key: 1,
+      order: 1,
       _id: 0,
     };
 

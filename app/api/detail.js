@@ -7,6 +7,15 @@ import pickForms from './detail/form';
 
 const POKE_URL = 'https://pokeapi.co/api/v2/pokemon';
 
+function filterName(names) {
+  const findLanguageName = (lan) => names.find(({ language }) => language.name === lan)?.name;
+  const en = findLanguageName('en');
+  const ko = findLanguageName('ko') || en;
+  return {
+    en, ko,
+  };
+}
+
 export default async function fetchPokeDetail(id, chain) {
   const data = await (await fetch(`${POKE_URL}/${id}`)).json();
 
@@ -22,7 +31,7 @@ export default async function fetchPokeDetail(id, chain) {
   const stats = filterStats(statsObj);
   const moves = await filterMoves(movesObj);
   const speciesData = await (await fetch(species.url)).json();
-  const { varieties, id: speciesId } = speciesData;
+  const { varieties, id: speciesId, names } = speciesData;
   const forms = await pickForms(varieties, formsArr);
 
   return {
@@ -31,5 +40,6 @@ export default async function fetchPokeDetail(id, chain) {
     moves,
     forms,
     speciesId,
+    speciesName: filterName(names),
   };
 }
