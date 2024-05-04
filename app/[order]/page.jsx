@@ -28,9 +28,11 @@ export default async function DetailPage({ params }) {
   const chainData = await fetchChain(targetChainIndex);
 
   let test = moves;
+  // console.log('test1', test[0].genMoves[0].versionMoves);
 
   if (chainData) {
     test = await checkBackEvolutionMoves(id, chainData.chain, moves);
+    // console.log('test2', test[0].genMoves[0].versionMoves);
   }
 
   return (

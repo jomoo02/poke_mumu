@@ -20,6 +20,7 @@ export default function SearchResult({ searchText, result, closeModal }) {
         form={poke.form}
         sprity={poke.sprity}
         id={poke.id}
+        order={poke.order}
         closeModal={closeModal}
       />
     </div>

@@ -6,7 +6,7 @@ import { useLanguage } from '@/app/language-provider';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
 
 export default function SearchPoke({
-  no, name, types, form, sprity, id, closeModal,
+  no, name, types, form, sprity, id, closeModal, order
 }) {
   const { language } = useLanguage();
   const sprityUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${sprity}`;
@@ -39,7 +39,7 @@ export default function SearchPoke({
     <div className="px-2.5 sm:px-3 md:px-4 h-full">
       <div className="flex h-full justify-between items-center">
         <Link
-          href={`/${id}`}
+          href={`/${order}`}
           onClick={() => handleClick(pokeData)}
           onKeyDown={(e) => handleKeyDown(e, pokeData)}
           tabIndex={0}

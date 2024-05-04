@@ -1,4 +1,4 @@
-import { svMachine } from '../../lib/machineNumber';
+import updateMovesGen9 from './move-gen9';
 
 const GEN1 = ['red-blue', 'yellow'];
 const GEN2 = ['gold-silver', 'crystal'];
@@ -192,33 +192,10 @@ function addMachineNumber(moves) {
 
   const targetGenMoves = moves.find(({ gen }) => gen === target.gen)?.genMoves;
   if (targetGenMoves) {
-    console.log('pass 1', targetGenMoves);
-    const targetVersionMoves = targetGenMoves.find(({ version }) => (
-      version === target.version))?.versionMoves;
+    const targetVersion = targetGenMoves.find(({ version }) => version === target.version);
+    const targetVersionMoves = targetVersion?.versionMoves;
     if (targetVersionMoves) {
-      console.log('pass 2');
-      const machineMoves = targetVersionMoves.machine;
-      const after = machineMoves.map(({ machine, move }) => {
-        const moveNameKo = move.name.ko;
-        const machineNumber = svMachine[moveNameKo];
-        if (machineNumber) {
-          return {
-            move,
-            machine: {
-              id: machineNumber,
-              type: 'tm',
-              name: `tm${machineNumber}`,
-            },
-          };
-        }
-        return {
-          move,
-          machine,
-        };
-      });
-      console.log('after', after);
-
-      targetVersionMoves.machine = after;
+      targetVersion.versionMoves = updateMovesGen9(targetVersionMoves);
     }
   }
   return moves;

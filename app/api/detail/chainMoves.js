@@ -21,7 +21,7 @@ function mapEvolutionChain(chain, map = new Map()) {
 function traceBackEvolution(id, chain) {
   const beforeEvolution = [];
   const evolutionMap = mapEvolutionChain(chain);
-  let currentId = id;
+  let currentId = String(id);
 
   while (currentId && evolutionMap.has(currentId)) {
     const currentElement = evolutionMap.get(currentId);
@@ -128,7 +128,6 @@ function addBackEggMove(moves, backEvolutionsMoves) {
 
 export default async function checkBackEvolutionMoves(id, chain, moves) {
   const backEvolution = traceBackEvolution(id, chain);
-
   if (backEvolution.length > 0) {
     const backEvolutionsMoves = await Promise.all(
       backEvolution.map(async (backId) => {
