@@ -36,6 +36,7 @@ export default function CardList() {
               no={no}
               form={form}
               order={order}
+              pokeKey={key}
               isPriority={(index <= 20)}
             />
           </div>

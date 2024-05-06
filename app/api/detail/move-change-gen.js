@@ -1,19 +1,19 @@
-import { svMachine } from '../../lib/machineNumber';
-import { changes } from '../../lib/changeMove';
-import { addMovesGen9 } from '../../lib/addNewMove';
+import { svMachine, bdspMachine } from '../../lib/machineNumber';
+import { changedMovesGen9 } from '../../lib/changedMoves';
+import { addedMovesGen9 } from '../../lib/addedMoves';
 
 function addNewMove(moveName) {
   const { en, ko } = moveName;
-  if (addMovesGen9[ko]) {
+  if (addedMovesGen9[ko]) {
     return {
       en,
-      ko: addMovesGen9[ko],
+      ko: addedMovesGen9[ko],
     };
   }
   return moveName;
 }
 
-function changeMoveName(moveName) {
+function changeMoveName(moveName, changes) {
   const { en, ko } = moveName;
   if (changes[ko]) {
     return {
@@ -24,16 +24,16 @@ function changeMoveName(moveName) {
   return moveName;
 }
 
-function addMachineNumber(moveObj) {
+function addMachineNumber(moveObj, machineNumbers) {
   const { move } = moveObj;
   const { ko } = move.name;
-  if (svMachine[move.name.ko]) {
+  if (machineNumbers[move.name.ko]) {
     return {
       move,
       machine: {
-        id: svMachine[ko],
+        id: machineNumbers[ko],
         type: 'tm',
-        name: `tm${svMachine[ko]}`,
+        name: `tm${machineNumbers[ko]}`,
       },
     };
   }
@@ -43,7 +43,7 @@ function addMachineNumber(moveObj) {
 
 function processMoves(moves, method) {
   const changedMoves = moves.map(({ move, ...rest }) => {
-    const moveName = changeMoveName(addNewMove(move.name));
+    const moveName = changeMoveName(addNewMove(move.name), changedMovesGen9);
     return {
       ...rest,
       move: {
@@ -54,13 +54,22 @@ function processMoves(moves, method) {
   });
 
   if (method === 'machine') {
-    return changedMoves.map(addMachineNumber);
+    return changedMoves.map((move) => addMachineNumber(move, svMachine));
   }
 
   return changedMoves;
 }
 
-export default function updateMovesGen9(movesGen9) {
+export function addMachineNumberGen8Bdsp(movesGen8) {
+  const machineMoves = movesGen8.machine;
+  const addedNumberMoves = machineMoves.map((move) => addMachineNumber(move, bdspMachine));
+  return {
+    ...movesGen8,
+    machine: addedNumberMoves,
+  };
+}
+
+export function updateMovesGen9(movesGen9) {
   const learnMethods = Object.keys(movesGen9);
 
   const processedMoves = learnMethods.map((method) => {

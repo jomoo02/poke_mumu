@@ -1,4 +1,4 @@
-const changes = {
+const changedMovesGen9 = {
   가드스웹: '가드스왑',
   가로챔: '가로채기',
   기관총: '씨기관총',
@@ -50,4 +50,4 @@ const changes = {
   화염자동차: '화염바퀴',
 };
 
-export { changes };
+export { changedMovesGen9 };

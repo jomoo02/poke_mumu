@@ -1,4 +1,7 @@
-import updateMovesGen9 from './move-gen9';
+import {
+  updateMovesGen9,
+  addMachineNumberGen8Bdsp,
+} from './move-change-gen';
 
 const GEN1 = ['red-blue', 'yellow'];
 const GEN2 = ['gold-silver', 'crystal'];
@@ -187,15 +190,13 @@ function filterNotExist(moves) {
   });
 }
 
-function addMachineNumber(moves) {
-  const target = { gen: 9, version: 'scarlet-violet' };
-
+function updateTargetVersionMoves(moves, target, update) {
   const targetGenMoves = moves.find(({ gen }) => gen === target.gen)?.genMoves;
   if (targetGenMoves) {
     const targetVersion = targetGenMoves.find(({ version }) => version === target.version);
     const targetVersionMoves = targetVersion?.versionMoves;
     if (targetVersionMoves) {
-      targetVersion.versionMoves = updateMovesGen9(targetVersionMoves);
+      targetVersion.versionMoves = update(targetVersionMoves);
     }
   }
   return moves;
@@ -217,8 +218,24 @@ export default async function filterMoves(moves) {
     };
   }));
 
+  const updatesMoves = [
+    {
+      target: { gen: 9, version: 'scarlet-violet' },
+      update: updateMovesGen9,
+    },
+    {
+      target: { gen: 8, version: 'brilliant-diamond-and-shining-pearl' },
+      update: addMachineNumberGen8Bdsp,
+    },
+  ];
+
   const filterdNotExistMoves = filterNotExist(genAllMoves);
-  addMachineNumber(filterdNotExistMoves);
+  // addMachineNumber(filterdNotExistMoves);
+  // checkBdspVersion(filterdNotExistMoves);
+
+  updatesMoves.forEach(({ target, update }) => {
+    updateTargetVersionMoves(filterdNotExistMoves, target, update);
+  });
 
   return filterdNotExistMoves;
 }

@@ -6,7 +6,7 @@ import { useLanguage } from '@/app/language-provider';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
 
 export default function SearchPoke({
-  no, name, types, form, sprity, id, closeModal, order
+  no, name, types, form, sprity, id, closeModal, order, pokeKey,
 }) {
   const { language } = useLanguage();
   const sprityUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${sprity}`;
@@ -16,7 +16,7 @@ export default function SearchPoke({
   const pokeNameSub = language === 'ko' ? name.en : name.ko;
   const noText = `no.${no}`;
   const pokeData = {
-    no, name, types, form, sprity, id,
+    no, name, types, form, sprity, id, order, key: pokeKey,
   };
 
   const pokeType = (type) => (language === 'ko' ? typesKo[type] : type);

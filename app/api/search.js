@@ -4,32 +4,32 @@ import { checkTextLanguageKo, checkTextNumberType } from '../lib/utils';
 import PokeModel from '../models/Poke.mjs';
 import dbConnect from './db/connect';
 
-function filterById(pokes) {
-  const idSet = new Set();
-  const duplicationIdSet = new Set();
+// function filterById(pokes) {
+//   const idSet = new Set();
+//   const duplicationIdSet = new Set();
 
-  const filteringPoeks = pokes.filter(({ id }) => {
-    if (!idSet.has(id)) {
-      idSet.add(id);
-      return true;
-    }
-    duplicationIdSet.add(id);
-    return false;
-  });
+//   const filteringPoeks = pokes.filter(({ id }) => {
+//     if (!idSet.has(id)) {
+//       idSet.add(id);
+//       return true;
+//     }
+//     duplicationIdSet.add(id);
+//     return false;
+//   });
 
-  return filteringPoeks.map((poke) => {
-    if ([...duplicationIdSet].find((id) => id === poke.id)) {
-      return {
-        ...poke,
-        form: {
-          en: 'default',
-          ko: 'default',
-        },
-      };
-    }
-    return poke;
-  });
-}
+//   return filteringPoeks.map((poke) => {
+//     if ([...duplicationIdSet].find((id) => id === poke.id)) {
+//       return {
+//         ...poke,
+//         form: {
+//           en: 'default',
+//           ko: 'default',
+//         },
+//       };
+//     }
+//     return poke;
+//   });
+// }
 
 function decideSearchQuery(text) {
   const isTextNumber = checkTextNumberType(text);
@@ -66,8 +66,9 @@ export async function fetchSearchPokes(text) {
       .find(query, projection)
       .sort({ no: 1, id: 1 })
       .lean();
+    console.log(result);
 
-    return filterById(result);
+    return result;
   } catch (error) {
     console.error(error);
     return [];

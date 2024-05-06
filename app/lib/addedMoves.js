@@ -1,4 +1,4 @@
-const addMovesGen9 = {
+const addedMovesGen9 = {
   'Silk Trap': '스레드트랩',
   'Axe Kick': '발꿈치찍기',
   'Last Respects': '성묘',
@@ -47,4 +47,4 @@ const addMovesGen9 = {
   'Headlong Rush': '들이받기',
 };
 
-export { addMovesGen9 };
+export { addedMovesGen9 };

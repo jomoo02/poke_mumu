@@ -66,7 +66,7 @@ function LevelUpMethodMoves({ moves }) {
               key={`${level}/${move.name.en}`}
               move={move}
             >
-              {String(level)}
+              {level === 0 ? '진화' : String(level)}
             </Move>
           ))}
         </div>
@@ -293,7 +293,6 @@ function GenMoves({ gen, genMoves }) {
 }
 
 export default function Moves({ moves }) {
-  console.log(moves);
   const gens = moves.map(({ gen }) => gen);
   const [targetGen, setTargetGen] = useState(gens.at(-1));
   const [genMoves, setGenMoves] = useState(moves.find(({ gen }) => gen === gens.at(-1)).genMoves);
