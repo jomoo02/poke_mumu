@@ -1,3 +1,7 @@
+function findMove(moves, name) {
+  return moves.find(({ move }) => move?.name?.ko === name?.ko);
+}
+
 function mapEvolutionChain(chain, map = new Map()) {
   chain.forEach((item) => {
     const { id, to } = item;
@@ -29,56 +33,59 @@ export function tracePreviousEvolutionIds(id, chain) {
   return preEvolutionIds.reverse();
 }
 
-function addPreEggMoves(eggMoves, preEggMoves, preId) {
-  return preEggMoves.reduce((acc, cur) => {
-    const foundMoveIndex = acc.findIndex(({ name }) => name?.ko === cur.name?.ko);
-
-    if (foundMoveIndex === -1) {
-      acc.push({
-        ...cur,
-        preIds: [preId],
-      });
-    } else {
-      acc[foundMoveIndex].preIds.push(preId);
+function addEggMoves(eggMoves, newMoves) {
+  return newMoves.reduce((acc, cur) => {
+    const foundMove = findMove(acc, cur.move.name);
+    if (!foundMove) {
+      acc.push(cur);
     }
-
     return acc;
   }, [...eggMoves]);
 }
 
-function compareGenMoves(genMoves, preGenMoves, preId) {
-  return genMoves.map((genMove) => {
-    const { version, versionMoves } = genMove;
-    const eggMove = versionMoves.egg;
+function addPreEvolutionMoves(moves, preEvolutionMoves, preId) {
+  const { pre, ...rest } = moves;
+  const existingMoves = Object.values(rest).flat();
+  const newMoves = Object.values(preEvolutionMoves).flat();
 
-    const foundPreVersion = preGenMoves.find((pre) => pre.version === version);
-    const addedEggMoves = foundPreVersion
-      ? addPreEggMoves(eggMove, foundPreVersion.versionMoves.egg, preId)
-      : eggMove;
+  return newMoves.reduce((acc, cur) => {
+    const isExistMove = findMove(existingMoves, cur.move.name);
+
+    if (!isExistMove) {
+      const foundPreMove = findMove(acc, cur.move.name);
+      if (!foundPreMove) {
+        acc.push({ ...cur, preIds: [preId] });
+      } else {
+        foundPreMove.preIds.push(preId);
+      }
+    }
+
+    return acc;
+  }, [...pre]);
+}
+
+function compareGenMoves(genMoves, preGenMoves, preId) {
+  return genMoves.map(({ version, versionMoves }) => {
+    const { egg, ...restMoves } = versionMoves;
+
+    const foundVersion = preGenMoves.find((preGenMove) => preGenMove.version === version);
+    if (!foundVersion) {
+      return { version, versionMoves };
+    }
+    const { egg: preEvoultionEgg, ...restPreEvolutionMoves } = foundVersion.versionMoves;
+    const updatedEggMoves = addEggMoves(egg, preEvoultionEgg);
+    const updatedPreMoves = addPreEvolutionMoves(restMoves, restPreEvolutionMoves, preId);
 
     return {
       version,
       versionMoves: {
         ...versionMoves,
-        egg: addedEggMoves,
+        egg: updatedEggMoves,
+        pre: updatedPreMoves,
       },
     };
   });
 }
-
-// function compareOnePreMoves(moves, preGenMoves, preId) {
-//   return moves.map(({ gen, genMoves }) => {
-//     const foundPreGen = preMoves.find((preMove) => preMove.gen === gen);
-//     if (!foundPreGen) {
-//       return { gen, genMoves };
-//     }
-
-//     return {
-//       gen,
-//       genMoves: compareGenMoves(genMoves, foundPreGen.genMoves, preId),
-//     };
-//   });
-// }
 
 export function addPreviousEvolutionMoves(moves, preMovesDatas) {
   return preMovesDatas.reduce((currentMoves, { preId, preMoves }) => (

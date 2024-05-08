@@ -179,7 +179,7 @@ function PreEvolutionMethodMoves({ moves }) {
   const sprityUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
   const methodText = '이전 진화에서만 얻을 수 있는 기술';
 
-  const sortedMoves = [...moves].sort((a, b) => a.ids.length - b.ids.length);
+  const sortedMoves = [...moves].sort((a, b) => a.preIds.length - b.preIds.length);
 
   return (
     <div>
@@ -187,13 +187,13 @@ function PreEvolutionMethodMoves({ moves }) {
       <div className="grid gap-y-6">
         <div className="grid gap-y-2">
           <Header method="back" />
-          {sortedMoves.map(({ move, ids }) => (
+          {sortedMoves.map(({ move, preIds }) => (
             <Move
               key={move.name.en}
               move={move}
             >
               <div className="flex gap-x-2">
-                {ids.map((id) => (
+                {preIds.map((id) => (
                   <Image
                     key={id}
                     src={`${sprityUrl}/${id}.png`}
@@ -304,6 +304,7 @@ export default function Moves({ moves }) {
   };
 
   return (
+    // <div>1</div>
     <div>
       <h3 className="text-2xl">기술</h3>
       <div className="flex gap-x-1 border-b">

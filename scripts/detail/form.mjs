@@ -67,17 +67,10 @@ function pickFormName(formNames) {
 
   const nameEn = findLanguageName('en');
   const nameKo = findLanguageName('ko');
-  const genderName = getGenderName(nameEn);
 
   if (nameEn === DEFAULT.en) {
     return {
       ...DEFAULT,
-    };
-  }
-
-  if (genderName.en) {
-    return {
-      ...genderName,
     };
   }
 
@@ -98,8 +91,8 @@ function checkFemaleCase(name) {
   return FEMALE_CASES.find((femaleName) => femaleName === name);
 }
 
-function pickId(sprites, pokemon, gender = MALE) {
-  if (gender === FEMALE) {
+function pickId(sprites, pokemonUrl, gender = MALE) {
+  if (gender === FEMALE && sprites.front_female) {
     const sprity = sprites.front_female;
     return `female/${sprity.split('/').at(-1).split('.')[0]}`;
   }
@@ -109,7 +102,7 @@ function pickId(sprites, pokemon, gender = MALE) {
     return sprity.split('/').at(-1).split('.')[0];
   }
 
-  return pokemon.url.split('/').at(-2);
+  return pokemonUrl.split('/').at(-2);
 }
 
 async function fetchFormsId(formUrls) {

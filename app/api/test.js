@@ -23,7 +23,7 @@ async function fetchChainIndex(id, speciesId) {
     if (index) {
       return index;
     }
-    return allChainIds.find((chainId) => chainId.includes(String(speciesId)))?.chainIndex;
+    return allChainIds.find((chainId) => chainId.ids.includes(String(speciesId)))?.chainIndex;
   } catch (error) {
     return error.message;
   }

@@ -1,6 +1,6 @@
 function findLanguageName(names, targetLanguage) {
   return names.find(({ language }) => (
-    language.names === targetLanguage
+    language.name === targetLanguage
   ))?.name;
 }
 

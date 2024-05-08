@@ -7,7 +7,7 @@ const MOVE_METHODS = {
   machine: 'machine',
   tutor: 'tutor',
   egg: 'egg',
-  back: 'back',
+  pre: 'pre',
 };
 
 function pickMoveName(names) {
@@ -106,8 +106,6 @@ async function fetchVersionMoveDetails(versionMoves) {
           moveDetail.machine = machineInfo;
         } else if (method === MOVE_METHODS['level-up']) {
           moveDetail.level = level;
-        } else if (method === MOVE_METHODS.egg) {
-          moveDetail.preIds = [];
         }
 
         return moveDetail;

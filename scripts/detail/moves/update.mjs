@@ -79,7 +79,6 @@ function updateGen9Sv(svMoves) {
 }
 
 export default function updateMoves(moves) {
-  console.log('updateMoves');
   const targets = [
     { gen: 9, version: SCARLET_VIOLET, update: updateGen9Sv },
     { gen: 8, version: BRILLIANT_DIAMOND_AND_SHINING_PEARL, update: updateGen8Bdsp },
