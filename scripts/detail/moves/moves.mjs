@@ -1,5 +1,6 @@
 import { GEN_ALL } from '../gen.mjs';
 import fetchVersionMachineMove from './machine.mjs';
+import updateMoves from './update.mjs';
 
 const MOVE_METHODS = {
   'level-up': 'level-up',
@@ -23,25 +24,30 @@ function pickMoveName(names) {
 }
 
 async function fetchMove(url) {
-  const data = await (await fetch(url)).json();
+  try {
+    const data = await (await fetch(url)).json();
 
-  const {
-    names,
-    accuracy,
-    type,
-    power,
-    machines,
-    damage_class: damageClass,
-  } = data;
+    const {
+      names,
+      accuracy,
+      type,
+      power,
+      machines,
+      damage_class: damageClass,
+    } = data;
 
-  return {
-    accuracy,
-    power,
-    machines,
-    damage_class: damageClass.name,
-    type: type.name,
-    names: pickMoveName(names),
-  };
+    return {
+      accuracy,
+      power,
+      machines,
+      damage_class: damageClass.name,
+      type: type.name,
+      name: pickMoveName(names),
+    };
+  } catch (error) {
+    console.error(error);
+    return error.message;
+  }
 }
 
 function groupByMethod(moves) {
@@ -64,8 +70,8 @@ function groupByMethod(moves) {
 function filterVersion(targetVersion, moves) {
   return moves
     .reduce((acc, { move, version_group_details: versionGroups }) => {
-      const targetVersionDetail = versionGroups.find(({ verion_group: version }) => (
-        version === targetVersion));
+      const targetVersionDetail = versionGroups.find(({ version_group: { name } }) => (
+        name === targetVersion));
 
       if (targetVersionDetail) {
         acc.push({
@@ -78,32 +84,39 @@ function filterVersion(targetVersion, moves) {
 }
 
 async function fetchVersionMoveDetails(versionMoves) {
-  return Promise.all(
-    versionMoves.map(async (move) => {
-      const { versionDetail, move: { url: moveUrl } } = move;
-      const {
-        level_learned_at: level,
-        move_learn_method: { name: method },
-        version_group: { name: version },
-      } = versionDetail;
+  try {
+    return Promise.all(
+      versionMoves.map(async (move) => {
+        const { versionDetail, move: { url: moveUrl } } = move;
+        const {
+          level_learned_at: level,
+          move_learn_method: { name: method },
+          version_group: { name: version },
+        } = versionDetail;
 
-      const { machines, ...moveInfo } = await fetchMove(moveUrl);
+        const { machines, ...moveInfo } = await fetchMove(moveUrl);
 
-      const moveDetail = {
-        method,
-        move: moveInfo,
-      };
+        const moveDetail = {
+          method,
+          move: moveInfo,
+        };
 
-      if (method === 'machine') {
-        const machineInfo = await fetchVersionMachineMove(version, machines);
-        moveDetail.machine = machineInfo;
-      } else if (method === 'level-up') {
-        moveDetail.level = level;
-      }
+        if (method === MOVE_METHODS.machine) {
+          const machineInfo = await fetchVersionMachineMove(version, machines);
+          moveDetail.machine = machineInfo;
+        } else if (method === MOVE_METHODS['level-up']) {
+          moveDetail.level = level;
+        } else if (method === MOVE_METHODS.egg) {
+          moveDetail.preIds = [];
+        }
 
-      return moveDetail;
-    }),
-  );
+        return moveDetail;
+      }),
+    );
+  } catch (error) {
+    console.error(error);
+    return error.message;
+  }
 }
 
 function filterGenNotExist(moves) {
@@ -119,27 +132,40 @@ function filterGenNotExist(moves) {
   });
 }
 
-export default async function fetchMoves(moves) {
-  const allGenMoves = await Promise.all(
-    GEN_ALL.map(async (versions, index) => {
-      const gen = index + 1;
-      const genMoves = await Promise.all(versions.map(async (version) => {
-        const targetVersionMoves = filterVersion(version, moves);
-        const moveDetails = await fetchVersionMoveDetails(targetVersionMoves);
+async function fetchAllGenMoves(moves) {
+  try {
+    return Promise.all(
+      GEN_ALL.map(async (versions, index) => {
+        const gen = index + 1;
+        const genMoves = await Promise.all(versions.map(async (version) => {
+          const targetVersionMoves = filterVersion(version, moves);
+          const moveDetails = await fetchVersionMoveDetails(targetVersionMoves);
+
+          return {
+            version,
+            versionMoves: groupByMethod(moveDetails),
+          };
+        }));
 
         return {
-          version,
-          versionMoves: groupByMethod(moveDetails),
+          gen,
+          genMoves,
         };
-      }));
+      }),
+    );
+  } catch (error) {
+    console.error(error);
+    return error.message;
+  }
+}
 
-      return {
-        gen,
-        genMoves,
-      };
-    }),
-  );
-
-  const filterdMoves = filterGenNotExist(allGenMoves);
-  return filterdMoves;
+export default async function fetchMoves(moves) {
+  try {
+    const allGenMoves = await fetchAllGenMoves(moves);
+    const filterdMoves = filterGenNotExist(allGenMoves);
+    return updateMoves(filterdMoves);
+  } catch (error) {
+    console.error(error);
+    return error.message;
+  }
 }

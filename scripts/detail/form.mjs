@@ -39,15 +39,20 @@ async function fetchVarietiesFormUrls(varieties) {
   const varietiesUrls = filterVarieties(varieties)
     .map(({ pokemon }) => pokemon.url);
 
-  const varietiesFormsUrls = await Promise.all(
-    varietiesUrls.map(async (url) => {
-      const data = await (await fetch(url)).json();
-      const { forms } = data;
-      return forms.map(({ url: formUrl }) => formUrl);
-    }),
-  );
+  try {
+    const varietiesFormsUrls = await Promise.all(
+      varietiesUrls.map(async (url) => {
+        const data = await (await fetch(url)).json();
+        const { forms } = data;
+        return forms.map(({ url: formUrl }) => formUrl);
+      }),
+    );
 
-  return varietiesFormsUrls.flat();
+    return varietiesFormsUrls.flat();
+  } catch (error) {
+    console.error(error);
+    return error.message;
+  }
 }
 
 function pickFormName(formNames) {
@@ -108,40 +113,50 @@ function pickId(sprites, pokemon, gender = MALE) {
 }
 
 async function fetchFormsId(formUrls) {
-  const formIds = await Promise.all(
-    formUrls.map(async (url) => {
-      const data = await (await fetch(url)).json();
+  try {
+    const formIds = await Promise.all(
+      formUrls.map(async (url) => {
+        const data = await (await fetch(url)).json();
 
-      const {
-        sprites,
-        name,
-        form_names: formNames,
-        pokemon: { url: pokemonUrl },
-      } = data;
+        const {
+          sprites,
+          name,
+          form_names: formNames,
+          pokemon: { url: pokemonUrl },
+        } = data;
 
-      if (checkFemaleCase(name)) {
-        return [MALE, FEMALE].map((gender) => ({
-          name: getGenderName(gender),
-          id: pickId(sprites, pokemonUrl, gender),
-        }));
-      }
+        if (checkFemaleCase(name)) {
+          return [MALE, FEMALE].map((gender) => ({
+            name: getGenderName(gender),
+            id: pickId(sprites, pokemonUrl, gender),
+          }));
+        }
 
-      return {
-        name: pickFormName(formNames),
-        id: pickId(sprites, pokemonUrl),
-      };
-    }),
-  );
+        return {
+          name: pickFormName(formNames),
+          id: pickId(sprites, pokemonUrl),
+        };
+      }),
+    );
 
-  return formIds.flat();
+    return formIds.flat();
+  } catch (error) {
+    console.error(error);
+    return error.message;
+  }
 }
 
 export default async function fetchForms(varieties, forms) {
-  const varietiesFormsUrls = await fetchVarietiesFormUrls(varieties);
-  const formUrls = forms.map(({ url }) => url);
-  const allUrls = [
-    ...new Set([...varietiesFormsUrls, ...formUrls]),
-  ];
+  try {
+    const varietiesFormsUrls = await fetchVarietiesFormUrls(varieties);
+    const formUrls = forms.map(({ url }) => url);
+    const allUrls = [
+      ...new Set([...varietiesFormsUrls, ...formUrls]),
+    ];
 
-  return fetchFormsId(allUrls);
+    return fetchFormsId(allUrls);
+  } catch (error) {
+    console.error(error);
+    return error.message;
+  }
 }

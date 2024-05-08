@@ -11,6 +11,7 @@ import { fetchAllChainIds, fetchChain } from '@/app/api/chain';
 import { fetchPoke } from '@/app/api/data';
 import checkBackEvolutionMoves from '@/app/api/detail/chainMoves';
 import RouteButton from '@/app/ui/detail/route-button';
+import fetchPokeDetailTest from '@/app/api/test';
 
 export default async function DetailPage({ params }) {
   const order = params?.order;
@@ -20,19 +21,27 @@ export default async function DetailPage({ params }) {
   } = await fetchPoke(order);
 
   const {
-    abilities, stats, moves, forms, speciesId, speciesName,
-  } = await fetchPokeDetail(id);
+    abilities, stats, moves, forms, speciesId, speciesName, chain: chainData,
+  } = await fetchPokeDetailTest(id);
+  const test = moves;
 
-  const allIds = await fetchAllChainIds();
-  const targetChainIndex = allIds.find(({ ids }) => ids.includes(String(speciesId)))?.chainIndex;
-  console.log(targetChainIndex);
-  const chainData = await fetchChain(targetChainIndex);
+  // console.log(test);
 
-  let test = moves;
+  // console.log(abilities, stats, moves, forms, speciesId, speciesName, chainData);
+  // const {
+  //   abilities, stats, moves, forms, speciesId, speciesName,
+  // } = await fetchPokeDetail(id);
 
-  if (chainData) {
-    test = await checkBackEvolutionMoves(id, chainData.chain, moves);
-  }
+  // const allIds = await fetchAllChainIds();
+  // const targetChainIndex = allIds.find(({ ids }) => ids.includes(String(speciesId)))?.chainIndex;
+  // console.log(targetChainIndex);
+  // const chainData = await fetchChain(targetChainIndex);
+
+  // let test = moves;
+
+  // if (chainData) {
+  //   test = await checkBackEvolutionMoves(id, chainData.chain, moves);
+  // }
 
   return (
     <div className="grid gap-y-10">
@@ -53,7 +62,7 @@ export default async function DetailPage({ params }) {
         />
       ))}
       <Stats base={stats.baseStats} effort={stats.effortStats} type={types[0]} />
-      <Moves moves={test} />
+      <Moves moves={test} /> 
     </div>
   );
 }

@@ -5,12 +5,12 @@ function findLanguageName(names, targetLanguage) {
 }
 
 function findLanguageFlavorText(flavorTextEntries, targetLanguage) {
-  const targetFlavorTexts = flavorTextEntries.fliter(({ language }) => (
+  const targetFlavorTexts = flavorTextEntries.filter(({ language }) => (
     language.name === targetLanguage
   ));
 
   const findTargetVersionFlavorText = (targetVersion) => (
-    targetFlavorTexts.find(({ version_group: version }) => version === targetVersion)
+    targetFlavorTexts.find(({ version_group: version }) => version?.name === targetVersion)
   );
 
   const svFlavorText = findTargetVersionFlavorText('scarlet-violet');
@@ -29,26 +29,31 @@ function findLanguageFlavorText(flavorTextEntries, targetLanguage) {
 }
 
 async function fetchAbility(abilityUrl, isHidden) {
-  const data = await (await fetch(abilityUrl)).json();
-  const {
-    names,
-    flavor_text_entries: flavorTextEntires,
-  } = data;
+  try {
+    const data = await (await fetch(abilityUrl)).json();
+    const {
+      names,
+      flavor_text_entries: flavorTextEntires,
+    } = data;
 
-  const nameEn = findLanguageName(names, 'en') || 'none';
-  const flavorTextEn = findLanguageFlavorText(flavorTextEntires, 'en') || 'none';
+    const nameEn = findLanguageName(names, 'en') || 'none';
+    const flavorTextEn = findLanguageFlavorText(flavorTextEntires, 'en') || 'none';
 
-  return {
-    isHidden,
-    name: {
-      en: nameEn,
-      ko: findLanguageName(names, 'ko') || nameEn,
-    },
-    flavorText: {
-      en: flavorTextEn,
-      ko: findLanguageFlavorText(flavorTextEntires, 'ko') || flavorTextEn,
-    },
-  };
+    return {
+      isHidden,
+      name: {
+        en: nameEn,
+        ko: findLanguageName(names, 'ko') || nameEn,
+      },
+      flavorText: {
+        en: flavorTextEn,
+        ko: findLanguageFlavorText(flavorTextEntires, 'ko') || flavorTextEn,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return error.message;
+  }
 }
 
 export default async function fetchAbilities(abilities) {
@@ -68,7 +73,12 @@ export default async function fetchAbilities(abilities) {
       { url, isHidden }
     ));
 
-  return Promise.all(uniqueAbilities.map(({ url, isHidden }) => (
-    fetchAbility(url, isHidden)
-  )));
+  try {
+    return Promise.all(uniqueAbilities.map(({ url, isHidden }) => (
+      fetchAbility(url, isHidden)
+    )));
+  } catch (error) {
+    console.error(error);
+    return error.message;
+  }
 }

@@ -215,12 +215,12 @@ function VersionMoves({ version, versionMoves }) {
   const {
     machine,
     egg,
-    back,
+    pre,
     tutor,
     'level-up': levelUp,
   } = versionMoves;
 
-  const allMoves = [...machine, ...egg, ...tutor, ...back, ...levelUp];
+  const allMoves = [...machine, ...egg, ...tutor, ...pre, ...levelUp];
 
   return (
     <div className="my-4 w-full">
@@ -235,7 +235,7 @@ function VersionMoves({ version, versionMoves }) {
             <LevelUpMethodMoves moves={levelUp} />
             <MachineMethodMoves moves={machine} />
             <EggMethodMoves moves={egg} />
-            <PreEvolutionMethodMoves moves={back} />
+            <PreEvolutionMethodMoves moves={pre} />
             <TutorMethodMoves moves={tutor} />
           </>
         )}
@@ -293,6 +293,7 @@ function GenMoves({ gen, genMoves }) {
 }
 
 export default function Moves({ moves }) {
+  console.log(moves);
   const gens = moves.map(({ gen }) => gen);
   const [targetGen, setTargetGen] = useState(gens.at(-1));
   const [genMoves, setGenMoves] = useState(moves.find(({ gen }) => gen === gens.at(-1)).genMoves);
