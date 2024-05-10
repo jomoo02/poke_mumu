@@ -1,45 +1,24 @@
 'use server';
 
-import filterAbilities from './detail/abilities';
-import filterStats from './detail/stats';
-import filterMoves from './detail/moves';
-import pickForms from './detail/form';
+import DetailModel from '../models/Detail.mjs';
+import dbConnect from './db/connect.ts';
 
-const POKE_URL = 'https://pokeapi.co/api/v2/pokemon';
+export default async function fetchDetail(id) {
+  try {
+    await dbConnect();
 
-function filterName(names) {
-  const findLanguageName = (lan) => names.find(({ language }) => language.name === lan)?.name;
-  const en = findLanguageName('en');
-  const ko = findLanguageName('ko') || en;
-  return {
-    en, ko,
-  };
-}
+    const query = { id };
+    const projection = {
+      _id: 0,
+    };
 
-export default async function fetchPokeDetail(id, chain) {
-  const data = await (await fetch(`${POKE_URL}/${id}`)).json();
+    const result = await DetailModel
+      .findOne(query, projection)
+      .lean();
 
-  const {
-    species,
-    forms: formsArr,
-    abilities: abilitiesObj,
-    stats: statsObj,
-    moves: movesObj,
-  } = data;
-
-  const abilities = await filterAbilities(abilitiesObj);
-  const stats = filterStats(statsObj);
-  const moves = await filterMoves(movesObj);
-  const speciesData = await (await fetch(species.url)).json();
-  const { varieties, id: speciesId, names } = speciesData;
-  const forms = await pickForms(varieties, formsArr);
-
-  return {
-    abilities,
-    stats,
-    moves,
-    forms,
-    speciesId,
-    speciesName: filterName(names),
-  };
+    return result;
+  } catch (error) {
+    console.error(`fetchDetail Error!: ${error}`);
+    return error.message;
+  }
 }

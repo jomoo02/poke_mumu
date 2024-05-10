@@ -1,3 +1,4 @@
+import axios from 'axios';
 import fetchMoves from './moves/moves.mjs';
 import {
   tracePreviousEvolutionIds,
@@ -9,8 +10,10 @@ async function fetchPokeMoves(id) {
   const POKE_URL = 'https://pokeapi.co/api/v2/pokemon';
 
   try {
-    const data = await (await fetch(`${POKE_URL}/${id}`)).json();
-    return fetchMoves(data.moves);
+    // const data = await (await fetch(`${POKE_URL}/${id}`)).json();
+    const res = await axios(`${POKE_URL}/${id}`);
+
+    return fetchMoves(res.data.moves);
   } catch (error) {
     console.error(`$moves.mjs fetchPokeMoves: ${error}`);
     return error.message;

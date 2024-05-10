@@ -66,7 +66,6 @@ export async function fetchSearchPokes(text) {
       .find(query, projection)
       .sort({ no: 1, id: 1 })
       .lean();
-    console.log(result);
 
     return result;
   } catch (error) {

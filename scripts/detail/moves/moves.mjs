@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { setupCache } from 'axios-cache-interceptor';
 import { GEN_ALL } from '../gen.mjs';
 import fetchVersionMachineMove from './machine.mjs';
 import updateMoves from './update.mjs';
@@ -9,6 +11,9 @@ const MOVE_METHODS = {
   egg: 'egg',
   pre: 'pre',
 };
+
+const instance = axios.create();
+const axiosCache = setupCache(instance);
 
 function pickMoveName(names) {
   const findLanguageName = (target) => (
@@ -25,7 +30,7 @@ function pickMoveName(names) {
 
 async function fetchMove(url) {
   try {
-    const data = await (await fetch(url)).json();
+    const { data } = await axiosCache(url);
 
     const {
       names,
@@ -144,7 +149,6 @@ async function fetchAllGenMoves(moves) {
             versionMoves: groupByMethod(moveDetails),
           };
         }));
-
         return {
           gen,
           genMoves,

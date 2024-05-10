@@ -1141,7 +1141,7 @@ const chain279 = {
             trigger: 'level-up',
             condition: [['min_level', 34]],
           }],
-          id: '553',
+          id: '563',
         },
       ],
       detail: [],

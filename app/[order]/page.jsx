@@ -1,5 +1,5 @@
 import React from 'react';
-import fetchPokeDetail from '@/app/api/detail';
+// import fetchPokeDetail from '@/app/api/detail';
 import BasicInfo from '@/app/ui/detail/basic-info';
 import Abilities from '@/app/ui/detail/ability';
 import Types from '@/app/ui/detail/type';
@@ -12,41 +12,35 @@ import { fetchPoke } from '@/app/api/data';
 import checkBackEvolutionMoves from '@/app/api/detail/chainMoves';
 import RouteButton from '@/app/ui/detail/route-button';
 import fetchPokeDetailTest from '@/app/api/test';
+import fetchDetail from '@/app/api/detail';
 
 export default async function DetailPage({ params }) {
   const order = params?.order;
 
   const {
-    no, name, sprity, types, id,
+    no, name, sprity, types, id, form,
   } = await fetchPoke(order);
 
-  const {
-    abilities, stats, moves, forms, speciesId, speciesName, chain: chainData,
-  } = await fetchPokeDetailTest(id);
-  const test = moves;
-
-  // console.log(test);
-
-  // console.log(abilities, stats, moves, forms, speciesId, speciesName, chainData);
   // const {
-  //   abilities, stats, moves, forms, speciesId, speciesName,
-  // } = await fetchPokeDetail(id);
+  //   abilities, stats, moves, forms, speciesId, speciesName, chain: chainData,
+  // } = await fetchPokeDetailTest(id);
 
-  // const allIds = await fetchAllChainIds();
-  // const targetChainIndex = allIds.find(({ ids }) => ids.includes(String(speciesId)))?.chainIndex;
-  // console.log(targetChainIndex);
-  // const chainData = await fetchChain(targetChainIndex);
+  const {
+    abilities,
+    stats,
+    moves,
+    forms,
+    speciesName,
+    chainIndex,
+    speciesId,
+  } = await fetchDetail(id);
 
-  // let test = moves;
-
-  // if (chainData) {
-  //   test = await checkBackEvolutionMoves(id, chainData.chain, moves);
-  // }
+  const chainData = await fetchChain(chainIndex);
 
   return (
     <div className="grid gap-y-10">
       <RouteButton order={order} />
-      <BasicInfo no={no} name={name} sprity={sprity} id={speciesId} order={order} />
+      <BasicInfo no={no} name={name} sprity={sprity} id={speciesId} order={order} form={form} />
       <Forms forms={forms} name={speciesName} />
       <Abilities abilities={abilities} />
       <Types types={types} />
@@ -62,7 +56,7 @@ export default async function DetailPage({ params }) {
         />
       ))}
       <Stats base={stats.baseStats} effort={stats.effortStats} type={types[0]} />
-      <Moves moves={test} /> 
+      <Moves moves={moves} />
     </div>
   );
 }

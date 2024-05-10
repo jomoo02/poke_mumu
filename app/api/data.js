@@ -10,7 +10,6 @@ export async function fetchPoke(order) {
     const query = { order };
     const projection = {
       _id: 0,
-      form: 0,
     };
     const result = await PokeModel
       .findOne(query, projection)

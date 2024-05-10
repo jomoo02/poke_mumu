@@ -49,10 +49,10 @@ export default async function fetchPokeDetailTest(id) {
     const { varieties, id: speciesId, names } = speciesData;
 
     const forms = await fetchForms(varieties, formsArr);
-
     const chainIndex = await fetchChainIndex(id, speciesId);
     const chain = await fetchChain(chainIndex);
-    const moves = await fetchTotalMoves(movesObj, id, chain.chain);
+    const moves = await fetchTotalMoves(movesObj, id, chain?.chain);
+
     return {
       abilities,
       stats,

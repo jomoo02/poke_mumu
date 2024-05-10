@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 function findLanguageName(names, targetLanguage) {
   return names.find(({ language }) => (
     language.name === targetLanguage
@@ -30,7 +32,8 @@ function findLanguageFlavorText(flavorTextEntries, targetLanguage) {
 
 async function fetchAbility(abilityUrl, isHidden) {
   try {
-    const data = await (await fetch(abilityUrl)).json();
+    // const data = await (await fetch(abilityUrl)).json();
+    const { data } = await axios(abilityUrl);
     const {
       names,
       flavor_text_entries: flavorTextEntires,

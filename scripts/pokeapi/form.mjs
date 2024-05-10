@@ -25,14 +25,16 @@ const exclusionFormSpecies = [
   'sinistcha',
   'sinistea',
   'polteageist',
+
+  'burmy', // 초목도롱
 ];
 
-const genderDistinctionSpecies = [
-  'frillish',
-  'jellicent',
-  'unfezant',
-  'pyroar',
-];
+// const genderDistinctionSpecies = [
+//   'frillish',
+//   'jellicent',
+//   'unfezant',
+//   'pyroar',
+// ];
 
 function findLanguageName(names, targetLanguage) {
   return names.find(({ language }) => language.name === targetLanguage)?.name || 'default';
@@ -226,24 +228,24 @@ export default async function filterForm(nameEn, sprites, forms) {
     }];
   }
 
-  if (genderDistinctionSpecies.includes(nameEn)) {
-    return [
-      {
-        sprity,
-        form: {
-          en: 'male',
-          ko: '수컷의 모습',
-        },
-      },
-      {
-        sprity: sprites?.front_female,
-        form: {
-          en: 'female',
-          ko: '암컷의 모습',
-        },
-      },
-    ];
-  }
+  // if (genderDistinctionSpecies.includes(nameEn)) {
+  //   return [
+  //     {
+  //       sprity,
+  //       form: {
+  //         en: 'male',
+  //         ko: '수컷의 모습',
+  //       },
+  //     },
+  //     {
+  //       sprity: sprites?.front_female,
+  //       form: {
+  //         en: 'female',
+  //         ko: '암컷의 모습',
+  //       },
+  //     },
+  //   ];
+  // }
 
   const pokeForms = await Promise.all(forms.map((form) => getForm(form.url)));
 
