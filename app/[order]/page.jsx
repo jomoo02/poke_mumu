@@ -1,5 +1,4 @@
 import React from 'react';
-// import fetchPokeDetail from '@/app/api/detail';
 import BasicInfo from '@/app/ui/detail/basic-info';
 import Abilities from '@/app/ui/detail/ability';
 import Types from '@/app/ui/detail/type';
@@ -7,11 +6,9 @@ import Stats from '@/app/ui/detail/stat';
 import Moves from '@/app/ui/detail/moves';
 import Chain from '@/app/ui/detail/chain';
 import Forms from '@/app/ui/detail/forms';
-import { fetchAllChainIds, fetchChain } from '@/app/api/chain';
+import { fetchChain } from '@/app/api/chain';
 import { fetchPoke } from '@/app/api/data';
-import checkBackEvolutionMoves from '@/app/api/detail/chainMoves';
 import RouteButton from '@/app/ui/detail/route-button';
-import fetchPokeDetailTest from '@/app/api/test';
 import fetchDetail from '@/app/api/detail';
 
 export default async function DetailPage({ params }) {
@@ -20,10 +17,6 @@ export default async function DetailPage({ params }) {
   const {
     no, name, sprity, types, id, form,
   } = await fetchPoke(order);
-
-  // const {
-  //   abilities, stats, moves, forms, speciesId, speciesName, chain: chainData,
-  // } = await fetchPokeDetailTest(id);
 
   const {
     abilities,

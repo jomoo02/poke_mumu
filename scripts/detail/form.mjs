@@ -112,6 +112,10 @@ function pickFormName(formNames, name) {
     return DEFAULT;
   }
 
+  if ([MALE, FEMALE].includes(nameEn)) {
+    return getGenderName(nameEn);
+  }
+
   const addedLocaionForms = LOCATON_FORMS.find(({ en }) => en === nameEn);
 
   if (addedLocaionForms) {
