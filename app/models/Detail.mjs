@@ -7,7 +7,6 @@ const detailScema = new mongoose.Schema({
   moves: Array,
   forms: Array,
   chainIndex: Number,
-  speciesId: Number,
   speciesName: Object,
 });
 

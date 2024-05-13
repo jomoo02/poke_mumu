@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 const pokeScema = new mongoose.Schema({
   id: Number,
   no: Number,
-  key: String,
   types: Array,
   sprity: String,
   name: Object,

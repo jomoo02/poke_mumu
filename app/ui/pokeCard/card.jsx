@@ -6,7 +6,7 @@ import { useLanguage } from '@/app/language-provider';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
 
 export default function Card({
-  name, sprity, types, id, no, form, isPriority, order, pokeKey,
+  name, sprity, types, id, no, form, isPriority, order,
 }) {
   const { language } = useLanguage();
   const sprityUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${sprity}`;
@@ -19,7 +19,7 @@ export default function Card({
 
   const { savePokeLocal } = useLocalStorage();
   const pokeData = {
-    name, sprity, types, id, no, form, order, key: pokeKey,
+    name, sprity, types, id, no, form, order,
   };
 
   return (

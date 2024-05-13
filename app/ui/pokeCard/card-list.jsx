@@ -25,9 +25,9 @@ export default function CardList() {
     <div className="flex w-full flex-col items-center min-h-screen">
       <div className="w-full grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 xs:gap-x-2 sm:gap-x-4 gap-y-1.5 xs:gap-y-2 sm:gap-y-4 justify-center items-center">
         {pokeDatas.map(({
-          name, sprity, types, id, no, form, key, order,
+          name, sprity, types, id, no, form, order,
         }, index) => (
-          <div key={key} className="flex justify-center">
+          <div key={id} className="flex justify-center">
             <Card
               name={name}
               sprity={sprity}
@@ -36,7 +36,6 @@ export default function CardList() {
               no={no}
               form={form}
               order={order}
-              pokeKey={key}
               isPriority={(index <= 20)}
             />
           </div>

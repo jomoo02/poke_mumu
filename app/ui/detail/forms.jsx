@@ -20,7 +20,7 @@ export default function Forms({ forms, name }) {
       <div className="flex gap-x-10">
         {forms.map(({ id, name: formName }) => (
           <div
-            key={id}
+            key={`${id}-${formName.en}`}
             className="flex flex-col items-center justify-center"
           >
             <Image

@@ -128,7 +128,6 @@ async function fetchDetail(id) {
       moves,
       id: Number(id),
       speciesName: filterName(names),
-      speciesId: Number(speciesId),
     });
 
     return detailModel;
@@ -169,7 +168,9 @@ async function main() {
   await connectMongoose();
   const allPokeIds = (await fetchAllPokeIds()).map(({ id }) => id).sort((a, b) => a - b);
 
+  // eslint-disable-next-line no-restricted-syntax
   for (const id of allPokeIds) {
+    // eslint-disable-next-line no-await-in-loop
     await createDetail(id);
   }
 

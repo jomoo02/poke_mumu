@@ -10,7 +10,7 @@ export default function SearchResult({ searchText, result, closeModal }) {
 
   const renderPokeItem = (poke) => (
     <div
-      key={poke.key}
+      key={poke.id}
       className="h-[75px] xs:px-2 py-0.5"
     >
       <SearchPoke
@@ -22,7 +22,6 @@ export default function SearchResult({ searchText, result, closeModal }) {
         id={poke.id}
         order={poke.order}
         closeModal={closeModal}
-        pokeKey={poke.key}
       />
     </div>
   );

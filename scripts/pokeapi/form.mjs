@@ -1,11 +1,16 @@
-const defaultFormSpecies = [
+const DEFAULT = {
+  en: 'default',
+  ko: 'default',
+};
+
+const DEFAULT_FORM_SPECIES = [
   'castform',
   'koraidon',
   'miraidon',
   'average',
 ];
 
-const exclusionFormSpecies = [
+const EXCLUSION_FORM_SPECIES = [
   'unown',
   'pichu',
   'mothim',
@@ -26,112 +31,83 @@ const exclusionFormSpecies = [
   'sinistea',
   'polteageist',
 
-  'burmy', // 초목도롱
+  'burmy',
+  'shellos',
+  'gastrodon',
+  'cherrim',
+  'deerling',
+  'sawsbuck',
+  'gimmighoul',
 ];
 
-// const genderDistinctionSpecies = [
-//   'frillish',
-//   'jellicent',
-//   'unfezant',
-//   'pyroar',
-// ];
+const FORM_KO_MAP = {
+  hisui: '히스이의 모습',
+  paldea: '팔데아의 모습',
+  male: '수컷의 모습',
+  female: '암컷의 모습',
+  incarnate: '화신폼',
+  therian: '영물폼',
+  'green-plumage': '그린 페더',
+  'blue-plumage': '블루 페더',
+  'yellow-plumage': '옐로 페더',
+  'white-plumage': '화이트 페더',
+  zero: '나이브폼',
+  hero: '마이티폼',
+  curly: '젖힌 모습',
+  droopy: '늘어진 모습',
+  stretchy: '뻗은 모습',
+  'two-segment': '두 마디폼',
+  chest: '상자폼',
+  terastal: '테라스탈폼',
+  stellar: '스텔라폼',
+  'family-of-four': '네 식구',
+  origin: '오리진폼',
+  'white-striped': '백색근의 모습',
+};
+
+const FORM_NAME_KO_MAP = {
+  'paldea-blaze-breed': {
+    en: 'Paldean Form / Blaze Breed',
+    ko: '팔데아의 모습 / 블레이즈종',
+  },
+  'paldea-combat-breed': {
+    en: 'Paldean Form / Combat Breed',
+    ko: '팔데아의 모습 / 컴뱃종',
+  },
+  'paldea-aqua-breed': {
+    en: 'Paldean Form / Aqua Breed',
+    ko: '팔데아의 모습 / 워터종',
+  },
+};
+
+const NAME_KO_MAP = {
+  'darmanitan-galar-zen': {
+    en: 'Galarian Form / Zen Mode',
+    ko: '가라르의 모습 / 달마 모드',
+  },
+  terapagos: {
+    en: 'Normal Form',
+    ko: '노말폼',
+  },
+};
 
 function findLanguageName(names, targetLanguage) {
   return names.find(({ language }) => language.name === targetLanguage)?.name || 'default';
 }
 
 function translateFormNameKo(form, formNames) {
-  if (form === 'hisui') {
-    return '히스이의 모습';
-  }
-
-  if (form === 'paldea') {
-    return '팔데아의 모습';
-  }
-
-  if (form === 'male') {
-    return '수컷의 모습';
-  }
-  if (form === 'female') {
-    return '암컷의 모습';
-  }
-
-  if (form === 'incarnate') {
-    return '화신폼';
-  }
-  if (form === 'therian') {
-    return '영물폼';
-  }
-
-  if (form === 'green-plumage') {
-    return '그린 페더';
-  }
-  if (form === 'blue-plumage') {
-    return '블루 페더';
-  }
-  if (form === 'yellow-plumage') {
-    return '옐로 페더';
-  }
-  if (form === 'white-plumage') {
-    return '화이트 페더';
-  }
-
-  if (form === 'zero') {
-    return '나이브폼';
-  }
-  if (form === 'hero') {
-    return '마이티폼';
-  }
-
-  if (form === 'curly') {
-    return '젖힌 모습';
-  }
-  if (form === 'droopy') {
-    return '늘어진 모습';
-  }
-  if (form === 'stretchy') {
-    return '뻗은 모습';
-  }
-
-  if (form === 'two-segment') {
-    return '두 마디폼';
-  }
-
-  if (form === 'chest') {
-    return '상자폼';
-  }
-  if (form === 'roaming') {
-    return '도보폼';
-  }
-
-  if (form === 'terastal') {
-    return '테라스탈폼';
-  }
-  if (form === 'stellar') {
-    return '스텔라폼';
-  }
-
-  if (form === 'family-of-four') {
-    return '네 식구';
-  }
-
-  if (form === 'origin') {
-    return '오리진폼';
-  }
-
-  if (form === 'white-striped') {
-    return '백색근의 모습';
+  if (FORM_KO_MAP[form]) {
+    return FORM_KO_MAP[form];
   }
 
   return findLanguageName(formNames, 'ko');
 }
 
-async function getForm(formUrl) {
+async function fetchFormData(formUrl) {
   const data = await (await fetch(formUrl)).json();
 
   const {
     name,
-    sprites,
     form_name: formName,
     form_names: formNames,
     pokemon,
@@ -139,118 +115,34 @@ async function getForm(formUrl) {
 
   const form = formName || 'default';
   const formNameEn = findLanguageName(formNames, 'en');
-  const sprity = sprites.front_default;
 
   if (
     formNameEn?.toLowerCase() === name
-    || defaultFormSpecies.some((target) => name.includes(target))
+    || DEFAULT_FORM_SPECIES.some((target) => name.includes(target))
   ) {
-    return {
-      sprity,
-      form: {
-        en: 'default',
-        ko: 'default',
-      },
-    };
+    return { ...DEFAULT };
   }
 
-  if (formName === 'paldea-blaze-breed') {
-    return {
-      sprity,
-      form: {
-        en: 'Paldean Form / Blaze Breed',
-        ko: '팔데아의 모습 / 블레이즈종',
-      },
-    };
+  if (FORM_NAME_KO_MAP[formName]) {
+    return { ...FORM_NAME_KO_MAP[formName] };
   }
 
-  if (formName === 'paldea-combat-breed') {
-    return {
-      sprity,
-      form: {
-        en: 'Paldean Form / Combat Breed',
-        ko: '팔데아의 모습 / 컴뱃종',
-      },
-    };
+  if (NAME_KO_MAP[pokemon?.name]) {
+    return { ...NAME_KO_MAP[pokemon.name] };
   }
-
-  if (formName === 'paldea-aqua-breed') {
-    return {
-      sprity,
-      form: {
-        en: 'Paldean Form / Aqua Breed',
-        ko: '팔데아의 모습 / 워터종',
-      },
-    };
-  }
-
-  if (pokemon?.name === 'darmanitan-galar-zen') {
-    return {
-      sprity,
-      form: {
-        en: 'Galarian Form / Zen Mode',
-        ko: '가라르의 모습 / 달마 모드',
-      },
-    };
-  }
-
-  if (pokemon?.name === 'terapagos') {
-    return {
-      sprity,
-      form: {
-        en: 'Normal Form',
-        ko: '노말폼',
-      },
-    };
-  }
-
-  const formNameKo = translateFormNameKo(form, formNames);
 
   return {
-    sprity,
-    form: {
-      en: formNameEn,
-      ko: formNameKo,
-    },
+    en: formNameEn,
+    ko: translateFormNameKo(form, formNames),
   };
 }
 
-export default async function filterForm(nameEn, sprites, forms) {
-  const sprity = sprites?.front_default;
-
-  if (exclusionFormSpecies.includes(nameEn)) {
-    return [{
-      sprity,
-      form: {
-        en: 'default',
-        ko: 'default',
-      },
-    }];
+export default async function fetchForm(nameEn, forms) {
+  if (EXCLUSION_FORM_SPECIES.includes(nameEn)) {
+    return { ...DEFAULT };
   }
 
-  // if (genderDistinctionSpecies.includes(nameEn)) {
-  //   return [
-  //     {
-  //       sprity,
-  //       form: {
-  //         en: 'male',
-  //         ko: '수컷의 모습',
-  //       },
-  //     },
-  //     {
-  //       sprity: sprites?.front_female,
-  //       form: {
-  //         en: 'female',
-  //         ko: '암컷의 모습',
-  //       },
-  //     },
-  //   ];
-  // }
+  const targetForm = forms[0];
 
-  const pokeForms = await Promise.all(forms.map((form) => getForm(form.url)));
-
-  return pokeForms.map((form) => ({
-    sprity: form.sprity || sprity,
-    form: form.form,
-  }));
+  return fetchFormData(targetForm.url);
 }

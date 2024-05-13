@@ -1,5 +1,5 @@
-import filterForm from './form.mjs';
-import filterVarieties from './variety.mjs';
+import fetchForm from './form.mjs';
+import fetchVarieties from './variety.mjs';
 import { filterName, checkMegaPokeName } from './name.mjs';
 
 const POKE_URL = 'https://pokeapi.co/api/v2/pokemon/';
@@ -13,23 +13,17 @@ async function fetchPoke(url, names, no) {
 
   const types = typesObj.map(({ type }) => type.name);
   const nameData = filterName(names);
-  const formData = await filterForm(nameEn, sprites, forms);
+  const form = await fetchForm(nameEn, forms);
+  const { name, form: checkedForm } = checkMegaPokeName(nameData, form);
 
-  return formData.map(({ sprity, form }) => {
-    const { name, form: checkedForm } = checkMegaPokeName(nameData, form);
-    const key = `${id}-${form.en}`;
-    const sprityPiece = sprity.split('/').at(-1);
-
-    return {
-      id,
-      no,
-      key,
-      name,
-      types,
-      sprity: sprityPiece,
-      form: checkedForm,
-    };
-  });
+  return {
+    id,
+    no,
+    name,
+    types,
+    sprity: sprites?.front_default.split('/').at(-1),
+    form: checkedForm,
+  };
 }
 
 async function getPokeData(no) {
@@ -40,10 +34,9 @@ async function getPokeData(no) {
   const { varieties, names } = speciesData;
 
   const pokes = await Promise.all(
-    filterVarieties(varieties).map(({ pokemon }) => fetchPoke(pokemon.url, names, no)),
+    fetchVarieties(varieties).map(({ pokemon }) => fetchPoke(pokemon.url, names, no)),
   );
-
-  return [].concat(...pokes);
+  return pokes;
 }
 
 export default async function getPokes(no) {

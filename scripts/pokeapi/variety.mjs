@@ -18,6 +18,7 @@ const exclusionSpecies = [
   'eternatus',
   'maushold',
   'magearna',
+  'gimmighoul',
 ];
 
 const exclusionVarieties = [
@@ -26,7 +27,7 @@ const exclusionVarieties = [
   'starter',
 ];
 
-export default function filterVarieties(varieties) {
+export default function fetchVarieties(varieties) {
   if (varieties.length === 1) {
     return varieties;
   }
