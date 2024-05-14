@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 export default function BasicInfo({
@@ -9,9 +9,6 @@ export default function BasicInfo({
   const exceptionOrder = [];
   const bascinUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
   const url = exceptionOrder.includes(Number(order)) ? `/${order}.png` : `${bascinUrl}/${sprity}`;
-  const [imageUrl, setImageUrl] = useState(url);
-
-  const handleImageError = () => setImageUrl(`${bascinUrl}/${id}.png`);
 
   const noText = `No. ${no}`;
   const formText = form.en === 'default' ? '' : `(${form.ko})`;
@@ -23,11 +20,10 @@ export default function BasicInfo({
         <span>{nameText}</span>
       </div>
       <Image
-        src={imageUrl}
+        src={url}
         alt={name.en}
         width={25}
         height={25}
-        onError={handleImageError}
         priority
       />
     </>

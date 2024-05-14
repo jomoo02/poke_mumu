@@ -23,6 +23,7 @@ const SPEICIAL_FORMS = [
   { name: 'paldea-combat-breed', form: { en: 'Paldean Form / Combat Breed', ko: '팔데아의 모습 / 컴뱃종' } },
   { name: 'paldea-blaze-breed', form: { en: 'Paldean Form / Blaze Breed', ko: '팔데아의 모습 / 블레이즈종' } },
   { name: 'paldea-aqua-breed', form: { en: 'Paldean Form / Aqua Breed', ko: '팔데아의 모습 / 아쿠아종' } },
+  { name: 'galar-zen', form: { en: 'Galarian Form / Zen Mode', ko: '가라르의 모습 / 달마모드' } },
 ];
 
 const ADDED_FORMS_KO = {
@@ -46,6 +47,9 @@ const ADDED_FORMS_KO = {
   'two-segment': '두 마디폼',
   'three-segment': '세 마디폼',
   'white-striped': '백색근의 모습',
+  origin: '오리진폼',
+  phony: '위작폼',
+  antique: '진작폼',
 };
 
 function getGenderName(gender) {
@@ -140,10 +144,6 @@ function pickFormName(formNames, name) {
       ko: ADDED_FORMS_KO[name],
     };
   }
-
-  // if ([MALE, FEMALE].includes(nameEn)) {
-  //   return getGenderName(nameEn);
-  // }
 
   const addedLocaionForms = LOCATON_FORMS.find(({ en }) => en === nameEn);
 
