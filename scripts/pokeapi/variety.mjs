@@ -5,7 +5,6 @@ const exclusionNames = [
 ];
 
 const exclusionSpecies = [
-  'castform',
   'greninja',
   'pikachu',
   'rockruff',

@@ -4,7 +4,7 @@ import { connectMongoose, disconnectMongoose } from '../app/api/db/connectMongoo
 
 dotenv.config({ path: '.env.local' });
 
-const ABILITIES_MAP = {
+const ABILITIES_MAP_KO = {
   'Lingering Aroma': {
     name: '가시지않는향기',
     text: '상대가 접촉하면 가시지 않는 향기가 상대에게 배어 버린다.',
@@ -163,16 +163,26 @@ const ABILITIES_MAP = {
   },
 };
 
-async function updateAbilities() {
+const ABILITIES_MAP_EN = {
+  'Supersweet Syrup': 'A sickly sweet scent spreads across the field the first time the Pokémon enters a battle, lowering the evasiveness of opposing Pokémon.',
+  Hospitality: "When the Pokémon enters a battle, it showers its ally with hospitality, restoring a small amount of the ally's HP.",
+  'Toxic Chain': 'Toxic Chain may cause bad poisoning when the Pokémon hits an opponent with a move.',
+  'Tera Shift': 'When the Pokémon enters a battle, it absorbs the energy around itself and transforms into its Terastal Form.',
+  'Tera Shell': 'The Pokémon’s shell contains the powers of each type. All damage-dealing moves that hit the Pokémon when its HP is full will not be very effective.',
+  'Teraform Zero': 'When Terapagos changes into its Stellar Form, it uses its hidden powers to eliminate all effects of weather and terrain, reducing them to zero.',
+  'Poison Puppeteer': 'Pokémon poisoned by Pecharunt’s moves will also become confused.',
+};
+
+async function updateAbilitiesKo() {
   try {
     await connectMongoose();
 
     // eslint-disable-next-line no-restricted-syntax
-    for (const [abilityName, ability] of Object.entries(ABILITIES_MAP)) {
+    for (const [abilityName, ability] of Object.entries(ABILITIES_MAP_KO)) {
       const filter = { 'abilities.name.en': abilityName };
       const update = {
         $set: {
-          'abilities.$[elem].flavorText.ko': ability.text,
+          'abilities.$[elem].flavorText.ko': ability,
           'abilities.$[elem].name.ko': ability.name, // name.ko도 함께 변경
         },
       };
@@ -188,4 +198,29 @@ async function updateAbilities() {
   }
 }
 
-updateAbilities();
+async function updateAbilitiesEn() {
+  try {
+    await connectMongoose();
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [abilityName, ability] of Object.entries(ABILITIES_MAP_EN)) {
+      const filter = { 'abilities.name.en': abilityName };
+      const update = {
+        $set: {
+          'abilities.$[elem].flavorText.en': ability,
+        },
+      };
+      const options = { arrayFilters: [{ 'elem.name.en': abilityName }] };
+
+      // eslint-disable-next-line no-await-in-loop
+      await DetailModel.updateMany(filter, update, options);
+    }
+
+    await disconnectMongoose();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+updateAbilitiesKo();
+updateAbilitiesEn();

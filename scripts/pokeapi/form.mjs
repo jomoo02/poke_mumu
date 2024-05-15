@@ -4,7 +4,6 @@ const DEFAULT = {
 };
 
 const DEFAULT_FORM_SPECIES = [
-  'castform',
   'koraidon',
   'miraidon',
   'average',

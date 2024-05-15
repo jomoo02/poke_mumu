@@ -43,7 +43,7 @@ export async function fetchPokes(index) {
 
     const result = await PokeModel
       .find(query, projection)
-      .sort({ no: 1, id: 1 })
+      .sort({ order: 1 })
       .lean();
 
     return result;

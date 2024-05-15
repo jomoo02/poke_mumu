@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setupCache } from 'axios-cache-interceptor';
+import typesKo from './type.mjs';
 
 const instance = axios.create();
 const axiosCache = setupCache(instance);
@@ -62,6 +63,13 @@ function getGenderName(gender) {
   };
 
   return name;
+}
+
+function getTypeCaseName(type) {
+  return {
+    en: type,
+    ko: typesKo[type],
+  };
 }
 
 function filterForm(forms) {
@@ -195,8 +203,15 @@ async function fetchFormsId(formUrls) {
           name,
           form_name: formName,
           form_names: formNames,
-          pokemon: { url: pokemonUrl },
+          pokemon: { url: pokemonUrl, name: pokemonName },
         } = res.data;
+
+        if (pokemonName === 'arceus') {
+          return {
+            name: getTypeCaseName(formName),
+            id: pickId(sprites, pokemonUrl),
+          };
+        }
 
         if (checkFemaleCase(name)) {
           return [MALE, FEMALE].map((gender) => ({
