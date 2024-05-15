@@ -4,7 +4,8 @@ import Abilities from '@/app/ui/detail/ability';
 import Types from '@/app/ui/detail/type';
 import Stats from '@/app/ui/detail/stat';
 import Moves from '@/app/ui/detail/moves';
-import Chain from '@/app/ui/detail/chain';
+// import Chain from '@/app/ui/detail/chain';
+import Chain from '@/app/ui/detail/chain-v2';
 import Forms from '@/app/ui/detail/forms';
 import { fetchChain } from '@/app/api/chain';
 import { fetchPoke } from '@/app/api/data';
@@ -27,7 +28,7 @@ export default async function DetailPage({ params }) {
     chainIndex,
   } = await fetchDetail(id);
 
-  const chain = await fetchChain(chainIndex);
+  const { chain } = await fetchChain(chainIndex);
 
   return (
     <div className="grid gap-y-10">
