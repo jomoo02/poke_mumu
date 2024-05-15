@@ -31,6 +31,23 @@ function Move({ move, children }) {
   const nameText = language === 'ko' ? name.ko : name.en;
   const typeText = language === 'ko' ? typesKo[type] : type;
 
+  const damageClassMap = {
+    physical: {
+      src: '/damage/physical.png',
+      bg: 'bg-orange-400/90',
+    },
+    special: {
+      src: '/damage/special.png',
+      bg: 'bg-blue-400/90',
+    },
+    status: {
+      src: '/damage/status.png',
+      bg: 'bg-gray-400/90',
+    },
+  };
+
+  const { src, bg } = damageClassMap[damageClass];
+
   return (
     <div className={`${children ? 'grid-cols-7' : 'grid-cols-6'} grid gap-x-2`}>
       {children}
@@ -40,7 +57,17 @@ function Move({ move, children }) {
           {typeText}
         </div>
       </div>
-      <div>{damageClass}</div>
+      <div className="flex items-center justify-center px-2">
+        <div className={`border ${bg} rounded-md relative w-full h-full`}>
+          <Image
+            src={src}
+            alt={damageClass}
+            fill
+            size="25px"
+            style={{ objectFit: 'contain' }}
+          />
+        </div>
+      </div>
       <div>{power}</div>
       <div>{accuracy}</div>
     </div>
@@ -223,7 +250,7 @@ function VersionMoves({ version, versionMoves }) {
   const allMoves = [...machine, ...egg, ...tutor, ...pre, ...levelUp];
 
   return (
-    <div className="my-4 w-full">
+    <div className="my-4">
       <h4 className="font-medium">
         {`${version} 버전`}
       </h4>
@@ -303,7 +330,6 @@ export default function Moves({ moves }) {
   };
 
   return (
-    // <div>1</div>
     <div>
       <h3 className="text-2xl">기술</h3>
       <div className="flex gap-x-1 border-b">

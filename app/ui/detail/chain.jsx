@@ -1,17 +1,16 @@
 import React from 'react';
 import Image from 'next/image';
 
-export default function Chain({
+function ChainItem({
   name, to, detail, id,
 }) {
   const sprityUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   return (
-    <div className="flex gap-x-5">
+    <div className="flex gap-x-5 flex-col md:flex-row">
       {detail.length > 0 && (
         <div>
-          {detail.map(({ trigger, condition }, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <div key={`${trigger}-${index}`} className="flex gap-x-1 bg-green-50">
+          {detail.map(({ trigger, condition }) => (
+            <div key={trigger} className="flex gap-x-1 bg-green-50">
               <div>{trigger}</div>
               <div>
                 {condition.length > 0 && (
@@ -33,9 +32,9 @@ export default function Chain({
         />
       </div>
       {to.length > 0 && (
-        <div>
+        <div className="flex flex-row md:flex-col">
           {to.map((next) => (
-            <Chain
+            <ChainItem
               key={next.name}
               name={next.name}
               to={next.to}
@@ -45,6 +44,29 @@ export default function Chain({
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+export default function Chain({ chain }) {
+  const chainData = (
+    <div>
+      {chain.chain.map(({
+        name, to, detail, id,
+      }) => (
+        <ChainItem
+          key={id}
+          name={name}
+          to={to}
+          detail={detail}
+          id={id}
+        />
+      ))}
+    </div>
+  );
+  return (
+    <div>
+      {chainData}
     </div>
   );
 }

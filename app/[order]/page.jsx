@@ -27,7 +27,7 @@ export default async function DetailPage({ params }) {
     chainIndex,
   } = await fetchDetail(id);
 
-  const chainData = await fetchChain(chainIndex);
+  const chain = await fetchChain(chainIndex);
 
   return (
     <div className="grid gap-y-10">
@@ -36,17 +36,7 @@ export default async function DetailPage({ params }) {
       <Forms forms={forms} name={speciesName} />
       <Abilities abilities={abilities} />
       <Types types={types} />
-      {chainData && chainData.chain.map(({
-        name: cName, to, detail, id: cId,
-      }) => (
-        <Chain
-          key={`${cName}-${cId}-${to[0]?.name}`}
-          name={cName}
-          to={to}
-          detail={detail}
-          id={cId}
-        />
-      ))}
+      <Chain chain={chain} />
       <Stats base={stats.baseStats} effort={stats.effortStats} type={types[0]} />
       <Moves moves={moves} />
     </div>
