@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { ITEM_KO, TRADE_ITEM_KO } from '../../translations/item';
 
 const getSprityUrl = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
@@ -39,6 +40,11 @@ function Detail({ detail }) {
     return null;
   }
 
+  const TRIGGER = {
+    trade: '통신교환',
+    'use-item': '사용',
+  };
+
   const CONDITION_MAP_KO = {
     min_level: '레벨',
     time_of_day: '에 레벨업',
@@ -55,22 +61,31 @@ function Detail({ detail }) {
       return `${CONDITION_MAP_KO[key]} ${value}`;
     } if (key === 'time_of_day') {
       return `${TIME_OF_DAY_MAP_KO[value]}에 레벨업`;
+    } if (key === 'item') {
+      return `${ITEM_KO[value] || value}`;
+    } if (key === 'location') {
+      return `${value}에서`;
+    } if (key === 'min_happiness') {
+      return `친밀도 ${value} 레벨업`;
+    } if (key === 'held_item') {
+      return `${TRADE_ITEM_KO[value]}을 지닌 상태에서`;
     }
     return `${value}`;
   };
 
   const detailTexts = detail.map(({ trigger, condition }, index) => (
-    <div key={`${trigger}-${index}`} className="flex flex-col justify-center items-center">
+    <div key={`${trigger}-${index}`} className="flex justify-center items-center">
       {condition.map(([key, value]) => (
         <div key={`${key}-${value}`}>
           {getConditionText(key, value)}
         </div>
       ))}
+      <div>{TRIGGER[trigger]}</div>
     </div>
   ));
 
   return (
-    <div className="min-h-36 flex items-center justify-center md:w-40 lg:w-64">
+    <div className="min-h-36 flex items-center justify-center md:w-40 lg:w-64 flex-col">
       {detailTexts}
     </div>
   );
@@ -106,7 +121,7 @@ function ChainItem({
   );
 }
 
-export default function Chain({ chain }) {
+export default function Chain({ chain, chainIndex }) {
   if (!chain) {
     return null;
   }
@@ -114,6 +129,7 @@ export default function Chain({ chain }) {
   return (
     <div>
       <h3 className="text-2xl">진화</h3>
+      <div>{chainIndex}</div>
       <div className={gridColumn[chain.length]}>
         {chain.map(({
           name, to, detail, id,
