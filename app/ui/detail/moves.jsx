@@ -34,7 +34,7 @@ function GenMoves({ gen, genMoves }) {
             type="button"
             onClick={() => handleTargetVersion(version)}
             className={
-              `${version === targetVersion ? 'bg-slate-400/90' : 'bg-slate-200'} flex justify-center items-center h-7 rounded-md md:h-8 px-2.5 py-1 text-sm md:text-base text-nowrap`
+              `${version === targetVersion ? 'bg-slate-400/90' : 'bg-slate-200'} flex justify-center items-center h-7 rounded-md px-2.5 py-1 text-sm md:text-base text-nowrap`
             }
           >
             {version}
@@ -72,18 +72,18 @@ export default function Moves({ moves }) {
   return (
     <div className="overflow-auto">
       <h3 className="text-2xl">기술</h3>
-      <div className="flex gap-x-1.5 md:gap-x-2 overflow-x-scroll py-3" ref={containerRef}>
+      <div className="flex gap-x-1.5 md:gap-x-2 overflow-x-auto py-3" ref={containerRef}>
         {gens?.map((gen) => (
           <button
             key={gen}
             type="button"
             onClick={() => handleTargetGen(gen)}
             className={
-              `${gen === targetGen ? 'bg-slate-400/90' : 'bg-slate-200'} flex items-end justify-center rounded-md px-2 py-1 h-7 md:h-8 min-w-10 max-w-10 md:min-w-11 md:max-w-11`
+              `${gen === targetGen ? 'bg-slate-400/90' : 'bg-slate-200'} flex items-center justify-center rounded-md px-2 py-1 h-7 min-w-10 max-w-10 md:min-w-11 md:max-w-11`
             }
           >
-            <span className="text-sm md:text-base font-medium text-slate-800">{gen}</span>
-            <span className="font-semibold text-[12px] leading-[18px] text-slate-700">th</span>
+            <span className="text-sm md:text-base font-medium text-slate-80">{gen}</span>
+            <span className="font-semibold text-[12px] leading-[24px] text-slate-700">th</span>
           </button>
         ))}
       </div>

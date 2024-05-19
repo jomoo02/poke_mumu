@@ -1,9 +1,43 @@
 import React from 'react';
-import Header from '../header';
-import Move from '../move';
+import Move from './move';
+
+const GRID_COLS_MAP = {
+  levelUp: 'grid-cols-7',
+  machine: 'grid-cols-7',
+  pre: 'grid-cols-7',
+  tutor: 'grid-cols-6',
+  egg: 'grid-cols-6',
+};
+
+function Header({ gridCols, children }) {
+  return (
+    <div className={`grid gap-x-1.5 md:gap-x-2 ${gridCols} border-b text-xs md:text-base items-center h-9`}>
+      {children}
+      <div className="col-span-2">이름</div>
+      <div className="text-center">타입</div>
+      <div className="text-center">분류</div>
+      <div className="text-center">위력</div>
+      <div className="text-center">명중률</div>
+    </div>
+  );
+}
+
+function TitleHeader({ method, header }) {
+  const HEADER_COL_SPAN_MAP = {
+    pre: 'col-span-1 px-2',
+    levelUp: 'col-span-1',
+    machine: 'col-span-1',
+  };
+
+  return (
+    <div className={`flex items-center ${HEADER_COL_SPAN_MAP[method]}`}>
+      {header}
+    </div>
+  );
+}
 
 export default function MethodMoves({
-  title, method, moves, HeaderContent, MoveContent,
+  title, method, moves, headerContent, MoveContent,
 }) {
   if (moves.length === 0) {
     return null;
@@ -22,11 +56,17 @@ export default function MethodMoves({
         {title}
       </h4>
       <div className="grid gap-y-0.5">
-        <Header>
-          {HeaderContent && <HeaderContent />}
+        <Header gridCols={GRID_COLS_MAP[method]}>
+          {headerContent && (
+            <TitleHeader header={headerContent} method={method} />
+          )}
         </Header>
         {moves.map((moveData) => (
-          <Move key={getKey(moveData)} move={moveData.move}>
+          <Move
+            key={getKey(moveData)}
+            move={moveData.move}
+            gridCols={GRID_COLS_MAP[method]}
+          >
             {MoveContent && <MoveContent moveData={moveData} />}
           </Move>
         ))}

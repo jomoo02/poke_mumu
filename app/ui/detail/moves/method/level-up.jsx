@@ -1,14 +1,6 @@
 import React from 'react';
 import MethodMoves from './method-moves';
 
-function Header() {
-  return (
-    <div className="flex items-center">
-      level
-    </div>
-  );
-}
-
 function Content({ moveData: { level } }) {
   return (
     <div className="flex items-center text-xs md:text-base">
@@ -26,7 +18,7 @@ export default function LevelUpMethodMoves({ moves }) {
       title={methodText}
       moves={sortedMoves}
       method="levelUp"
-      HeaderContent={Header}
+      headerContent="level"
       MoveContent={Content}
     />
   );

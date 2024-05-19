@@ -48,7 +48,7 @@ function DamageClass({ damageClass }) {
   );
 }
 
-export default function Move({ move, children }) {
+export default function Move({ move, gridCols, children }) {
   const { language } = useLanguage();
   const {
     name,
@@ -62,7 +62,7 @@ export default function Move({ move, children }) {
 
   return (
     <div className={
-      `${children ? 'grid-cols-7' : 'grid-cols-6'} grid gap-x-1 md:gap-x-2 min-h-9 items-center`
+      `${gridCols} grid gap-x-1.5 md:gap-x-2 min-h-9 items-center`
       }
     >
       {children}

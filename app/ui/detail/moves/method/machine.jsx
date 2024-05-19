@@ -1,14 +1,6 @@
 import React, { Fragment } from 'react';
 import MethodMoves from './method-moves';
 
-function Header({ type }) {
-  return (
-    <div className="flex items-center">
-      {type}
-    </div>
-  );
-}
-
 function Content({ moveData }) {
   return (
     <div className="flex items-center text-xs md:text-base">
@@ -30,7 +22,6 @@ export default function MachineMethodMoves({ moves }) {
       }));
 
   const machineTypesMoves = machineTypes.map((type) => filterMovesMachinType(type));
-  const getHeader = (type) => <Header type={type} />;
 
   return (
     <div>
@@ -44,7 +35,8 @@ export default function MachineMethodMoves({ moves }) {
               <MethodMoves
                 title={type}
                 moves={machineTypesMoves[index]}
-                HeaderContent={() => <Header type={type} />}
+                method="machine"
+                headerContent={type}
                 MoveContent={Content}
               />
             )}
