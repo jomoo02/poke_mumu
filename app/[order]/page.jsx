@@ -4,9 +4,6 @@ import Abilities from '@/app/ui/detail/ability';
 import Types from '@/app/ui/detail/type';
 import Stats from '@/app/ui/detail/stat';
 import Moves from '@/app/ui/detail/moves';
-// import Moves from '@/app/ui/detail/moves-v2';
-
-// import Chain from '@/app/ui/detail/chain';
 import Chain from '@/app/ui/detail/chain-v2';
 import Forms from '@/app/ui/detail/forms';
 import { fetchChain } from '@/app/api/chain';
@@ -30,16 +27,16 @@ export default async function DetailPage({ params }) {
     chainIndex,
   } = await fetchDetail(id);
 
-  const { chain } = await fetchChain(chainIndex);
+  const chainData = await fetchChain(chainIndex);
 
   return (
     <div className="grid gap-y-10 lg:mx-36 xl:mx-40 2xl:mx-48">
       <RouteButton order={order} />
       <BasicInfo no={no} name={name} sprity={sprity} id={id} order={order} form={form} />
-      <Forms forms={forms} name={speciesName} />
+      {/* <Forms forms={forms} name={speciesName} />
       <Abilities abilities={abilities} />
-      <Types types={types} />
-      <Chain chain={chain} chainIndex={chainIndex} />
+      <Types types={types} /> */}
+      <Chain chainData={chainData} />
       <Stats base={stats.baseStats} effort={stats.effortStats} type={types[0]} />
       <Moves moves={moves} />
     </div>

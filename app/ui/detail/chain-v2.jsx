@@ -1,6 +1,10 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import { ITEM_KO, TRADE_ITEM_KO } from '../../translations/item';
+import Trigger from './trigger';
+import { useLanguage } from '@/app/language-provider';
 
 const getSprityUrl = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
@@ -86,7 +90,8 @@ function Detail({ detail }) {
 
   return (
     <div className="min-h-36 flex items-center justify-center md:w-40 lg:w-64 flex-col">
-      {detailTexts}
+      {/* {detailTexts} */}
+      <Trigger detail={detail} />
     </div>
   );
 }
@@ -94,6 +99,8 @@ function Detail({ detail }) {
 function ChainItem({
   to, detail, name, id,
 }) {
+  const { language } = useLanguage();
+  const nameLan = language === 'ko' ? name.ko : name.en;
   const src = getSprityUrl(id);
 
   return (
@@ -105,14 +112,14 @@ function ChainItem({
             <div className="w-16 h-16 md:w-20 relative md:h-20">
               <Image
                 src={src}
-                alt={name}
+                alt={nameLan}
                 fill
                 size="70px"
                 priority
                 style={{ objectFit: 'contain' }}
               />
             </div>
-            <div>{name}</div>
+            <div>{nameLan}</div>
           </div>
         </div>
       </div>
@@ -121,10 +128,12 @@ function ChainItem({
   );
 }
 
-export default function Chain({ chain, chainIndex }) {
-  if (!chain) {
+export default function Chain({ chainData }) {
+  if (!chainData) {
     return null;
   }
+
+  const { chain, index: chainIndex } = chainData;
 
   return (
     <div>
