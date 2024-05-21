@@ -6,6 +6,10 @@ const MOVE_KO = {
   'twin-beam': '트윈빔을',
   'hyper-drill': '하이퍼드릴을',
   'barb-barrage': '독침천발을',
+  'psyshield-bash': '배리어러시를',
+  stomp: '짓밟기',
+  'dragon-pulse': '용의파동',
+  taunt: '도발',
 };
 
 export { MOVE_KO };

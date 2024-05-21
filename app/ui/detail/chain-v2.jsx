@@ -144,7 +144,7 @@ export default function Chain({ chainData }) {
           name, to, detail, id,
         }) => (
           <ChainItem
-            key={id}
+            key={`${id}-${name.en}`}
             to={to}
             detail={detail}
             name={name}

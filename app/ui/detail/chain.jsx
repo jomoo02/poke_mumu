@@ -57,7 +57,6 @@ function NextChainItem({ nextChainItem }) {
   if (nextChainItem.length === 0) {
     return null;
   }
-  const toCount = nextChainItem.length;
 
   const container = `grid grid-cols-${nextChainItem.length}`;
   return (
