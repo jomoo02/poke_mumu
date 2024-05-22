@@ -18,34 +18,11 @@ export async function fetchAllChainIds() {
 
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(`fetchAllChainIds error: ${error.message}`);
 
-    return [];
+    return error;
   }
 }
-
-// export async function fetchChain(chainIndex) {
-//   try {
-//     await dbConnect();
-
-//     const query = { chainIndex };
-//     const projection = {
-//       _id: 0,
-//       chainIndex: 1,
-//       chain: 1,
-//     };
-
-//     const result = await ChainModel
-//       .findOne(query, projection)
-//       .lean();
-
-//     return result;
-//   } catch (error) {
-//     console.log(error);
-
-//     return '';
-//   }
-// }
 
 export async function fetchChain(index) {
   try {
@@ -64,8 +41,30 @@ export async function fetchChain(index) {
 
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(`fechChain error index ${index}: ${error.message}`);
 
-    return '';
+    return error;
+  }
+}
+
+export async function fetchAllChain() {
+  try {
+    await dbConnect();
+
+    const query = { };
+    const projection = {
+      _id: 0,
+    };
+
+    const result = await ChainModelV2
+      .find(query, projection)
+      .sort({ index: 1 })
+      .lean();
+
+    return result;
+  } catch (error) {
+    console.error(`fetchAllChain error: ${error.message}`);
+
+    return error;
   }
 }

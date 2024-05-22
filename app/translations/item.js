@@ -20,29 +20,31 @@ const ITEM_KO = {
   'scroll-of-waters': '물의족자',
   'auspicious-armor': '축복받은갑옷',
   'malicious-armor': '저주받은갑옷',
+  'masterpiece-teacup': '걸작찻잔',
+  'unremarkable-teacup': '범작찻잔',
 };
 
 const TRADE_ITEM_KO = {
-  'kings-rock': '왕의징표석을',
-  'metal-coat': '메탈코트를',
-  protector: '프로텍터를',
-  'dragon-scale': '용의비늘을',
-  electirizer: '에레키부스터를',
-  magmarizer: '마그마부스터를',
-  'up-grade': '업그레이드를',
-  'dubious-disc': '괴상한패치를',
+  'kings-rock': '왕의징표석',
+  'metal-coat': '메탈코트',
+  protector: '프로텍터',
+  'dragon-scale': '용의비늘',
+  electirizer: '에레키부스터',
+  magmarizer: '마그마부스터',
+  'up-grade': '업그레이드',
+  'dubious-disc': '괴상한패치',
   'prism-scale': '고운비늘',
   'reaper-cloth': '영계의천',
   'deep-sea-tooth': '심해의이빨',
   'deep-sea-scale': '심해의비늘',
-  sachet: '향기주머니를',
-  'whipped-dream': '휘핑팝을',
+  sachet: '향기주머니',
+  'whipped-dream': '휘핑팝',
 };
 
 const HELD_ITEM_KO = {
-  'razor-fang': '예리한이빨을',
-  'razor-claw': '예리한손톱을',
-  'oval-stone': '동글동글돌을',
+  'razor-fang': '예리한이빨',
+  'razor-claw': '예리한손톱',
+  'oval-stone': '동글동글돌',
 };
 
 export {

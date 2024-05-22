@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
 import axios from 'axios';
 import { setupCache } from 'axios-cache-interceptor';
-import DetailModel from '../app/models/Detail.mjs';
-import ChainV2Model from '../app/models/ChainV2.mjs';
-import { connectMongoose, disconnectMongoose } from '../app/api/db/connectMongoose.mjs';
+import DetailModel from '../../app/models/Detail.mjs';
+import ChainV2Model from '../../app/models/ChainV2.mjs';
+import { connectMongoose, disconnectMongoose } from '../../app/api/db/connectMongoose.mjs';
 
 dotenv.config({ path: '.env.local' });
 
@@ -64,7 +64,7 @@ async function updateChainIndex(id, allChain) {
 
     const query = { id: Number(id) };
     const update = { chainIndex: updatingIndex };
-    const option = { new: true, rawResult: true };
+    const option = { new: true };
 
     const updateDetailModel = await DetailModel.findOneAndUpdate(
       query,

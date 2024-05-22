@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
-import DetailModel from '../app/models/Detail.mjs';
-import { connectMongoose, disconnectMongoose } from '../app/api/db/connectMongoose.mjs';
+import DetailModel from '../../app/models/Detail.mjs';
+import { connectMongoose, disconnectMongoose } from '../../app/api/db/connectMongoose.mjs';
 
 dotenv.config({ path: '.env.local' });
 

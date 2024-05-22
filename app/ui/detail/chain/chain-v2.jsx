@@ -2,9 +2,10 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ITEM_KO, TRADE_ITEM_KO } from '../../translations/item';
-import Trigger from './trigger';
 import { useLanguage } from '@/app/language-provider';
+import { ITEM_KO, TRADE_ITEM_KO } from '../../../translations/item';
+import Trigger from '../trigger';
+import TriggierV2 from './triggerV2';
 
 const getSprityUrl = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
@@ -39,59 +40,25 @@ function NextChainItem({ nextChainItem }) {
   );
 }
 
-function Detail({ detail }) {
+function Detail({ detail, name }) {
   if (detail.length === 0) {
     return null;
   }
 
-  const TRIGGER = {
-    trade: '통신교환',
-    'use-item': '사용',
-  };
-
-  const CONDITION_MAP_KO = {
-    min_level: '레벨',
-    time_of_day: '에 레벨업',
-  };
-
-  const TIME_OF_DAY_MAP_KO = {
-    night: '밤',
-    day: '낮',
-    dusk: '황혼',
-  };
-
-  const getConditionText = (key, value) => {
-    if (key === 'min_level') {
-      return `${CONDITION_MAP_KO[key]} ${value}`;
-    } if (key === 'time_of_day') {
-      return `${TIME_OF_DAY_MAP_KO[value]}에 레벨업`;
-    } if (key === 'item') {
-      return `${ITEM_KO[value] || value}`;
-    } if (key === 'location') {
-      return `${value}에서`;
-    } if (key === 'min_happiness') {
-      return `친밀도 ${value} 레벨업`;
-    } if (key === 'held_item') {
-      return `${TRADE_ITEM_KO[value]}을 지닌 상태에서`;
-    }
-    return `${value}`;
-  };
-
-  const detailTexts = detail.map(({ trigger, condition }, index) => (
-    <div key={`${trigger}-${index}`} className="flex justify-center items-center">
-      {condition.map(([key, value]) => (
-        <div key={`${key}-${value}`}>
-          {getConditionText(key, value)}
-        </div>
-      ))}
-      <div>{TRIGGER[trigger]}</div>
-    </div>
-  ));
+  // const detailTexts = detail.map(({ trigger, condition }, index) => (
+  //   <div key={`${trigger}-${index}`} className="flex justify-center items-center">
+  //     {condition.map(([key, value]) => (
+  //       <div key={`${key}-${value}`}>
+  //         {getConditionText(key, value)}
+  //       </div>
+  //     ))}
+  //     <div>{TRIGGER[trigger]}</div>
+  //   </div>
+  // ));
 
   return (
     <div className="min-h-36 flex items-center justify-center md:w-40 lg:w-64 flex-col">
-      {/* {detailTexts} */}
-      <Trigger detail={detail} />
+      <TriggierV2 detail={detail} name={name} />
     </div>
   );
 }
@@ -107,9 +74,9 @@ function ChainItem({
     <div className="md:flex">
       <div className="flex justify-center">
         <div className="md:flex">
-          <Detail detail={detail} />
+          <Detail detail={detail} name={name.en} />
           <div className="w-20 md:w-24 flex flex-col items-center justify-center">
-            <div className="w-16 h-16 md:w-20 relative md:h-20">
+            {/* <div className="w-16 h-16 md:w-20 relative md:h-20">
               <Image
                 src={src}
                 alt={nameLan}
@@ -118,7 +85,7 @@ function ChainItem({
                 priority
                 style={{ objectFit: 'contain' }}
               />
-            </div>
+            </div> */}
             <div>{nameLan}</div>
           </div>
         </div>

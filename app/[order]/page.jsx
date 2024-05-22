@@ -4,7 +4,7 @@ import Abilities from '@/app/ui/detail/ability';
 import Types from '@/app/ui/detail/type';
 import Stats from '@/app/ui/detail/stat';
 import Moves from '@/app/ui/detail/moves';
-import Chain from '@/app/ui/detail/chain-v2';
+import Chain from '@/app/ui/detail/chain/chain-v2';
 import Forms from '@/app/ui/detail/forms';
 import { fetchChain } from '@/app/api/chain';
 import { fetchPoke } from '@/app/api/data';
@@ -32,7 +32,7 @@ export default async function DetailPage({ params }) {
   return (
     <div className="grid gap-y-10 lg:mx-36 xl:mx-40 2xl:mx-48">
       <RouteButton order={order} />
-      <BasicInfo no={no} name={name} sprity={sprity} id={id} order={order} form={form} />
+      {/* <BasicInfo no={no} name={name} sprity={sprity} id={id} order={order} form={form} /> */}
       {/* <Forms forms={forms} name={speciesName} />
       <Abilities abilities={abilities} />
       <Types types={types} /> */}
