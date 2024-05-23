@@ -22,6 +22,9 @@ const ITEM_KO = {
   'malicious-armor': '저주받은갑옷',
   'masterpiece-teacup': '걸작찻잔',
   'unremarkable-teacup': '범작찻잔',
+  'tart-apple': '새콤한사과',
+  'sweet-apple': '달콤한사과',
+  'syrupy-apple': '꿀맛사과',
 };
 
 const TRADE_ITEM_KO = {

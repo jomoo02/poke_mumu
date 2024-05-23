@@ -76,7 +76,7 @@ function ChainItem({
         <div className="md:flex">
           <Detail detail={detail} name={name.en} />
           <div className="w-20 md:w-24 flex flex-col items-center justify-center">
-            {/* <div className="w-16 h-16 md:w-20 relative md:h-20">
+            <div className="w-16 h-16 md:w-20 relative md:h-20">
               <Image
                 src={src}
                 alt={nameLan}
@@ -85,7 +85,7 @@ function ChainItem({
                 priority
                 style={{ objectFit: 'contain' }}
               />
-            </div> */}
+            </div>
             <div>{nameLan}</div>
           </div>
         </div>

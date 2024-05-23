@@ -18,6 +18,7 @@ import TradeSpeciesCase from './trigger-detail/trade-species';
 import PartyTypeCase from './trigger-detail/party-type';
 import TurnUpsideDownCase from './trigger-detail/turn-upside-down';
 import NeedsOverworldRainCase from './trigger-detail/rain';
+import RecoilDamageCase from './trigger-detail/recoil-damage';
 
 export default function TriggerV2({ detail, name }) {
   const { language } = useLanguage();
@@ -51,6 +52,7 @@ export default function TriggerV2({ detail, name }) {
                 {key === 'party_type' && <PartyTypeCase type={value} language={language} />}
                 {key === 'turn_upside_down' && <TurnUpsideDownCase language={language} />}
                 {key === 'needs_overworld_rain' && <NeedsOverworldRainCase language={language} />}
+                {key === 'recoil-damage' && <RecoilDamageCase damage={value} language={language} />}
               </div>
             </div>
           ))}

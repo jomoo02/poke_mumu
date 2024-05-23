@@ -32,10 +32,10 @@ export default async function DetailPage({ params }) {
   return (
     <div className="grid gap-y-10 lg:mx-36 xl:mx-40 2xl:mx-48">
       <RouteButton order={order} />
-      {/* <BasicInfo no={no} name={name} sprity={sprity} id={id} order={order} form={form} /> */}
-      {/* <Forms forms={forms} name={speciesName} />
+      <BasicInfo no={no} name={name} sprity={sprity} id={id} order={order} form={form} />
+      <Forms forms={forms} name={speciesName} />
       <Abilities abilities={abilities} />
-      <Types types={types} /> */}
+      <Types types={types} />
       <Chain chainData={chainData} />
       <Stats base={stats.baseStats} effort={stats.effortStats} type={types[0]} />
       <Moves moves={moves} />

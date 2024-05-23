@@ -10,6 +10,7 @@ const MOVE_KO = {
   stomp: '짓밟기',
   'dragon-pulse': '용의파동',
   taunt: '도발',
+  'dragon-cheer': '드래곤옐',
 };
 
 export { MOVE_KO };
