@@ -50,8 +50,20 @@ const HELD_ITEM_KO = {
   'oval-stone': '동글동글돌',
 };
 
+const ALL_ITEM_KO = {
+  ...ITEM_KO,
+  ...TRADE_ITEM_KO,
+  ...HELD_ITEM_KO,
+};
+
+const ITEM_EN = {
+  'kings-rock': "King's Rock",
+};
+
 export {
   ITEM_KO,
   TRADE_ITEM_KO,
   HELD_ITEM_KO,
+  ALL_ITEM_KO,
+  ITEM_EN,
 };

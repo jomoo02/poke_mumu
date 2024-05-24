@@ -1,28 +1,28 @@
 import React from 'react';
 import { useLanguage } from '@/app/language-provider';
-import TimeOfDayCase from './trigger-detail/time-of-day';
-import MinLevelCase from './trigger-detail/min-level';
-import ItemCase from './trigger-detail/item';
-import LocationCase from './trigger-detail/location';
-import MinHappinessCase from './trigger-detail/min-happiness';
-import OtherCase from './trigger-detail/ohter';
-import HeldItemCase from './trigger-detail/held-item';
-import RelativeStatCase from './trigger-detail/relative-stat';
-import KnownMoveCase from './trigger-detail/known-move';
-import KnownMoveTypeCase from './trigger-detail/known-move-type';
-import MinAffectionCase from './trigger-detail/min-affection';
-import PartySpeciesCase from './trigger-detail/party-species';
-import GenderCase from './trigger-detail/gender';
-import MinBeautyCase from './trigger-detail/min-beauty';
-import TradeSpeciesCase from './trigger-detail/trade-species';
-import PartyTypeCase from './trigger-detail/party-type';
-import TurnUpsideDownCase from './trigger-detail/turn-upside-down';
-import NeedsOverworldRainCase from './trigger-detail/rain';
-import RecoilDamageCase from './trigger-detail/recoil-damage';
-import AgileStyleCase from './trigger-detail/agile-style';
-import StrongStyleCase from './trigger-detail/strong-style';
-import SpinCase from './trigger-detail/spin';
-import RelativeNatureCase from './trigger-detail/relative-nature';
+import TimeOfDayCase from './condition/time-of-day';
+import MinLevelCase from './condition/condition-key/min-level';
+import ItemCase from './condition/condition-key/item';
+import LocationCase from './condition/condition-key/location';
+import MinHappinessCase from './condition/min-happiness';
+import OtherCase from './condition/ohter';
+import HeldItemCase from './condition/condition-key/held-item';
+import RelativeStatCase from './condition/relative-stat';
+import KnownMoveCase from './condition/condition-key/known-move';
+import KnownMoveTypeCase from './condition/known-move-type';
+import MinAffectionCase from './condition/condition-key/min-affection';
+import PartySpeciesCase from './condition/party-species';
+import GenderCase from './condition/condition-key/gender';
+import MinBeautyCase from './condition/condition-key/min-beauty';
+import TradeSpeciesCase from './condition/trade-species';
+import PartyTypeCase from './condition/party-type';
+import TurnUpsideDownCase from './condition/turn-upside-down';
+import NeedsOverworldRainCase from './condition/rain';
+import RecoilDamageCase from './condition/recoil-damage';
+import AgileStyleCase from './condition/condition-key/agile-style';
+import StrongStyleCase from './condition/strong-style';
+import SpinCase from './condition/spin';
+import RelativeNatureCase from './condition/relative-nature';
 
 const COMPONENT_MAP = {
   min_level: MinLevelCase,
@@ -53,7 +53,7 @@ const COMPONENT_MAP = {
 export default function TriggerV2({ detail }) {
   const { language } = useLanguage();
 
-  const flexDirection = language === 'ko' ? 'flex-col' : 'flex-col-reverse';
+  const flexDirection = language === 'ko' ? 'flex-row' : 'flex-row-reverse';
 
   const createKey = (trigger, condition) => `${trigger}-${condition.map(({ key }) => key).join('/')}`;
 
@@ -100,14 +100,16 @@ export default function TriggerV2({ detail }) {
       {detail.map(({ trigger, condition }, index) => (
         <div key={createKey(trigger, condition)} className={`flex ${flexDirection} gap-1`}>
           {index > 0 && <div>or</div>}
-          <div className="flex">
-            {sortCondition(condition).map(({ key, value }, conditionIndex) => (
-              <div key={value} className="flex">
-                {conditionIndex > 0 && <span className="mx-1">+</span>}
-                {renderCondition(key, value)}
-              </div>
-            ))}
-            <span className="flex justify-center ml-1">
+          <div className={`flex ${flexDirection}`}>
+            <div className="flex">
+              {sortCondition(condition).map(({ key, value }, conditionIndex) => (
+                <div key={value} className="flex">
+                  {conditionIndex > 0 && <span className="mx-1">+</span>}
+                  {renderCondition(key, value)}
+                </div>
+              ))}
+            </div>
+            <span className="flex justify-center mx-1">
               {creteTriggerText(trigger, condition)}
             </span>
           </div>

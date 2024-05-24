@@ -1,4 +1,5 @@
 import React from 'react';
+import ConditionContainer from '../condition-container';
 
 const LOCATION = {
   alola: '알로라지방',
@@ -14,8 +15,8 @@ export default function LocationCase({ value, language }) {
   const locationText = language === 'ko' ? LOCATION[value] : `in ${value}`;
 
   return (
-    <div className="flex justify-center items-center text-sm">
+    <ConditionContainer>
       {locationText}
-    </div>
+    </ConditionContainer>
   );
 }

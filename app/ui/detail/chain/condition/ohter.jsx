@@ -50,8 +50,7 @@ const OTHER_CASE_MAP = {
 export default function OtherCase({ value, language }) {
   const curNameCase = OTHER_CASE_MAP[value];
   const text = language === 'ko' ? curNameCase.ko : curNameCase.en;
-  // const text = curNameCase ? (
-  //   language === 'ko' ? curNameCase.ko : curNameCase.en) : 'none';
+
   return (
     <div className="flex justify-center items-center text-sm">
       {text}

@@ -1,10 +1,11 @@
 import React from 'react';
+import ConditionContainer from '../condition-container';
 
 export default function MinLevelCase({ value }) {
   return (
-    <div className="flex gap-x-1 text-sm justify-center items-center">
+    <ConditionContainer styleClass="gap-x-1">
       <span>Level</span>
       <span>{value}</span>
-    </div>
+    </ConditionContainer>
   );
 }
