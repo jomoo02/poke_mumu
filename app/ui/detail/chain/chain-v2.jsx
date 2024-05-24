@@ -40,7 +40,7 @@ function NextChainItem({ nextChainItem }) {
   );
 }
 
-function Detail({ detail, name }) {
+function Detail({ detail }) {
   if (detail.length === 0) {
     return null;
   }
@@ -58,7 +58,7 @@ function Detail({ detail, name }) {
 
   return (
     <div className="min-h-36 flex items-center justify-center md:w-40 lg:w-64 flex-col">
-      <TriggierV2 detail={detail} name={name} />
+      <TriggierV2 detail={detail} />
     </div>
   );
 }
@@ -74,7 +74,7 @@ function ChainItem({
     <div className="md:flex">
       <div className="flex justify-center">
         <div className="md:flex">
-          <Detail detail={detail} name={name.en} />
+          <Detail detail={detail} />
           <div className="w-20 md:w-24 flex flex-col items-center justify-center">
             <div className="w-16 h-16 md:w-20 relative md:h-20">
               <Image

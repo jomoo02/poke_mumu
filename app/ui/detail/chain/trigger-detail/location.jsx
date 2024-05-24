@@ -11,7 +11,7 @@ const LOCATION = {
 };
 
 export default function LocationCase({ location, language }) {
-  const locationText = language === 'ko' ? LOCATION[location] : location;
+  const locationText = language === 'ko' ? LOCATION[location] : `in ${location}`;
 
   return (
     <div className="flex justify-center items-center text-sm">

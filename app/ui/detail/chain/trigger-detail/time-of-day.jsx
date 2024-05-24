@@ -13,7 +13,7 @@ export default function TimeOfDayCase({ time, language }) {
     if (language === 'en') {
       return ['dusk', 'full-mon'].includes(timeValue) ? timeValue : `${makeFirstUpperCaseTextArray(timeValue.split('-'))}time`;
     }
-    return `${TIME_OF_DAY_MAP_KO[timeValue]}`;
+    return TIME_OF_DAY_MAP_KO[timeValue];
   };
 
   const timeText = getTimeText(time);

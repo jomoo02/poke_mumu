@@ -1,9 +1,9 @@
 import React from 'react';
 
 export default function MinHappinessCase({ language }) {
-  const enText = 'high Friendship';
+  const enText = 'with high Friendship';
   // const koText = '친밀도가 높은 상태에서 레벨 업';
-  const koText = '친밀도가 높은 상태';
+  const koText = '친밀도가 높은 상태에서';
 
   const text = language === 'ko' ? koText : enText;
 
