@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function GenderCase({ gender, language }) {
+export default function GenderCase({ value, language }) {
   const getGenderText = () => {
-    if (gender === 2) {
+    if (value === 2) {
       return language === 'ko' ? '수컷' : 'Male';
     }
     return language === 'ko' ? '암컷' : 'Female';

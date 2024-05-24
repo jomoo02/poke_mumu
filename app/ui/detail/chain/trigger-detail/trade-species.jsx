@@ -6,8 +6,8 @@ const SPECIES_MAP_KO = {
   karrablast: '딱정곤',
 };
 
-export default function TradeSpeciesCase({ species, language }) {
-  const speciesPoke = language === 'ko' ? SPECIES_MAP_KO[species] : makeFirstUpperCase(species);
+export default function TradeSpeciesCase({ value, language }) {
+  const speciesPoke = language === 'ko' ? SPECIES_MAP_KO[value] : makeFirstUpperCase(value);
 
   const getRes = () => {
     if (language === 'ko') {

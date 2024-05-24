@@ -21,6 +21,34 @@ import NeedsOverworldRainCase from './trigger-detail/rain';
 import RecoilDamageCase from './trigger-detail/recoil-damage';
 import AgileStyleCase from './trigger-detail/agile-style';
 import StrongStyleCase from './trigger-detail/strong-style';
+import SpinCase from './trigger-detail/spin';
+import RelativeNatureCase from './trigger-detail/relative-nature';
+
+const COMPONENT_MAP = {
+  min_level: MinLevelCase,
+  time_of_day: TimeOfDayCase,
+  item: ItemCase,
+  location: LocationCase,
+  min_happiness: MinHappinessCase,
+  other: OtherCase,
+  held_item: HeldItemCase,
+  relative_physical_stats: RelativeStatCase,
+  known_move: KnownMoveCase,
+  known_move_type: KnownMoveTypeCase,
+  min_affection: MinAffectionCase,
+  party_species: PartySpeciesCase,
+  turn_upside_down: TurnUpsideDownCase,
+  needs_overworld_rain: NeedsOverworldRainCase,
+  recoil_damage: RecoilDamageCase,
+  agile_style: AgileStyleCase,
+  gender: GenderCase,
+  strong_style: StrongStyleCase,
+  trade_species: TradeSpeciesCase,
+  min_beauty: MinBeautyCase,
+  party_type: PartyTypeCase,
+  spin: SpinCase,
+  relative_nature: RelativeNatureCase,
+};
 
 export default function TriggerV2({ detail }) {
   const { language } = useLanguage();
@@ -61,49 +89,27 @@ export default function TriggerV2({ detail }) {
     return [...keyObjects, ...otherObjects, ...lastObjects];
   };
 
+  const renderCondition = (key, value) => {
+    const Component = COMPONENT_MAP[key];
+    if (!Component) return null;
+    return <Component {...{ value, language }} />;
+  };
+
   return (
-    <div>
-      {detail.map(({ trigger, condition }) => (
-        <div key={createKey(trigger, condition)}>
-          <div>{trigger}</div>
-          {condition.map(({ key, value }) => (
-            <div key={value} className="flex flex-col">
-              <div>{`${key}: ${value}`}</div>
-            </div>
-          ))}
-        </div>
-      ))}
-      {detail.map(({ trigger, condition }) => (
-        <div key={createKey(trigger, condition)} className={`flex ${flexDirection}`}>
-          <div>
-            {sortCondition(condition).map(({ key, value }) => (
-              <div key={value} className="flex flex-col gap-y-5">
-                {key === 'min_level' && <MinLevelCase level={value} />}
-                {key === 'time_of_day' && <TimeOfDayCase time={value} language={language} />}
-                {key === 'item' && <ItemCase item={value} language={language} />}
-                {key === 'location' && <LocationCase location={value} language={language} />}
-                {key === 'min_happiness' && <MinHappinessCase language={language} />}
-                {key === 'other' && <OtherCase name={value} language={language} />}
-                {key === 'held_item' && <HeldItemCase item={value} language={language} />}
-                {key === 'relative_physical_stats' && <RelativeStatCase value={value} language={language} />}
-                {key === 'known_move' && <KnownMoveCase move={value} language={language} />}
-                {key === 'known_move_type' && <KnownMoveTypeCase type={value} language={language} />}
-                {key === 'min_affection' && <MinAffectionCase value={value} language={language} />}
-                {key === 'party_species' && <PartySpeciesCase party={value} language={language} />}
-                {key === 'gender' && <GenderCase gender={value} language={language} />}
-                {key === 'min_beauty' && <MinBeautyCase language={language} />}
-                {key === 'trade_species' && <TradeSpeciesCase species={value} language={language} />}
-                {key === 'party_type' && <PartyTypeCase type={value} language={language} />}
-                {key === 'turn_upside_down' && <TurnUpsideDownCase language={language} />}
-                {key === 'needs_overworld_rain' && <NeedsOverworldRainCase language={language} />}
-                {key === 'recoil-damage' && <RecoilDamageCase damage={value} language={language} />}
-                {key === 'agile_style' && <AgileStyleCase move={value} language={language} />}
-                {key === 'strong_style' && <StrongStyleCase move={value} language={language} />}
+    <div className="text-sm">
+      {detail.map(({ trigger, condition }, index) => (
+        <div key={createKey(trigger, condition)} className={`flex ${flexDirection} gap-1`}>
+          {index > 0 && <div>or</div>}
+          <div className="flex">
+            {sortCondition(condition).map(({ key, value }, conditionIndex) => (
+              <div key={value} className="flex">
+                {conditionIndex > 0 && <span className="mx-1">+</span>}
+                {renderCondition(key, value)}
               </div>
             ))}
-          </div>
-          <div className="text-sm flex justify-center">
-            {creteTriggerText(trigger, condition)}
+            <span className="flex justify-center ml-1">
+              {creteTriggerText(trigger, condition)}
+            </span>
           </div>
         </div>
       ))}

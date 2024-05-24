@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeFirstUpperCaseTextArray } from '@/app/lib/utils';
 
-export default function TimeOfDayCase({ time, language }) {
+export default function TimeOfDayCase({ value, language }) {
   const TIME_OF_DAY_MAP_KO = {
     night: '밤',
     day: '낮',
@@ -9,14 +9,14 @@ export default function TimeOfDayCase({ time, language }) {
     'full-moon': '보름달',
   };
 
-  const getTimeText = (timeValue) => {
+  const getTimeText = (time) => {
     if (language === 'en') {
-      return ['dusk', 'full-mon'].includes(timeValue) ? timeValue : `${makeFirstUpperCaseTextArray(timeValue.split('-'))}time`;
+      return ['dusk', 'full-mon'].includes(time) ? time : `${makeFirstUpperCaseTextArray(time.split('-'))}time`;
     }
-    return TIME_OF_DAY_MAP_KO[timeValue];
+    return TIME_OF_DAY_MAP_KO[time];
   };
 
-  const timeText = getTimeText(time);
+  const timeText = getTimeText(value);
 
   return (
     <div className="text-sm flex justify-center items-center">

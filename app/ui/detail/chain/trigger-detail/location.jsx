@@ -10,8 +10,8 @@ const LOCATION = {
   'icy-rock': '특정장소',
 };
 
-export default function LocationCase({ location, language }) {
-  const locationText = language === 'ko' ? LOCATION[location] : `in ${location}`;
+export default function LocationCase({ value, language }) {
+  const locationText = language === 'ko' ? LOCATION[value] : `in ${value}`;
 
   return (
     <div className="flex justify-center items-center text-sm">

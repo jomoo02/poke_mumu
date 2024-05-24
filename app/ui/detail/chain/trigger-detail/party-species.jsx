@@ -5,8 +5,8 @@ const PARTY_MAP_KO = {
   remoraid: '총어',
 };
 
-export default function PartySpeciesCase({ party, language }) {
-  const partyPoke = language === 'ko' ? PARTY_MAP_KO[party] : makeFirstUpperCase(party);
+export default function PartySpeciesCase({ value, language }) {
+  const partyPoke = language === 'ko' ? PARTY_MAP_KO[value] : makeFirstUpperCase(value);
 
   const getRes = () => {
     if (language === 'ko') {

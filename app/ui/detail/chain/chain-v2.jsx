@@ -57,7 +57,7 @@ function Detail({ detail }) {
   // ));
 
   return (
-    <div className="min-h-36 flex items-center justify-center md:w-40 lg:w-64 flex-col">
+    <div className="min-h-36 flex items-center justify-center md:w-80 lg:w-80 flex-col">
       <TriggierV2 detail={detail} />
     </div>
   );
