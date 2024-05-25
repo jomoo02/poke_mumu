@@ -1,4 +1,5 @@
 import React from 'react';
+import ConditionContainer from '../condition-container';
 
 const NATURE_MAP = {
   amped: {
@@ -16,18 +17,18 @@ export default function RelativeNature({ value, language }) {
 
   if (language === 'ko') {
     return (
-      <div>
+      <ConditionContainer>
         <div>
           원래 성격에 따라
         </div>
         <div className="text-xs">{`(${natures.ko})`}</div>
-      </div>
+      </ConditionContainer>
     );
   }
   return (
-    <div>
+    <ConditionContainer>
       <span>Nature: </span>
       <span>{natures.en}</span>
-    </div>
+    </ConditionContainer>
   );
 }

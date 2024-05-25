@@ -1,18 +1,19 @@
 import React from 'react';
+import ConditionContainer from '../condition-container';
 
 export default function SpinCase({ language }) {
   if (language === 'ko') {
     return (
-      <div>
+      <ConditionContainer>
         <span>사탕공예</span>
         <span>를 지니게하고 L스틱으로 캐릭터를 계속 회전</span>
-      </div>
+      </ConditionContainer>
     );
   }
   return (
-    <div className="flex gap-x-1">
+    <ConditionContainer styleClass="gap-x-1">
       <span>Spin holding a</span>
       <span>Sweet</span>
-    </div>
+    </ConditionContainer>
   );
 }

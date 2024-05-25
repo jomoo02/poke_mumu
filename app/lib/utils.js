@@ -49,3 +49,14 @@ export function getKoreanParticleForAnd(word) {
 
   return '';
 }
+
+export function getKoreanSubjectParticle(word) {
+  const lastChar = word[word.length - 1];
+  const jongseong = getJongseongIndex(lastChar);
+
+  if (jongseong !== -1) {
+    return jongseong === 0 ? '가' : '이';
+  }
+
+  return '';
+}

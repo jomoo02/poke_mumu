@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeFirstUpperCaseTextArray } from '@/app/lib/utils';
+import ConditionContainer from '../condition-container';
 
 export default function TimeOfDayCase({ value, language }) {
   const TIME_OF_DAY_MAP_KO = {
@@ -19,8 +20,8 @@ export default function TimeOfDayCase({ value, language }) {
   const timeText = getTimeText(value);
 
   return (
-    <div className="text-sm flex justify-center items-center">
+    <ConditionContainer className="text-sm flex justify-center items-center">
       {timeText}
-    </div>
+    </ConditionContainer>
   );
 }

@@ -12,11 +12,20 @@ const LOCATION = {
 };
 
 export default function LocationCase({ value, language }) {
-  const locationText = language === 'ko' ? LOCATION[value] : `in ${value}`;
+  const location = language === 'ko' ? LOCATION[value] : `in ${value}`;
+  const getText = () => {
+    if (language === 'ko') {
+      return ![LOCATION.alola, LOCATION.galar, LOCATION.hisui].includes(location) ? '에서' : '';
+    }
+    return '';
+  };
+
+  const text = getText();
 
   return (
     <ConditionContainer>
-      {locationText}
+      {location}
+      {text}
     </ConditionContainer>
   );
 }

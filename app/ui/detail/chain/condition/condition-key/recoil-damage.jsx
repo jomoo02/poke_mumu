@@ -1,4 +1,5 @@
 import React from 'react';
+import ConditionContainer from '../condition-container';
 
 export default function RecoilDamageCase({ value, language }) {
   const text = language === 'ko' ? (
@@ -6,8 +7,8 @@ export default function RecoilDamageCase({ value, language }) {
   ) : `after losing at least ${value} HP from recoil damage`;
 
   return (
-    <div className="flex justify-center items-center text-sm">
+    <ConditionContainer>
       {text}
-    </div>
+    </ConditionContainer>
   );
 }

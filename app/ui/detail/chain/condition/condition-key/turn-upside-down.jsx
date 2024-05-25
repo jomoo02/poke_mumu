@@ -1,4 +1,5 @@
 import React from 'react';
+import ConditionContainer from '../condition-container';
 
 export default function TurnUpsideDownCase({ language }) {
   const text = language === 'ko' ? (
@@ -6,8 +7,8 @@ export default function TurnUpsideDownCase({ language }) {
   ) : 'holding console upside down';
 
   return (
-    <div className="flex justify-center items-center text-sm">
+    <ConditionContainer>
       {text}
-    </div>
+    </ConditionContainer>
   );
 }

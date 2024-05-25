@@ -3,8 +3,6 @@
 import React from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/app/language-provider';
-import { ITEM_KO, TRADE_ITEM_KO } from '../../../translations/item';
-import Trigger from '../trigger';
 import TriggierV2 from './triggerV2';
 
 const getSprityUrl = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;

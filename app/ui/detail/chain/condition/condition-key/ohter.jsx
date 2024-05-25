@@ -1,4 +1,5 @@
 import React from 'react';
+import ConditionContainer from '../condition-container';
 
 const OTHER_CASE_MAP = {
   annihilape: {
@@ -52,8 +53,8 @@ export default function OtherCase({ value, language }) {
   const text = language === 'ko' ? curNameCase.ko : curNameCase.en;
 
   return (
-    <div className="flex justify-center items-center text-sm">
+    <ConditionContainer>
       {text}
-    </div>
+    </ConditionContainer>
   );
 }

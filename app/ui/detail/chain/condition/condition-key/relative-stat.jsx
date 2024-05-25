@@ -1,4 +1,5 @@
 import React from 'react';
+import ConditionContainer from '../condition-container';
 
 function relativePhysicalStats(value, language) {
   if (value === 1) {
@@ -13,8 +14,8 @@ export default function RelativeStatCase({ value, language }) {
   const text = relativePhysicalStats(value, language);
 
   return (
-    <div className="flex justify-center items-center text-sm">
+    <ConditionContainer>
       {text}
-    </div>
+    </ConditionContainer>
   );
 }
