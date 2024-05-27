@@ -83,13 +83,13 @@ export default function Condition({ condition, language }) {
   };
 
   return (
-    <>
-      {sortedCondtion.map(({ key, value }, conditionIndex) => (
+    <div className="flex flex-wrap">
+      {sortedCondtion.map(({ key, value }, index) => (
         <div key={value} className="flex">
-          {conditionIndex > 0 && <span className="mx-1">+</span>}
+          {index > 0 && <span className="mx-1">+</span>}
           {renderCondition(key, value)}
         </div>
       ))}
-    </>
+    </div>
   );
 }

@@ -60,7 +60,7 @@ function ChainItem({
   return (
     <div className="md:flex">
       <div className="flex justify-center">
-        <div className="md:flex">
+        <div className="flex flex-col md:flex-row justify-center items-center">
           <Detail detail={detail} />
           <div className="w-20 md:w-24 flex flex-col items-center justify-center">
             <div className="w-16 h-16 md:w-20 relative md:h-20">

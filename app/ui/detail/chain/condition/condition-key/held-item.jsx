@@ -16,9 +16,9 @@ export default function HeldItemCase({ value, language }) {
 
   return (
     <ConditionContainer className="gap-x-1">
-      {suffix && <span>{suffix}</span>}
-      <ItmeLinkWithParticle item={value} language={language} />
       {prefix && <span>{prefix}</span>}
+      <ItmeLinkWithParticle item={value} language={language} />
+      {suffix && <span>{suffix}</span>}
     </ConditionContainer>
   );
 }
