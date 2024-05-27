@@ -2,14 +2,23 @@ import React from 'react';
 import ConditionContainer from '../condition-container';
 import { ItmeLinkWithParticle } from '../link-container';
 
+const LANGUAGE_CONTENT = {
+  ko: {
+    suffix: '지닌채',
+  },
+  en: {
+    prefix: 'holding',
+  },
+};
+
 export default function HeldItemCase({ value, language }) {
-  const text = language === 'ko' ? '지닌채' : 'holding';
-  const styleClass = language === 'ko' ? 'gap-x-1' : 'gap-x-1 flex-row-reverse';
+  const { suffix, prefix } = LANGUAGE_CONTENT[language];
 
   return (
-    <ConditionContainer styleClass={styleClass}>
+    <ConditionContainer className="gap-x-1">
+      {suffix && <span>{suffix}</span>}
       <ItmeLinkWithParticle item={value} language={language} />
-      <span>{text}</span>
+      {prefix && <span>{prefix}</span>}
     </ConditionContainer>
   );
 }

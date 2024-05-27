@@ -1,23 +1,17 @@
 import React from 'react';
+import ConditionContainer from '../condition-container';
 
-function ConditionContainer({ children }) {
-  return (
-    <div className="flex justify-center items-center">
-      {children}
-    </div>
-  );
-}
+const TEXT_GENERATORS = {
+  ko: (gender) => (gender === 2 ? '수컷' : '암컷'),
+  en: (gender) => (gender === 2 ? 'Male' : 'Female'),
+};
 
 export default function GenderCase({ value, language }) {
-  const GENEDER_MAP = {
-    2: { ko: '수컷', en: 'Male' },
-    1: { ko: '암컷', en: 'Female' },
-  };
-  const gender = GENEDER_MAP[value]?.[language];
+  const text = TEXT_GENERATORS[language](value);
 
   return (
     <ConditionContainer>
-      {gender}
+      {text}
     </ConditionContainer>
   );
 }

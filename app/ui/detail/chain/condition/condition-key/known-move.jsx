@@ -2,14 +2,23 @@ import React from 'react';
 import ConditionContainer from '../condition-container';
 import { MoveLink } from '../link-container';
 
+const LANGUAGE_CONTENT = {
+  ko: {
+    suffix: '배운 상태에서',
+  },
+  en: {
+    prefix: 'knowing',
+  },
+};
+
 export default function KnownMoveCase({ value, language }) {
-  const text = language === 'ko' ? '배운 상태에서' : 'knowing';
-  const styleClass = language === 'ko' ? 'gap-x-1' : 'gap-x-1 flex-row-reverse';
+  const { prefix, suffix } = LANGUAGE_CONTENT[language];
 
   return (
-    <ConditionContainer styleClass={styleClass}>
+    <ConditionContainer className="gap-x-1">
+      {prefix && <span>{prefix}</span>}
       <MoveLink move={value} language={language} />
-      <span>{text}</span>
+      {suffix && <span>{suffix}</span>}
     </ConditionContainer>
   );
 }

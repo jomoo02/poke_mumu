@@ -4,7 +4,7 @@ import { ItemLink } from '../link-container';
 
 export default function ItemCase({ value, language }) {
   return (
-    <ConditionContainer className="flex justify-center items-center text-sm">
+    <ConditionContainer>
       <ItemLink item={value} language={language} />
     </ConditionContainer>
   );

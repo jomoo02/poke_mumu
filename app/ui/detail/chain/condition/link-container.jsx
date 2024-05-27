@@ -12,18 +12,23 @@ import { ALL_ITEM_KO, ITEM_EN } from '@/app/translations/item';
 import { POKE_KO } from '@/app/translations/poke';
 
 export function MoveLink({ move, language }) {
-  if (language === 'ko') {
-    const moveKo = MOVE_KO[move];
-    return (
-      <span>
-        <Link href={`move/${move}`} className="underline">{moveKo}</Link>
-        <span>{getKoreanParticle(moveKo)}</span>
-      </span>
-    );
-  }
+  const MOVE_HANDLE = {
+    ko: {
+      getText: (target) => MOVE_KO[target],
+      getParticle: (target) => getKoreanParticle(MOVE_KO[target]),
+    },
+    en: {
+      getText: (target) => makeFirstUpperCaseTextArray(target.split('-')),
+    },
+  };
+
+  const { getText, getParticle } = MOVE_HANDLE[language];
+  const moveText = getText(move);
+
   return (
     <span>
-      <Link href={`move/${move}`}>{makeFirstUpperCaseTextArray(move.split('-'))}</Link>
+      <Link href={`move/${move}`} className="underline">{moveText}</Link>
+      {getParticle && <span>{getParticle(move)}</span>}
     </span>
   );
 }
@@ -44,14 +49,11 @@ export function ItemLink({ item, language, children }) {
 export function ItmeLinkWithParticle({ item, language }) {
   const particle = language === 'ko' ? getKoreanParticle(ALL_ITEM_KO[item]) : '';
 
-  if (particle) {
-    return (
-      <ItemLink item={item} language={language}>
-        <span>{particle}</span>
-      </ItemLink>
-    );
-  }
-  return <ItemLink item={item} language={language} />;
+  return (
+    <ItemLink item={item} language={language}>
+      {particle && <span>{particle}</span>}
+    </ItemLink>
+  );
 }
 
 export function PokeLink({ poke, language, children }) {
@@ -70,27 +72,19 @@ export function PokeLink({ poke, language, children }) {
 export function PokeLinkWithSbjectParticle({ poke, language }) {
   const subjectParticle = language === 'ko' ? getKoreanSubjectParticle(POKE_KO[poke]) : '';
 
-  if (subjectParticle) {
-    return (
-      <PokeLink poke={poke} language={language}>
-        <span>{subjectParticle}</span>
-      </PokeLink>
-    );
-  }
-
-  return <PokeLink poke={poke} language={language} />;
+  return (
+    <PokeLink poke={poke} language={language}>
+      {subjectParticle && <span>{subjectParticle}</span>}
+    </PokeLink>
+  );
 }
 
 export function PokeLinkWithParticleForAnd({ poke, language }) {
   const particleForAnd = language === 'ko' ? getKoreanParticleForAnd(POKE_KO[poke]) : '';
 
-  if (particleForAnd) {
-    return (
-      <PokeLink poke={poke} language={language}>
-        <span>{particleForAnd}</span>
-      </PokeLink>
-    );
-  }
-
-  return <PokeLink poke={poke} language={language} />;
+  return (
+    <PokeLink poke={poke} language={language}>
+      {particleForAnd && <span>{particleForAnd}</span>}
+    </PokeLink>
+  );
 }

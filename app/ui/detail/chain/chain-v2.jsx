@@ -43,17 +43,6 @@ function Detail({ detail }) {
     return null;
   }
 
-  // const detailTexts = detail.map(({ trigger, condition }, index) => (
-  //   <div key={`${trigger}-${index}`} className="flex justify-center items-center">
-  //     {condition.map(([key, value]) => (
-  //       <div key={`${key}-${value}`}>
-  //         {getConditionText(key, value)}
-  //       </div>
-  //     ))}
-  //     <div>{TRIGGER[trigger]}</div>
-  //   </div>
-  // ));
-
   return (
     <div className="min-h-36 flex items-center justify-center md:w-80 lg:w-80 flex-col">
       <TriggierV2 detail={detail} />

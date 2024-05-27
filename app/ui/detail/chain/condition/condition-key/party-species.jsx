@@ -2,7 +2,7 @@ import React from 'react';
 import ConditionContainer from '../condition-container';
 import { PokeLinkWithSbjectParticle } from '../link-container';
 
-const TEXTS = {
+const LANGUAGE_CONTENT = {
   ko: {
     prefix: '파티에',
     suffix: '있을 때',
@@ -15,10 +15,10 @@ const TEXTS = {
 };
 
 export default function PartySpeciesCase({ value, language }) {
-  const { prefix, middle, suffix } = TEXTS[language];
+  const { prefix, middle, suffix } = LANGUAGE_CONTENT[language];
 
   return (
-    <ConditionContainer styleClass="gap-x-1">
+    <ConditionContainer className="gap-x-1">
       <span>{prefix}</span>
       <PokeLinkWithSbjectParticle poke={value} language={language} />
       {language === 'en' && <span>{middle}</span>}

@@ -3,15 +3,17 @@ import typesKo from '@/app/translations/type';
 import { makeFirstUpperCase } from '@/app/lib/utils';
 import ConditionContainer from '../condition-container';
 
-export default function PartyTypeCase({ value, language }) {
-  const getKoText = (partyType) => `${partyType} 타입 포켓몬을 지니고 있는 상태`;
-  const getEnText = (partyType) => `with a ${partyType}-type Pokémon in the party`;
+const TEXT_GENERATORS = {
+  ko: (partyType) => `${typesKo[partyType]} 타입 포켓몬을 지니고 있는 상태`,
+  en: (partyType) => `with a ${makeFirstUpperCase(partyType)}-type Pokémon in the party`,
+};
 
-  const res = language === 'ko' ? getKoText(typesKo[value]) : getEnText(makeFirstUpperCase(value));
+export default function PartyTypeCase({ value, language }) {
+  const text = TEXT_GENERATORS[language](value);
 
   return (
     <ConditionContainer>
-      {res}
+      {text}
     </ConditionContainer>
   );
 }

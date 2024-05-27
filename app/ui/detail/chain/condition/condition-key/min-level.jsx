@@ -3,7 +3,7 @@ import ConditionContainer from '../condition-container';
 
 export default function MinLevelCase({ value }) {
   return (
-    <ConditionContainer styleClass="gap-x-1">
+    <ConditionContainer className="gap-x-1">
       <span>Level</span>
       <span>{value}</span>
     </ConditionContainer>

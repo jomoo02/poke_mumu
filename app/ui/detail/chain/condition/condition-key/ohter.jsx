@@ -1,10 +1,17 @@
 import React from 'react';
 import ConditionContainer from '../condition-container';
+import { MoveLink } from '../link-container';
 
-const OTHER_CASE_MAP = {
+const NAME_CONTENT = {
   annihilape: {
-    en: 'after using Rage Fist 20 times',
-    ko: '분노의주먹을 20번 사용 후',
+    move: 'rage-fist',
+    en: {
+      prefix: 'after using',
+      suffix: '20 times',
+    },
+    ko: {
+      suffix: '20번 사용 후',
+    },
   },
   sirfetchD: {
     en: 'achieve 3 critical hits in one battle',
@@ -49,8 +56,22 @@ const OTHER_CASE_MAP = {
 };
 
 export default function OtherCase({ value, language }) {
-  const curNameCase = OTHER_CASE_MAP[value];
-  const text = language === 'ko' ? curNameCase.ko : curNameCase.en;
+  const content = NAME_CONTENT[value];
+
+  if (value === 'annihilape') {
+    const { move } = content;
+    const { prefix, suffix } = content[language];
+
+    return (
+      <ConditionContainer className="gap-x-1">
+        {prefix && <span>{prefix}</span>}
+        <MoveLink move={move} language={language} />
+        <span>{suffix}</span>
+      </ConditionContainer>
+    );
+  }
+
+  const text = content[language];
 
   return (
     <ConditionContainer>

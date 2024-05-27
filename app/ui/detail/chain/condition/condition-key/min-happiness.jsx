@@ -1,11 +1,13 @@
 import React from 'react';
 import ConditionContainer from '../condition-container';
 
-export default function MinHappinessCase({ language }) {
-  const enText = 'with high Friendship';
-  const koText = '친밀도가 높은 상태에서';
+const LANGUAGE_CONTENT = {
+  en: 'with high Friendship',
+  ko: '친밀도가 높은 상태에서',
+};
 
-  const text = language === 'ko' ? koText : enText;
+export default function MinHappinessCase({ language }) {
+  const text = LANGUAGE_CONTENT[language];
 
   return (
     <ConditionContainer>
