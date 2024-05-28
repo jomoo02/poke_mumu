@@ -18,7 +18,7 @@ const LANGUAGE_TRIGGER_CONTENT = {
 export default function TriggerV2({ detail }) {
   const { language } = useLanguage();
 
-  const flexDirection = language === 'ko' ? 'flex-col' : 'flex-row-reverse';
+  const flexDirection = language === 'ko' ? 'flex-row flex-wrap' : 'flex-row-reverse flex-wrap-reverse';
 
   const createKey = (trigger, condition) => `${trigger}-${condition.map(({ key }) => key).join('/')}`;
 
@@ -38,9 +38,9 @@ export default function TriggerV2({ detail }) {
   return (
     <div className="text-sm text-balance">
       {detail.map(({ trigger, condition }, index) => (
-        <div key={createKey(trigger, condition)} className={`flex ${flexDirection} gap-1`}>
+        <div key={createKey(trigger, condition)}>
           {index > 0 && <div className="text-center">or</div>}
-          <div className="flex flex-wrap gap-x-1 justify-center">
+          <div className={`flex gap-x-1 justify-center ${flexDirection}`}>
             <Condition condition={condition} language={language} />
             <span className="text-center">
               {creteTriggerText(trigger, condition)}

@@ -83,7 +83,7 @@ export default function Condition({ condition, language }) {
   };
 
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap justify-center">
       {sortedCondtion.map(({ key, value }, index) => (
         <div key={value} className="flex">
           {index > 0 && <span className="mx-1">+</span>}

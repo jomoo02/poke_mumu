@@ -10,10 +10,10 @@ const getSprityUrl = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/
 const gridColumn = {
   1: 'grid grid-cols-1',
   2: 'grid grid-cols-2 md:grid-cols-1',
-  3: 'grid grid-cols-3 md:grid-cols-1',
+  3: 'grid grid-cols-1 md:grid-cols-1',
   4: 'grid-grid-cols-4 md:grid-cols-1',
   7: 'grid grid-cols-7 md:grid-cols-1',
-  8: 'grid grid-cols-8 md:grid-cols-1',
+  8: 'grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4',
 };
 
 function NextChainItem({ nextChainItem }) {
@@ -22,7 +22,7 @@ function NextChainItem({ nextChainItem }) {
   }
 
   return (
-    <div className={gridColumn[nextChainItem.length]}>
+    <div className={`${gridColumn[nextChainItem.length]} gap-y-4`}>
       {nextChainItem.map(({
         name, to, detail, id,
       }) => (
@@ -44,7 +44,7 @@ function Detail({ detail }) {
   }
 
   return (
-    <div className="min-h-36 flex items-center justify-center md:w-80 lg:w-80 flex-col">
+    <div className="min-h-24 md:min-h-28 flex items-center justify-center md:w-44 lg:w-60 px-1.5">
       <TriggierV2 detail={detail} />
     </div>
   );
@@ -57,12 +57,14 @@ function ChainItem({
   const nameLan = language === 'ko' ? name.ko : name.en;
   const src = getSprityUrl(id);
 
+  const containerClass = to.length === 8 ? '' : 'md:flex';
+
   return (
-    <div className="md:flex">
+    <div className={containerClass}>
       <div className="flex justify-center">
-        <div className="flex flex-col md:flex-row justify-center items-center">
+        <div className="flex justify-center items-center flex-col md:flex-row">
           <Detail detail={detail} />
-          <div className="w-20 md:w-24 flex flex-col items-center justify-center">
+          <div className="w-24 md:w-24 flex flex-col items-center justify-center">
             <div className="w-16 h-16 md:w-20 relative md:h-20">
               <Image
                 src={src}
@@ -73,7 +75,7 @@ function ChainItem({
                 style={{ objectFit: 'contain' }}
               />
             </div>
-            <div>{nameLan}</div>
+            <div className="text-sm text-balance text-center">{nameLan}</div>
           </div>
         </div>
       </div>
@@ -93,18 +95,20 @@ export default function Chain({ chainData }) {
     <div>
       <h3 className="text-2xl">진화</h3>
       <div>{chainIndex}</div>
-      <div className={gridColumn[chain.length]}>
-        {chain.map(({
-          name, to, detail, id,
-        }) => (
-          <ChainItem
-            key={`${id}-${name.en}`}
-            to={to}
-            detail={detail}
-            name={name}
-            id={id}
-          />
-        ))}
+      <div className="flex justify-center">
+        <div className={gridColumn[chain.length]}>
+          {chain.map(({
+            name, to, detail, id,
+          }) => (
+            <ChainItem
+              key={`${id}-${name.en}`}
+              to={to}
+              detail={detail}
+              name={name}
+              id={id}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
