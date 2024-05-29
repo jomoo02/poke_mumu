@@ -1,7 +1,6 @@
 import React from 'react';
 import typesKo from '@/app/translations/type';
 import { makeFirstUpperCase } from '@/app/lib/utils';
-import ConditionContainer from '../condition-container';
 
 const TEXT_GENERATORS = {
   ko: (partyType) => `${typesKo[partyType]} 타입 포켓몬을 지니고 있는 상태`,
@@ -12,8 +11,8 @@ export default function PartyTypeCase({ value, language }) {
   const text = TEXT_GENERATORS[language](value);
 
   return (
-    <ConditionContainer>
+    <span>
       {text}
-    </ConditionContainer>
+    </span>
   );
 }

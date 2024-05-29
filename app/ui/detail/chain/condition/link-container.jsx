@@ -26,10 +26,10 @@ export function MoveLink({ move, language }) {
   const moveText = getText(move);
 
   return (
-    <span>
+    <>
       <Link href={`move/${move}`} className="underline">{moveText}</Link>
       {getParticle && <span>{getParticle(move)}</span>}
-    </span>
+    </>
   );
 }
 
@@ -39,10 +39,10 @@ export function ItemLink({ item, language, children }) {
   const itemText = language === 'ko' ? itemKo : makeFirstUpperCaseTextArray(itemEn.split('-'));
 
   return (
-    <span>
+    <>
       <Link href={`item/${item}`} className="underline">{itemText}</Link>
       {children}
-    </span>
+    </>
   );
 }
 
@@ -62,10 +62,10 @@ export function PokeLink({ poke, language, children }) {
   const text = language === 'ko' ? pokeKo : makeFirstUpperCase(pokeEn);
 
   return (
-    <span>
+    <>
       <Link href={`detail/${poke}`} className="underline">{text}</Link>
       {children}
-    </span>
+    </>
   );
 }
 

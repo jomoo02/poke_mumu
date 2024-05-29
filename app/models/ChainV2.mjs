@@ -7,6 +7,8 @@ const chainScema = new mongoose.Schema({
   },
   chain: Array,
   ids: Array,
+  maxWidth: Number,
+  maxDepth: Number,
 });
 
 const ChainV2Model = mongoose.models.ChainV2 || mongoose.model('ChainV2', chainScema);

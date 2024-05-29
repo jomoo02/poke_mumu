@@ -1,5 +1,4 @@
 import React from 'react';
-import ConditionContainer from '../condition-container';
 
 const LANGUAGE_CONTENT = {
   en: 'with high Friendship',
@@ -10,8 +9,8 @@ export default function MinHappinessCase({ language }) {
   const text = LANGUAGE_CONTENT[language];
 
   return (
-    <ConditionContainer>
+    <span>
       {text}
-    </ConditionContainer>
+    </span>
   );
 }

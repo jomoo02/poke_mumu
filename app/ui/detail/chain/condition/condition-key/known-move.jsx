@@ -1,5 +1,4 @@
 import React from 'react';
-import ConditionContainer from '../condition-container';
 import { MoveLink } from '../link-container';
 
 const LANGUAGE_CONTENT = {
@@ -15,10 +14,10 @@ export default function KnownMoveCase({ value, language }) {
   const { prefix, suffix } = LANGUAGE_CONTENT[language];
 
   return (
-    <ConditionContainer className="gap-x-1">
-      {prefix && <span>{prefix}</span>}
+    <>
+      {prefix && <span className="mr-1">{prefix}</span>}
       <MoveLink move={value} language={language} />
-      {suffix && <span>{suffix}</span>}
-    </ConditionContainer>
+      {suffix && <span className="ml-1">{suffix}</span>}
+    </>
   );
 }

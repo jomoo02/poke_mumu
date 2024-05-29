@@ -1,6 +1,5 @@
 import React from 'react';
 import typesKo from '@/app/translations/type';
-import ConditionContainer from '../condition-container';
 
 const TEXT_GENERATORS = {
   en: (type) => `after ${type}-type move learned`,
@@ -11,8 +10,8 @@ export default function KnownMoveTypeCase({ value, language }) {
   const text = TEXT_GENERATORS[language](value);
 
   return (
-    <ConditionContainer>
+    <span>
       {text}
-    </ConditionContainer>
+    </span>
   );
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import ConditionContainer from '../condition-container';
 
 const LANGUAGE_CONTENT = {
   en: 'during rain',
@@ -10,8 +9,8 @@ export default function NeedsOverworldRainCase({ language }) {
   const text = LANGUAGE_CONTENT[language];
 
   return (
-    <ConditionContainer>
+    <span>
       {text}
-    </ConditionContainer>
+    </span>
   );
 }

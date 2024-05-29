@@ -1,5 +1,4 @@
 import React from 'react';
-import ConditionContainer from '../condition-container';
 
 const TEXT_GENERATORS = {
   en: (stat) => {
@@ -24,8 +23,8 @@ export default function RelativeStatCase({ value, language }) {
   const text = TEXT_GENERATORS[language](value);
 
   return (
-    <ConditionContainer>
+    <span>
       {text}
-    </ConditionContainer>
+    </span>
   );
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import ConditionContainer from '../condition-container';
 
 const REGION = {
   alola: '알로라지방',
@@ -31,9 +30,9 @@ export default function LocationCase({ value, language }) {
   const text = getText ? getText(value) : '';
 
   return (
-    <ConditionContainer>
+    <>
       {location}
       {text}
-    </ConditionContainer>
+    </>
   );
 }

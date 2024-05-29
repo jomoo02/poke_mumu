@@ -12,6 +12,8 @@ export async function fetchAllChainIds() {
       _id: 0,
       chainIndex: 1,
       ids: 1,
+      maxWidth: 1,
+      maxDepth: 1,
     };
 
     const result = await ChainModel.find({}, projection).lean();
@@ -33,6 +35,8 @@ export async function fetchChain(index) {
       _id: 0,
       index: 1,
       chain: 1,
+      maxWidth: 1,
+      maxDepth: 1,
     };
 
     const result = await ChainModelV2

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useLanguage } from '@/app/language-provider';
 import Condition from './condition/condition';
 
@@ -18,8 +18,6 @@ const LANGUAGE_TRIGGER_CONTENT = {
 export default function TriggerV2({ detail }) {
   const { language } = useLanguage();
 
-  const flexDirection = language === 'ko' ? 'flex-row flex-wrap' : 'flex-row-reverse flex-wrap-reverse';
-
   const createKey = (trigger, condition) => `${trigger}-${condition.map(({ key }) => key).join('/')}`;
 
   const creteTriggerText = (trigger, condition) => {
@@ -36,18 +34,21 @@ export default function TriggerV2({ detail }) {
   };
 
   return (
-    <div className="text-sm text-balance">
-      {detail.map(({ trigger, condition }, index) => (
-        <div key={createKey(trigger, condition)}>
-          {index > 0 && <div className="text-center">or</div>}
-          <div className={`flex gap-x-1 justify-center ${flexDirection}`}>
-            <Condition condition={condition} language={language} />
-            <span className="text-center">
-              {creteTriggerText(trigger, condition)}
-            </span>
-          </div>
-        </div>
-      ))}
+    <div className="text-sm text-center text-balance">
+      {detail.map(({ trigger, condition }, index) => {
+        const triggerText = creteTriggerText(trigger, condition);
+
+        return (
+          <Fragment key={createKey(trigger, condition)}>
+            {index > 0 && <div>or</div>}
+            <p>
+              {(triggerText && language === 'en') && <span className="mr-1">{triggerText}</span>}
+              <Condition condition={condition} language={language} />
+              {(triggerText && language === 'ko') && <span className="ml-1">{triggerText}</span>}
+            </p>
+          </Fragment>
+        );
+      })}
     </div>
   );
 }

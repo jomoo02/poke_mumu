@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import AgileStyleCase from './condition-key/agile-style';
 import GenderCase from './condition-key/gender';
 import HeldItemCase from './condition-key/held-item';
@@ -83,13 +83,13 @@ export default function Condition({ condition, language }) {
   };
 
   return (
-    <div className="flex flex-wrap justify-center">
+    <>
       {sortedCondtion.map(({ key, value }, index) => (
-        <div key={value} className="flex">
+        <Fragment key={value}>
           {index > 0 && <span className="mx-1">+</span>}
           {renderCondition(key, value)}
-        </div>
+        </Fragment>
       ))}
-    </div>
+    </>
   );
 }

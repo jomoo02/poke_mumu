@@ -1,5 +1,4 @@
 import React from 'react';
-import ConditionContainer from '../condition-container';
 
 const LANGUAGE_CONTENT = {
   ko: '아름다움 수치 MAX 상태에서',
@@ -10,8 +9,8 @@ export default function MinBeautyCase({ language }) {
   const text = LANGUAGE_CONTENT[language];
 
   return (
-    <ConditionContainer>
+    <span>
       {text}
-    </ConditionContainer>
+    </span>
   );
 }

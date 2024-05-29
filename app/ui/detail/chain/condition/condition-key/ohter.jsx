@@ -1,5 +1,4 @@
 import React from 'react';
-import ConditionContainer from '../condition-container';
 import { MoveLink } from '../link-container';
 
 const NAME_CONTENT = {
@@ -63,19 +62,19 @@ export default function OtherCase({ value, language }) {
     const { prefix, suffix } = content[language];
 
     return (
-      <ConditionContainer className="gap-x-1">
-        {prefix && <span>{prefix}</span>}
+      <>
+        {prefix && <span className="mr-1">{prefix}</span>}
         <MoveLink move={move} language={language} />
-        <span>{suffix}</span>
-      </ConditionContainer>
+        <span className="ml-1">{suffix}</span>
+      </>
     );
   }
 
   const text = content[language];
 
   return (
-    <ConditionContainer>
+    <span>
       {text}
-    </ConditionContainer>
+    </span>
   );
 }

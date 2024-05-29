@@ -1,5 +1,4 @@
 import React from 'react';
-import ConditionContainer from '../condition-container';
 import { PokeLinkWithSbjectParticle } from '../link-container';
 
 const LANGUAGE_CONTENT = {
@@ -18,11 +17,11 @@ export default function PartySpeciesCase({ value, language }) {
   const { prefix, middle, suffix } = LANGUAGE_CONTENT[language];
 
   return (
-    <ConditionContainer className="gap-x-1">
-      <span>{prefix}</span>
+    <>
+      <span className="mr-1">{prefix}</span>
       <PokeLinkWithSbjectParticle poke={value} language={language} />
-      {language === 'en' && <span>{middle}</span>}
-      <span>{suffix}</span>
-    </ConditionContainer>
+      {language === 'en' && <span className="ml-1">{middle}</span>}
+      <span className="ml-1">{suffix}</span>
+    </>
   );
 }

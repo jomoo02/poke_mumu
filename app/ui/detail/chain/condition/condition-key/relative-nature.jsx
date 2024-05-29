@@ -1,5 +1,4 @@
 import React from 'react';
-import ConditionContainer from '../condition-container';
 
 const LANGUAGE_CONTENT = {
   ko: {
@@ -19,9 +18,9 @@ export default function RelativeNature({ value, language }) {
   const natures = value === 'amped' ? amped : lowKey;
 
   return (
-    <ConditionContainer>
+    <>
       <span>{prefix}</span>
       <span className="text-xs">{`(${natures})`}</span>
-    </ConditionContainer>
+    </>
   );
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeFirstUpperCaseTextArray } from '@/app/lib/utils';
-import ConditionContainer from '../condition-container';
 
 const TIME_OF_DAY_MAP_KO = {
   night: '밤',
@@ -18,8 +17,8 @@ export default function TimeOfDayCase({ value, language }) {
   const text = TEXT_GENERATORS[language](value);
 
   return (
-    <ConditionContainer>
+    <span>
       {text}
-    </ConditionContainer>
+    </span>
   );
 }
