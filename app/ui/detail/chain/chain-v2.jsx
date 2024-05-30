@@ -47,7 +47,7 @@ function Detail({ detail, maxDepth, maxWidth }) {
 
   const getWidth = () => {
     if (maxWidth === 8) {
-      return 'w-full xs:h-52';
+      return 'w-full';
     }
     if (maxWidth === 4) {
       return 'w-full md:w-80';
@@ -55,14 +55,22 @@ function Detail({ detail, maxDepth, maxWidth }) {
     if (maxDepth === 2) {
       return 'w-full max-w-52 md:w-80 md:max-w-80 lg:w-96 lg:max-w-96';
     }
-    return 'w-full max-w-52 md:w-52';
+    return 'w-full max-w-52 md:w-52 xl:max-w-72 xl:w-72';
+  };
+
+  const getHeight = () => {
+    if (maxWidth === 8) {
+      return 'min-h-40 md:min-h-36';
+    }
+    return 'min-h-32 md:min-h-28';
   };
 
   const width = getWidth();
+  const height = getHeight();
 
   return (
-    <div className={`min-h-32 md:min-h-28 flex items-center justify-center px-3.5 ${width}`}>
-      <TriggierV2 detail={detail} />
+    <div className={`flex items-center justify-center px-3.5 ${width} ${height}`}>
+      <TriggierV2 detail={detail} maxWidth={maxWidth} />
     </div>
   );
 }
@@ -109,7 +117,7 @@ function ChainItem({
   );
 }
 
-export default function Chain({ chainData }) {
+export default function Chain({ chainData, type }) {
   if (!chainData) {
     return null;
   }
@@ -118,14 +126,14 @@ export default function Chain({ chainData }) {
     chain,
     maxWidth,
     maxDepth,
-    index: chainIndex,
   } = chainData;
 
   return (
-    <div className="w-full">
-      <h3 className="text-2xl">진화</h3>
-      <div>{chainIndex}</div>
-      <div className="md:flex justify-center w-full">
+    <div>
+      <div className={`w-full ${type} text-center py-[3px] rounded-t-md`}>
+        <h3 className="font-medium text-white">진화</h3>
+      </div>
+      <div className={`md:flex justify-center pt-2 pb-1 border-2 border-t-0 ${type}-border rounded-b-sm`}>
         <div className={gridColumn[chain.length]}>
           {chain.map(({
             name, to, detail, id,

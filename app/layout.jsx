@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
                 </div>
               </div>
             </header>
-            <main className="px-1 xs:px-4 sm:px-7">
+            <main className="px-1 xs:px-3 sm:px-5">
               {children}
             </main>
             <footer className="h-32" />

@@ -6,70 +6,142 @@
   @apply bg-[#949495];
 }
 
+.normal-border {
+  @apply border-[#949495]/70;
+}
+
 .fire {
   @apply bg-[#e56c3e];
+}
+
+.fire-border {
+  @apply border-[#e56c3e]/70;
 }
 
 .water {
   @apply bg-[#5185c5];
 }
 
+.water-border {
+  @apply border-[#5185c5]/70;
+}
+
 .grass {
   @apply bg-[#66a945];
+}
+
+.grass-border {
+  @apply border-[#66a945]/70;
 }
 
 .electric {
   @apply bg-[#f6d851];
 }
 
+.electric-border {
+  @apply border-[#f6d851]/70;
+}
+
 .ice {
   @apply bg-[#6dc8eb];
+}
+
+.ice-border {
+  @apply border-[#6dc8eb]/70;
 }
 
 .fighting {
   @apply bg-[#e09c40];
 }
 
+.fighting-border {
+  @apply border-[#e09c40]/70;
+}
+
 .poison {
   @apply bg-[#735198];
+}
+
+.poison-border {
+  @apply border-[#735198]/70;
 }
 
 .ground {
   @apply bg-[#9c7743];
 }
 
+.ground-border {
+  @apply border-[#9c7743]/70;
+}
+
 .flying {
   @apply bg-[#a2c3e7];
+}
+
+.flying-border {
+  @apply border-[#a2c3e7]/70;
 }
 
 .psychic {
   @apply bg-[#dd6b7b];
 }
 
+.psychic-border {
+  @apply border-[#dd6b7b]/70;
+}
+
 .bug {
   @apply bg-[#9fa244];
+}
+
+.bug-border {
+  @apply border-[#9fa244]/70;
 }
 
 .rock {
   @apply bg-[#bfb889];
 }
 
+.rock-border {
+  @apply border-[#bfb889]/70;
+}
+
 .ghost {
   @apply bg-[#684870];
+}
+
+.ghost-border {
+  @apply border-[#684870]/70;
 }
 
 .dragon {
   @apply bg-[#535ca8];
 }
 
+.dragon-border {
+  @apply border-[#535ca8]/70;
+}
+
 .dark {
   @apply bg-[#4c4948];
+}
+
+.dark-border {
+  @apply border-[#4c4948]/70;
 }
 
 .steel {
   @apply bg-[#69a9c7];
 }
 
+.steel-border {
+  @apply border-[#69a9c7]/70;
+}
+
 .fairy {
   @apply bg-[#dab4d4];
+}
+
+.fairy-boder {
+  @apply border-[#dab4d4]/70;
 }

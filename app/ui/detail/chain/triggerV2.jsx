@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { useLanguage } from '@/app/language-provider';
+import EvolutionArrowIcon from '@/app/ui/icons/evolution-arrow';
 import Condition from './condition/condition';
 
 const LANGUAGE_TRIGGER_CONTENT = {
@@ -15,7 +16,7 @@ const LANGUAGE_TRIGGER_CONTENT = {
   },
 };
 
-export default function TriggerV2({ detail }) {
+export default function TriggerV2({ detail, maxWidth }) {
   const { language } = useLanguage();
 
   const createKey = (trigger, condition) => `${trigger}-${condition.map(({ key }) => key).join('/')}`;
@@ -34,7 +35,7 @@ export default function TriggerV2({ detail }) {
   };
 
   return (
-    <div className="text-sm text-center text-balance">
+    <div className="text-xs md:text-sm text-center text-balance">
       {detail.map(({ trigger, condition }, index) => {
         const triggerText = creteTriggerText(trigger, condition);
 
@@ -49,6 +50,9 @@ export default function TriggerV2({ detail }) {
           </Fragment>
         );
       })}
+      <div className="flex justify-center mt-2.5 md:mt-0.5">
+        <EvolutionArrowIcon maxWidth={maxWidth} />
+      </div>
     </div>
   );
 }

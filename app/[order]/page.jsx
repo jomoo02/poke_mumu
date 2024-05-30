@@ -30,13 +30,13 @@ export default async function DetailPage({ params }) {
   const chainData = await fetchChain(chainIndex);
 
   return (
-    <div className="grid gap-y-10 lg:mx-20 xl:mx-40 2xl:mx-48">
+    <div className="grid gap-y-10 lg:mx-10 xl:mx-20 2xl:mx-56">
       <RouteButton order={order} />
       <BasicInfo no={no} name={name} sprity={sprity} id={id} order={order} form={form} />
       <Forms forms={forms} name={speciesName} />
       <Abilities abilities={abilities} />
       <Types types={types} />
-      <Chain chainData={chainData} />
+      <Chain chainData={chainData} type={types[0]} />
       <Stats base={stats.baseStats} effort={stats.effortStats} type={types[0]} />
       <Moves moves={moves} />
     </div>
