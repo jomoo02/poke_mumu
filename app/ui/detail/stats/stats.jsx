@@ -44,10 +44,10 @@ function Header({ type, language }) {
       `${type} grid grid-cols-5 gap-x-1 sm:gap-x-3 text-sm text-center text-white font-semibold rounded-t-md items-center capitalize`
       }
     >
-      <div className="col-span-5 border-b border-[#fafaf9] py-[2.5px] sm:py-[3px]">{headerText}</div>
+      <h2 className="col-span-5 border-b border-[#fafaf9] py-[2px] sm:py-[5px]">{headerText}</h2>
       <div />
-      <div className="col-span-3 py-[2.5px] sm:py-[3px]">{baseText}</div>
-      <div className="py-[2.5px] sm:py-[3px]">{effortText}</div>
+      <div className="col-span-3 py-[2.5px] sm:py-[5px]">{baseText}</div>
+      <div className="py-[2.5px] sm:py-[5px]">{effortText}</div>
     </div>
   );
 }
@@ -56,7 +56,7 @@ function StatRow({
   statText, value, effortValue, children,
 }) {
   return (
-    <div className="grid grid-cols-5 py-1 sm:py-[5px] gap-x-1 sm:gap-x-3 items-center">
+    <div className="grid grid-cols-5 py-[2.5px] sm:py-[5px] gap-x-1 sm:gap-x-3 items-center min-h-6">
       <div className="text-xs sm:text-sm text-right pr-0.5 sm:pr-1.5 capitalize">
         {statText}
       </div>
