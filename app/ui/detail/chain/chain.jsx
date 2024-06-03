@@ -118,6 +118,8 @@ function ChainItem({
 }
 
 export default function Chain({ chainData, type }) {
+  const { language } = useLanguage();
+
   if (!chainData) {
     return null;
   }
@@ -128,10 +130,12 @@ export default function Chain({ chainData, type }) {
     maxDepth,
   } = chainData;
 
+  const title = language === 'ko' ? '진화' : 'Evolution Tree';
+
   return (
     <div>
       <div className={`w-full ${type} text-center py-[3px] rounded-t-md`}>
-        <h3 className="font-medium text-white">진화</h3>
+        <h3 className="font-medium text-white text-sm md:text-base">{title}</h3>
       </div>
       <div className={`md:flex justify-center pt-2 pb-1 border-2 border-t-0 ${type}-border rounded-b-sm`}>
         <div className={gridColumn[chain.length]}>

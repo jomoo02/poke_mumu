@@ -35,11 +35,11 @@
 }
 
 .electric {
-  @apply bg-[#f6d851];
+  @apply bg-[#fde047];
 }
 
 .electric-border {
-  @apply border-[#f6d851]/70;
+  @apply border-[#fde047]/70;
 }
 
 .ice {

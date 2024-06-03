@@ -7,9 +7,22 @@ const statKo = {
   speed: '스피드',
 };
 
+const statEn = {
+  hp: 'hp',
+  attack: 'attack',
+  defense: 'defense',
+  'special-attack': 'sp.Atk',
+  'special-defense': 'sp.Def',
+  speed: 'speed',
+};
+
 const statTypeKo = {
   base: '종족값',
   effort: '노력치',
 };
 
-export { statKo, statTypeKo };
+export {
+  statKo,
+  statTypeKo,
+  statEn,
+};
