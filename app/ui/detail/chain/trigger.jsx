@@ -16,7 +16,7 @@ const LANGUAGE_TRIGGER_CONTENT = {
   },
 };
 
-export default function TriggerV2({ detail, maxWidth }) {
+export default function Trigger({ detail, maxWidth }) {
   const { language } = useLanguage();
 
   const createKey = (trigger, condition) => `${trigger}-${condition.map(({ key }) => key).join('/')}`;

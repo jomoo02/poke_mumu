@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/app/language-provider';
-import TriggierV2 from './trigger';
+import Triggier from './trigger';
 
 const getSprityUrl = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
@@ -70,7 +70,7 @@ function Detail({ detail, maxDepth, maxWidth }) {
 
   return (
     <div className={`flex items-center justify-center px-3.5 ${width} ${height}`}>
-      <TriggierV2 detail={detail} maxWidth={maxWidth} />
+      <Triggier detail={detail} maxWidth={maxWidth} />
     </div>
   );
 }

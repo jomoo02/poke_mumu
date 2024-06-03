@@ -1,6 +1,6 @@
 import React from 'react';
 import { fetchAllChain } from '@/app/api/chain';
-import Chain from '@/app/ui/detail/chain/chain-v2';
+import Chain from '@/app/ui/detail/chain/chain';
 
 export default async function Main() {
   const allChain = await fetchAllChain();
