@@ -35,7 +35,7 @@ export default function Abilities({ abilities, type }) {
           {title}
         </h2>
       </div>
-      <div className={`grid divide-y border-2 border-t-0 ${type}-border`}>
+      <div className={`grid divide-y border-2 border-t-0 ${type}-border rounded-b-sm`}>
         {abilities.map(({ name, flavorText, isHidden }) => (
           <Ability
             key={name.en}

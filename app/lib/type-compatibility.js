@@ -1,0 +1,106 @@
+const NORMAL = 'normal';
+const FIRE = 'fire';
+const ROCK = 'rock';
+const GHOST = 'ghost';
+const POISON = 'poison';
+const GRASS = 'grass';
+const DRAGON = 'dragon';
+const WATER = 'water';
+const FLYING = 'flying';
+const BUG = 'bug';
+const DARK = 'dark';
+const ELECTRIC = 'electric';
+const GROUND = 'ground';
+const ICE = 'ice';
+const STEEL = 'steel';
+const FAIRY = 'fairy';
+const FIGHTING = 'fighting';
+const PSYCHIC = 'psychic';
+
+const SUPER_EFFECTIVE = 'super_effective';
+
+const NOT_VERY_EFFECTIVE = 'not_very_effective';
+const NO_EFFECT = 'no_effect';
+
+const defenseCompatibility = {
+  [NORMAL]: {
+    [SUPER_EFFECTIVE]: [FIGHTING],
+    [NO_EFFECT]: [GHOST],
+  },
+  [FIRE]: {
+    [SUPER_EFFECTIVE]: [WATER, GROUND, ROCK],
+    [NOT_VERY_EFFECTIVE]: [FIRE, GRASS, ICE, BUG, STEEL, FAIRY],
+  },
+  [WATER]: {
+    [SUPER_EFFECTIVE]: [FIRE, WATER, ICE, STEEL],
+    [NOT_VERY_EFFECTIVE]: [GRASS, ELECTRIC],
+  },
+  [GRASS]: {
+    [SUPER_EFFECTIVE]: [FIRE, ICE, FLYING, BUG],
+    [NOT_VERY_EFFECTIVE]: [WATER, GRASS, ELECTRIC, GROUND],
+  },
+  [ELECTRIC]: {
+    [SUPER_EFFECTIVE]: [GROUND],
+    [NOT_VERY_EFFECTIVE]: [ELECTRIC, FLYING, STEEL],
+  },
+  [ICE]: {
+    [SUPER_EFFECTIVE]: [FIRE, FIGHTING, ROCK, STEEL],
+    [NOT_VERY_EFFECTIVE]: [ICE],
+  },
+  [FIGHTING]: {
+    [SUPER_EFFECTIVE]: [FLYING, PSYCHIC, FAIRY],
+    [NOT_VERY_EFFECTIVE]: [BUG, ROCK, DARK],
+  },
+  [POISON]: {
+    [SUPER_EFFECTIVE]: [GROUND, PSYCHIC],
+    [NOT_VERY_EFFECTIVE]: [GRASS, FIGHTING, POISON, BUG, FAIRY],
+  },
+  [GROUND]: {
+    [SUPER_EFFECTIVE]: [WATER, GRASS, ICE],
+    [NOT_VERY_EFFECTIVE]: [POISON, ROCK],
+    [NO_EFFECT]: [ELECTRIC],
+  },
+  [FLYING]: {
+    [SUPER_EFFECTIVE]: [ELECTRIC, ICE, ROCK],
+    [NOT_VERY_EFFECTIVE]: [GRASS, FIGHTING, BUG],
+    [NO_EFFECT]: [GROUND],
+  },
+  [PSYCHIC]: {
+    [SUPER_EFFECTIVE]: [BUG, GHOST, DARK],
+    [NOT_VERY_EFFECTIVE]: [FIGHTING, PSYCHIC],
+  },
+  [BUG]: {
+    [SUPER_EFFECTIVE]: [FIRE, FLYING, ROCK],
+    [NOT_VERY_EFFECTIVE]: [GRASS, FIGHTING, GROUND],
+  },
+  [ROCK]: {
+    [SUPER_EFFECTIVE]: [WATER, GRASS, FIGHTING, GRASS, STEEL],
+    [NOT_VERY_EFFECTIVE]: [NORMAL, FIRE, POISON, FLYING],
+  },
+  [GHOST]: {
+    [SUPER_EFFECTIVE]: [GHOST, DARK],
+    [NOT_VERY_EFFECTIVE]: [POISON, BUG],
+    [NO_EFFECT]: [NORMAL, FIGHTING],
+  },
+  [DRAGON]: {
+    [SUPER_EFFECTIVE]: [ICE, DRAGON, FAIRY],
+    [NOT_VERY_EFFECTIVE]: [FIRE, WATER, GRASS, ELECTRIC],
+  },
+  [DARK]: {
+    [SUPER_EFFECTIVE]: [FIGHTING, BUG, FAIRY],
+    [NOT_VERY_EFFECTIVE]: [GHOST, DARK],
+    [NO_EFFECT]: [PSYCHIC],
+  },
+  [STEEL]: {
+    [SUPER_EFFECTIVE]: [FIRE, FIGHTING, GROUND],
+    [NOT_VERY_EFFECTIVE]: [NORMAL, GRASS, ICE, FLYING, PSYCHIC, BUG, ROCK, DRAGON, STEEL, FAIRY],
+    [NO_EFFECT]: [POISON],
+  },
+  [FAIRY]: {
+    [SUPER_EFFECTIVE]: [POISON, STEEL],
+    [NOT_VERY_EFFECTIVE]: [FIGHTING, BUG, DARK],
+    [NO_EFFECT]: [DRAGON],
+  },
+};
+
+export { defenseCompatibility };

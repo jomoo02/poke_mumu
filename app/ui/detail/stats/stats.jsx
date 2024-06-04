@@ -82,7 +82,7 @@ export default function Stats({ base, effort, type }) {
   return (
     <div>
       <Header type={type} language={language} />
-      <div className={`grid border-2 border-t-0 ${type}-border divide-y`}>
+      <div className={`grid border-2 border-t-0 ${type}-border divide-y rounded-b-sm`}>
         {stats.map(({ stat, value, effortValue }) => (
           <StatRow key={stat} statText={languageStat[stat]} value={value} effortValue={effortValue}>
             <Bar value={value} max={maxStatValue} />
