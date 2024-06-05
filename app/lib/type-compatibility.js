@@ -17,10 +17,9 @@ const FAIRY = 'fairy';
 const FIGHTING = 'fighting';
 const PSYCHIC = 'psychic';
 
-const SUPER_EFFECTIVE = 'super_effective';
-
-const NOT_VERY_EFFECTIVE = 'not_very_effective';
-const NO_EFFECT = 'no_effect';
+const SUPER_EFFECTIVE = 'superEffective';
+const NOT_VERY_EFFECTIVE = 'notVeryEffective';
+const NO_EFFECT = 'noEffect';
 
 const defenseCompatibility = {
   [NORMAL]: {
@@ -32,8 +31,8 @@ const defenseCompatibility = {
     [NOT_VERY_EFFECTIVE]: [FIRE, GRASS, ICE, BUG, STEEL, FAIRY],
   },
   [WATER]: {
-    [SUPER_EFFECTIVE]: [FIRE, WATER, ICE, STEEL],
-    [NOT_VERY_EFFECTIVE]: [GRASS, ELECTRIC],
+    [SUPER_EFFECTIVE]: [GRASS, ELECTRIC],
+    [NOT_VERY_EFFECTIVE]: [FIRE, WATER, ICE, STEEL],
   },
   [GRASS]: {
     [SUPER_EFFECTIVE]: [FIRE, ICE, FLYING, BUG],
@@ -74,7 +73,7 @@ const defenseCompatibility = {
     [NOT_VERY_EFFECTIVE]: [GRASS, FIGHTING, GROUND],
   },
   [ROCK]: {
-    [SUPER_EFFECTIVE]: [WATER, GRASS, FIGHTING, GRASS, STEEL],
+    [SUPER_EFFECTIVE]: [WATER, FIGHTING, GRASS, STEEL, GROUND],
     [NOT_VERY_EFFECTIVE]: [NORMAL, FIRE, POISON, FLYING],
   },
   [GHOST]: {
@@ -103,4 +102,54 @@ const defenseCompatibility = {
   },
 };
 
-export { defenseCompatibility };
+function setInitialCompatibility() {
+  return [
+    NORMAL, FIRE, ROCK, GHOST, POISON, GRASS, DRAGON, WATER, FLYING,
+    BUG, DARK, ELECTRIC, GROUND, ICE, STEEL, FAIRY, FIGHTING, PSYCHIC,
+  ].reduce((acc, type) => {
+    acc[type] = 1;
+    return acc;
+  }, {});
+}
+
+function getDefenseCompatibility(types) {
+  const dfCompatibility = setInitialCompatibility();
+
+  types.forEach((type) => {
+    const {
+      superEffective,
+      notVeryEffective,
+      noEffect,
+    } = defenseCompatibility[type];
+
+    if (superEffective) {
+      superEffective.forEach((target) => {
+        dfCompatibility[target] *= 2;
+      });
+    }
+
+    if (notVeryEffective) {
+      notVeryEffective.forEach((target) => {
+        dfCompatibility[target] /= 2;
+      });
+    }
+
+    if (noEffect) {
+      noEffect.forEach((target) => {
+        dfCompatibility[target] *= 0;
+      });
+    }
+  });
+
+  return Object.keys(dfCompatibility).reduce((acc, type) => {
+    const effectiveness = dfCompatibility[type];
+    if (acc[effectiveness]) {
+      acc[effectiveness].push(type);
+    } else {
+      acc[effectiveness] = [type];
+    }
+    return acc;
+  }, {});
+}
+
+export { getDefenseCompatibility };

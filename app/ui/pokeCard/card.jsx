@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import typesKo from '@/app/translations/type';
 import { useLanguage } from '@/app/language-provider';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
+import Type from '../detail/type';
 
 export default function Card({
   name, sprity, types, id, no, form, isPriority, order,
@@ -14,8 +14,6 @@ export default function Card({
   const pokeNoText = `No.${no}, id.${id}`;
   const pokeName = language === 'ko' ? name.ko : name.en;
   const pokeForm = language === 'ko' ? form.ko : form.en;
-
-  const getLanguageType = (type) => (language === 'ko' ? typesKo[type] : type);
 
   const { savePokeLocal } = useLocalStorage();
   const pokeData = {
@@ -56,8 +54,8 @@ export default function Card({
 
         <div className="flex gap-x-2 w-full">
           {types.map((type) => (
-            <div className={`type ${type} w-1/2 flex justify-center items-center font-semibold`} key={type}>
-              {getLanguageType(type)}
+            <div key={type} className="md:px-1 w-1/2">
+              <Type type={type} width="w-full" />
             </div>
           ))}
         </div>

@@ -1,9 +1,17 @@
 .type {
-  @apply text-white px-2 py-0.5 rounded-md xs:rounded-lg text-xs xs:text-[13px] xs:leading-[18px] sm:text-sm;
+  @apply text-white py-0.5 rounded-md text-xs xs:text-[13px] xs:leading-[18px] w-12 xs:w-14;
+}
+
+.type-text {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .7);
 }
 
 .normal {
   @apply bg-[#949495];
+}
+
+.normal-bg {
+  @apply bg-[#949495]/40;
 }
 
 .normal-border {
@@ -14,12 +22,20 @@
   @apply bg-[#e56c3e];
 }
 
+.fire-bg {
+  @apply bg-[#e56c3e]/40;
+}
+
 .fire-border {
   @apply border-[#e56c3e]/70;
 }
 
 .water {
   @apply bg-[#5185c5];
+}
+
+.water-bg {
+  @apply bg-[#5185c5]/40;
 }
 
 .water-border {
@@ -30,20 +46,33 @@
   @apply bg-[#66a945];
 }
 
+.grass-bg {
+  @apply bg-[#66a945]/40;
+}
+
 .grass-border {
   @apply border-[#66a945]/70;
 }
 
 .electric {
-  @apply bg-[#fde047];
+  @apply bg-[#ebce3d];
 }
 
+.electric-bg {
+  @apply bg-[#ebce3d]/40;
+}
+
+
 .electric-border {
-  @apply border-[#fde047]/70;
+  @apply border-[#ebce3d]/70;
 }
 
 .ice {
   @apply bg-[#6dc8eb];
+}
+
+.ice-bg {
+  @apply bg-[#6dc8eb]/40;
 }
 
 .ice-border {
@@ -54,12 +83,20 @@
   @apply bg-[#e09c40];
 }
 
+.fighting-bg {
+  @apply bg-[#e09c40]/40;
+}
+
 .fighting-border {
   @apply border-[#e09c40]/70;
 }
 
 .poison {
   @apply bg-[#735198];
+}
+
+.poison-bg {
+  @apply bg-[#735198]/40;
 }
 
 .poison-border {
@@ -70,12 +107,20 @@
   @apply bg-[#9c7743];
 }
 
+.ground-bg {
+  @apply bg-[#9c7743]/40;
+}
+
 .ground-border {
   @apply border-[#9c7743]/70;
 }
 
 .flying {
   @apply bg-[#a2c3e7];
+}
+
+.flying-bg {
+  @apply bg-[#a2c3e7]/40;
 }
 
 .flying-border {
@@ -86,12 +131,20 @@
   @apply bg-[#dd6b7b];
 }
 
+.psychic-bg {
+  @apply bg-[#dd6b7b]/40;
+}
+
 .psychic-border {
   @apply border-[#dd6b7b]/70;
 }
 
 .bug {
   @apply bg-[#9fa244];
+}
+
+.bug-bg {
+  @apply bg-[#9fa244]/40;
 }
 
 .bug-border {
@@ -102,12 +155,20 @@
   @apply bg-[#bfb889];
 }
 
+.rock-bg {
+  @apply bg-[#bfb889]/40;
+}
+
 .rock-border {
   @apply border-[#bfb889]/70;
 }
 
 .ghost {
   @apply bg-[#684870];
+}
+
+.ghost-bg {
+  @apply bg-[#684870]/40;
 }
 
 .ghost-border {
@@ -118,12 +179,20 @@
   @apply bg-[#535ca8];
 }
 
+.dragon-bg {
+  @apply bg-[#535ca8]/40;
+}
+
 .dragon-border {
   @apply border-[#535ca8]/70;
 }
 
 .dark {
   @apply bg-[#4c4948];
+}
+
+.dark-bg {
+  @apply bg-[#4c4948]/50;
 }
 
 .dark-border {
@@ -134,12 +203,20 @@
   @apply bg-[#69a9c7];
 }
 
+.steel-bg {
+  @apply bg-[#69a9c7]/40;
+}
+
 .steel-border {
   @apply border-[#69a9c7]/70;
 }
 
 .fairy {
   @apply bg-[#dab4d4];
+}
+
+.fairy-bg {
+  @apply bg-[#dab4d4]/40;
 }
 
 .fairy-boder {

@@ -1,7 +1,7 @@
 import React from 'react';
 import BasicInfo from '@/app/ui/detail/basic-info';
 import Abilities from '@/app/ui/detail/abilities';
-import Types from '@/app/ui/detail/type';
+import DefenseCompatibility from '@/app/ui/detail/defense-compatibility';
 import Stats from '@/app/ui/detail/stats/stats';
 import Moves from '@/app/ui/detail/moves';
 import Chain from '@/app/ui/detail/chain/chain';
@@ -32,12 +32,13 @@ export default async function DetailPage({ params }) {
   const chainData = await fetchChain(chainIndex);
 
   return (
-    <div className="grid gap-y-10 lg:mx-10 xl:mx-20 2xl:mx-56">
+    <div className="grid gap-y-10 lg:mx-10 xl:mx-20 2xl:mx-56 containe">
       <RouteButton order={order} />
+      {/* {name.ko} */}
       <BasicInfo no={no} name={name} sprity={sprity} id={id} order={order} form={form} />
       <Forms forms={forms} name={speciesName} />
       <Abilities abilities={abilities} type={mainType} />
-      <Types types={types} />
+      <DefenseCompatibility types={types} />
       <Chain chainData={chainData} type={mainType} />
       <Stats base={stats.baseStats} effort={stats.effortStats} type={mainType} />
       <Moves moves={moves} />
