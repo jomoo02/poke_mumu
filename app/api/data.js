@@ -17,8 +17,27 @@ export async function fetchPoke(order) {
 
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return '';
+  }
+}
+
+export async function fetchPokeKey(pokeKey) {
+  try {
+    await dbConnect();
+
+    const query = { pokeKey };
+    const projection = {
+      _id: 0,
+    };
+    const result = await PokeModel
+      .findOne(query, projection)
+      .lean();
+
+    return result;
+  } catch (error) {
+    console.error(`error fetchPokeKey: ${error.message}`);
+    return error;
   }
 }
 
@@ -30,14 +49,6 @@ export async function fetchPokes(index) {
     const end = start + 240 - 1;
     const query = { order: { $gte: start, $lte: end } };
     const projection = {
-      name: 1,
-      id: 1,
-      types: 1,
-      sprity: 1,
-      no: 1,
-      form: 1,
-      key: 1,
-      order: 1,
       _id: 0,
     };
 
@@ -51,5 +62,30 @@ export async function fetchPokes(index) {
     console.error(error);
 
     return [];
+  }
+}
+
+export async function fetchSurroundingPokes(order) {
+  try {
+    const surroundingPokes = {};
+
+    const projection = {
+      _id: 0,
+      pokeKey: 1,
+      sprity: 1,
+    };
+
+    const beforePoke = await PokeModel.findOne({ order: Number(order) - 1 }, projection).lean();
+    const nextPoke = await PokeModel.findOne({ order: Number(order) + 1 }, projection).lean();
+
+    if (beforePoke) {
+      surroundingPokes.before = beforePoke;
+    } if (nextPoke) {
+      surroundingPokes.next = nextPoke;
+    }
+    return surroundingPokes;
+  } catch (error) {
+    console.error(`error fetchSurroundingPokes ${error.message}`);
+    return error;
   }
 }

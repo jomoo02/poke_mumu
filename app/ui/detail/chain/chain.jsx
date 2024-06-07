@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/app/language-provider';
+import Link from 'next/link';
 import Triggier from './trigger';
 
 const getSprityUrl = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
@@ -24,7 +25,7 @@ function NextChainItem({ nextChainItem, maxDepth, maxWidth }) {
   return (
     <div className={`${gridColumn[nextChainItem.length]} gap-y-4`}>
       {nextChainItem.map(({
-        name, to, detail, id,
+        name, to, detail, id, pokeKey,
       }) => (
         <ChainItem
           key={id}
@@ -32,6 +33,7 @@ function NextChainItem({ nextChainItem, maxDepth, maxWidth }) {
           to={to}
           detail={detail}
           id={id}
+          pokeKey={pokeKey}
           maxDepth={maxDepth}
           maxWidth={maxWidth}
         />
@@ -76,7 +78,7 @@ function Detail({ detail, maxDepth, maxWidth }) {
 }
 
 function ChainItem({
-  to, detail, name, id, maxDepth, maxWidth,
+  to, detail, name, id, maxDepth, maxWidth, pokeKey,
 }) {
   const { language } = useLanguage();
   const nameLan = language === 'ko' ? name.ko : name.en;
@@ -101,14 +103,14 @@ function ChainItem({
                 style={{ objectFit: 'contain' }}
               />
             </div>
-            <div className="text-center h-10 flex flex-col">
+            <Link href={`/${pokeKey}`} className="text-center h-10 flex flex-col">
               {nameLan.split('(').map((part, index) => (
                 <span key={part} className={`${index > 0 ? 'text-xs' : 'text-sm md:text-[15px]'}`}>
                   {index > 0 && '('}
                   {part}
                 </span>
               ))}
-            </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -128,19 +130,21 @@ export default function Chain({ chainData, type }) {
     chain,
     maxWidth,
     maxDepth,
+    index,
   } = chainData;
 
   const title = language === 'ko' ? '진화' : 'Evolution Tree';
 
   return (
     <div>
+      {index}
       <div className={`w-full ${type} text-center py-[3px] sm:py-1.5 rounded-t-md`}>
         <h3 className="font-semibold text-white text-sm">{title}</h3>
       </div>
       <div className={`md:flex justify-center pt-2 pb-1 border-2 border-t-0 ${type}-border rounded-b-sm`}>
         <div className={gridColumn[chain.length]}>
           {chain.map(({
-            name, to, detail, id,
+            name, to, detail, id, pokeKey,
           }) => (
             <ChainItem
               key={`${id}-${name.en}`}
@@ -148,6 +152,7 @@ export default function Chain({ chainData, type }) {
               detail={detail}
               name={name}
               id={id}
+              pokeKey={pokeKey}
               maxDepth={maxDepth}
               maxWidth={maxWidth}
             />

@@ -6,7 +6,7 @@ import useLocalStorage from '@/app/hooks/useLocalStorage';
 import Type from '../detail/type';
 
 export default function Card({
-  name, sprity, types, id, no, form, isPriority, order,
+  name, sprity, types, id, no, form, isPriority, order, pokeKey,
 }) {
   const { language } = useLanguage();
   const sprityUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${sprity}`;
@@ -17,7 +17,7 @@ export default function Card({
 
   const { savePokeLocal } = useLocalStorage();
   const pokeData = {
-    name, sprity, types, id, no, form, order,
+    name, sprity, types, id, no, form, order, pokeKey,
   };
 
   return (
@@ -25,7 +25,7 @@ export default function Card({
       <div className="w-1/2 xs:w-full">
         <div className="text-sm text-slate-600 font-medium">{pokeNoText}</div>
         <div className="flex w-full my-1 pr-2 xs:pr-0 justify-center poke-card">
-          <Link href={`/${order}`} onClick={() => savePokeLocal(pokeData)}>
+          <Link href={`/${pokeKey}`} onClick={() => savePokeLocal(pokeData)}>
             <div className="w-[64px] h-[64px] xs:w-20 xs:h-20 xl:w-[84px] xl:h-[84px] relative">
               <Image
                 src={sprityUrl}

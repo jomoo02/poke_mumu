@@ -7,16 +7,16 @@ import Moves from '@/app/ui/detail/moves';
 import Chain from '@/app/ui/detail/chain/chain';
 import Forms from '@/app/ui/detail/forms';
 import { fetchChain } from '@/app/api/chain';
-import { fetchPoke } from '@/app/api/data';
+import { fetchPokeKey } from '@/app/api/data';
 import RouteButton from '@/app/ui/detail/route-button';
 import fetchDetail from '@/app/api/detail';
 
 export default async function DetailPage({ params }) {
-  const order = params?.order;
+  const pokeKey = params?.pokeKey;
 
   const {
-    no, name, sprity, types, id, form,
-  } = await fetchPoke(order);
+    no, name, sprity, types, id, form, order,
+  } = await fetchPokeKey(pokeKey);
 
   const mainType = types[0];
 
@@ -35,8 +35,8 @@ export default async function DetailPage({ params }) {
     <div className="grid gap-y-10 lg:mx-10 xl:mx-20 2xl:mx-56 containe">
       <RouteButton order={order} />
       {/* {name.ko} */}
-      <BasicInfo no={no} name={name} sprity={sprity} id={id} order={order} form={form} />
-      <Forms forms={forms} name={speciesName} />
+      <BasicInfo no={no} name={name} sprity={sprity} id={id} order={order} form={form} types={types} />
+      {/* <Forms forms={forms} name={speciesName} /> */}
       <Abilities abilities={abilities} type={mainType} />
       <DefenseCompatibility types={types} />
       <Chain chainData={chainData} type={mainType} />

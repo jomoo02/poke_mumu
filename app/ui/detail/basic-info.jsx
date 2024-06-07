@@ -2,9 +2,10 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Type from './type';
 
 export default function BasicInfo({
-  no, name, sprity, id, order, form,
+  no, name, sprity, id, order, form, types,
 }) {
   const exceptionOrder = [];
   const bascinUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
@@ -15,17 +16,22 @@ export default function BasicInfo({
   const nameText = `${name.ko}${formText}`;
   return (
     <>
-      <div className="flex gap-x-4">
-        <span>{noText}</span>
-        <span>{nameText}</span>
+      <div className="grid gap-y-2">
+        <div className="flex gap-x-4">
+          <span>{noText}</span>
+          <span>{nameText}</span>
+        </div>
+        <div className="flex gap-x-2">
+          {types.map((type) => <Type type={type} key={type} />)}
+        </div>
       </div>
-      <Image
+      {/* <Image
         src={url}
         alt={name.en}
-        width={25}
-        height={25}
+        width={75}
+        height={75}
         priority
-      />
+      /> */}
     </>
   );
 }

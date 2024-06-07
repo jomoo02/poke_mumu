@@ -30,7 +30,7 @@ export async function fetchSearchPokes(text) {
       sprity: 1,
       no: 1,
       form: 1,
-      key: 1,
+      pokeKey: 1,
       order: 1,
       _id: 0,
     };
