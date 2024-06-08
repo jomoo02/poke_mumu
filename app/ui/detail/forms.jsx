@@ -7,10 +7,11 @@ import { useLanguage } from '@/app/language-provider';
 const url = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
 
 const formClassMap = {
-  10: 'grid grid-cols-3 md:grid-cols-5',
-  18: 'grid grid-cols-3 md:grid-cols-6',
+  10: 'grid grid-cols-3 md:grid-cols-5 gap-y-3 md:gap-y-5',
+  18: 'grid grid-cols-3 md:grid-cols-6 gap-y-3 md:gap-y-5',
+  20: 'grid grid-cols-3 md:grid-cols-5 gap-y-3 md:gap-y-5',
   5: 'flex flex-wrap gap-x-5 justify-around',
-  6: 'grid grid-cols-3 md:grid-cols-6',
+  6: 'grid grid-cols-3 md:grid-cols-6 gap-y-3 md:gap-y-5',
   0: 'flex flex-wrap gap-x-5 justify-evenly',
 };
 
