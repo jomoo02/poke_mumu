@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Type from './type';
 
 export default function BasicInfo({
-  no, name, sprity, id, order, form, types,
+  no, name, sprity, order, form, types,
 }) {
   const exceptionOrder = [];
   const bascinUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
@@ -25,13 +25,13 @@ export default function BasicInfo({
           {types.map((type) => <Type type={type} key={type} />)}
         </div>
       </div>
-      {/* <Image
+      <Image
         src={url}
         alt={name.en}
-        width={75}
-        height={75}
+        width={200}
+        height={200}
         priority
-      /> */}
+      />
     </>
   );
 }

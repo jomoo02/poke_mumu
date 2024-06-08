@@ -8,7 +8,7 @@ import Chain from '@/app/ui/detail/chain/chain';
 import Forms from '@/app/ui/detail/forms';
 import { fetchChain } from '@/app/api/chain';
 import { fetchPokeKey } from '@/app/api/data';
-import RouteButton from '@/app/ui/detail/route-button';
+import PokeNavigation from '@/app/ui/detail/poke-navigation';
 import fetchDetail from '@/app/api/detail';
 
 export default async function DetailPage({ params }) {
@@ -33,10 +33,10 @@ export default async function DetailPage({ params }) {
 
   return (
     <div className="grid gap-y-10 lg:mx-10 xl:mx-20 2xl:mx-56 containe">
-      <RouteButton order={order} />
+      <PokeNavigation order={order} />
       {/* {name.ko} */}
-      <BasicInfo no={no} name={name} sprity={sprity} id={id} order={order} form={form} types={types} />
-      {/* <Forms forms={forms} name={speciesName} /> */}
+      <BasicInfo no={no} name={name} sprity={sprity} order={order} form={form} types={types} />
+      <Forms forms={forms} name={speciesName} type={mainType} />
       <Abilities abilities={abilities} type={mainType} />
       <DefenseCompatibility types={types} />
       <Chain chainData={chainData} type={mainType} />

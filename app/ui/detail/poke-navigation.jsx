@@ -4,7 +4,7 @@ import { fetchSurroundingPokes } from '@/app/api/data';
 import ArrowRightIcon from '../icons/arrow-right';
 import ArrowLeftIcon from '../icons/arrow-left';
 
-function NextRouteButton({ pokeKey, direction }) {
+function RouteButton({ pokeKey, direction }) {
   const directionIcon = {
     before: ArrowLeftIcon,
     next: ArrowRightIcon,
@@ -13,20 +13,18 @@ function NextRouteButton({ pokeKey, direction }) {
   const IconComponent = directionIcon[direction];
 
   return (
-    <Link
-      href={`/${pokeKey}`}
-    >
+    <Link href={`/${pokeKey}`}>
       <IconComponent />
     </Link>
   );
 }
 
-export default async function RouteButton({ order }) {
+export default async function PokeNavigation({ order }) {
   const { before, next } = await fetchSurroundingPokes(order);
   return (
     <div className="flex justify-between">
-      <div>{before && <NextRouteButton pokeKey={before.pokeKey} direction="before" /> }</div>
-      <div>{next && <NextRouteButton pokeKey={next.pokeKey} direction="next" /> }</div>
+      <div>{before && <RouteButton pokeKey={before.pokeKey} direction="before" /> }</div>
+      <div>{next && <RouteButton pokeKey={next.pokeKey} direction="next" /> }</div>
     </div>
   );
 }

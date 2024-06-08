@@ -103,7 +103,7 @@ function ChainItem({
                 style={{ objectFit: 'contain' }}
               />
             </div>
-            <Link href={`/${pokeKey}`} className="text-center h-10 flex flex-col">
+            <Link href={`/${pokeKey}`} className="text-center h-10 flex flex-col underline underline-offset-2">
               {nameLan.split('(').map((part, index) => (
                 <span key={part} className={`${index > 0 ? 'text-xs' : 'text-sm md:text-[15px]'}`}>
                   {index > 0 && '('}
@@ -130,14 +130,12 @@ export default function Chain({ chainData, type }) {
     chain,
     maxWidth,
     maxDepth,
-    index,
   } = chainData;
 
   const title = language === 'ko' ? '진화' : 'Evolution Tree';
 
   return (
     <div>
-      {index}
       <div className={`w-full ${type} text-center py-[3px] sm:py-1.5 rounded-t-md`}>
         <h3 className="font-semibold text-white text-sm">{title}</h3>
       </div>
