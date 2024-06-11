@@ -4,7 +4,7 @@ import React from 'react';
 import { statKo, statEn } from '@/app/translations/stat';
 import { useLanguage } from '@/app/language-provider';
 import Bar from '@/app/ui/detail/stats/bar';
-import Header from '../header';
+import TitleHeader from '../title-header';
 
 const LANGUAGE_TEXT = {
   ko: {
@@ -38,7 +38,7 @@ function makeTotalStats(base, effort) {
   });
 }
 
-function SubHeader({ baseText, effortText, type }) {
+function SubTitleHeader({ baseText, effortText, type }) {
   return (
     <div className={
       `${type} grid grid-cols-5 gap-x-1 sm:gap-x-3 text-sm text-center text-white font-semibold items-center capitalize border-t border-[#fafaf9]`
@@ -82,8 +82,8 @@ export default function Stats({ base, effort, type }) {
 
   return (
     <div>
-      <Header type={type} title={title} />
-      <SubHeader type={type} baseText={baseText} effortText={effortText} />
+      <TitleHeader type={type} title={title} />
+      <SubTitleHeader type={type} baseText={baseText} effortText={effortText} />
       <div className={`grid border-2 border-t-0 ${type}-border divide-y rounded-b-sm`}>
         {stats.map(({ stat, value, effortValue }) => (
           <StatRow key={stat} statText={languageStat[stat]} value={value} effortValue={effortValue}>

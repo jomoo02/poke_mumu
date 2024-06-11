@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/app/language-provider';
-import Header from './header';
+import TitleHeader from './title-header';
 
 const url = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
 
@@ -53,7 +53,7 @@ export default function Forms({ forms, name, type }) {
 
   return (
     <div>
-      <Header type={type} title={title} />
+      <TitleHeader type={type} title={title} />
       <div className={`border-2 border-t-0 ${type}-border rounded-b-sm px-1 md:px-5 py-2 ${formClass}`}>
         {forms.map(({ id, name: formName }) => (
           <div key={`${id}-${formName.en}`} className="flex flex-col justify-center items-center">

@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/app/language-provider';
 import Type from './type';
-import Header from './header';
+import TitleHeader from './title-header';
 
 const languageText = {
   ko: {
@@ -52,7 +52,7 @@ export default function BasicInfo({
 
   return (
     <div>
-      <Header title={title} type={mainType} />
+      <TitleHeader title={title} type={mainType} />
       <div className={`border-2 border-t-0 ${mainType}-border md:py-3 md:flex md:justify-evenly`}>
         <div className="flex justify-center items-center py-3 md:py-0">
           <Image

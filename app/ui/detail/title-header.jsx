@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Header({ type, title }) {
+export default function TitleHeader({ type, title }) {
   return (
     <div className={`${type} rounded-t-md`}>
       <h2

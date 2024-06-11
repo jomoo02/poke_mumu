@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useLanguage } from '@/app/language-provider';
 import Link from 'next/link';
 import Triggier from './trigger';
-import Header from '../header';
+import TitleHeader from '../title-header';
 
 const getSprityUrl = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
@@ -137,7 +137,7 @@ export default function Chain({ chainData, type }) {
 
   return (
     <div>
-      <Header type={type} title={title} />
+      <TitleHeader type={type} title={title} />
       <div className={`md:flex justify-center pt-2 pb-1 border-2 border-t-0 ${type}-border rounded-b-sm`}>
         <div className={gridColumn[chain.length]}>
           {chain.map(({
