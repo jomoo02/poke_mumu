@@ -8,7 +8,7 @@ import Chain from '@/app/ui/detail/chain/chain';
 import Forms from '@/app/ui/detail/forms';
 import { fetchChain } from '@/app/api/chain';
 import { fetchPokeKey } from '@/app/api/data';
-import PokeNavigation from '@/app/ui/detail/poke-navigation';
+import PokeNavigation from '@/app/ui/detail/poke-router/poke-navigation';
 import fetchDetail from '@/app/api/detail';
 
 export default async function DetailPage({ params }) {

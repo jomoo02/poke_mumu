@@ -73,6 +73,10 @@ export async function fetchSurroundingPokes(order) {
       _id: 0,
       pokeKey: 1,
       sprity: 1,
+      order: 1,
+      name: 1,
+      form: 1,
+      no: 1,
     };
 
     const beforePoke = await PokeModel.findOne({ order: Number(order) - 1 }, projection).lean();
