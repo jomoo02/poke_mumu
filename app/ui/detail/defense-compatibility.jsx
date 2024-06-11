@@ -4,6 +4,7 @@ import React from 'react';
 import { useLanguage } from '@/app/language-provider';
 import { getDefenseCompatibility } from '@/app/lib/type-compatibility';
 import Type from '@/app/ui/detail/type';
+import Header from './Header';
 
 const TYPE_GRID_COLS_MAP = {
   1: 'md:grid-cols-1',
@@ -81,11 +82,7 @@ export default function DefenseCompatibility({ types }) {
 
   return (
     <div>
-      <div className={`${mainType} rounded-t-md`}>
-        <h2 className="text-white text-center font-semibold py-[3px] sm:py-1.5 text-sm capitalize">
-          {title}
-        </h2>
-      </div>
+      <Header type={mainType} title={title} />
       <div className={`border-2 border-t-0 ${mainType}-border rounded-b-sm`}>
         <div className={`flex ${textDirection} py-1 md:py-1.5 justify-center items-center gap-x-2.5 ${mainType}-bg1 border-b-2 ${mainType}-border`}>
           <div className="flex gap-x-2">

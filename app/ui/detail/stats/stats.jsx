@@ -4,16 +4,17 @@ import React from 'react';
 import { statKo, statEn } from '@/app/translations/stat';
 import { useLanguage } from '@/app/language-provider';
 import Bar from '@/app/ui/detail/stats/bar';
+import Header from '../Header';
 
 const LANGUAGE_TEXT = {
   ko: {
-    headerText: '스탯',
+    title: '스탯',
     baseText: '종족값',
     effortText: '노력치',
     totalText: '합계',
   },
   en: {
-    headerText: 'stat',
+    title: 'stat',
     baseText: 'base stat',
     effortText: 'effort',
     totalText: 'total',
@@ -37,14 +38,12 @@ function makeTotalStats(base, effort) {
   });
 }
 
-function Header({ type, language }) {
-  const { headerText, baseText, effortText } = LANGUAGE_TEXT[language];
+function SubHeader({ baseText, effortText, type }) {
   return (
     <div className={
-      `${type} grid grid-cols-5 gap-x-1 sm:gap-x-3 text-sm text-center text-white font-semibold rounded-t-md items-center capitalize`
+      `${type} grid grid-cols-5 gap-x-1 sm:gap-x-3 text-sm text-center text-white font-semibold items-center capitalize border-t border-[#fafaf9]`
       }
     >
-      <h2 className="col-span-5 border-b border-[#fafaf9] py-[2px] sm:py-[5px]">{headerText}</h2>
       <div />
       <div className="col-span-3 py-[2.5px] sm:py-[5px]">{baseText}</div>
       <div className="py-[2.5px] sm:py-[5px]">{effortText}</div>
@@ -72,6 +71,8 @@ function StatRow({
 export default function Stats({ base, effort, type }) {
   const { language } = useLanguage();
   const { totalText } = LANGUAGE_TEXT[language];
+  const { title, baseText, effortText } = LANGUAGE_TEXT[language];
+
   const languageStat = language === 'ko' ? statKo : statEn;
 
   const stats = makeTotalStats(base, effort);
@@ -81,7 +82,8 @@ export default function Stats({ base, effort, type }) {
 
   return (
     <div>
-      <Header type={type} language={language} />
+      <Header type={type} title={title} />
+      <SubHeader type={type} baseText={baseText} effortText={effortText} />
       <div className={`grid border-2 border-t-0 ${type}-border divide-y rounded-b-sm`}>
         {stats.map(({ stat, value, effortValue }) => (
           <StatRow key={stat} statText={languageStat[stat]} value={value} effortValue={effortValue}>

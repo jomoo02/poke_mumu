@@ -15,23 +15,25 @@ export default function BasicInfo({
   const formText = form.en === 'default' ? '' : `(${form.ko})`;
   const nameText = `${name.ko}${formText}`;
   return (
-    <>
-      <div className="grid gap-y-2">
-        <div className="flex gap-x-4">
-          <span>{noText}</span>
-          <span>{nameText}</span>
+    <div>
+      <div>
+        <div className="grid gap-y-2">
+          <div className="flex gap-x-4">
+            <span>{noText}</span>
+            <span>{nameText}</span>
+          </div>
+          <div className="flex gap-x-2">
+            {types.map((type) => <Type type={type} key={type} />)}
+          </div>
         </div>
-        <div className="flex gap-x-2">
-          {types.map((type) => <Type type={type} key={type} />)}
-        </div>
+        <Image
+          src={url}
+          alt={name.en}
+          width={200}
+          height={200}
+          priority
+        />
       </div>
-      <Image
-        src={url}
-        alt={name.en}
-        width={200}
-        height={200}
-        priority
-      />
-    </>
+    </div>
   );
 }

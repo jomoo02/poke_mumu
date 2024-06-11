@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/app/language-provider';
+import Header from './Header';
 
 const url = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
 
@@ -30,10 +31,13 @@ function FormInfo({ id, name, language }) {
   );
 }
 
-function Header({
-  name, formCount, type, language,
-}) {
-  const LANGUAGE_CONTENT = {
+export default function Forms({ forms, name, type }) {
+  const { language } = useLanguage();
+
+  const formCount = forms?.length || 0;
+  const formClass = formClassMap[formCount] ? formClassMap[formCount] : formClassMap[0];
+
+  const languageContent = {
     ko: {
       one: '의 모습',
       many: '의 모습들',
@@ -44,26 +48,12 @@ function Header({
     },
   };
 
-  const { one, many } = LANGUAGE_CONTENT[language];
-  const headerText = `${name[language]}${formCount > 1 ? many : one}`;
-
-  return (
-    <div className={`${type} rounded-t-md`}>
-      <h2 className="text-white text-center font-semibold py-[3px] sm:py-1.5 text-sm capitalize">
-        {headerText}
-      </h2>
-    </div>
-  );
-}
-
-export default function Forms({ forms, name, type }) {
-  const { language } = useLanguage();
-  const formCount = forms?.length || 0;
-  const formClass = formClassMap[formCount] ? formClassMap[formCount] : formClassMap[0];
+  const { one, many } = languageContent[language];
+  const title = `${name[language]}${formCount > 1 ? many : one}`;
 
   return (
     <div>
-      <Header name={name} formCount={formCount} type={type} language={language} />
+      <Header type={type} title={title} />
       <div className={`border-2 border-t-0 ${type}-border rounded-b-sm px-1 md:px-5 py-2 ${formClass}`}>
         {forms.map(({ id, name: formName }) => (
           <div key={`${id}-${formName.en}`} className="flex flex-col justify-center items-center">

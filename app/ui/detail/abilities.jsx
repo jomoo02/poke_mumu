@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useLanguage } from '@/app/language-provider';
+import Header from './Header';
 
 function Ability({ name, flavorText, isHidden }) {
   const { language } = useLanguage();
@@ -30,11 +31,7 @@ export default function Abilities({ abilities, type }) {
 
   return (
     <div>
-      <div className={`${type} rounded-t-md`}>
-        <h2 className="text-white text-center font-semibold py-[3px] sm:py-1.5 text-sm capitalize">
-          {title}
-        </h2>
-      </div>
+      <Header type={type} title={title} />
       <div className={`grid divide-y border-2 border-t-0 ${type}-border rounded-b-sm`}>
         {abilities.map(({ name, flavorText, isHidden }) => (
           <Ability
