@@ -18,7 +18,7 @@ function Ability({ name, flavorText, isHidden }) {
         {nameText}
         {isHidden && <span className="text-xs md:text-sm">{hiddenText}</span>}
       </h3>
-      <p className="col-span-7 text-pretty text-sm md:text-[15px] py-0.5 px-1 flex items-center">
+      <p className="col-span-7 text-pretty text-sm md:text-[15px] p-1.5 md:px-3 flex items-center">
         {flavorTextText}
       </p>
     </div>

@@ -23,9 +23,12 @@ const languageText = {
   },
 };
 
-function Info({ subject, children, className }) {
+function Info({
+  subject, children, className, order,
+}) {
+  const containerBorder = order === 'first' ? 'border-y' : 'border-b';
   return (
-    <div className="flex gap-x-5 md:gap-x-10 py-1 items-center border-b min-w-72 capitalize">
+    <div className={`flex gap-x-5 md:gap-x-10 py-1 items-center min-w-72 capitalize ${containerBorder}`}>
       <div className="w-24 text-right text-slate-500 font-semibold text-sm">{subject}</div>
       <div className={`${className} text-slate-600 font-semibold text-[15px]`}>{children}</div>
     </div>
@@ -62,7 +65,7 @@ export default function BasicInfo({
         </div>
 
         <div className="px-2 pb-1 md:pb-0 flex flex-col justify-center">
-          <Info subject={nationalText}>
+          <Info subject={nationalText} order="first">
             {no}
           </Info>
           <Info subject={nameText}>
