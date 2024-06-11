@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useLanguage } from '@/app/language-provider';
 import Link from 'next/link';
 import Triggier from './trigger';
-import Header from '../Header';
+import Header from '../header';
 
 const getSprityUrl = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 

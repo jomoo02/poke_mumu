@@ -4,7 +4,7 @@ import React from 'react';
 import { useLanguage } from '@/app/language-provider';
 import { getDefenseCompatibility } from '@/app/lib/type-compatibility';
 import Type from '@/app/ui/detail/type';
-import Header from './Header';
+import Header from './header';
 
 const TYPE_GRID_COLS_MAP = {
   1: 'md:grid-cols-1',

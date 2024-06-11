@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/app/language-provider';
-import Header from './Header';
+import Header from './header';
 
 const url = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
 

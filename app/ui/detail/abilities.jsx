@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useLanguage } from '@/app/language-provider';
-import Header from './Header';
+import Header from './header';
 
 function Ability({ name, flavorText, isHidden }) {
   const { language } = useLanguage();
@@ -14,11 +14,11 @@ function Ability({ name, flavorText, isHidden }) {
 
   return (
     <div className={`grid grid-cols-9 ${backgroundColor} gap-x-1 min-h-12`}>
-      <h3 className="col-span-2 border-r text-center py-0.5 px-1 text-xs md:text-sm flex flex-col items-center justify-center">
+      <h3 className="col-span-2 border-r text-center py-0.5 px-1 text-sm md:text-[15px] flex flex-col items-center justify-center">
         {nameText}
-        {isHidden && <span>{hiddenText}</span>}
+        {isHidden && <span className="text-xs md:text-sm">{hiddenText}</span>}
       </h3>
-      <p className="col-span-7 text-pretty text-xs md:text-sm py-0.5 px-1 flex items-center">
+      <p className="col-span-7 text-pretty text-sm md:text-[15px] py-0.5 px-1 flex items-center">
         {flavorTextText}
       </p>
     </div>

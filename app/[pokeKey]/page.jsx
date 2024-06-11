@@ -32,12 +32,12 @@ export default async function DetailPage({ params }) {
   const chainData = await fetchChain(chainIndex);
 
   return (
-    <div className="grid gap-y-10 lg:mx-10 xl:mx-20 2xl:mx-56 containe">
-      <PokeNavigation order={order} />
+    <div className="grid gap-y-10 lg:mx-10 xl:mx-20 2xl:mx-56">
+      <PokeNavigation order={order} type={mainType} />
       {/* {name.ko} */}
       <BasicInfo no={no} name={name} sprity={sprity} order={order} form={form} types={types} />
-      <Forms forms={forms} name={speciesName} type={mainType} />
       <Abilities abilities={abilities} type={mainType} />
+      <Forms forms={forms} name={speciesName} type={mainType} />
       <DefenseCompatibility types={types} />
       <Chain chainData={chainData} type={mainType} />
       <Stats base={stats.baseStats} effort={stats.effortStats} type={mainType} />

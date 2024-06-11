@@ -5,37 +5,49 @@ import ArrowRightIcon from '../../icons/arrow-right';
 import ArrowLeftIcon from '../../icons/arrow-left';
 import PokeInfo from './poke-info';
 
-function RouteButton({ pokeKey, direction, info }) {
+function RouteButton({
+  pokeKey, direction, info, type,
+}) {
   const directionIcon = {
     before: {
       IconComponent: ArrowLeftIcon,
-      className: '',
+      flexDirection: 'flex-row',
+      iconClassName: 'border-r',
     },
     next: {
       IconComponent: ArrowRightIcon,
-      className: 'flex-row-reverse',
+      flexDirection: 'flex-row-reverse',
+      iconClassName: 'border-l',
     },
   };
 
-  const { IconComponent, className } = directionIcon[direction];
+  const { IconComponent, flexDirection, iconClassName } = directionIcon[direction];
 
   return (
     <Link
       href={`/${pokeKey}`}
-      className={`flex ${className} items-center gap-x-3 min-h-10`}
+      className={`flex border-2 ${type}-border rounded-lg items-center h-full ${flexDirection}`}
     >
-      <IconComponent />
-      <PokeInfo info={info} />
+      <div className={`${iconClassName} h-full flex items-center justify-center px-4`}>
+        <IconComponent />
+      </div>
+      <div className="flex-1">
+        <PokeInfo info={info} />
+      </div>
     </Link>
   );
 }
 
-export default async function PokeNavigation({ order }) {
+export default async function PokeNavigation({ order, type }) {
   const { before, next } = await fetchSurroundingPokes(order);
   return (
-    <div className="md:flex justify-between items-center">
-      <div>{before && <RouteButton pokeKey={before.pokeKey} direction="before" info={before} /> }</div>
-      <div>{next && <RouteButton pokeKey={next.pokeKey} direction="next" info={next} /> }</div>
+    <div className="grid gap-y-2 md:flex-row md:grid-cols-2 lg:grid-cols-3 gap-x-12 lg:gap-x-0">
+      <div>
+        {before && <RouteButton pokeKey={before.pokeKey} direction="before" info={before} type={type} /> }
+      </div>
+      <div className="md:col-start-2 lg:col-start-3">
+        {next && <RouteButton pokeKey={next.pokeKey} direction="next" info={next} type={type} /> }
+      </div>
     </div>
   );
 }

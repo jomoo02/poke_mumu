@@ -4,7 +4,7 @@ import React from 'react';
 import { statKo, statEn } from '@/app/translations/stat';
 import { useLanguage } from '@/app/language-provider';
 import Bar from '@/app/ui/detail/stats/bar';
-import Header from '../Header';
+import Header from '../header';
 
 const LANGUAGE_TEXT = {
   ko: {

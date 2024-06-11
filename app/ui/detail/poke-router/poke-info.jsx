@@ -20,21 +20,25 @@ export default function PokeInfo({ info }) {
   };
 
   return (
-    <div className="flex items-center text-sm gap-x-2">
-      <div className="capitalize ">{`no. ${no}`}</div>
-      <div className="text-center">
-        <span>{name[language]}</span>
-        {form.en !== 'default' && <span>{`(${form[language]})`}</span>}
-      </div>
+    <div className="flex items-center text-sm gap-x-2 py-1 flex-col justify-center">
       <Image
         src={imageUrl}
         alt={name.en}
-        width={40}
+        width={45}
         height={35}
-        style={{ width: 40, height: 35 }}
+        style={{ width: 45, height: 35 }}
         priority
         onError={handleImageError}
       />
+
+      <div className="flex gap-x-1 text-sm md:text-base items-center capitalize">
+        <span className="capitalize text-slate-500 font-semibold text-sm">{`no. ${no}`}</span>
+        <span className="text-center text-slate-600/90 font-semibold text-[15px]">
+          {name[language]}
+          {form.en !== 'default' && <span>{`(${form[language]})`}</span>}
+        </span>
+      </div>
+
     </div>
   );
 }
