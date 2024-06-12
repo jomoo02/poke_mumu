@@ -67,7 +67,7 @@ export default function Search({ closeModal }) {
                   type="text"
                   onChange={handleSearch}
                   placeholder={inputPlaceholder}
-                  className="flex-1 py-0.5 text-sm h-8 focus:outline-none px-2"
+                  className="flex-1 py-1 text-base h-8 focus:outline-none px-2 font-medium"
                 />
                 <button onClick={closeModal} type="button" aria-label="Close" className="flex items-center h-7 w-7">
                   <CloseIcon size="1.75rem" />
