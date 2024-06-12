@@ -10,8 +10,8 @@ export default function SearchPoke({
 }) {
   const { language } = useLanguage();
   const sprityUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${sprity}`;
-  const formText = language === 'ko' ? form.ko : form.en;
-  const pokeForm = formText === 'default' ? '' : formText;
+
+  const pokeForm = form.en === 'default' ? '' : form[language];
   const pokeNameMain = language === 'ko' ? name.ko : name.en;
   const pokeNameSub = language === 'ko' ? name.en : name.ko;
   const noText = `no.${no}`;

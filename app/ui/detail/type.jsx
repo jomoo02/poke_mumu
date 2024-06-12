@@ -10,7 +10,6 @@ export default function Type({ type, width = 'w-[60px] xs:w-[63px]' }) {
 
   return (
     <div
-      key={type}
       className={
         `${width} leading-[22px] xs:leading-[23px] px-px font-medium text-sm text-center
         rounded-[5px] border border-zinc-700/80 text-white ${type} type-text capitalize`
