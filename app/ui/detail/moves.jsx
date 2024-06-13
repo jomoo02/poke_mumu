@@ -25,9 +25,9 @@ function GenMoves({ gen, genMoves }) {
   }, [genMoves]);
 
   return (
-    <div>
+    <div className="">
       <h3 className="text-xl">{`${gen} 세대`}</h3>
-      <div className="flex gap-x-1.5 overflow-x-auto py-3">
+      <div className="w-full flex gap-x-1.5 overflow-x-auto py-3">
         {versions.map((version) => (
           <button
             key={version}
@@ -70,7 +70,7 @@ export default function Moves({ moves }) {
   }, []);
 
   return (
-    <div className="overflow-auto">
+    <div className=" overflow-hidden">
       <h3 className="text-2xl">기술</h3>
       <div className="flex gap-x-1.5 md:gap-x-2 overflow-x-auto py-3" ref={containerRef}>
         {gens?.map((gen) => (
