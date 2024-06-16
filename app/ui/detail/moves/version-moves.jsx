@@ -1,9 +1,4 @@
 import React from 'react';
-// import LevelUpMethodMoves from './method/level-up';
-// import MachineMethodMoves from './method/machine';
-// import PreEvolutionMethodMoves from './method/pre-evolution';
-// import TutorMethodMoves from './method/tutor';
-// import EggMethodMoves from './method/egg';
 import LevelUpMethodMoves from './v2/method/level-up';
 import EggMethodMoves from './v2/method/egg';
 import PreEvolutionMethodMoves from './v2/method/pre-evolution';
@@ -56,15 +51,19 @@ export default function VersionMoves({ version, versionMoves }) {
     <Container version={version}>
       <div className="grid xl:grid-cols-2 gap-y-10 gap-x-2">
         <div className="grid sm:flex sm:flex-col gap-y-10">
-          <LevelUpMethodMoves moves={levelUp} />
-          <EggMethodMoves moves={egg} />
-          <TutorMethodMoves moves={tutor} />
-          <PreEvolutionMethodMoves moves={pre} />
+          {levelUp.length > 0 && <LevelUpMethodMoves moves={levelUp} />}
+          {egg.length > 0 && <EggMethodMoves moves={egg} />}
+          {tutor.length > 0 && <TutorMethodMoves moves={tutor} />}
+          {pre.length > 0 && <PreEvolutionMethodMoves moves={pre} />}
         </div>
 
         <div className="grid gap-y-10">
-          {machineTypesMoves.map(({ type, moves }) => (
-            <MachineMethodMoves key={type} moves={moves} machineType={type} />))}
+          {machineTypesMoves.map(({ type, moves }) => {
+            if (moves.length > 0) {
+              return <MachineMethodMoves key={type} moves={moves} machineType={type} />;
+            }
+            return null;
+          })}
         </div>
       </div>
     </Container>

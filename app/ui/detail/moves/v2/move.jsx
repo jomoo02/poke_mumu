@@ -51,7 +51,7 @@ export default function Move({ move, children, language }) {
   return (
     <div className="flex min-h-9 items-center">
       {children}
-      <div className="col-span-2 text-sm md:text-base w-[10.5rem] md:w-44 font-semibold text-slate-700">
+      <div className="text-sm md:text-base w-[10.25rem] px-2.5 md:w-44 font-semibold text-slate-700">
         {nameText}
       </div>
       <div className="flex justify-center w-[5.25rem]">
@@ -60,8 +60,8 @@ export default function Move({ move, children, language }) {
       <div className="flex justify-center w-[5.25rem]">
         <DamageClass damageClass={damageClass} />
       </div>
-      <div className="text-sm md:text-base text-center w-[4rem]">{power}</div>
-      <div className="text-sm md:text-base text-center w-[4rem]">{accuracy}</div>
+      <div className="text-sm md:text-base text-right w-[5.55rem] px-3">{power || '—'}</div>
+      <div className="text-sm md:text-base text-right w-[5rem] px-3">{accuracy || '—'}</div>
     </div>
   );
 }
