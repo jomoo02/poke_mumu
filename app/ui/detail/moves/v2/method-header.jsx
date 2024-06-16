@@ -6,14 +6,14 @@ import {
 
 const languageText = {
   ko: {
-    name: '기술',
+    move: '기술',
     type: '타입',
     damage_class: '분류',
     power: '위력',
     accuracy: '명중률',
   },
   en: {
-    name: 'move',
+    move: 'move',
     type: 'type',
     damage_class: 'cat.',
     power: 'power',
@@ -23,7 +23,7 @@ const languageText = {
 
 const defaultRowInfos = [
   {
-    key: 'name',
+    key: 'move',
     text: 'move',
     width: 'w-44',
   },
@@ -81,7 +81,7 @@ export default function MethodHeader({
   return (
     <div
       className="flex border-y border-zinc-700/80 divide-zinc-700/80
-      text-sm md:text-base items-stretch h-[2.4rem] font-semibold divide-x"
+      text-sm md:text-base items-stretch h-[2.4rem] font-medium divide-x"
     >
       {rowInfos.map(({ key, text, width }) => (
         <button

@@ -5,17 +5,6 @@ import PreEvolutionMethodMoves from './v2/method/pre-evolution';
 import TutorMethodMoves from './v2/method/tutor';
 import MachineMethodMoves from './v2/method/machine';
 
-function Container({ version, children }) {
-  return (
-    <div className="my-4">
-      <h4 className="font-medium">
-        {`${version} 버전`}
-      </h4>
-      {children}
-    </div>
-  );
-}
-
 export default function VersionMoves({ version, versionMoves }) {
   const {
     machine,
@@ -27,9 +16,7 @@ export default function VersionMoves({ version, versionMoves }) {
 
   if ([...machine, ...egg, ...tutor, ...pre, ...levelUp].length === 0) {
     return (
-      <Container version={version}>
-        <div>none</div>
-      </Container>
+      <div>none</div>
     );
   }
 
@@ -48,24 +35,23 @@ export default function VersionMoves({ version, versionMoves }) {
     .filter(({ moves }) => moves);
 
   return (
-    <Container version={version}>
-      <div className="grid xl:grid-cols-2 gap-y-10 gap-x-2">
-        <div className="grid sm:flex sm:flex-col gap-y-10">
-          {levelUp.length > 0 && <LevelUpMethodMoves moves={levelUp} />}
-          {egg.length > 0 && <EggMethodMoves moves={egg} />}
-          {tutor.length > 0 && <TutorMethodMoves moves={tutor} />}
-          {pre.length > 0 && <PreEvolutionMethodMoves moves={pre} />}
-        </div>
-
-        <div className="grid gap-y-10">
-          {machineTypesMoves.map(({ type, moves }) => {
-            if (moves.length > 0) {
-              return <MachineMethodMoves key={type} moves={moves} machineType={type} />;
-            }
-            return null;
-          })}
-        </div>
+    <div className="grid xl:grid-cols-2 gap-y-10 gap-x-20 py-4">
+      {/* <div className="grid sm:flex sm:flex-col gap-y-10"> */}
+      <div className="grid gap-y-10 justify-evenly">
+        {levelUp.length > 0 && <LevelUpMethodMoves moves={levelUp} />}
+        {egg.length > 0 && <EggMethodMoves moves={egg} />}
+        {tutor.length > 0 && <TutorMethodMoves moves={tutor} />}
+        {pre.length > 0 && <PreEvolutionMethodMoves moves={pre} />}
       </div>
-    </Container>
+
+      <div className="grid gap-y-10 justify-evenly">
+        {machineTypesMoves.map(({ type, moves }) => {
+          if (moves.length > 0) {
+            return <MachineMethodMoves key={type} moves={moves} machineType={type} />;
+          }
+          return null;
+        })}
+      </div>
+    </div>
   );
 }

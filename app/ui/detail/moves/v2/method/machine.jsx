@@ -43,7 +43,7 @@ export default function MachineMethodMoves({ moves, machineType }) {
       }
 
       return [...beforeMoves].sort((a, b) => {
-        if (key === 'name') {
+        if (key === 'move') {
           return isAsc
             ? a.move.name[language].localeCompare(b.move.name[language])
             : b.move.name[language].localeCompare(a.move.name[language]);
@@ -64,7 +64,7 @@ export default function MachineMethodMoves({ moves, machineType }) {
 
   return (
     <div className="overflow-hidden">
-      <h3 className="capitalize">{subTitleText}</h3>
+      <h3 className="capitalize font-bold text-slate-800 mb-2.5 text-lg">{subTitleText}</h3>
       <div className="flex justify-center xl:justify-start">
         <div className="grid overflow-x-auto py-0.5">
           <MethodHeader
@@ -75,7 +75,7 @@ export default function MachineMethodMoves({ moves, machineType }) {
           <div className="grid divide-y border-b">
             {sortedMoves.map(({ machine, move }) => (
               <Move key={move.name.en} move={move} language={language}>
-                <div className="w-14 text-sm px-2">{machine.name.slice(2)}</div>
+                <div className="w-14 text-sm px-2 font-medium">{machine.name.slice(2)}</div>
               </Move>
             ))}
           </div>

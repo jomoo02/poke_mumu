@@ -8,7 +8,7 @@ const subTitleLanguageText = {
   ko: '교배를 통해 유전 받을 수 있는 기술',
 };
 
-const defaultSortOrder = { key: 'name', asc: true };
+const defaultSortOrder = { key: 'move', asc: true };
 
 const sortMoves = (moves) => [...moves].sort((a, b) => a.move.type.localeCompare(b.move.type));
 
@@ -24,7 +24,7 @@ export default function EggMethodMoves({ moves }) {
     setSortOrder({ key, asc: isAsc });
 
     setSortedMoves((beforeMoves) => [...beforeMoves].sort((a, b) => {
-      if (key === 'name') {
+      if (key === 'move') {
         return isAsc
           ? a.move.name[language].localeCompare(b.move.name[language])
           : b.move.name[language].localeCompare(a.move.name[language]);
@@ -44,7 +44,7 @@ export default function EggMethodMoves({ moves }) {
 
   return (
     <div className="overflow-hidden">
-      <h3 className="capitalize">{subTitleText}</h3>
+      <h3 className="capitalize font-bold text-slate-800 mb-2.5 text-lg">{subTitleText}</h3>
       <div className="flex justify-center xl:justify-start">
         <div className="grid overflow-x-auto py-0.5">
           <MethodHeader onSort={handleSortMoves} sortOrder={sortOrder} />
