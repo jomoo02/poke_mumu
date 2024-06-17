@@ -35,7 +35,7 @@ export default function VersionMoves({ version, versionMoves }) {
     .filter(({ moves }) => moves);
 
   return (
-    <div className="grid xl:grid-cols-2 gap-y-10 gap-x-20 py-4">
+    <div className="grid xl:grid-cols-2 gap-y-10 gap-x-20 py-3">
       {/* <div className="grid sm:flex sm:flex-col gap-y-10"> */}
       <div className="grid gap-y-10 justify-evenly">
         {levelUp.length > 0 && <LevelUpMethodMoves moves={levelUp} />}
