@@ -45,7 +45,7 @@ export default function LevelUpMethodMoves({ moves }) {
   return (
     <div className="overflow-hidden">
       <h3 className="capitalize font-bold text-slate-800 mb-2.5 text-lg">{subTitleText}</h3>
-      <div className="flex justify-center xl:justify-start">
+      <div className="flex">
         <div className="grid overflow-x-auto py-0.5">
           <MethodHeader
             onSort={handleSortMoves}

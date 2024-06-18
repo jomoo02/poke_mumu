@@ -35,11 +35,11 @@ export default async function DetailPage({ params }) {
   // <div className="grid gap-y-10 lg:mx-10 xl:mx-20 2xl:mx-56">
     <div className="grid gap-y-10">
       <PokeNavigation order={order} type={mainType} />
-      <BasicInfo no={no} name={name} sprity={sprity} order={order} form={form} types={types} />
+      {/* <BasicInfo no={no} name={name} sprity={sprity} order={order} form={form} types={types} /> */}
       <Abilities abilities={abilities} type={mainType} />
-      <Forms forms={forms} name={speciesName} type={mainType} />
+      {/* <Forms forms={forms} name={speciesName} type={mainType} /> */}
       <DefenseCompatibility types={types} />
-      <Chain chainData={chainData} type={mainType} />
+      {/* <Chain chainData={chainData} type={mainType} /> */}
       <Stats base={stats.baseStats} effort={stats.effortStats} type={mainType} />
       <Moves moves={moves} type={mainType} />
     </div>

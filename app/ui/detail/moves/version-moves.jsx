@@ -5,7 +5,7 @@ import PreEvolutionMethodMoves from './v2/method/pre-evolution';
 import TutorMethodMoves from './v2/method/tutor';
 import MachineMethodMoves from './v2/method/machine';
 
-export default function VersionMoves({ version, versionMoves }) {
+export default function VersionMoves({ versionMoves }) {
   const {
     machine,
     egg,
@@ -35,16 +35,14 @@ export default function VersionMoves({ version, versionMoves }) {
     .filter(({ moves }) => moves);
 
   return (
-    <div className="grid xl:grid-cols-2 gap-y-10 gap-x-20 py-3">
-      {/* <div className="grid sm:flex sm:flex-col gap-y-10"> */}
-      <div className="grid gap-y-10 justify-evenly">
+    <div className="flex flex-wrap gap-y-10 py-3 gap-x-10 justify-between">
+      <div className="flex flex-col gap-y-10 overflow-auto">
         {levelUp.length > 0 && <LevelUpMethodMoves moves={levelUp} />}
         {egg.length > 0 && <EggMethodMoves moves={egg} />}
         {tutor.length > 0 && <TutorMethodMoves moves={tutor} />}
         {pre.length > 0 && <PreEvolutionMethodMoves moves={pre} />}
       </div>
-
-      <div className="grid gap-y-10 justify-evenly">
+      <div className="flex flex-col gap-y-10 overflow-auto">
         {machineTypesMoves.map(({ type, moves }) => {
           if (moves.length > 0) {
             return <MachineMethodMoves key={type} moves={moves} machineType={type} />;
