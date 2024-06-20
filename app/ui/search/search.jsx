@@ -1,18 +1,24 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { fetchSearchPokes } from '@/app/api/search';
 import { useLanguage } from '@/app/language-provider';
+import { useRouter } from 'next/navigation';
 import CloseIcon from '../icons/close';
 import SearchIcon from '../icons/search';
 import SearchResult from './result';
 
-export default function Search({ closeModal }) {
+export default function Search({  }) {
   const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const { language } = useLanguage();
   const htmlOverflowClass = 'overflow-y-hidden';
 
   const inputPlaceholder = language === 'ko' ? '도감 번호 또는 포켓몬 이름' : 'Pokedex number or Pokemon name';
+
+  const router = useRouter();
+  const closeModal = () => router.back();
 
   const handleSearch = useDebouncedCallback((e) => {
     setSearchText(e.target.value);
@@ -54,7 +60,7 @@ export default function Search({ closeModal }) {
   }, []);
 
   return (
-    <div className="backdrop-blur-sm bg-gray-200/30 z-20 fixed top-0 w-screen h-dvh">
+    <div className="backdrop-blur-sm bg-gray-200/30 z-20 top-20 left-0 absolute w-screen">
       <div className="h-full lg:py-10">
         <div className="flex flex-col items-center h-dvh lg:h-[500px]">
           <div className="h-full w-full lg:w-3/5">

@@ -25,13 +25,13 @@ export default function SearchPoke({
 
   const handleClick = (poke) => {
     savePokeLocal(poke);
-    closeModal();
+    // closeModal();
   };
 
   const handleKeyDown = (e, poke) => {
     if (e.key === 'Enter') {
       savePokeLocal(poke);
-      closeModal();
+      // closeModal();
     }
   };
 
@@ -39,7 +39,7 @@ export default function SearchPoke({
     <div className="px-2.5 sm:px-3 md:px-4 h-full">
       <div className="flex h-full justify-between items-center">
         <Link
-          href={`/${pokeKey}`}
+          href={`/detail/${pokeKey}`}
           onClick={() => handleClick(pokeData)}
           onKeyDown={(e) => handleKeyDown(e, pokeData)}
           tabIndex={0}
