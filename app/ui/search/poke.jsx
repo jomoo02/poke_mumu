@@ -21,17 +21,16 @@ export default function SearchPoke({
 
   const pokeType = (type) => (language === 'ko' ? typesKo[type] : type);
 
-  const { savePokeLocal } = useLocalStorage();
+  const { saveLocalPoke } = useLocalStorage();
 
   const handleClick = (poke) => {
-    savePokeLocal(poke);
+    saveLocalPoke(poke);
     // closeModal();
   };
 
   const handleKeyDown = (e, poke) => {
     if (e.key === 'Enter') {
-      savePokeLocal(poke);
-      // closeModal();
+      saveLocalPoke(poke);
     }
   };
 

@@ -17,8 +17,8 @@ async function fetchMachineMove(url) {
       name: item?.name || '',
     };
   } catch (error) {
-    console.error(error);
-    return error.message;
+    console.error(`fetchMachineMove error: ${error.message}`);
+    return error;
   }
 }
 

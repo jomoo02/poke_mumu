@@ -15,7 +15,7 @@ export default function Card({
   const pokeName = language === 'ko' ? name.ko : name.en;
   const pokeForm = language === 'ko' ? form.ko : form.en;
 
-  const { savePokeLocal } = useLocalStorage();
+  const { saveLocalPoke } = useLocalStorage();
   const pokeData = {
     name, sprity, types, id, no, form, order, pokeKey,
   };
@@ -25,7 +25,7 @@ export default function Card({
       <div className="w-1/2 xs:w-full">
         <div className="text-sm text-slate-600 font-medium">{pokeNoText}</div>
         <div className="flex w-full my-1 pr-2 xs:pr-0 justify-center poke-card">
-          <Link href={`/detail/${pokeKey}`} onClick={() => savePokeLocal(pokeData)}>
+          <Link href={`/detail/${pokeKey}`} onClick={() => saveLocalPoke(pokeData)}>
             <div className="w-[64px] h-[64px] xs:w-20 xs:h-20 xl:w-[84px] xl:h-[84px] relative">
               <Image
                 src={sprityUrl}

@@ -72,17 +72,32 @@ function groupByMethod(moves) {
   }, initialObj);
 }
 
+// find 함수가 문제 => filter로 변경
 function filterVersion(targetVersion, moves) {
+  // return moves
+  //   .reduce((acc, { move, version_group_details: versionGroups }) => {
+  //     const targetVersionDetail = versionGroups.find(({ version_group: { name } }) => (
+  //       name === targetVersion));
+
+  //     if (targetVersionDetail) {
+  //       acc.push({
+  //         move,
+  //         versionDetail: targetVersionDetail,
+  //       });
+  //     }
+  //     return acc;
+  //   }, []);
   return moves
-    .reduce((acc, { move, version_group_details: versionGroups }) => {
-      const targetVersionDetail = versionGroups.find(({ version_group: { name } }) => (
+    .reduce((acc, { move, version_group_details: versionGroupDetails }) => {
+      const targetVersionDetails = versionGroupDetails.filter(({ version_group: { name } }) => (
         name === targetVersion));
 
-      if (targetVersionDetail) {
-        acc.push({
+      if (targetVersionDetails.length > 0) {
+        const versionDetails = targetVersionDetails.map((versionDetail) => ({
           move,
-          versionDetail: targetVersionDetail,
-        });
+          versionDetail,
+        }));
+        return [...acc, ...versionDetails];
       }
       return acc;
     }, []);

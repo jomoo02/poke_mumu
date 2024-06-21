@@ -9,7 +9,7 @@ export default function useLocalStorage() {
 
   const excludePokeById = (id) => localPokes.filter((poke) => poke.id !== id);
 
-  const savePokeLocal = (poke) => {
+  const saveLocalPoke = (poke) => {
     const filteredPokes = excludePokeById(poke.id);
 
     const savingPokes = JSON.stringify(
@@ -30,6 +30,6 @@ export default function useLocalStorage() {
 
   return {
     localPokes,
-    savePokeLocal,
+    saveLocalPoke,
   };
 }
