@@ -55,7 +55,7 @@ export default function Search() {
   useLockBodyScroll();
 
   return (
-    <div className="flex flex-col bg-white h-full lg:border lg:border-zinc-700/80 lg:rounded-l-xl lg:rounded-tr-xl py-0.5 lg:shadow-lg">
+    <div className="flex flex-col bg-white h-full lg:border lg:border-zinc-400/80 lg:rounded-l-xl lg:rounded-tr-xl py-0.5 lg:shadow-lg">
       <SearchInput handleChange={handleChange} handleClickClose={closeModal} />
       <div className="h-[calc(100dvh-2.3rem)] flex-1 overflow-y-auto">
         <SearchResult

@@ -2,11 +2,9 @@ import { Inter } from 'next/font/google';
 import './styles/globals.css';
 import './styles/type.css';
 import React from 'react';
-import Link from 'next/link';
-import SearchIcon from '@/app/ui/icons/search';
 import ClientProvider from './client-provider';
 import { LanguageProvider } from './language-provider';
-import ThemeToggleButton from './ui/theme-toggle-button';
+import Header from './ui/header';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,21 +19,12 @@ export default function RootLayout({ children, modal }) {
       <body className={`${inter.className} antialiased`}>
         <ClientProvider>
           <LanguageProvider>
-            <header className="mb-4">
-              <div className="flex bg-orange-400 h-20 w-full justify-between items-center px-2.5 xs:px-6 sm:px-8 lg:px-12 relative">
-                <Link href="/"><h2 className="text-white text-xl font-black">Poke MuMu</h2></Link>
-                <div className="flex gap-x-2 xs:gap-x-6 items-center h-11">
-                  <Link href="/search">
-                    <SearchIcon size="1.8rem" color="#fff" />
-                  </Link>
-                  <ThemeToggleButton />
-                </div>
-              </div>
-            </header>
+            <Header />
+            {modal}
             <main className="px-1 xs:px-3 sm:px-5">
               {children}
             </main>
-            <div className="">{modal}</div>
+            <div id="modal" />
             <footer className="h-32" />
           </LanguageProvider>
         </ClientProvider>
