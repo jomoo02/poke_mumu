@@ -51,7 +51,7 @@ export default function Move({ move, children, language }) {
   return (
     <div className="flex min-h-9 items-center">
       {children}
-      <div className="text-base px-2.5 w-44 font-semibold text-slate-700">
+      <div className="text-base px-2.5 w-[10.5rem] font-semibold text-slate-700">
         {nameText}
       </div>
       <div className="flex justify-center w-[5.25rem]">

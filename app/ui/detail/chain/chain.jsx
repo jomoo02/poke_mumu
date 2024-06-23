@@ -104,7 +104,7 @@ function ChainItem({
                 style={{ objectFit: 'contain' }}
               />
             </div>
-            <Link href={`/${pokeKey}`} className="text-center h-10 flex flex-col underline underline-offset-2">
+            <Link href={`/detail/${pokeKey}`} className="text-center h-10 flex flex-col underline underline-offset-2">
               {nameLan.split('(').map((part, index) => (
                 <span key={part} className={`${index > 0 ? 'text-xs' : 'text-sm md:text-[15px]'}`}>
                   {index > 0 && '('}

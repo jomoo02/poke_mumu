@@ -10,7 +10,7 @@ const getSubTitleLanguageText = (machineType) => ({
 
 const defaultFirstRow = {
   key: 'machine',
-  width: 'w-14',
+  width: 'w-12',
   text: 'TM',
 };
 
@@ -75,7 +75,7 @@ export default function MachineMethodMoves({ moves, machineType }) {
           <div className="grid divide-y border-b">
             {sortedMoves.map(({ machine, move }) => (
               <Move key={move.name.en} move={move} language={language}>
-                <div className="w-14 text-sm px-2 font-medium">{machine.name.slice(2)}</div>
+                <div className="w-12 text-sm px-2 font-medium">{machine.name.slice(2)}</div>
               </Move>
             ))}
           </div>

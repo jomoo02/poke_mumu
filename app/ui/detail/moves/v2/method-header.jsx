@@ -25,7 +25,7 @@ const defaultRowInfos = [
   {
     key: 'move',
     text: 'move',
-    width: 'w-44',
+    width: 'w-[10.5rem]',
   },
   {
     key: 'type',

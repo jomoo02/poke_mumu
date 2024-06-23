@@ -25,7 +25,7 @@ function RouteButton({
 
   return (
     <Link
-      href={`/${pokeKey}`}
+      href={`/detail/${pokeKey}`}
       className={`flex border-2 ${type}-border rounded-lg items-center h-full ${flexDirection}`}
     >
       <div className={`${iconClassName} h-full flex items-center justify-center px-4`}>
