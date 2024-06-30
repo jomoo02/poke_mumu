@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
 
 const detailScema = new mongoose.Schema({
-  id: Number,
+  // id: Number,
+  // chainIndex: Number,
+  pokeKey: String,
   abilities: Array,
   stats: Object,
   moves: Array,
   forms: Array,
-  chainIndex: Number,
   speciesName: Object,
 });
 

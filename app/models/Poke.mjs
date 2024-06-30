@@ -12,6 +12,7 @@ const pokeScema = new mongoose.Schema({
     unique: true,
   },
   pokKey: String,
+  chainIndex: Number,
 });
 
 const PokeModel = mongoose.models.Poke || mongoose.model('Poke', pokeScema);

@@ -31,7 +31,7 @@ function updateMachineNumber(moveObj, machineMap) {
       machine: {
         id: machineMap[ko],
         type: 'tm',
-        name: `tm${machineMap[ko]}`,
+        number: machineMap[ko],
       },
     };
   }

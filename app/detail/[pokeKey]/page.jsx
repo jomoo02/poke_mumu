@@ -15,7 +15,7 @@ export default async function DetailPage({ params }) {
   const pokeKey = params?.pokeKey;
 
   const {
-    no, name, sprity, types, id, form, order,
+    no, name, sprity, types, form, order, chainIndex,
   } = await fetchPokeKey(pokeKey);
 
   const mainType = types[0];
@@ -26,8 +26,7 @@ export default async function DetailPage({ params }) {
     moves,
     forms,
     speciesName,
-    chainIndex,
-  } = await fetchDetail(id);
+  } = await fetchDetail(pokeKey);
 
   const chainData = await fetchChain(chainIndex);
 

@@ -25,10 +25,11 @@ export default function VersionMoves({ versionMoves }) {
   const filterMovesMachinType = (type) => (
     machine
       .filter(({ machine: machineMove }) => machineMove.type === type)
-      .sort((a, b) => {
-        const getNumber = (str) => parseInt(str.match(/\d+/), 10) || 0;
-        return getNumber(a.machine.name) - getNumber(b.machine.name);
-      }));
+      .sort((a, b) => a.machine.number - b.machine.number));
+      // .sort((a, b) => {
+      //   const getNumber = (str) => parseInt(str.match(/\d+/), 10) || 0;
+      //   return getNumber(a.machine.name) - getNumber(b.machine.name);
+      // }));
 
   const machineTypesMoves = machineTypes
     .map((type) => ({ type, moves: filterMovesMachinType(type) }))

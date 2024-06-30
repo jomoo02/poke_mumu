@@ -10,14 +10,16 @@ const getSubTitleLanguageText = (machineType) => ({
 
 const defaultFirstRow = {
   key: 'machine',
-  width: 'w-12',
+  width: 'w-14',
   text: 'TM',
 };
 
-const sortMoves = (moves) => [...moves].sort((a, b) => {
-  const getNumber = (str) => parseInt(str.match(/\d+/), 10) || 0;
-  return getNumber(a.machine.name) - getNumber(b.machine.name);
-});
+// const sortMoves = (moves) => [...moves].sort((a, b) => {
+//   const getNumber = (str) => parseInt(str.match(/\d+/), 10) || 0;
+//   return getNumber(a.machine.name) - getNumber(b.machine.name);
+// });
+
+const sortMoves = (moves) => [...moves].sort((a, b) => a.machine.number - b.machine.number);
 
 const defaultSortOrder = { key: 'machine', asc: true };
 
@@ -75,7 +77,7 @@ export default function MachineMethodMoves({ moves, machineType }) {
           <div className="grid divide-y border-b">
             {sortedMoves.map(({ machine, move }) => (
               <Move key={move.name.en} move={move} language={language}>
-                <div className="w-12 text-sm px-2 font-medium">{machine.name.slice(2)}</div>
+                <div className="w-14 text-sm px-2 font-medium">{machine.number}</div>
               </Move>
             ))}
           </div>

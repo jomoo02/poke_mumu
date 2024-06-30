@@ -9,12 +9,13 @@ async function fetchMachineMove(url) {
     // const data = await (await fetch(url)).json();
     const res = await axiosCache(url);
     const { id, item } = res.data;
-    const type = item?.name.slice(0, 2);
+    const type = item?.name.slice(0, 2) || 'tt';
+    const number = type === 'tt' ? 999 : Number(item?.name.slice(2));
 
     return {
       id,
       type,
-      name: item?.name || '',
+      number,
     };
   } catch (error) {
     console.error(`fetchMachineMove error: ${error.message}`);
@@ -36,8 +37,8 @@ export default async function fetchVersionMachineMove(version, machines) {
 
     return {
       id: 0,
-      type: 'tm',
-      name: 'tm0',
+      type: 'tt',
+      number: 999,
     };
   } catch (error) {
     console.error(error);

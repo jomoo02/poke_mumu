@@ -1,6 +1,5 @@
 'use server';
 
-import ChainModel from '../models/Chain.mjs';
 import ChainModelV2 from '../models/ChainV2.mjs';
 import dbConnect from './db/connect.ts';
 
@@ -16,7 +15,7 @@ export async function fetchAllChainIds() {
       maxDepth: 1,
     };
 
-    const result = await ChainModel.find({}, projection).lean();
+    const result = await ChainModelV2.find({}, projection).lean();
 
     return result;
   } catch (error) {

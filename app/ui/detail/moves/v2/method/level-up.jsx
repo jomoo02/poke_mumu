@@ -10,7 +10,7 @@ const subTitleLanguageText = {
 
 const defaultFirstRow = {
   key: 'level',
-  width: 'w-12',
+  width: 'w-14',
   text: 'Lv.',
 };
 
@@ -68,7 +68,7 @@ export default function LevelUpMethodMoves({ moves }) {
           <div className="grid divide-y border-b">
             {sortedMoves.map(({ level, move }) => (
               <Move key={`${move.name.en}-${level}`} move={move} language={language}>
-                <div className="w-12 text-sm px-2 font-medium">{level}</div>
+                <div className="w-14 text-sm px-2 font-medium">{level}</div>
               </Move>
             ))}
           </div>
