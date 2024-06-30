@@ -16,6 +16,7 @@ export default function Card({
   const pokeForm = language === 'ko' ? form.ko : form.en;
 
   const { saveLocalPoke } = useLocalStorage();
+
   const pokeData = {
     name, sprity, types, id, no, form, order, pokeKey,
   };
