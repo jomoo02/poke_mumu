@@ -26,7 +26,7 @@ export default function CardList({ initialPokeData }) {
   return (
     <div className="flex w-full flex-col items-center min-h-screen">
       <div
-        className="w-full grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 sm:gap-x-4 gap-y-1.5 sm:gap-y-4 justify-center items-center"
+        className="w-full grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 sm:gap-x-4 gap-y-2.5 sm:gap-y-4 justify-center items-center"
       >
         {initialPokeData.map((basicInfo, index) => (
           <div key={basicInfo.id} className="flex justify-center">

@@ -20,6 +20,7 @@ export function makeFirstUpperCaseTextArray(textArray) {
 
 function getJongseongIndex(char) {
   const charCode = char.charCodeAt(0);
+
   if (charCode >= 0xAC00 && charCode <= 0xD7A3) {
     const jongseong = (charCode - 0xAC00) % 28;
     return jongseong;

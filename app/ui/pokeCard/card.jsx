@@ -5,6 +5,8 @@ import { useLanguage } from '@/app/language-provider';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
 import Type from '../detail/type';
 
+const SPRITY_BASE_URL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
+
 function Container({ children }) {
   return (
     <div className="border-2 rounded-md border-slate-400 w-full h-[6.75rem] sm:h-56 py-2 px-3 sm:py-3 flex sm:flex-col">
@@ -25,24 +27,19 @@ function Types({ types }) {
   );
 }
 
-//   name, sprity, types, id, no, form, isPriority, order, pokeKey,
 export default function Card({ basicInfo, isPriority }) {
   const { language } = useLanguage();
 
   const {
-    name, sprity, types, id, no, form, order, pokeKey,
+    name, sprity, types, no, form, pokeKey,
   } = basicInfo;
 
-  const sprityUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${sprity}`;
+  const sprityUrl = `${SPRITY_BASE_URL}/${sprity}`;
   const isBlockFormText = form.en === 'default' ? 'hidden' : 'block';
-  const pokeName = language === 'ko' ? name.ko : name.en;
-  const pokeForm = language === 'ko' ? form.ko : form.en;
+  const pokeName = name[language] || name.en;
+  const pokeForm = form[language] || form.en;
 
   const { saveLocalPoke } = useLocalStorage();
-
-  const pokeData = {
-    name, sprity, types, id, no, form, order, pokeKey,
-  };
 
   return (
     <Container>
@@ -51,7 +48,7 @@ export default function Card({ basicInfo, isPriority }) {
           {`No.${no}`}
         </div>
         <div className="flex w-full sm:my-1 pr-2.5 sm:pr-0 justify-center poke-card">
-          <Link href={`/detail/${pokeKey}`} onClick={() => saveLocalPoke(pokeData)}>
+          <Link href={`/detail/${pokeKey}`} onClick={() => saveLocalPoke(basicInfo)}>
             <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
               <Image
                 src={sprityUrl}

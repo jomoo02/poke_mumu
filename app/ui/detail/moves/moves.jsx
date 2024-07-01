@@ -3,8 +3,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/app/language-provider';
 import { versionGroupLanguage } from '@/app/translations/version';
-import VersionMoves from './moves/version-moves';
-import TitleHeader from './title-header';
+import VersionMoves from './version-moves';
+import TitleHeader from '../title-header';
 
 const titleLanguageText = {
   ko: '기술',

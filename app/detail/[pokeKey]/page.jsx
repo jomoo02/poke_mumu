@@ -3,7 +3,7 @@ import BasicInfo from '@/app/ui/detail/basic-info';
 import Abilities from '@/app/ui/detail/abilities';
 import DefenseCompatibility from '@/app/ui/detail/defense-compatibility';
 import Stats from '@/app/ui/detail/stats/stats';
-import Moves from '@/app/ui/detail/moves';
+import Moves from '@/app/ui/detail/moves/moves';
 import Chain from '@/app/ui/detail/chain/chain';
 import Forms from '@/app/ui/detail/forms';
 import { fetchChain } from '@/app/api/chain';

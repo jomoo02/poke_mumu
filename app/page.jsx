@@ -4,6 +4,7 @@ import { fetchPokes } from './api/data';
 
 export default async function Page() {
   const pokeData = await fetchPokes(0);
+
   return (
     <div>
       <CardList initialPokeData={pokeData} />

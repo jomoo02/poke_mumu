@@ -5,6 +5,7 @@ import { useLanguage } from '../language-provider';
 
 export default function ThemeToggleButton() {
   const { language, setLanguage } = useLanguage();
+
   const handleToggle = () => (language === 'ko' ? setLanguage('en') : setLanguage('ko'));
 
   return (

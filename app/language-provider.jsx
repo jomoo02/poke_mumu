@@ -8,6 +8,7 @@ const LanguageContext = createContext('ko');
 
 export function LanguageProvider({ children }) {
   const [language, setLanguage] = useState('ko');
+
   const value = useMemo(() => ({ language, setLanguage }), [language]);
 
   return (

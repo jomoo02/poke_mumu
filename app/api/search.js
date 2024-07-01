@@ -6,11 +6,13 @@ import dbConnect from './db/connect';
 
 function decideSearchQuery(text) {
   const isTextNumber = checkTextNumberType(text);
+
   if (isTextNumber) {
     return ({ no: Number(text) });
   }
 
   const isTextLanguageKo = checkTextLanguageKo(text);
+
   if (isTextLanguageKo) {
     return ({ 'name.ko': { $regex: text, $options: 'i' } });
   }
