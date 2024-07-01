@@ -35,9 +35,10 @@ function Info({
   );
 }
 
-export default function BasicInfo({
-  no, name, sprity, order, form, types,
-}) {
+export default function BasicInfo({ basicInfo }) {
+  const {
+    no, name, sprity, order, form, types,
+  } = basicInfo;
   const { language } = useLanguage();
 
   const exceptionOrder = [];

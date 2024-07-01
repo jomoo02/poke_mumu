@@ -14,9 +14,9 @@ import fetchDetail from '@/app/api/detail';
 export default async function DetailPage({ params }) {
   const pokeKey = params?.pokeKey;
 
-  const {
-    no, name, sprity, types, form, order, chainIndex,
-  } = await fetchPokeKey(pokeKey);
+  const basicInfo = await fetchPokeKey(pokeKey);
+
+  const { types, name, order, chainIndex } = basicInfo;
 
   const mainType = types[0];
 
@@ -31,10 +31,9 @@ export default async function DetailPage({ params }) {
   const chainData = await fetchChain(chainIndex);
 
   return (
-  // <div className="grid gap-y-10 lg:mx-10 xl:mx-20 2xl:mx-56">
     <div className="grid gap-y-10">
       <PokeNavigation order={order} type={mainType} />
-      <BasicInfo no={no} name={name} sprity={sprity} order={order} form={form} types={types} />
+      <BasicInfo basicInfo={basicInfo} />
       <Abilities abilities={abilities} type={mainType} />
       <Forms forms={forms} name={speciesName} type={mainType} />
       <DefenseCompatibility types={types} />

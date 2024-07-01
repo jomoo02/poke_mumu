@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchPokes } from '@/app/api/data';
 import Card from './card';
 
-export default function CardList() {
+export default function CardList({ initialPokeData }) {
   const [pokeDatas, setPokeDatas] = useState([]);
   const [pokeIndex, setPokeIndex] = useState(0);
 
@@ -18,26 +18,29 @@ export default function CardList() {
   };
 
   useEffect(() => {
-    fetchPoke();
+    if (pokeIndex !== 0) {
+      fetchPoke();
+    }
   }, [pokeIndex]);
 
   return (
     <div className="flex w-full flex-col items-center min-h-screen">
-      <div className="w-full grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 xs:gap-x-2 sm:gap-x-4 gap-y-1.5 xs:gap-y-2 sm:gap-y-4 justify-center items-center">
-        {pokeDatas.map(({
-          name, sprity, types, id, no, form, order, pokeKey,
-        }, index) => (
-          <div key={id} className="flex justify-center">
+      <div
+        className="w-full grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 sm:gap-x-4 gap-y-1.5 sm:gap-y-4 justify-center items-center"
+      >
+        {initialPokeData.map((basicInfo, index) => (
+          <div key={basicInfo.id} className="flex justify-center">
             <Card
-              name={name}
-              sprity={sprity}
-              types={types}
-              id={id}
-              no={no}
-              form={form}
-              order={order}
-              pokeKey={pokeKey}
-              isPriority={(index <= 20)}
+              basicInfo={basicInfo}
+              isPriority={index <= 20}
+            />
+          </div>
+        ))}
+        {pokeDatas.map((basicInfo, index) => (
+          <div key={basicInfo.id} className="flex justify-center">
+            <Card
+              basicInfo={basicInfo}
+              isPriority={index <= 20}
             />
           </div>
         ))}
