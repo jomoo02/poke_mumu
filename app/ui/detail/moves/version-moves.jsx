@@ -26,17 +26,13 @@ export default function VersionMoves({ versionMoves }) {
     machine
       .filter(({ machine: machineMove }) => machineMove.type === type)
       .sort((a, b) => a.machine.number - b.machine.number));
-      // .sort((a, b) => {
-      //   const getNumber = (str) => parseInt(str.match(/\d+/), 10) || 0;
-      //   return getNumber(a.machine.name) - getNumber(b.machine.name);
-      // }));
 
   const machineTypesMoves = machineTypes
     .map((type) => ({ type, moves: filterMovesMachinType(type) }))
     .filter(({ moves }) => moves);
 
   return (
-    <div className="flex flex-wrap gap-y-10 py-3 gap-x-10 justify-between">
+    <div className="flex flex-wrap gap-y-10 py-3 gap-x-10 justify-evenly">
       <div className="flex flex-col gap-y-10 overflow-auto">
         {levelUp.length > 0 && <LevelUpMethodMoves moves={levelUp} />}
         {egg.length > 0 && <EggMethodMoves moves={egg} />}

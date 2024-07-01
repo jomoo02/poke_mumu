@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <header className="z-30 mb-4 w-full top-0 sticky">
       <div
-        className="flex bg-orange-400 h-16 justify-between items-center px-2.5 xs:px-6 sm:px-8 lg:px-12"
+        className="flex bg-orange-400 h-16 justify-between items-center px-2.5 xs:px-6 sm:px-8 md:px-12"
       >
         <h2 className="text-white text-xl font-black">
           <Link href="/">

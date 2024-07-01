@@ -36,7 +36,7 @@ function GenMoves({ genMoves, type }) {
 
   const renderVersionButton = (version, index) => {
     const isActive = version === targetVersion;
-    const colSpanClass = versions.length % 2 === 1 && index === versions.length - 1 ? 'col-span-2' : 'col-span-1';
+    const colSpanClass = versions.length % 2 === 1 && index === versions.length - 1 ? 'col-span-2 xl:col-span-1' : 'col-span-1';
     const roundedClass = (index === 2 && index === versions.length - 1) ? 'xl:rounded-t-md' : 'rounded-t-md';
     const commonClasses = `min-h-7 ${roundedClass} px-2.5 py-1
       text-sm text-center flex justify-center items-center ${colSpanClass} break-all xs:break-normal text-pretty`;
@@ -53,7 +53,7 @@ function GenMoves({ genMoves, type }) {
         key={version}
         type="button"
         onClick={() => handleTargetVersion(version)}
-        className={`bg-slate-200 ${commonClasses} hover:bg-slate-400/70 font-medium `}
+        className={`bg-slate-200 ${commonClasses} hover:bg-slate-400/70 font-medium`}
       >
         <span>{versionGroupLanguage[language][version]}</span>
       </button>
@@ -61,9 +61,9 @@ function GenMoves({ genMoves, type }) {
   };
 
   return (
-    <div className="">
-      <div className="w-full border-b-2 grid gap-y-3 pt-2">
-        <div className="grid grid-cols-2 xl:flex gap-x-1 gap-y-px px-2">
+    <div>
+      <div className="border-b-2 grid gap-y-3 pt-2">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-1 gap-y-px px-2">
           {versions.map((version, index) => renderVersionButton(version, index))}
         </div>
       </div>

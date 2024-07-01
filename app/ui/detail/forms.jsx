@@ -64,7 +64,7 @@ export default function Forms({ forms, name, type }) {
   return (
     <div>
       <TitleHeader type={type} title={title} />
-      <div className={`border-2 border-t-0 ${type}-border rounded-b-sm px-1 md:px-5 pt-1.5 pb-3.5 ${formClass}`}>
+      <div className={`border-2 border-t-0 ${type}-border rounded-b-sm px-1 md:px-5 pt-2.5 pb-3.5 ${formClass}`}>
         {forms.map(({ id, name: formName }) => (
           <div key={`${id}-${formName.en}`} className="flex flex-col justify-center items-center">
             <FormInfo id={id} name={formName} language={language} />

@@ -21,7 +21,7 @@ export default function RootLayout({ children, modal }) {
           <LanguageProvider>
             <Header />
             {modal}
-            <main className="px-1 xs:px-3 sm:px-5">
+            <main className="px-1 xs:px-3 sm:px-5 md:px-10">
               {children}
             </main>
             <div id="modal" />
