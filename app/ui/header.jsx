@@ -5,7 +5,7 @@ import ThemeToggleButton from './theme-toggle-button';
 
 export default function Header() {
   return (
-    <header className="z-30 mb-4 w-full top-0 sticky">
+    <header className="z-30 top-0 sticky">
       <div
         className="flex bg-orange-400 h-16 justify-between items-center px-2.5 xs:px-6 sm:px-8 md:px-12"
       >

@@ -16,7 +16,7 @@ export default async function DetailPage({ params }) {
 
   const basicInfo = await fetchPokeKey(pokeKey);
 
-  const { types, name, order, chainIndex } = basicInfo;
+  const { types, order, chainIndex } = basicInfo;
 
   const mainType = types[0];
 
