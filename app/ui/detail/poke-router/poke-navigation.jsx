@@ -41,7 +41,7 @@ function RouteButton({
 export default async function PokeNavigation({ order, type }) {
   const { before, next } = await fetchSurroundingPokes(order);
   return (
-    <div className="grid gap-y-2 md:flex-row md:grid-cols-2 xl:grid-cols-3 gap-x-12 lg:gap-x-20 xl:gap-x-0">
+    <div className="grid gap-y-4 md:flex-row md:grid-cols-2 xl:grid-cols-3 gap-x-12 lg:gap-x-20 xl:gap-x-0">
       <div>
         {before && <RouteButton pokeKey={before.pokeKey} direction="before" info={before} type={type} /> }
       </div>

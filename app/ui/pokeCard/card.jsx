@@ -46,7 +46,7 @@ export default function Card({ basicInfo, isPriority }) {
 
   const handleClick = () => {
     saveLocalPoke(basicInfo);
-    setPokeCardIndex(order);
+    // setPokeCardIndex(order);
   };
 
   return (
@@ -55,7 +55,7 @@ export default function Card({ basicInfo, isPriority }) {
         <div className="text-sm text-slate-600 font-semibold">
           {`No.${no}`}
         </div>
-        <Link href={`/detail/${pokeKey}`} onClick={handleClick} scroll>
+        <Link href={`/detail/${pokeKey}`} onClick={handleClick}>
           <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center poke-card">
             <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
               <Image
@@ -67,7 +67,6 @@ export default function Card({ basicInfo, isPriority }) {
                   objectFit: 'contain',
                 }}
                 priority={isPriority}
-                loading={isPriority ? 'eager' : 'lazy'}
               />
             </div>
           </div>

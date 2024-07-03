@@ -11,31 +11,33 @@ async function fetchPokeQuery({ pageParam }) {
 }
 
 export default function usePokeInfiniteQuery() {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
-  const { getPokeCardIndex } = usePokeCardIndex();
+  // const { getPokeCardIndex } = usePokeCardIndex();
 
-  useEffect(() => {
-    (async () => {
-      const pokeCardIndex = getPokeCardIndex();
+  // useEffect(() => {
+  //   (async () => {
+  //     const pokeCardIndex = getPokeCardIndex();
 
-      if (pokeCardIndex <= 1) {
-        return;
-      }
+  //     if (pokeCardIndex <= 1) {
+  //       return;
+  //     }
 
-      await queryClient.prefetchInfiniteQuery({
-        queryKey,
-        queryFn: fetchPokeQuery,
-        initialPageParam: 1,
-        pages: pokeCardIndex,
-      });
-    })();
-  }, []);
+  //     await queryClient.prefetchInfiniteQuery({
+  //       queryKey,
+  //       queryFn: fetchPokeQuery,
+  //       initialPageParam: 1,
+  //       pages: pokeCardIndex,
+  //     });
+  //   })();
+  // }, []);
 
   const {
     data,
     fetchNextPage,
     hasNextPage,
+    isFetching,
+    status,
   } = useInfiniteQuery({
     queryKey,
     queryFn: fetchPokeQuery,
@@ -47,18 +49,21 @@ export default function usePokeInfiniteQuery() {
       }
       return pageParam + 1;
     },
+    select: (d) => d?.pages.flat() || [],
   });
 
-  const pokeData = useMemo(() => {
-    if (data) {
-      return data.pages.flat();
-    }
-    return [];
-  }, [data]);
+  // const pokeData = useMemo(() => {
+  //   if (data) {
+  //     return data.pages.flat();
+  //   }
+  //   return [];
+  // }, [data]);
 
   return {
-    pokeData,
+    pokeData: data,
     fetchNextPage,
     hasNextPage,
+    isFetching,
+    status,
   };
 }

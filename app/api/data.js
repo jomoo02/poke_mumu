@@ -41,6 +41,26 @@ export async function fetchPokeKey(pokeKey) {
   }
 }
 
+export async function fetchAllPoke() {
+  try {
+    await dbConnect();
+
+    const query = {};
+    const projection = {
+      _id: 0,
+    };
+    const result = await PokeModel
+      .find(query, projection)
+      .sort({ order: 1 })
+      .lean();
+
+    return result;
+  } catch (error) {
+    console.error(`error fetchPokeKey: ${error.message}`);
+    return error;
+  }
+}
+
 export async function fetchPokes(index) {
   try {
     await dbConnect();
