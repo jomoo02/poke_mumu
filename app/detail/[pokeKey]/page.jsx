@@ -33,7 +33,7 @@ export default async function DetailPage({ params }) {
   return (
     <>
       <div />
-      <div className="grid gap-y-12">
+      <div className="grid gap-y-12 min-h-screen">
         <PokeNavigation order={order} type={mainType} />
         <BasicInfo basicInfo={basicInfo} />
         <Abilities abilities={abilities} type={mainType} />

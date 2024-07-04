@@ -5,6 +5,15 @@ import { fetchPokes } from '../api/data';
 
 const queryKey = ['pokeCardData'];
 
+async function fetchPokeQueryPre({ pageParam }) {
+  console.log('pre', pageParam);
+  if (pageParam === 0) {
+    return [];
+  }
+  const res = await fetchPokes(pageParam);
+  return res;
+}
+
 async function fetchPokeQuery({ pageParam }) {
   console.log(pageParam);
   if (pageParam === 0) {
@@ -15,26 +24,28 @@ async function fetchPokeQuery({ pageParam }) {
 }
 
 export default function usePokeInfiniteQuery() {
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-  // const { getPokeCardIndex } = usePokeCardIndex();
+  const { getPokeCardIndex } = usePokeCardIndex();
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const pokeCardIndex = getPokeCardIndex();
-
-  //     if (pokeCardIndex <= 1) {
-  //       return;
-  //     }
-
-  //     await queryClient.prefetchInfiniteQuery({
-  //       queryKey,
-  //       queryFn: fetchPokeQuery,
-  //       initialPageParam: 1,
-  //       pages: pokeCardIndex,
-  //     });
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const pokeCardIndex = getPokeCardIndex();
+      await queryClient.prefetchInfiniteQuery({
+        queryKey,
+        queryFn: fetchPokeQueryPre,
+        initialPageParam: 0,
+        getNextPageParam: (lastPage, pages, lastPageParam) => {
+          const pageParam = Number(lastPageParam);
+          if (pageParam >= 5) {
+            return undefined;
+          }
+          return pageParam + 1;
+        },
+        pages: pokeCardIndex + 1,
+      });
+    })();
+  }, []);
 
   const {
     data,

@@ -17,28 +17,21 @@ export default function CardList({ initialPokeData }) {
 
   useEffect(() => {
     if (hasNextPage && isIntersecting && !isFetching) {
-      console.log(pokeDatas);
       fetchNextPage();
     }
   }, [isIntersecting]);
 
-  // const fetchPoke = async () => {
-  //   console.log(pokeIndex);
-  //   const data = await fetchPokes(pokeIndex);
-  //   setPokeDatas([...pokeDatas, ...data]);
-  // };
+  useEffect(() => {
+    const position = sessionStorage.getItem('pos');
 
-  // useEffect(() => {
-  //   if (pokeIndex !== 0) {
-  //     fetchPoke();
-  //   }
-  // }, [pokeIndex]);
+    if (!isFetching && position) {
+      window.scrollTo({ top: position });
+    }
+  }, [isFetching]);
 
-  // useEffect(() => {
-  //   if (isIntersecting) {
-  //     setPokeIndex((index) => index + 1);
-  //   }
-  // }, [isIntersecting]);
+  if (isFetching) {
+    return <div>fetching</div>;
+  }
 
   return (
     <div className="flex w-full flex-col items-center min-h-screen">
@@ -52,11 +45,10 @@ export default function CardList({ initialPokeData }) {
             isPriority={index <= 20}
           />
         ))}
-        {status === 'pending' ? <div>loading</div> : pokeDatas?.map((basicInfo, index) => (
+        {pokeDatas?.map((basicInfo) => (
           <Card
             key={basicInfo.id}
             basicInfo={basicInfo}
-            isPriority={index <= 20}
           />
         ))}
       </div>

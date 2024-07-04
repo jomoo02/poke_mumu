@@ -20,7 +20,9 @@ export default function RootLayout({ children, modal }) {
         <ClientProvider>
           <LanguageProvider>
             <Header />
-            {modal}
+            <div>
+              {modal}
+            </div>
             <main className="px-2.5 xs:px-4 sm:px-8 md:px-10 py-10">
               {children}
             </main>
