@@ -58,7 +58,8 @@ export default function Card({ basicInfo, isPriority }) {
           {`No.${no}`}
         </div>
         <Link href={`/detail/${pokeKey}`} onClick={handleClick}>
-          <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center poke-card">
+          <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center">
+          {/* <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center poke-card"> */}
             <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
               <Image
                 src={sprityUrl}
