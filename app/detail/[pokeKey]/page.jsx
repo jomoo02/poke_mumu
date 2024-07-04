@@ -31,15 +31,18 @@ export default async function DetailPage({ params }) {
   const chainData = await fetchChain(chainIndex);
 
   return (
-    <div className="grid gap-y-12">
-      <PokeNavigation order={order} type={mainType} />
-      <BasicInfo basicInfo={basicInfo} />
-      <Abilities abilities={abilities} type={mainType} />
-      <Forms forms={forms} name={speciesName} type={mainType} />
-      <DefenseCompatibility types={types} />
-      <Chain chainData={chainData} type={mainType} />
-      <Stats base={stats.baseStats} effort={stats.effortStats} type={mainType} />
-      <Moves moves={moves} type={mainType} />
-    </div>
+    <>
+      <div />
+      <div className="grid gap-y-12">
+        <PokeNavigation order={order} type={mainType} />
+        <BasicInfo basicInfo={basicInfo} />
+        <Abilities abilities={abilities} type={mainType} />
+        <Forms forms={forms} name={speciesName} type={mainType} />
+        <DefenseCompatibility types={types} />
+        <Chain chainData={chainData} type={mainType} />
+        <Stats base={stats.baseStats} effort={stats.effortStats} type={mainType} />
+        <Moves moves={moves} type={mainType} />
+      </div>
+    </>
   );
 }

@@ -19,7 +19,6 @@ export default function RootLayout({ children, modal }) {
       <body className={`${inter.className} antialiased`}>
         <ClientProvider>
           <LanguageProvider>
-            <div />
             <Header />
             {modal}
             <main className="px-2.5 xs:px-4 sm:px-8 md:px-10 py-10">
