@@ -14,9 +14,21 @@ import fetchDetail from '@/app/api/detail';
 export default async function DetailPage({ params }) {
   const pokeKey = params?.pokeKey;
 
-  const basicInfo = await fetchPokeKey(pokeKey);
+  // const basicInfo = await fetchPokeKey(pokeKey);
+
+  // const {
+  //   abilities,
+  //   stats,
+  //   moves,
+  //   forms,
+  //   speciesName,
+  // } = await fetchDetail(pokeKey);
+
+  const [basicInfo, detailInfo] = await Promise.all([fetchPokeKey(pokeKey), fetchDetail(pokeKey)]);
 
   const { types, order, chainIndex } = basicInfo;
+
+  const chainData = await fetchChain(chainIndex);
 
   const mainType = types[0];
 
@@ -26,9 +38,7 @@ export default async function DetailPage({ params }) {
     moves,
     forms,
     speciesName,
-  } = await fetchDetail(pokeKey);
-
-  const chainData = await fetchChain(chainIndex);
+  } = detailInfo;
 
   return (
     <>

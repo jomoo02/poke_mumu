@@ -42,7 +42,7 @@ export default function usePokeInfiniteQuery() {
           }
           return pageParam + 1;
         },
-        pages: pokeCardIndex + 1,
+        pages: pokeCardIndex + 2,
       });
     })();
   }, []);
@@ -52,7 +52,9 @@ export default function usePokeInfiniteQuery() {
     fetchNextPage,
     hasNextPage,
     isFetching,
+    isFetchingNextPage,
     status,
+    isLoading,
   } = useInfiniteQuery({
     queryKey,
     queryFn: fetchPokeQuery,
@@ -67,18 +69,13 @@ export default function usePokeInfiniteQuery() {
     select: (d) => d?.pages.flat() || [],
   });
 
-  // const pokeData = useMemo(() => {
-  //   if (data) {
-  //     return data.pages.flat();
-  //   }
-  //   return [];
-  // }, [data]);
-
   return {
     pokeData: data,
     fetchNextPage,
     hasNextPage,
-    isFetching,
+    isFetchingNextPage,
     status,
+    isFetching,
+    isLoading,
   };
 }
