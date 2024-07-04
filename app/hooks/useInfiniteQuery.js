@@ -6,6 +6,10 @@ import { fetchPokes } from '../api/data';
 const queryKey = ['pokeCardData'];
 
 async function fetchPokeQuery({ pageParam }) {
+  console.log(pageParam);
+  if (pageParam === 0) {
+    return [];
+  }
   const res = await fetchPokes(pageParam);
   return res;
 }
@@ -41,7 +45,7 @@ export default function usePokeInfiniteQuery() {
   } = useInfiniteQuery({
     queryKey,
     queryFn: fetchPokeQuery,
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage, pages, lastPageParam) => {
       const pageParam = Number(lastPageParam);
       if (pageParam >= 5) {

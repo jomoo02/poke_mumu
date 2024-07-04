@@ -52,7 +52,7 @@ export default function CardList({ initialPokeData }) {
             isPriority={index <= 20}
           />
         ))}
-        {status === 'pending' ? <div>loading</div> : pokeDatas.map((basicInfo, index) => (
+        {status === 'pending' ? <div>loading</div> : pokeDatas?.map((basicInfo, index) => (
           <Card
             key={basicInfo.id}
             basicInfo={basicInfo}
