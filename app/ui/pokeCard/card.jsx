@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -46,9 +48,9 @@ export default function Card({ basicInfo, isPriority }) {
 
   const handleClick = () => {
     saveLocalPoke(basicInfo);
-    setPokeCardIndex(order);
+    // setPokeCardIndex(order);
 
-    sessionStorage.setItem('pos', window.scrollY);
+    // sessionStorage.setItem('pos', window.scrollY);
   };
 
   return (
@@ -68,7 +70,7 @@ export default function Card({ basicInfo, isPriority }) {
                 style={{
                   objectFit: 'contain',
                 }}
-                priority={isPriority}
+                priority
               />
             </div>
           </div>
