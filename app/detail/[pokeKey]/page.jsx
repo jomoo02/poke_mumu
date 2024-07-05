@@ -10,6 +10,7 @@ import { fetchChain } from '@/app/api/chain';
 import { fetchPokeKey } from '@/app/api/data';
 import PokeNavigation from '@/app/ui/detail/poke-router/poke-navigation';
 import fetchDetail from '@/app/api/detail';
+import ScrollTop from '@/app/ui/scrollTop';
 
 export default async function DetailPage({ params }) {
   const pokeKey = params?.pokeKey;
@@ -42,7 +43,7 @@ export default async function DetailPage({ params }) {
 
   return (
     <>
-      <div />
+      <ScrollTop />
       <div className="grid gap-y-12 min-h-screen">
         <PokeNavigation order={order} type={mainType} />
         <BasicInfo basicInfo={basicInfo} />
