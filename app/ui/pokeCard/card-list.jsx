@@ -8,14 +8,7 @@ import Card from './card';
 import PokeCardSkelton from './card-skeleton';
 
 function CardListSkelton() {
-  const [cardCount, setCardCount] = useState(0);
-
-  useLayoutEffect(() => {
-    const index = sessionStorage.getItem('poke-card-index');
-    if (index) {
-      setCardCount((index + 2) * 240);
-    }
-  }, []);
+  const [cardCount, setCardCount] = useState(240 * 5);
 
   return (
     <>
@@ -34,7 +27,6 @@ export default function CardList({ initialPokeData }) {
   } = usePokeInfiniteQuery();
 
   useEffect(() => {
-    console.log(hasNextPage, isIntersecting, isLoading, isFetchingNextPage);
     if (hasNextPage && isIntersecting && !isFetchingNextPage) {
       fetchNextPage();
     }
@@ -42,8 +34,9 @@ export default function CardList({ initialPokeData }) {
 
   useEffect(() => {
     const position = sessionStorage.getItem('pos');
-    console.log('1', position, status);
+
     if (!isLoading && position) {
+      // sessionStorage.removeItem('pos');
       window.scrollTo({ top: position });
     }
   }, [isLoading]);
@@ -53,17 +46,18 @@ export default function CardList({ initialPokeData }) {
       <div
         className="w-full grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 sm:gap-x-4 gap-y-3 sm:gap-y-4 justify-center items-center"
       >
-        {initialPokeData.map((basicInfo, index) => (
-          <Card
-            key={basicInfo.id}
-            basicInfo={basicInfo}
-            priority={index <= 20}
-          />
-        ))}
+
         {(isLoading) ? (
           <CardListSkelton />
         ) : (
           <>
+            {initialPokeData.map((basicInfo, index) => (
+              <Card
+                key={basicInfo.id}
+                basicInfo={basicInfo}
+                priority={index <= 20}
+              />
+            ))}
             {pokeDatas.map((basicInfo) => (
               <Card
                 key={basicInfo.id}

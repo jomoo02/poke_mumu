@@ -1,25 +1,16 @@
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
-import { useState, useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import usePokeCardIndex from './usePokeCardIndex';
 import { fetchPokes } from '../api/data';
 
 const queryKey = ['pokeCardData'];
 
-async function fetchPokeQueryPre({ pageParam }) {
-  console.log('pre', pageParam);
-  if (pageParam === 0) {
-    return [];
-  }
-  const res = await fetchPokes(pageParam);
-  return res;
-}
-
 async function fetchPokeQuery({ pageParam }) {
-  console.log(pageParam);
   if (pageParam === 0) {
     return [];
   }
   const res = await fetchPokes(pageParam);
+
   return res;
 }
 
@@ -33,7 +24,7 @@ export default function usePokeInfiniteQuery() {
       const pokeCardIndex = getPokeCardIndex();
       await queryClient.prefetchInfiniteQuery({
         queryKey,
-        queryFn: fetchPokeQueryPre,
+        queryFn: fetchPokeQuery,
         initialPageParam: 0,
         getNextPageParam: (lastPage, pages, lastPageParam) => {
           const pageParam = Number(lastPageParam);
