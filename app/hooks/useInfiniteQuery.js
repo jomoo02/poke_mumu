@@ -33,7 +33,7 @@ export default function usePokeInfiniteQuery() {
           }
           return pageParam + 1;
         },
-        pages: pokeCardIndex + 2,
+        pages: Number(pokeCardIndex) + 2,
       });
     })();
   }, []);

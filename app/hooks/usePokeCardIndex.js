@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const KEY = 'poke-card-index';
 
 export default function usePokeCardIndex() {

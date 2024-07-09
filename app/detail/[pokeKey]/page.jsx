@@ -40,7 +40,6 @@ export default async function DetailPage({ params }) {
     forms,
     speciesName,
   } = detailInfo;
-
   return (
     <>
       <ScrollTop />
