@@ -45,12 +45,11 @@ export default function CardListClient() {
     if (!isLoading && position) {
       // sessionStorage.removeItem('pos');
       // console.log(position);
-      
       window.scrollTo({ top: position });
       // sessionStorage.removeItem('pos');
       // console.log('removeItem');
     }
-  }, []);
+  }, [isLoading]);
 
   // useEffect(() => {
   //   const handleBeforeUnload = () => {
