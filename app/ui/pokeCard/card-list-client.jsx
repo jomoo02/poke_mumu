@@ -34,7 +34,7 @@ export default function CardListClient() {
     }
   }, [isIntersecting]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setCardIndex(getPokeCardIndex());
   }, []);
 
