@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, Suspense, useLayoutEffect } from 'react';
+import React, { useEffect, Suspense, Fragment } from 'react';
 import { fetchPokes } from '@/app/api/data';
 import usePokeCardIndex from '@/app/hooks/usePokeCardIndex';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
@@ -8,11 +8,10 @@ import usePokeInfiniteQuery from '../../hooks/useInfiniteQuery';
 import Card from './card';
 import PokeCardSkelton from './card-skeleton';
 
-function CardListSkelton({ cardIndex }) {
-  const cardLenth = Math.min(Number(cardIndex + 1) * 240, 1198);
+function CardListSkelton() {
   return (
     <>
-      {Array.from({ length: cardLenth }, (_, index) => (
+      {Array.from({ length: 240 }, (_, index) => (
         <PokeCardSkelton key={`card-${index}`} />
       ))}
     </>
@@ -20,9 +19,9 @@ function CardListSkelton({ cardIndex }) {
 }
 
 export default function CardListClient() {
-  const [cardIndex, setCardIndex] = useState(0);
+  // const [cardIndex, setCardIndex] = useState(0);
   const { isIntersecting, ref } = useIntersectionObserver();
-  const { getPokeCardIndex } = usePokeCardIndex();
+  // const { getPokeCardIndex } = usePokeCardIndex();
 
   const {
     pokeData: pokeDatas, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading,
@@ -32,6 +31,7 @@ export default function CardListClient() {
     if (hasNextPage && isIntersecting && !isFetchingNextPage) {
       fetchNextPage();
     }
+    console.log(pokeDatas);
   }, [isIntersecting]);
 
   // useLayoutEffect(() => {
@@ -68,26 +68,20 @@ export default function CardListClient() {
       <div
         className="w-full grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 sm:gap-x-4 gap-y-3 sm:gap-y-4 justify-center items-center"
       >
+        <Suspense fallback={<CardListSkelton />}>
+          {pokeDatas.pages.map((pages, index) => (
+            <Fragment key={pokeDatas.pageParams[index]}>
+              {pages.map((basicInfo) => (
+                <Card
+                  key={basicInfo.id}
+                  basicInfo={basicInfo}
+                />
+              ))}
+            </Fragment>
+          ))}
+        </Suspense>
 
-        {(isLoading) ? (
-          <div />
-        ) : (
-          <>
-            {/* {initialPokeData.map((basicInfo, index) => (
-              <Card
-                key={basicInfo.id}
-                basicInfo={basicInfo}
-                priority={index <= 20}
-              />
-            ))} */}
-            {pokeDatas.map((basicInfo) => (
-              <Card
-                key={basicInfo.id}
-                basicInfo={basicInfo}
-              />
-            ))}
-          </>
-        )}
+        {hasNextPage && isFetchingNextPage ? <CardListSkelton /> : null}
       </div>
       <div ref={ref} />
     </div>

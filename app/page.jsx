@@ -7,8 +7,8 @@ import { fetchPokes, fetchAllPoke } from './api/data';
 import ScrollTop from './ui/scrollTop';
 
 async function fetchPokeQuery({ pageParam }) {
+  console.log('prefetch: ', pageParam);
   const res = await fetchPokes(pageParam);
-
   return res;
 }
 
@@ -26,17 +26,14 @@ export default async function Page() {
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages, lastPageParam) => {
       const pageParm = Number(lastPageParam);
-      if (pageParm >= 5) return undefined;
+      if (pageParm >= 4) return undefined;
       return pageParm + 1;
     },
     pages: pageCounts,
   });
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      {/* <Suspense fallback={<p>loading...</p>}>
-        <CardList initialPokeData={pokeData} />
-      </Suspense> */}
-      {/* <ScrollTop /> */}
       <CardListClient />
     </HydrationBoundary>
   );
