@@ -17,6 +17,7 @@ export default async function Page() {
   // const pokeData = await fetchAllPoke();
   const cookieStore = cookies();
   const index = cookieStore.get('poke-card-index');
+  const pageCounts = Number(index?.value) + 2 || 1;
   const queryClient = new QueryClient();
 
   await queryClient.prefetchInfiniteQuery({
@@ -28,7 +29,7 @@ export default async function Page() {
       if (pageParm >= 5) return undefined;
       return pageParm + 1;
     },
-    pages: Number(index.value) + 2,
+    pages: pageCounts,
   });
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
