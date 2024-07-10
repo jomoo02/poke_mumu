@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react';
 import { QueryClient, HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { cookies } from 'next/headers';
 import CardList from './ui/pokeCard/card-list';
 import CardListClient from './ui/pokeCard/card-list-client';
 import { fetchPokes, fetchAllPoke } from './api/data';
 import ScrollTop from './ui/scrollTop';
-import { cookies } from 'next/headers';
 
 async function fetchPokeQuery({ pageParam }) {
   const res = await fetchPokes(pageParam);
