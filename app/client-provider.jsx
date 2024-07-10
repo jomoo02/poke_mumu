@@ -8,8 +8,6 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 
-// const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: 60 * 1000 } } });
-
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
@@ -17,16 +15,16 @@ function makeQueryClient() {
         staleTime: 60 * 1000,
       },
     },
-    dehydrate: {
-      shouldDehydrateQuery: (query) => defaultShouldDehydrateQuery(query)
-        || query.state.status === 'pending',
-    },
+    // dehydrate: {
+    //   shouldDehydrateQuery: (query) => defaultShouldDehydrateQuery(query)
+    //     || query.state.status === 'pending',
+    // },
   });
 }
 
 let browerQueryClient;
 
-function getQueryClient() {
+export function getQueryClient() {
   if (isServer) {
     return makeQueryClient();
   }

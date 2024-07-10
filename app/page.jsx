@@ -13,8 +13,6 @@ async function fetchPokeQuery({ pageParam }) {
 }
 
 export default async function Page() {
-  // const pokeData = await fetchPokes(0);
-  // const pokeData = await fetchAllPoke();
   const cookieStore = cookies();
   const index = cookieStore.get('poke-card-index');
   const pageCounts = Number(index?.value) + 2 || 1;

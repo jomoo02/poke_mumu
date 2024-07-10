@@ -42,8 +42,8 @@ function FormButton({ info }) {
 
   return (
     <form action={setPokeCardIndexWithOrder}>
-      <button type="submit">
-        <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center poke-card">
+      <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center poke-card">
+        <button type="submit">
           <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
             <Image
               src={sprityUrl}
@@ -56,8 +56,8 @@ function FormButton({ info }) {
               priority
             />
           </div>
-        </div>
-      </button>
+        </button>
+      </div>
     </form>
   );
 }

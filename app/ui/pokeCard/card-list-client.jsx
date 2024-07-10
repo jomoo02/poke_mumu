@@ -24,7 +24,7 @@ export default function CardListClient() {
   // const { getPokeCardIndex } = usePokeCardIndex();
 
   const {
-    pokeData: pokeDatas, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading,
+    pokeData: pokeDatas, fetchNextPage, hasNextPage, isFetchingNextPage,
   } = usePokeInfiniteQuery();
 
   useEffect(() => {
@@ -33,10 +33,6 @@ export default function CardListClient() {
     }
     console.log(pokeDatas);
   }, [isIntersecting]);
-
-  // useLayoutEffect(() => {
-  //   setCardIndex(getPokeCardIndex());
-  // }, []);
 
   // useEffect(() => {
   //   console.log('@@@@@@@@@@@');
@@ -50,18 +46,6 @@ export default function CardListClient() {
   //     // console.log('removeItem');
   //   }
   // }, [isLoading]);
-
-  // useEffect(() => {
-  //   const handleBeforeUnload = () => {
-  //     sessionStorage.setItem('pos2', window.);
-  //     console.log('setItem@@');
-  //   };
-  //   window.addEventListener('beforeunload', handleBeforeUnload);
-
-  //   return (() => {
-  //     window.removeEventListener('beforeunload', handleBeforeUnload);
-  //   });
-  // }, []);
 
   return (
     <div className="flex w-full flex-col items-center">
