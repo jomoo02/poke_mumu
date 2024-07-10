@@ -9,7 +9,7 @@ export default function ScrollTop() {
   useEffect(() => {
     const pathnamePiece = pathname.split('/');
 
-    if (pathnamePiece[1] === 'detail' || pathname === '/') {
+    if (pathnamePiece[1] === 'detail') {
       window.scrollTo({ top: 0 });
     }
   }, [pathname]);

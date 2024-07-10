@@ -16,6 +16,7 @@ export default async function Page() {
   const cookieStore = cookies();
   const index = cookieStore.get('poke-card-index');
   const pageCounts = Number(index?.value) + 2 || 1;
+
   const queryClient = new QueryClient();
 
   await queryClient.prefetchInfiniteQuery({

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import BasicInfo from '@/app/ui/detail/basic-info';
 import Abilities from '@/app/ui/detail/abilities';
 import DefenseCompatibility from '@/app/ui/detail/defense-compatibility';
@@ -42,7 +42,9 @@ export default async function DetailPage({ params }) {
   } = detailInfo;
   return (
     <>
-      <ScrollTop />
+      <Suspense fallback={null}>
+        <ScrollTop />
+      </Suspense>
       <div className="grid gap-y-12 min-h-screen">
         <PokeNavigation order={order} type={mainType} />
         <BasicInfo basicInfo={basicInfo} />

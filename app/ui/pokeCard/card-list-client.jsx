@@ -34,19 +34,6 @@ export default function CardListClient() {
     console.log(pokeDatas);
   }, [isIntersecting]);
 
-  // useEffect(() => {
-  //   console.log('@@@@@@@@@@@');
-  //   const position = sessionStorage.getItem('pos');
-
-  //   if (!isLoading && position) {
-  //     // sessionStorage.removeItem('pos');
-  //     // console.log(position);
-  //     window.scrollTo({ top: position });
-  //     // sessionStorage.removeItem('pos');
-  //     // console.log('removeItem');
-  //   }
-  // }, [isLoading]);
-
   return (
     <div className="flex w-full flex-col items-center">
       <div

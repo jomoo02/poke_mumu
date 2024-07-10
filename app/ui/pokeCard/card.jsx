@@ -76,13 +76,9 @@ export default function Card({ basicInfo }) {
 
   const { saveLocalPoke } = useLocalStorage();
 
-  const { setPokeCardIndex } = usePokeCardIndex();
-
   const handleClick = () => {
     saveLocalPoke(basicInfo);
-    setPokeCardIndex(order);
-
-    sessionStorage.setItem('pos', window.scrollY);
+    // await setPokeCardIndex(basicInfo);
   };
 
   return (
@@ -92,7 +88,10 @@ export default function Card({ basicInfo }) {
           {`No.${no}`}
         </div>
         <FormButton info={basicInfo} />
-        {/* <Link href={`detail/${pokeKey}`} onClick={handleClick}>
+        {/* <Link
+          onClick={handleClick}
+          href={`/detail/${pokeKey}`}
+        >
           <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center poke-card">
             <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
               <Image
