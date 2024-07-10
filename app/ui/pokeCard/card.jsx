@@ -30,7 +30,7 @@ function Types({ types }) {
   );
 }
 
-export default function Card({ basicInfo, isPriority }) {
+export default function Card({ basicInfo }) {
   const { language } = useLanguage();
 
   const {
