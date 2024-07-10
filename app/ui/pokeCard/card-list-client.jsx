@@ -38,19 +38,19 @@ export default function CardListClient() {
     setCardIndex(getPokeCardIndex());
   }, []);
 
-  // useEffect(() => {
-  //   console.log('@@@@@@@@@@@');
-  //   const position = sessionStorage.getItem('pos');
+  useEffect(() => {
+    console.log('@@@@@@@@@@@');
+    const position = sessionStorage.getItem('pos');
 
-  //   if (!isLoading && position) {
-  //     // sessionStorage.removeItem('pos');
-  //     // console.log(position);
+    if (!isLoading && position) {
+      // sessionStorage.removeItem('pos');
+      // console.log(position);
       
-  //     window.scrollTo({ top: position });
-  //     // sessionStorage.removeItem('pos');
-  //     // console.log('removeItem');
-  //   }
-  // }, []);
+      window.scrollTo({ top: position });
+      // sessionStorage.removeItem('pos');
+      // console.log('removeItem');
+    }
+  }, []);
 
   // useEffect(() => {
   //   const handleBeforeUnload = () => {
