@@ -34,9 +34,9 @@ export default function CardListClient() {
     }
   }, [isIntersecting]);
 
-  useLayoutEffect(() => {
-    setCardIndex(getPokeCardIndex());
-  }, []);
+  // useLayoutEffect(() => {
+  //   setCardIndex(getPokeCardIndex());
+  // }, []);
 
   // useEffect(() => {
   //   console.log('@@@@@@@@@@@');
@@ -70,7 +70,7 @@ export default function CardListClient() {
       >
 
         {(isLoading) ? (
-          <CardListSkelton cardIndex={cardIndex} />
+          <div />
         ) : (
           <>
             {/* {initialPokeData.map((basicInfo, index) => (

@@ -1,8 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useOptimistic } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { setPokeCardIndex } from '@/app/actions/action';
 import { useLanguage } from '@/app/language-provider';
 import usePokeCardIndex from '@/app/hooks/usePokeCardIndex';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
@@ -27,6 +29,36 @@ function Types({ types }) {
         </div>
       ))}
     </div>
+  );
+}
+
+function FormButton({ info }) {
+  const {
+    name, sprity, types, no, form, pokeKey, order,
+  } = info;
+
+  const sprityUrl = `${SPRITY_BASE_URL}/${sprity}`;
+  const setPokeCardIndexWithOrder = setPokeCardIndex.bind(null, info);
+
+  return (
+    <form action={setPokeCardIndexWithOrder}>
+      <button type="submit">
+        <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center poke-card">
+          <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
+            <Image
+              src={sprityUrl}
+              alt={name.en}
+              fill
+              sizes="80px"
+              style={{
+                objectFit: 'contain',
+              }}
+              priority
+            />
+          </div>
+        </div>
+      </button>
+    </form>
   );
 }
 
@@ -59,7 +91,8 @@ export default function Card({ basicInfo }) {
         <div className="text-sm text-slate-600 font-semibold">
           {`No.${no}`}
         </div>
-        <Link href={`detail/${pokeKey}`} onClick={handleClick}>
+        <FormButton info={basicInfo} />
+        {/* <Link href={`detail/${pokeKey}`} onClick={handleClick}>
           <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center poke-card">
             <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
               <Image
@@ -74,7 +107,7 @@ export default function Card({ basicInfo }) {
               />
             </div>
           </div>
-        </Link>
+        </Link> */}
       </div>
       <div className="flex flex-col justify-between flex-1">
         <div className="flex flex-col">
