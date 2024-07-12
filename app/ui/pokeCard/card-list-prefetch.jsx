@@ -36,6 +36,8 @@ function PrefetchCardList({ setIsPreFetch }) {
     if (info) {
       const { index } = JSON.parse(info);
       preFetch(index);
+    } else {
+      setIsPreFetch(false);
     }
   }, []);
 
