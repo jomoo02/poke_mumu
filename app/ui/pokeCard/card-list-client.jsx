@@ -27,12 +27,12 @@ export default function CardListClient() {
     pokeData: pokeDatas, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading,
   } = usePokeInfiniteQuery();
 
-  useEffect(() => {
-    if (hasNextPage && isIntersecting && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-    console.log(pokeDatas);
-  }, [isIntersecting]);
+  // useEffect(() => {
+  //   if (hasNextPage && isIntersecting && !isFetchingNextPage) {
+  //     fetchNextPage();
+  //   }
+  //   console.log(pokeDatas);
+  // }, [isIntersecting]);
 
   // useEffect(() => {
   //   if (!isLoading) {

@@ -62,7 +62,7 @@ function FormButton({ info }) {
   );
 }
 
-export default function Card({ basicInfo }) {
+export default function Card({ basicInfo, cardIndex }) {
   const { language } = useLanguage();
 
   const {
@@ -77,12 +77,15 @@ export default function Card({ basicInfo }) {
   const { saveLocalPoke } = useLocalStorage();
   // const { setPokeCardIndex } = usePokeCardIndex();
 
-  // const handleClick = () => {
-  //   saveLocalPoke(basicInfo);
-  //   setPokeCardIndex(order);
+  const handleClick = () => {
+    saveLocalPoke(basicInfo);
+    // setPokeCardIndex(order);
+    const scroll = window.scrollY;
+    const index = cardIndex;
+    sessionStorage.setItem('pos2', JSON.stringify({ scroll, index }));
 
-  //   // await setPokeCardIndex(basicInfo);
-  // };
+    // await setPokeCardIndex(basicInfo);
+  };
 
   return (
     <Container>
@@ -90,8 +93,8 @@ export default function Card({ basicInfo }) {
         <div className="text-sm text-slate-600 font-semibold">
           {`No.${no}`}
         </div>
-        <FormButton info={basicInfo} />
-        {/* <Link
+        {/* <FormButton info={basicInfo} /> */}
+        <Link
           onClick={handleClick}
           href={`/detail/${pokeKey}`}
         >
@@ -109,7 +112,7 @@ export default function Card({ basicInfo }) {
               />
             </div>
           </div>
-        </Link> */}
+        </Link>
       </div>
       <div className="flex flex-col justify-between flex-1">
         <div className="flex flex-col">

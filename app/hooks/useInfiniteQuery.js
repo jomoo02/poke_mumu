@@ -1,4 +1,4 @@
-import { QueryClient, useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useInfiniteQuery, useQueryClient, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { fetchPokes } from '../api/data';
 import { useEffect } from 'react';
 import usePokeCardIndex from './usePokeCardIndex';
@@ -43,7 +43,7 @@ export default function usePokeInfiniteQuery() {
     isFetchingNextPage,
     status,
     isLoading,
-  } = useInfiniteQuery({
+  } = useSuspenseInfiniteQuery({
     queryKey,
     queryFn: fetchPokeQuery,
     initialPageParam: 0,
