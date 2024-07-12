@@ -1,10 +1,12 @@
 'use client';
 
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, Suspense, lazy } from 'react';
 import PokeCardSkelton from './card-skeleton';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import fetchPokes from '../../actions/getData';
 import Card from './card';
+
+const LasyCard = lazy(() => import('./card'));
 
 function CardListSkelton() {
   return (
@@ -54,15 +56,18 @@ function PrefetchCardList({ setIsPreFetch }) {
 
   return (
     <>
-      {!isLoaded && <CardListSkelton />}
+      {/* {!isLoaded && <CardListSkelton />} */}
       {pokeDatas?.map((data, index) => (
         <Fragment key={`pokeIndex-${index}`}>
           {data.map((basicInfo, index1) => (
-            <Card
-              key={basicInfo.id}
-              basicInfo={basicInfo}
-              cardIndex={index}
-            />
+            <Suspense fallback={<PokeCardSkelton />} key={`${basicInfo.id}-sus-${index1}`}>
+              <LasyCard
+                key={basicInfo.id}
+                basicInfo={basicInfo}
+                cardIndex={index}
+              />
+            </Suspense>
+
           ))}
         </Fragment>
       ))}
