@@ -21,7 +21,7 @@ export default async function Page() {
 
   await queryClient.prefetchInfiniteQuery({
     queryKey: ['pokeCardData'],
-    queryFn: fetchPokeQuery,
+    queryFn: (info) => fetchPokeQuery(info),
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages, lastPageParam) => {
       const pageParm = Number(lastPageParam);
@@ -32,6 +32,7 @@ export default async function Page() {
   });
 
   return (
+    // <CardListClient />
     <HydrationBoundary state={dehydrate(queryClient)}>
       <CardListClient />
     </HydrationBoundary>

@@ -75,11 +75,14 @@ export default function Card({ basicInfo }) {
   const pokeForm = form[language] || form.en;
 
   const { saveLocalPoke } = useLocalStorage();
+  // const { setPokeCardIndex } = usePokeCardIndex();
 
-  const handleClick = () => {
-    saveLocalPoke(basicInfo);
-    // await setPokeCardIndex(basicInfo);
-  };
+  // const handleClick = () => {
+  //   saveLocalPoke(basicInfo);
+  //   setPokeCardIndex(order);
+
+  //   // await setPokeCardIndex(basicInfo);
+  // };
 
   return (
     <Container>
