@@ -59,7 +59,7 @@ export default function CardListClient() {
       <div
         className="w-full grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 sm:gap-x-4 gap-y-3 sm:gap-y-4 justify-center items-center"
       >
-        <Suspense fallback={<CardListSkelton />}>
+        {/* <Suspense fallback={<CardListSkelton />}>
           {pokeDatas.pages.map((pages, index) => (
             <Fragment key={pokeDatas.pageParams[index]}>
               {pages.map((basicInfo) => (
@@ -70,7 +70,17 @@ export default function CardListClient() {
               ))}
             </Fragment>
           ))}
-        </Suspense>
+        </Suspense> */}
+        {pokeDatas.pages.map((pages, index) => (
+          <Fragment key={`${index}-Fragment`}>
+            {pages.map((basicInfo) => (
+              <Card
+                key={basicInfo.id}
+                basicInfo={basicInfo}
+              />
+            ))}
+          </Fragment>
+        ))}
         {hasNextPage && isFetchingNextPage ? <CardListSkelton /> : null}
       </div>
       <div ref={ref} />

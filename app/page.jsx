@@ -7,7 +7,19 @@ import CardListPrefetch from './ui/pokeCard/card-list-prefetch';
 import { fetchPokes, fetchAllPoke } from './api/data';
 import ScrollTop from './ui/scrollTop';
 import getQueryClient from './query-get-client';
+import PokeCardSkelton from './ui/pokeCard/card-skeleton';
 
+function CardListSkelton() {
+  return (
+    <div
+      className="w-full grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 sm:gap-x-4 gap-y-3 sm:gap-y-4 justify-center items-center"
+    >
+      {Array.from({ length: 240 }, (_, index) => (
+        <PokeCardSkelton key={`card-${index}`} />
+      ))}
+    </div>
+  );
+}
 async function fetchPokeQuery({ pageParam }) {
   console.log('prefetch: ', pageParam);
   const res = await fetchPokes(pageParam);
@@ -37,9 +49,13 @@ export default function Page() {
 
   return (
     // <CardListClient />
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <CardListClient />
-    </HydrationBoundary>
+    <Suspense fallback={<CardListSkelton />}>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <CardListClient />
+      </HydrationBoundary>
+    </Suspense>
+
+
 
     // <>
     //   <ScrollTop />

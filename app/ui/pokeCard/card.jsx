@@ -90,7 +90,7 @@ export default function Card({ basicInfo, cardIndex }) {
     const index = cardIndex;
     sessionStorage.setItem('pos2', JSON.stringify({ scroll, index }));
 
-    // await setPokeCardIndex(basicInfo);
+    setPokeCardIndex(basicInfo);
   };
 
   return (
