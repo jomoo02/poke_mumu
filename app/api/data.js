@@ -1,5 +1,6 @@
 'use server';
 
+import { cache } from 'react';
 import PokeModel from '../models/Poke.mjs';
 import dbConnect from './db/connect.ts';
 
@@ -84,6 +85,25 @@ export async function fetchPokes(index) {
     return [];
   }
 }
+
+export const fetchPokesRange = cache(async (start, end) => {
+  await dbConnect();
+
+  const s = (start * 240) + 1;
+  const e = (end * 240) + 240;
+
+  const query = { order: { $gte: s, $lte: e } };
+  const projection = {
+    _id: 0,
+  };
+
+  const result = await PokeModel
+    .find(query, projection)
+    .sort({ order: 1 })
+    .lean();
+
+  return result;
+});
 
 export async function fetchSurroundingPokes(order) {
   try {

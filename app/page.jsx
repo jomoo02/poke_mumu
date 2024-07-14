@@ -4,10 +4,11 @@ import { cookies } from 'next/headers';
 import CardList from './ui/pokeCard/card-list';
 import CardListClient from './ui/pokeCard/card-list-client';
 import CardListPrefetch from './ui/pokeCard/card-list-prefetch';
-import { fetchPokes, fetchAllPoke } from './api/data';
+import { fetchPokes, fetchAllPoke, fetchPokesRange } from './api/data';
 import ScrollTop from './ui/scrollTop';
 import getQueryClient from './query-get-client';
 import PokeCardSkelton from './ui/pokeCard/card-skeleton';
+import PokeCardListV2 from './ui/pokeCard/card-list-v2';
 
 function CardListSkelton() {
   return (
@@ -26,41 +27,42 @@ async function fetchPokeQuery({ pageParam }) {
   return res;
 }
 
-export default function Page() {
-  // const initialData = await fetchPokes(0);
-  const cookieStore = cookies();
-  const index = cookieStore.get('poke-card-index');
-  const pageCounts = Number(index?.value) + 2 || 1;
+export default async function Page() {
+  const initialData = await fetchAllPoke();
 
-  const queryClient = getQueryClient();
-  // const queryClient = new QueryClient();
+  // const cookieStore = cookies();
+  // const index = cookieStore.get('poke-card-index');
+  // const pageCounts = Number(index?.value) + 2 || 1;
 
-  queryClient.prefetchInfiniteQuery({
-    queryKey: ['pokeCardData'],
-    queryFn: (info) => fetchPokeQuery(info),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, pages, lastPageParam) => {
-      const pageParm = Number(lastPageParam);
-      if (pageParm >= 4) return undefined;
-      return pageParm + 1;
-    },
-    pages: pageCounts,
-  });
+  // const queryClient = getQueryClient();
+  // // const queryClient = new QueryClient();
+
+  // queryClient.prefetchInfiniteQuery({
+  //   queryKey: ['pokeCardData'],
+  //   queryFn: (info) => fetchPokeQuery(info),
+  //   initialPageParam: 0,
+  //   getNextPageParam: (lastPage, pages, lastPageParam) => {
+  //     const pageParm = Number(lastPageParam);
+  //     if (pageParm >= 4) return undefined;
+  //     return pageParm + 1;
+  //   },
+  //   pages: pageCounts,
+  // });
 
   return (
     // <CardListClient />
-    <Suspense fallback={<CardListSkelton />}>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <CardListClient />
-      </HydrationBoundary>
-    </Suspense>
 
-
+    // <Suspense fallback={<CardListSkelton />}>
+    //   <HydrationBoundary state={dehydrate(queryClient)}>
+    //     <CardListClient />
+    //   </HydrationBoundary>
+    // </Suspense>
 
     // <>
     //   <ScrollTop />
     //   <CardListPrefetch initialData={initialData} />
     // </>
+    <PokeCardListV2 initialData={initialData} />
 
   );
 }

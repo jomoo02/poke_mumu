@@ -4,14 +4,15 @@ import React, { Fragment, useEffect, useState, Suspense, lazy } from 'react';
 import PokeCardSkelton from './card-skeleton';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import fetchPokes from '../../actions/getData';
+import { fetchPokesRange } from '../../api/data';
 import Card from './card';
 
 const LasyCard = lazy(() => import('./card'));
 
-function CardListSkelton() {
+function CardListSkelton({ count = 1 }) {
   return (
     <>
-      {Array.from({ length: 240 }, (_, index) => (
+      {Array.from({ length: 240 * count }, (_, index) => (
         <PokeCardSkelton key={`card-${index}`} />
       ))}
     </>
@@ -23,10 +24,9 @@ function PrefetchCardList({ setIsPreFetch }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const preFetch = async (n) => {
-    const cardIndexs = Array.from({ length: n }, (_, i) => i + 1);
-
-    const datas = await Promise.all(cardIndexs.map(fetchPokes));
-
+    const datas = await fetchPokesRange(0, n);
+    console.log(datas);
+    // setPokeDats([[...initialData], ...datas]);
     setPokeDats(datas);
     setIsLoaded(true);
     console.log(datas);
@@ -54,10 +54,23 @@ function PrefetchCardList({ setIsPreFetch }) {
     }
   }, [isLoaded]);
 
+  if (!isLoaded) {
+    return (
+      <CardListSkelton count={2} />
+    );
+  }
+
   return (
     <>
       {/* {!isLoaded && <CardListSkelton />} */}
-      {pokeDatas?.map((data, index) => (
+      {pokeDatas?.map((basicInfo) => (
+        <LasyCard
+          key={basicInfo.id}
+          basicInfo={basicInfo}
+          cardIndex={1}
+        />
+      ))}
+      {/* {pokeDatas?.map((data, index) => (
         <Fragment key={`pokeIndex-${index}`}>
           {data.map((basicInfo, index1) => (
             <Suspense fallback={<PokeCardSkelton />} key={`${basicInfo.id}-sus-${index1}`}>
@@ -70,7 +83,7 @@ function PrefetchCardList({ setIsPreFetch }) {
 
           ))}
         </Fragment>
-      ))}
+      ))} */}
     </>
   );
 }
@@ -79,18 +92,18 @@ export default function CardListPrefetch({ initialData }) {
   const { isIntersecting, ref } = useIntersectionObserver();
   const [pokeDatas, setPokeDatas] = useState([]);
   const [hasNext, setHasNext] = useState(true);
-  const [pokeIndex, setPokeIndex] = useState(1);
+  const [pokeIndex, setPokeIndex] = useState(0);
   const [isLoad, setIsLoad] = useState(false);
 
   const [isPreFetch, setIsPreFetch] = useState(true);
-
+  console.log(initialData);
   const load = async () => {
     if (hasNext) {
-      console.log(pokeIndex);
-      const data = await fetchPokes(pokeIndex);
+      const curIndex = pokeIndex + 1;
+      const data = await fetchPokes(curIndex);
 
       setPokeDatas((d) => [...d, ...data]);
-      const curIndex = pokeIndex + 1;
+
       setPokeIndex(curIndex);
 
       if (curIndex >= 5) {
@@ -104,7 +117,7 @@ export default function CardListPrefetch({ initialData }) {
     const info = sessionStorage.getItem('pos2');
     if (info) {
       const { index } = JSON.parse(info);
-      setPokeIndex(index + 1);
+      setPokeIndex(index);
     }
   }, []);
 
@@ -144,13 +157,7 @@ export default function CardListPrefetch({ initialData }) {
   return (
     <div>
       <div className="grid grid-cols-4">
-        {initialData.map((data) => (
-          <Card
-            key={data.id}
-            basicInfo={data}
-            cardIndex={pokeIndex}
-          />
-        ))}
+        {/* <InitialCardList initialData={initialData} /> */}
         <PrefetchCardList setIsPreFetch={setIsPreFetch} />
         {pokeDatas.map((data) => (
           <Card
