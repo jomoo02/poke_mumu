@@ -45,7 +45,7 @@ export default function usePokeInfiniteQuery() {
     isLoading,
   } = useSuspenseInfiniteQuery({
     queryKey,
-    queryFn: fetchPokeQuery,
+    queryFn: (info) => fetchPokeQuery(info),
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages, lastPageParam) => {
       const pageParam = Number(lastPageParam);

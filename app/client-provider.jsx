@@ -18,11 +18,6 @@ function makeQueryClient() {
     dehydrate: {
       shouldDehydrateQuery: (query) => defaultShouldDehydrateQuery(query)
         || query.state.status === 'pending',
-      serializeData: (data) => JSON.stringify(data),
-    },
-
-    hydrate: {
-      deserializeData: (data) => JSON.parse(data),
     },
   });
 }

@@ -39,9 +39,15 @@ function FormButton({ info }) {
 
   const sprityUrl = `${SPRITY_BASE_URL}/${sprity}`;
   const setPokeCardIndexWithOrder = setPokeCardIndex.bind(null, info);
+  const router = useRouter();
 
   return (
-    <form action={setPokeCardIndexWithOrder}>
+    <form
+      action={async () => {
+        await setPokeCardIndexWithOrder();
+        // router.push(`/detail/${pokeKey}`);
+      }}
+    >
       <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center poke-card">
         <button type="submit">
           <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
@@ -93,8 +99,8 @@ export default function Card({ basicInfo, cardIndex }) {
         <div className="text-sm text-slate-600 font-semibold">
           {`No.${no}`}
         </div>
-        {/* <FormButton info={basicInfo} /> */}
-        <Link
+        <FormButton info={basicInfo} />
+        {/* <Link
           onClick={handleClick}
           href={`/detail/${pokeKey}`}
         >
@@ -112,7 +118,7 @@ export default function Card({ basicInfo, cardIndex }) {
               />
             </div>
           </div>
-        </Link>
+        </Link> */}
       </div>
       <div className="flex flex-col justify-between flex-1">
         <div className="flex flex-col">

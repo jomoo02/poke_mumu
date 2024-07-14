@@ -23,7 +23,7 @@ function PrefetchCardList({ setIsPreFetch }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const preFetch = async (n) => {
-    const cardIndexs = Array.from({ length: n + 1 }, (_, i) => i);
+    const cardIndexs = Array.from({ length: n }, (_, i) => i + 1);
 
     const datas = await Promise.all(cardIndexs.map(fetchPokes));
 
@@ -75,11 +75,11 @@ function PrefetchCardList({ setIsPreFetch }) {
   );
 }
 
-export default function CardListPrefetch() {
+export default function CardListPrefetch({ initialData }) {
   const { isIntersecting, ref } = useIntersectionObserver();
   const [pokeDatas, setPokeDatas] = useState([]);
   const [hasNext, setHasNext] = useState(true);
-  const [pokeIndex, setPokeIndex] = useState(0);
+  const [pokeIndex, setPokeIndex] = useState(1);
   const [isLoad, setIsLoad] = useState(false);
 
   const [isPreFetch, setIsPreFetch] = useState(true);
@@ -144,6 +144,13 @@ export default function CardListPrefetch() {
   return (
     <div>
       <div className="grid grid-cols-4">
+        {initialData.map((data) => (
+          <Card
+            key={data.id}
+            basicInfo={data}
+            cardIndex={pokeIndex}
+          />
+        ))}
         <PrefetchCardList setIsPreFetch={setIsPreFetch} />
         {pokeDatas.map((data) => (
           <Card

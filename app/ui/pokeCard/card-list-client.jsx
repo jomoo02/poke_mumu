@@ -27,12 +27,12 @@ export default function CardListClient() {
     pokeData: pokeDatas, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading,
   } = usePokeInfiniteQuery();
 
-  // useEffect(() => {
-  //   if (hasNextPage && isIntersecting && !isFetchingNextPage) {
-  //     fetchNextPage();
-  //   }
-  //   console.log(pokeDatas);
-  // }, [isIntersecting]);
+  useEffect(() => {
+    if (hasNextPage && isIntersecting && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+    console.log(pokeDatas);
+  }, [isIntersecting]);
 
   // useEffect(() => {
   //   if (!isLoading) {
@@ -60,7 +60,7 @@ export default function CardListClient() {
         className="w-full grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 sm:gap-x-4 gap-y-3 sm:gap-y-4 justify-center items-center"
       >
         <Suspense fallback={<CardListSkelton />}>
-          {pokeDatas?.pages.map((pages, index) => (
+          {pokeDatas.pages.map((pages, index) => (
             <Fragment key={pokeDatas.pageParams[index]}>
               {pages.map((basicInfo) => (
                 <Card
