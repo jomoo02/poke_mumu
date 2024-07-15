@@ -22,7 +22,7 @@ const gridComponents = {
   )),
 };
 
-gridComponents.displayName = 'gridComponents';
+gridComponents.List.displayName = 'List';
 
 export default function CardListV3({ initialData }) {
   const [curIndex, setCurIndex] = useState(() => {
