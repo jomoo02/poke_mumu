@@ -9,6 +9,7 @@ import ScrollTop from './ui/scrollTop';
 import getQueryClient from './query-get-client';
 import PokeCardSkelton from './ui/pokeCard/card-skeleton';
 import PokeCardListV2 from './ui/pokeCard/card-list-v2';
+import PokeCardListV3 from './ui/pokeCard/card-list-v3';
 
 function CardListSkelton() {
   return (
@@ -62,7 +63,8 @@ export default async function Page() {
     //   <ScrollTop />
     //   <CardListPrefetch initialData={initialData} />
     // </>
-    <PokeCardListV2 initialData={initialData} />
+    // <PokeCardListV2 initialData={initialData} />
+    <PokeCardListV3 initialData={initialData} />
 
   );
 }

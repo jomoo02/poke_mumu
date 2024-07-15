@@ -87,7 +87,7 @@ export default function Card({ basicInfo, cardIndex }) {
     saveLocalPoke(basicInfo);
     // setPokeCardIndex(order);
     const scroll = window.scrollY;
-    const index = cardIndex;
+    const index = order;
     sessionStorage.setItem('pos2', JSON.stringify({ scroll, index }));
 
     // setPokeCardIndex(basicInfo);
