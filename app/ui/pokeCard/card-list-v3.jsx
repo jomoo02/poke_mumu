@@ -1,74 +1,49 @@
 'use client';
 
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import useIntersectionObserver from '@/app/hooks/useIntersectionObserver';
-import { Virtuoso, VirtuosoGrid } from 'react-virtuoso';
-import PokeCardSkelton from './card-skeleton';
-import fetchPokes from '../../api/data';
+import React, { useEffect } from 'react';
+import { VirtuosoGrid } from 'react-virtuoso';
 import Card from './card';
 
-const gridComponents = {
-  List: forwardRef(({ style, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      {...props}
-      style={{
-        ...style,
-      }}
-      className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 sm:gap-x-4 gap-y-3 sm:gap-y-4 justify-center items-center"
-    >
-      {children}
-    </div>
-  )),
-};
-
-gridComponents.List.displayName = 'List';
-
 export default function CardListV3({ initialData }) {
-  const [curIndex, setCurIndex] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const sessionInfo = window?.sessionStorage?.getItem('pos2') || null;
-      if (sessionInfo) {
-        const { index, scroll } = JSON.parse(sessionInfo);
-        return index;
-      }
-    }
-
-    return 0;
-  });
-  const virRef = useRef();
   useEffect(() => {
     const sessionInfo = sessionStorage.getItem('pos2');
 
-    if (sessionInfo && virRef.current) {
-      const { index, scroll } = JSON.parse(sessionInfo);
-      console.log(index, virRef);
-      setCurIndex(index);
-      console.log(scroll);
+    if (sessionInfo) {
+      const { scroll } = JSON.parse(sessionInfo);
+
       setTimeout(() => {
         window.scrollTo({ top: scroll });
-      }, 100);
+      }, 300);
+
+      sessionStorage.removeItem('pos2');
     }
-  }, [virRef]);
+  }, []);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      sessionStorage.setItem('pos2', JSON.stringify({ scroll: window.scrollY }));
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return (() => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    });
+  }, []);
 
   return (
-    <>
-      <VirtuosoGrid
-        ref={virRef}
-        style={{
-          height: 500,
-          width: '100%',
-        }}
-        useWindowScroll
-        data={initialData}
-        totalCount={1196}
-        components={gridComponents}
-        itemContent={(index, basicInfo) => (
-          <Card basicInfo={basicInfo} />
-        )}
-        // initialTopMostItemIndex={curIndex}
-      />
-      <style>{`html, body, #root { margin: 0; padding: 0 }`}</style>
-    </>
+    <VirtuosoGrid
+      style={{
+        height: 800,
+        width: '100%',
+      }}
+      overscan={300}
+      useWindowScroll
+      data={initialData}
+      totalCount={1196}
+      listClassName="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 sm:gap-x-4 gap-y-3 sm:gap-y-4 justify-center items-center"
+      itemContent={(index, basicInfo) => (
+        <Card basicInfo={basicInfo} />
+      )}
+    />
   );
 }

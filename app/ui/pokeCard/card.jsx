@@ -89,8 +89,6 @@ export default function Card({ basicInfo, cardIndex }) {
     const scroll = window.scrollY;
     const index = order;
     sessionStorage.setItem('pos2', JSON.stringify({ scroll, index }));
-
-    // setPokeCardIndex(basicInfo);
   };
 
   return (
@@ -99,7 +97,6 @@ export default function Card({ basicInfo, cardIndex }) {
         <div className="text-sm text-slate-600 font-semibold">
           {`No.${no}`}
         </div>
-        {/* <FormButton info={basicInfo} /> */}
         <Link
           onClick={handleClick}
           href={`/detail/${pokeKey}`}

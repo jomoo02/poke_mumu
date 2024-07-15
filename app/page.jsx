@@ -10,6 +10,9 @@ import getQueryClient from './query-get-client';
 import PokeCardSkelton from './ui/pokeCard/card-skeleton';
 import PokeCardListV2 from './ui/pokeCard/card-list-v2';
 import PokeCardListV3 from './ui/pokeCard/card-list-v3';
+import PokeCardListV4 from './ui/pokeCard/card-list-v4';
+import PokeCardListV5 from './ui/pokeCard/card-list-v5';
+import CardListV5 from './ui/pokeCard/card-list-v5';
 
 function CardListSkelton() {
   return (
@@ -28,15 +31,13 @@ async function fetchPokeQuery({ pageParam }) {
   return res;
 }
 
-export default async function Page() {
-  const initialData = await fetchAllPoke();
-
+export default function Page() {
   // const cookieStore = cookies();
   // const index = cookieStore.get('poke-card-index');
   // const pageCounts = Number(index?.value) + 2 || 1;
 
-  // const queryClient = getQueryClient();
-  // // const queryClient = new QueryClient();
+
+  // const queryClient = new QueryClient();
 
   // queryClient.prefetchInfiniteQuery({
   //   queryKey: ['pokeCardData'],
@@ -49,6 +50,12 @@ export default async function Page() {
   //   },
   //   pages: pageCounts,
   // });
+
+  const queryClient = getQueryClient();
+  queryClient.prefetchQuery({
+    queryKey: ['pre'],
+    queryFn: fetchAllPoke,
+  });
 
   return (
     // <CardListClient />
@@ -64,7 +71,17 @@ export default async function Page() {
     //   <CardListPrefetch initialData={initialData} />
     // </>
     // <PokeCardListV2 initialData={initialData} />
-    <PokeCardListV3 initialData={initialData} />
+
+    // <PokeCardListV3 initialData={initialData} />
+
+    // <>
+    //   <h2>pokedex</h2>
+    //   <PokeCardListV4 />
+    // </>
+
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <CardListV5 />
+    </HydrationBoundary>
 
   );
 }
