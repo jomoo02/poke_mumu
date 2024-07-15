@@ -22,6 +22,8 @@ const gridComponents = {
   )),
 };
 
+gridComponents.displayName = 'gridComponents';
+
 export default function CardListV3({ initialData }) {
   const [curIndex, setCurIndex] = useState(() => {
     if (typeof window !== 'undefined') {
