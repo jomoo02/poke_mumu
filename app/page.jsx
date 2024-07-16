@@ -51,11 +51,11 @@ export default function Page() {
   //   pages: pageCounts,
   // });
 
-  const queryClient = getQueryClient();
-  queryClient.prefetchQuery({
-    queryKey: ['pre'],
-    queryFn: fetchAllPoke,
-  });
+  // const queryClient = getQueryClient();
+  // queryClient.prefetchQuery({
+  //   queryKey: ['pre'],
+  //   queryFn: fetchAllPoke,
+  // });
 
   return (
     // <CardListClient />
@@ -74,14 +74,14 @@ export default function Page() {
 
     // <PokeCardListV3 initialData={initialData} />
 
-    // <>
-    //   <h2>pokedex</h2>
-    //   <PokeCardListV4 />
-    // </>
+    <>
+      <h2>pokedex</h2>
+      <PokeCardListV4 />
+    </>
 
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <CardListV5 />
-    </HydrationBoundary>
+    // <HydrationBoundary state={dehydrate(queryClient)}>
+    //   <CardListV5 />
+    // </HydrationBoundary>
 
   );
 }

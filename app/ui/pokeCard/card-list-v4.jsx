@@ -46,7 +46,9 @@ export default function CardListV4({ }) {
 
       setTimeout(() => {
         window.scrollTo({ top: scroll });
-      }, 100);
+      }, 200);
+
+      sessionStorage.removeItem('pos2');
     }
   }, [isLoading]);
 

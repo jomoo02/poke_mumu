@@ -7,7 +7,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import Card from './card';
 
 export default function CardListV5() {
-  const { data } = useSuspenseQuery({ queryKey: ['pre'], queryFn: fetchAllPoke });
+  const { data, isFetching } = useSuspenseQuery({ queryKey: ['pre'], queryFn: fetchAllPoke });
   const [visibleRange, setVisibleRange] = useState({
     startIndex: 0,
     endIndex: 0,
@@ -39,6 +39,12 @@ export default function CardListV5() {
       }, 100);
     }
   }, []);
+
+  if (isFetching) {
+    return (
+      <div>...fetching</div>
+    );
+  }
 
   return (
     <VirtuosoGrid
