@@ -28,13 +28,13 @@ export default function CardListV4({ }) {
   } = usePokeInfiniteQuery(setData);
 
   useEffect(() => {
-    const handleBeforeUnload = () => {
+    const handlePageHide = () => {
       sessionStorage.setItem('pos2', JSON.stringify({ scroll: window.scrollY, index: visibleRange.endIndex }));
     };
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('pagehide', handlePageHide);
 
     return (() => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('pagehide', handlePageHide);
     });
   }, [visibleRange]);
 
