@@ -38,7 +38,7 @@ export default function usePokeInfiniteQuery(setData) {
       preFetch(cardIndex);
     }
 
-    preFetch();
+    // preFetch();
   }, []);
 
   const {

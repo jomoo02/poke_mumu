@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { VirtuosoGrid } from 'react-virtuoso';
 import usePokeInfiniteQuery from '@/app/hooks/useInfiniteQuery';
 import Card from './card';
@@ -46,17 +46,18 @@ export default function CardListV4({ }) {
 
       setTimeout(() => {
         window.scrollTo({ top: scroll });
-      }, 200);
+        console.log('scrolled');
+      }, 300);
 
       sessionStorage.removeItem('pos2');
     }
   }, [isLoading]);
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="w-10 h-10 bg-blue-100">loading</div>
-  //   );
-  // }
+  if (isLoading && isFetching) {
+    return (
+      <CardListSkelton />
+    );
+  }
 
   return (
     <VirtuosoGrid
@@ -64,7 +65,7 @@ export default function CardListV4({ }) {
         height: 800,
         width: '100%',
       }}
-      overscan={300}
+      overscan={200}
       useWindowScroll
       data={data}
       totalCount={1198}

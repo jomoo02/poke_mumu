@@ -13,6 +13,7 @@ import PokeCardListV3 from './ui/pokeCard/card-list-v3';
 import PokeCardListV4 from './ui/pokeCard/card-list-v4';
 import PokeCardListV5 from './ui/pokeCard/card-list-v5';
 import CardListV5 from './ui/pokeCard/card-list-v5';
+import PokeCardListV6 from './ui/pokeCard/card-list-v6';
 
 function CardListSkelton() {
   return (
@@ -31,7 +32,8 @@ async function fetchPokeQuery({ pageParam }) {
   return res;
 }
 
-export default function Page() {
+export default async function Page() {
+  const data = await fetchAllPoke();
   // const cookieStore = cookies();
   // const index = cookieStore.get('poke-card-index');
   // const pageCounts = Number(index?.value) + 2 || 1;
@@ -74,9 +76,14 @@ export default function Page() {
 
     // <PokeCardListV3 initialData={initialData} />
 
+    // <>
+    //   <h2>pokedex</h2>
+    //   <PokeCardListV4 />
+    // </>
+
     <>
-      <h2>pokedex</h2>
-      <PokeCardListV4 />
+      <h2>pokeListV6</h2>
+      <PokeCardListV6 initialData={data} />
     </>
 
     // <HydrationBoundary state={dehydrate(queryClient)}>

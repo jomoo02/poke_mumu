@@ -37,10 +37,7 @@ export default function RootLayout({ children, modal }) {
               {modal}
             </div>
             <main className="px-2.5 xs:px-4 sm:px-8 md:px-10 py-10 min-h-svh">
-              <Suspense fallback={<CardListSkelton />}>
-                {children}
-              </Suspense>
-
+              {children}
             </main>
             <div id="modal" />
             <footer className="h-32" />

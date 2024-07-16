@@ -4,24 +4,24 @@ import { cache } from 'react';
 import PokeModel from '../models/Poke.mjs';
 import dbConnect from './db/connect.ts';
 
-// export async function fetchPoke(order) {
-//   try {
-//     await dbConnect();
+export async function fetchPoke(order) {
+  try {
+    await dbConnect();
 
-//     const query = { order };
-//     const projection = {
-//       _id: 0,
-//     };
-//     const result = await PokeModel
-//       .findOne(query, projection)
-//       .lean();
+    const query = { order };
+    const projection = {
+      _id: 0,
+    };
+    const result = await PokeModel
+      .findOne(query, projection)
+      .lean();
 
-//     return result;
-//   } catch (error) {
-//     console.error(error);
-//     return '';
-//   }
-// }
+    return result;
+  } catch (error) {
+    console.error(error);
+    return '';
+  }
+}
 
 export async function fetchPokeKey(pokeKey) {
   try {
