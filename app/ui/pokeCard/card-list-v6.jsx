@@ -10,6 +10,8 @@ import Card from './card';
 
 const PokeCard = memo(({ basicInfo }) => <Card basicInfo={basicInfo} />);
 
+PokeCard.displayName = 'PokeCard';
+
 function CardListSkelton({ count = 1 }) {
   return (
     <>
@@ -19,7 +21,6 @@ function CardListSkelton({ count = 1 }) {
     </>
   );
 }
-
 
 function Footer({ isFetching, hasNextPage }) {
   if (isFetching) {
