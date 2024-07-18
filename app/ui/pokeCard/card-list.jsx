@@ -12,11 +12,11 @@ PokeCard.displayName = 'PokeCard';
 
 export default function PokeCardList({ initialData }) {
   const [isLoading, setIsLoading] = useState(true);
-  const { getScrollPosition } = useScrollRestoration();
+  const { setScrollPosition, getScrollPosition } = useScrollRestoration();
 
   useEffect(() => {
     const handlePageHide = () => {
-      sessionStorage.setItem('pos2', JSON.stringify({ scroll: window.scrollY }));
+      setScrollPosition(window.scrollY);
     };
 
     window.addEventListener('pagehide', handlePageHide);
@@ -43,7 +43,6 @@ export default function PokeCardList({ initialData }) {
     <VirtuosoGrid
       style={{
         height: 500,
-        width: '100%',
       }}
       overscan={300}
       data={initialData}
