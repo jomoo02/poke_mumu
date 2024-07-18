@@ -2,7 +2,7 @@
 
 import { checkTextLanguageKo, checkTextNumberType } from '../lib/utils';
 import PokeModel from '../models/Poke.mjs';
-import dbConnect from './db/connect';
+import dbConnect from './db/connect.ts';
 
 function decideSearchQuery(text) {
   const isTextNumber = checkTextNumberType(text);

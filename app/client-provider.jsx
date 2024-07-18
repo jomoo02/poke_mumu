@@ -2,7 +2,6 @@
 
 import React from 'react';
 import {
-  defaultShouldDehydrateQuery,
   isServer,
   QueryClient,
   QueryClientProvider,
@@ -15,10 +14,6 @@ function makeQueryClient() {
         staleTime: 60 * 1000,
       },
     },
-    // dehydrate: {
-    //   shouldDehydrateQuery: (query) => defaultShouldDehydrateQuery(query)
-    //     || query.state.status === 'pending',
-    // },
   });
 }
 

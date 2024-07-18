@@ -1,13 +1,11 @@
 'use client';
 
-import React, { useOptimistic } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { setPokeCardIndex } from '@/app/actions/action';
 import { useLanguage } from '@/app/language-provider';
-import usePokeCardIndex from '@/app/hooks/usePokeCardIndex';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
+import useScrollRestoration from '@/app/hooks/useScrollRestoration';
 import Type from '../detail/type';
 
 const SPRITY_BASE_URL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
@@ -35,47 +33,11 @@ function Types({ types }) {
   );
 }
 
-function FormButton({ info }) {
-  const {
-    name, sprity, types, no, form, pokeKey, order,
-  } = info;
-
-  const sprityUrl = `${SPRITY_BASE_URL}/${sprity}`;
-  const setPokeCardIndexWithOrder = setPokeCardIndex.bind(null, info);
-  const router = useRouter();
-
-  return (
-    <form
-      action={async () => {
-        await setPokeCardIndexWithOrder();
-        // router.push(`/detail/${pokeKey}`);
-      }}
-    >
-      <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center poke-card">
-        <button type="submit">
-          <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
-            <Image
-              src={sprityUrl}
-              alt={name.en}
-              fill
-              sizes="80px"
-              style={{
-                objectFit: 'contain',
-              }}
-              priority
-            />
-          </div>
-        </button>
-      </div>
-    </form>
-  );
-}
-
-export default function Card({ basicInfo, cardIndex }) {
+export default function Card({ basicInfo }) {
   const { language } = useLanguage();
 
   const {
-    name, sprity, types, no, form, pokeKey, order,
+    name, sprity, types, no, form, pokeKey,
   } = basicInfo;
 
   const sprityUrl = `${SPRITY_BASE_URL}/${sprity}`;
@@ -84,14 +46,11 @@ export default function Card({ basicInfo, cardIndex }) {
   const pokeForm = form[language] || form.en;
 
   const { saveLocalPoke } = useLocalStorage();
-  // const { setPokeCardIndex } = usePokeCardIndex();
+  const { setScrollPosition } = useScrollRestoration();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     saveLocalPoke(basicInfo);
-    // setPokeCardIndex(order);
-    const scroll = window.scrollY;
-    const index = order;
-    sessionStorage.setItem('pos2', JSON.stringify({ scroll, index }));
+    setScrollPosition(window.scrollY);
   };
 
   return (
