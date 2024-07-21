@@ -7,15 +7,22 @@ import Moves from '@/app/ui/detail/moves/moves';
 import Chain from '@/app/ui/detail/chain/chain';
 import Forms from '@/app/ui/detail/forms';
 import { fetchChain } from '@/app/api/chain';
-import { fetchPokeKey } from '@/app/api/data';
+import { fetchAllPoke, fetchPokeKey } from '@/app/api/data';
 import PokeNavigation from '@/app/ui/detail/poke-router/poke-navigation';
-import fetchDetail from '@/app/api/detail';
+import { fetchDetail } from '@/app/api/detail';
 import ScrollTop from '@/app/ui/scrollTop';
 
 export const revalidate = 3600;
 
+export async function generateStaticParams() {
+  const keys = await fetchAllPoke();
+
+  return keys.map((info) => ({ pokeKey: info.pokeKey }));
+}
+
 export default async function DetailPage({ params }) {
-  const pokeKey = params?.pokeKey;
+  // await dbConnect();
+  const { pokeKey } = params;
 
   const [basicInfo, detailInfo] = await Promise.all([fetchPokeKey(pokeKey), fetchDetail(pokeKey)]);
 
