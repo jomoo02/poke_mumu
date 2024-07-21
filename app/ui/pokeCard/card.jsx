@@ -23,12 +23,29 @@ function Container({ children }) {
 
 function Types({ types }) {
   return (
-    <div className="flex gap-x-1 xs:gap-x-2 sm:gap-x-3 w-full">
+    <div className="grid grid-cols-2 gap-x-1 xs:gap-x-2 sm:gap-x-3">
       {types.map((type) => (
-        <div key={type} className="w-1/2">
-          <Type type={type} width="w-full" />
-        </div>
+        <Type type={type} width="w-full" key={type} />
       ))}
+    </div>
+  );
+}
+
+function PokeImage({ src, alt }) {
+  return (
+    <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="80px"
+        style={{
+          objectFit: 'contain',
+        }}
+        priority
+        placeholder="blur"
+        blurDataURL="/pokeball.svg"
+      />
     </div>
   );
 }
@@ -64,18 +81,7 @@ export default function Card({ basicInfo }) {
           href={`/detail/${pokeKey}`}
         >
           <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center poke-card">
-            <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
-              <Image
-                src={sprityUrl}
-                alt={name.en}
-                fill
-                sizes="80px"
-                style={{
-                  objectFit: 'contain',
-                }}
-                priority
-              />
-            </div>
+            <PokeImage src={sprityUrl} alt={name.en} />
           </div>
         </Link>
       </div>

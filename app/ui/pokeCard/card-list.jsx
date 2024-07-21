@@ -3,7 +3,7 @@
 import React, { useState, useEffect, memo } from 'react';
 import { VirtuosoGrid } from 'react-virtuoso';
 import useScrollRestoration from '@/app/hooks/useScrollRestoration';
-import PokeCardSkleton from './card-skeleton';
+import PokeCardSkeleton from './card-skeleton';
 import Card from './card';
 
 const PokeCard = memo(({ basicInfo }) => <Card basicInfo={basicInfo} />);
@@ -33,7 +33,7 @@ export default function PokeCardList({ initialData }) {
       setTimeout(() => {
         window.scrollTo({ top: scrollPosition });
         setIsLoading(false);
-      }, 300);
+      }, 200);
     } else {
       setIsLoading(false);
     }
@@ -47,10 +47,10 @@ export default function PokeCardList({ initialData }) {
       overscan={300}
       data={initialData}
       useWindowScroll
-      totalCount={1198}
+      totalCount={initialData.length}
       itemContent={(_, basicInfo) => {
         if (isLoading) {
-          return <PokeCardSkleton />;
+          return <PokeCardSkeleton />;
         }
         return <PokeCard basicInfo={basicInfo} />;
       }}
