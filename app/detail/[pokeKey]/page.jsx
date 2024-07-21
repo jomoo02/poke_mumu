@@ -12,18 +12,10 @@ import PokeNavigation from '@/app/ui/detail/poke-router/poke-navigation';
 import fetchDetail from '@/app/api/detail';
 import ScrollTop from '@/app/ui/scrollTop';
 
+export const revalidate = 3600;
+
 export default async function DetailPage({ params }) {
   const pokeKey = params?.pokeKey;
-
-  // const basicInfo = await fetchPokeKey(pokeKey);
-
-  // const {
-  //   abilities,
-  //   stats,
-  //   moves,
-  //   forms,
-  //   speciesName,
-  // } = await fetchDetail(pokeKey);
 
   const [basicInfo, detailInfo] = await Promise.all([fetchPokeKey(pokeKey), fetchDetail(pokeKey)]);
 

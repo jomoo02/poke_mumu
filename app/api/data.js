@@ -18,6 +18,20 @@ export const fetchPokeKey = cache(async (pokeKey) => {
   return result;
 });
 
+// export async function fetchPokeKey(pokeKey) {
+//   await dbConnect();
+
+//   const query = { pokeKey };
+//   const projection = {
+//     _id: 0,
+//   };
+//   const result = await PokeModel
+//     .findOne(query, projection)
+//     .lean();
+
+//   return result;
+// }
+
 export const fetchAllPoke = cache(async () => {
   await dbConnect();
 

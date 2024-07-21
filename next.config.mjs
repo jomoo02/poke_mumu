@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
@@ -9,6 +10,19 @@ const nextConfig = {
       },
     ],
     unoptimized: true,
+  },
+  async headers() {
+    return [
+      {
+        source: '/detail/:pokeKey',
+        headers: [
+          {
+            key: 'cache-control',
+            value: 's-maxage=600, stale-while-revalidate=30',
+          },
+        ],
+      },
+    ];
   },
 };
 
