@@ -11,19 +11,6 @@ const nextConfig = {
     ],
     unoptimized: true,
   },
-  async headers() {
-    return [
-      {
-        source: '/detail/:pokeKey',
-        headers: [
-          {
-            key: 'cache-control',
-            value: 's-maxage=600, stale-while-revalidate=30',
-          },
-        ],
-      },
-    ];
-  },
 };
 
 export default nextConfig;
