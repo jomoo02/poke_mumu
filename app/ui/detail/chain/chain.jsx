@@ -18,58 +18,24 @@ const gridColumn = {
   8: 'grid grid-cols-2 lg:grid-cols-4',
 };
 
-function NextChainItem({ nextChainItem, maxDepth, maxWidth }) {
-  if (nextChainItem.length === 0) {
-    return null;
-  }
-
-  return (
-    <div className={`${gridColumn[nextChainItem.length]} gap-y-4`}>
-      {nextChainItem.map(({
-        name, to, detail, id, pokeKey,
-      }) => (
-        <ChainItem
-          key={id}
-          name={name}
-          to={to}
-          detail={detail}
-          id={id}
-          pokeKey={pokeKey}
-          maxDepth={maxDepth}
-          maxWidth={maxWidth}
-        />
-      ))}
-    </div>
-  );
-}
-
 function Detail({ detail, maxDepth, maxWidth }) {
-  if (detail.length === 0) {
-    return null;
-  }
-
-  const getWidth = () => {
+  const width = (() => {
     if (maxWidth === 8) {
       return 'w-full';
-    }
-    if (maxWidth === 4) {
+    } if (maxWidth === 4) {
       return 'w-full md:w-80';
-    }
-    if (maxDepth === 2) {
+    } if (maxDepth === 2) {
       return 'w-full max-w-52 md:w-80 md:max-w-80 lg:w-96 lg:max-w-96';
     }
-    return 'w-full max-w-52 md:w-52 xl:max-w-72 xl:w-72';
-  };
+    return 'w-full max-w-52 md:w-40 lg:w-52 xl:max-w-72 xl:w-72';
+  })();
 
-  const getHeight = () => {
+  const height = (() => {
     if (maxWidth === 8) {
       return 'min-h-40 md:min-h-36';
     }
     return 'min-h-32 md:min-h-28';
-  };
-
-  const width = getWidth();
-  const height = getHeight();
+  })();
 
   return (
     <div className={`flex items-center justify-center px-3.5 ${width} ${height}`}>
@@ -78,21 +44,41 @@ function Detail({ detail, maxDepth, maxWidth }) {
   );
 }
 
+function ChainItemLink({ pokeKey, name }) {
+  const [nameText, subNameText] = (() => {
+    if (name.includes('(')) {
+      const targetIndex = name.indexOf('(');
+      const firstName = name.slice(0, targetIndex);
+      const lastName = name.slice(targetIndex);
+      return [firstName, lastName];
+    }
+
+    return [name];
+  })();
+
+  return (
+    <Link
+      href={`/detail/${pokeKey}`}
+      className="text-center h-10 flex flex-col underline underline-offset-2 hover:text-blue-400"
+    >
+      <span className="text-sm md:text-[15px]">{nameText}</span>
+      {subNameText && <span className="text-xs">{subNameText}</span>}
+    </Link>
+  );
+}
+
 function ChainItem({
-  to, detail, name, id, maxDepth, maxWidth, pokeKey,
+  detail, name, id, maxDepth, maxWidth, pokeKey, to = [],
 }) {
   const { language } = useLanguage();
   const nameLan = language === 'ko' ? name.ko : name.en;
   const src = getSprityUrl(id);
 
-  const containerClass = maxWidth === 8 ? '' : 'md:flex';
-  const flexRowClass = maxWidth === 8 ? 'flex-col' : 'flex-col md:flex-row';
-
   return (
-    <div className={containerClass}>
+    <div className={maxWidth === 8 ? '' : 'md:flex'}>
       <div className="flex justify-center">
-        <div className={`flex justify-center items-center ${flexRowClass}`}>
-          <Detail detail={detail} maxDepth={maxDepth} maxWidth={maxWidth} />
+        <div className={`flex flex-col justify-center items-center ${maxWidth === 8 ? '' : 'md:flex-row'}`}>
+          {detail.length > 0 && <Detail detail={detail} maxDepth={maxDepth} maxWidth={maxWidth} />}
           <div className="min-w-20 max-w-24 xs:w-24 md:w-24 flex flex-col items-center justify-center">
             <div className="w-16 h-16 md:w-20 relative md:h-20">
               <Image
@@ -104,18 +90,22 @@ function ChainItem({
                 style={{ objectFit: 'contain' }}
               />
             </div>
-            <Link href={`/detail/${pokeKey}`} className="text-center h-10 flex flex-col underline underline-offset-2">
-              {nameLan.split('(').map((part, index) => (
-                <span key={part} className={`${index > 0 ? 'text-xs' : 'text-sm md:text-[15px]'}`}>
-                  {index > 0 && '('}
-                  {part}
-                </span>
-              ))}
-            </Link>
+            <ChainItemLink pokeKey={pokeKey} name={nameLan} />
           </div>
         </div>
       </div>
-      <NextChainItem nextChainItem={to} maxDepth={maxDepth} maxWidth={maxWidth} />
+      {to.length > 0 && (
+        <div className={`${gridColumn[to.length]} gap-y-4`}>
+          {to.map((item) => (
+            <ChainItem
+              key={item.id}
+              {...item}
+              maxDepth={maxDepth}
+              maxWidth={maxWidth}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -136,26 +126,20 @@ export default function Chain({ chainData, type }) {
   const title = language === 'ko' ? '진화' : 'Evolution Tree';
 
   return (
-    <div>
+    <>
       <TitleHeader type={type} title={title} />
       <div className={`md:flex justify-center pt-2 pb-1 border-2 border-t-0 ${type}-border rounded-b-sm`}>
-        <div className={gridColumn[chain.length]}>
-          {chain.map(({
-            name, to, detail, id, pokeKey,
-          }) => (
+        <div className={`${gridColumn[chain.length]} md:gap-y-4`}>
+          {chain.map((item) => (
             <ChainItem
-              key={`${id}-${name.en}`}
-              to={to}
-              detail={detail}
-              name={name}
-              id={id}
-              pokeKey={pokeKey}
+              key={`${item.pokeKey}-${item.id}-${item.name.en}`}
+              {...item}
               maxDepth={maxDepth}
               maxWidth={maxWidth}
             />
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }
