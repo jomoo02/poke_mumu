@@ -126,7 +126,7 @@ export default function Chain({ chainData, type }) {
   const title = language === 'ko' ? '진화' : 'Evolution Tree';
 
   return (
-    <>
+    <div>
       <TitleHeader type={type} title={title} />
       <div className={`md:flex justify-center pt-2 pb-1 border-2 border-t-0 ${type}-border rounded-b-sm`}>
         <div className={`${gridColumn[chain.length]} md:gap-y-4`}>
@@ -140,6 +140,6 @@ export default function Chain({ chainData, type }) {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

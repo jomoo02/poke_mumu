@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '@/app/language-provider';
+import sortMovesWithKey from '@/app/lib/move-sort';
 import MethodHeader from '../method-header';
 import Move from '../move';
 
@@ -14,19 +15,28 @@ const defaultFirstRow = {
   text: 'TM',
 };
 
-// const sortMoves = (moves) => [...moves].sort((a, b) => {
-//   const getNumber = (str) => parseInt(str.match(/\d+/), 10) || 0;
-//   return getNumber(a.machine.name) - getNumber(b.machine.name);
-// });
+function SortMoves({ moves, sortOrder }) {
+  const { key, asc } = sortOrder;
 
-const sortMoves = (moves) => [...moves].sort((a, b) => a.machine.number - b.machine.number);
+  const { language } = useLanguage();
 
-const defaultSortOrder = { key: 'machine', asc: true };
+  const sortedMoves = sortMovesWithKey(moves, key, language, asc);
+
+  return (
+    <div className="grid divide-y border-b">
+      {sortedMoves.map(({ machine, move }) => (
+        <Move key={move.name.en} move={move} language={language}>
+          <div className="w-14 text-sm px-2 font-medium">{machine.number}</div>
+        </Move>
+      ))}
+    </div>
+  );
+}
 
 export default function MachineMethodMoves({ moves, machineType }) {
   const { language } = useLanguage();
-  const [sortedMoves, setSortedMoves] = useState(sortMoves(moves));
-  const [sortOrder, setSortOrder] = useState({ ...defaultSortOrder });
+
+  const [sortOrder, setSortOrder] = useState({ key: 'machine', asc: true });
 
   const curMachineType = machineType.toUpperCase();
 
@@ -34,53 +44,27 @@ export default function MachineMethodMoves({ moves, machineType }) {
 
   const firstRow = { ...defaultFirstRow, text: curMachineType };
 
-  const handleSortMoves = (key) => {
+  const handleColumnHeaderClick = (key) => {
     const isAsc = sortOrder.key === key ? !sortOrder.asc : false;
     setSortOrder({ key, asc: isAsc });
-
-    setSortedMoves((beforeMoves) => {
-      if (key === 'machine') {
-        const machineSortedMoves = sortMoves(beforeMoves);
-        return isAsc ? machineSortedMoves : machineSortedMoves.reverse();
-      }
-
-      return [...beforeMoves].sort((a, b) => {
-        if (key === 'move') {
-          return isAsc
-            ? a.move.name[language].localeCompare(b.move.name[language])
-            : b.move.name[language].localeCompare(a.move.name[language]);
-        } if (['type', 'damage_class'].includes(key)) {
-          return isAsc
-            ? a.move[key].localeCompare(b.move[key])
-            : b.move[key].localeCompare(a.move[key]);
-        }
-        return isAsc ? a.move[key] - b.move[key] : b.move[key] - a.move[key];
-      });
-    });
   };
-
-  useEffect(() => {
-    setSortedMoves(sortMoves(moves));
-    setSortOrder({ ...defaultSortOrder });
-  }, [moves]);
 
   return (
     <div className="overflow-hidden">
-      <h3 className="capitalize font-bold text-slate-800 mb-2.5 text-lg">{subTitleText}</h3>
+      <h3 className="capitalize font-bold text-slate-800 mb-2.5 text-lg">
+        {subTitleText}
+      </h3>
       <div className="flex">
         <div className="grid overflow-x-auto py-0.5">
           <MethodHeader
-            onSort={handleSortMoves}
+            onColumnHeaderClick={handleColumnHeaderClick}
             sortOrder={sortOrder}
             firstRow={firstRow}
           />
-          <div className="grid divide-y border-b">
-            {sortedMoves.map(({ machine, move }) => (
-              <Move key={move.name.en} move={move} language={language}>
-                <div className="w-14 text-sm px-2 font-medium">{machine.number}</div>
-              </Move>
-            ))}
-          </div>
+          <SortMoves
+            moves={moves}
+            sortOrder={sortOrder}
+          />
         </div>
       </div>
     </div>

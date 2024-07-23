@@ -31,23 +31,26 @@ const languageContent = {
 };
 
 const specialFormSrcMap = {
-  '666': '/vivillon-icy-snow.png',
+  666: '/vivillon-icy-snow.png',
   '666-meadow': '/vivillon-meadow.png',
-}
+};
 
 function FormInfo({ id, name, language }) {
-  
-  const src = specialFormSrcMap[id] || `${url}/${id}.png`; 
+  const src = specialFormSrcMap[id] || `${url}/${id}.png`;
+
   return (
     <>
-      <Image
-        src={src}
-        width={80}
-        height={80}
-        alt={id}
-        priority
-      />
-      <div className="text-center text-sm font-medium capitalize">{name[language]}</div>
+      <div className="w-20 h-20 relative">
+        <Image
+          src={src}
+          fill
+          alt={id}
+          priority
+        />
+      </div>
+      <div className="text-center text-sm font-medium capitalize">
+        {name[language]}
+      </div>
     </>
   );
 }
@@ -58,7 +61,7 @@ export default function Forms({ forms, name, type }) {
   const formCount = forms?.length || 0;
   const formClass = formClassMap[formCount] || formClassMap[0];
 
-  const { one, many } = languageContent[language];
+  const { one, many } = languageContent[language] || languageContent.ko;
   const title = `${name[language]}${formCount > 1 ? many : one}`;
 
   return (
@@ -66,7 +69,10 @@ export default function Forms({ forms, name, type }) {
       <TitleHeader type={type} title={title} />
       <div className={`border-2 border-t-0 ${type}-border rounded-b-sm px-1 md:px-5 pt-2.5 pb-3.5 ${formClass}`}>
         {forms.map(({ id, name: formName }) => (
-          <div key={`${id}-${formName.en}`} className="flex flex-col justify-center items-center">
+          <div
+            key={`${id}-${formName.en}`}
+            className="flex flex-col justify-center items-center"
+          >
             <FormInfo id={id} name={formName} language={language} />
           </div>
         ))}

@@ -26,7 +26,7 @@ function RouteButton({
   return (
     <Link
       href={`/detail/${pokeKey}`}
-      className={`flex border-2 ${type}-border rounded-lg items-center h-full ${flexDirection}`}
+      className={`flex border-2 ${type}-border rounded-lg items-center h-20 md:h-[5.2rem] ${flexDirection}`}
     >
       <div className={`${iconClassName} h-full flex items-center justify-center px-4`}>
         <IconComponent />
@@ -42,9 +42,7 @@ export default async function PokeNavigation({ order, type }) {
   const { before, next } = await fetchSurroundingPokes(order);
   return (
     <div className="grid gap-y-4 md:flex-row md:grid-cols-2 xl:grid-cols-3 gap-x-12 lg:gap-x-20 xl:gap-x-0">
-      <div>
-        {before && <RouteButton pokeKey={before.pokeKey} direction="before" info={before} type={type} /> }
-      </div>
+      {before && <RouteButton pokeKey={before.pokeKey} direction="before" info={before} type={type} /> }
       <div className="md:col-start-2 xl:col-span-1 xl:col-start-3">
         {next && <RouteButton pokeKey={next.pokeKey} direction="next" info={next} type={type} /> }
       </div>

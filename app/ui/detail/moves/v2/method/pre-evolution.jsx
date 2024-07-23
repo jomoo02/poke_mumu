@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/app/language-provider';
+import sortMovesWithKey from '@/app/lib/move-sort';
 import MethodHeader from '../method-header';
 import Move from '../move';
 
@@ -14,19 +15,6 @@ const defaultFirstRow = {
   width: 'w-[5.5rem]',
   text: 'poke',
 };
-
-const defaultSortOrder = { key: 'preIds', asc: true };
-
-const sortMoves = (moves) => [...moves].sort((a, b) => {
-  const aPreIds = a.preIds;
-  const bPreIds = b.preIds;
-  if (aPreIds.length !== bPreIds.length) {
-    return aPreIds.length - bPreIds.length;
-  }
-  const aSumIds = aPreIds.reduce((acc, cur) => acc + Number(cur), 0);
-  const bSumIds = bPreIds.reduce((acc, cur) => acc + Number(cur), 0);
-  return aSumIds - bSumIds;
-});
 
 function Content({ preIds }) {
   const sprityUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vii/icons';
@@ -68,42 +56,34 @@ function Content({ preIds }) {
   );
 }
 
+function SortMoves({ moves, sortOrder }) {
+  const { key, asc } = sortOrder;
+
+  const { language } = useLanguage();
+
+  const sortedMoves = sortMovesWithKey(moves, key, language, asc);
+
+  return (
+    <div className="grid divide-y border-b">
+      {sortedMoves.map(({ preIds, move }) => (
+        <Move key={move.name.en} move={move} language={language}>
+          <Content preIds={preIds} />
+        </Move>
+      ))}
+    </div>
+  );
+}
+
 export default function TutorMethodMoves({ moves }) {
   const { language } = useLanguage();
-  const [sortedMoves, setSortedMoves] = useState(sortMoves(moves));
-  const [sortOrder, setSortOrder] = useState({ ...defaultSortOrder });
+  const [sortOrder, setSortOrder] = useState({ key: 'preIds', asc: true });
 
   const subTitleText = subTitleLanguageText[language];
 
-  const handleSortMoves = (key) => {
+  const handleColumnHeaderClick = (key) => {
     const isAsc = sortOrder.key === key ? !sortOrder.asc : false;
     setSortOrder({ key, asc: isAsc });
-
-    setSortedMoves((beforeMoves) => {
-      if (key === 'preIds') {
-        const levelSortedMoves = sortMoves(beforeMoves);
-        return isAsc ? levelSortedMoves : levelSortedMoves.reverse();
-      }
-
-      return [...beforeMoves].sort((a, b) => {
-        if (key === 'move') {
-          return isAsc
-            ? a.move.name[language].localeCompare(b.move.name[language])
-            : b.move.name[language].localeCompare(a.move.name[language]);
-        } if (['type', 'damage_class'].includes(key)) {
-          return isAsc
-            ? a.move[key].localeCompare(b.move[key])
-            : b.move[key].localeCompare(a.move[key]);
-        }
-        return isAsc ? a.move[key] - b.move[key] : b.move[key] - a.move[key];
-      });
-    });
   };
-
-  useEffect(() => {
-    setSortedMoves(sortMoves(moves));
-    setSortOrder({ ...defaultSortOrder });
-  }, [moves]);
 
   return (
     <div className="overflow-hidden">
@@ -111,17 +91,11 @@ export default function TutorMethodMoves({ moves }) {
       <div className="flex">
         <div className="grid overflow-x-auto py-0.5">
           <MethodHeader
-            onSort={handleSortMoves}
+            onColumnHeaderClick={handleColumnHeaderClick}
             sortOrder={sortOrder}
             firstRow={defaultFirstRow}
           />
-          <div className="grid divide-y border-b">
-            {sortedMoves.map(({ preIds, move }) => (
-              <Move key={move.name.en} move={move} language={language}>
-                <Content preIds={preIds} />
-              </Move>
-            ))}
-          </div>
+          <SortMoves moves={moves} sortOrder={sortOrder} />
         </div>
       </div>
     </div>

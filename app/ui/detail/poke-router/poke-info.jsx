@@ -30,15 +30,18 @@ export default function PokeInfo({ info }) {
         priority
         onError={handleImageError}
       />
-
       <div className="flex gap-x-1 text-sm md:text-base items-center capitalize">
         <span className="capitalize text-slate-500 font-semibold text-sm">{`no. ${no}`}</span>
         <span className="text-center text-slate-600/90 font-semibold text-[15px]">
-          {name[language]}
-          {form.en !== 'default' && <span>{`(${form[language]})`}</span>}
+          {name[language] || name.en}
+
         </span>
       </div>
-
+      {form.en !== 'default' && (
+        <span className="text-slate-600 font-semibold text-xs leading-3">
+          {`(${form[language]})`}
+        </span>
+      )}
     </div>
   );
 }

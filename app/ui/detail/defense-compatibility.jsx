@@ -44,9 +44,7 @@ function TypeDefenseCompatibility({ types }) {
       {compatibilityValues.map((compatibilityValue) => {
         const curTypes = dfCompatibility[compatibilityValue];
 
-        const gridCols = TYPE_GRID_COLS_MAP[curTypes.length]
-          ? TYPE_GRID_COLS_MAP[curTypes.length] : TYPE_GRID_COLS_MAP[0];
-
+        const gridCols = TYPE_GRID_COLS_MAP[curTypes.length] || TYPE_GRID_COLS_MAP[0];
         const isFlexAuto = curTypes.length <= 4 ? '' : 'flex-auto';
 
         return (

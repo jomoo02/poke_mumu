@@ -64,7 +64,7 @@ function CaretIcon({ isSelect = false, isAsc = false }) {
 }
 
 export default function MethodHeader({
-  onSort, sortOrder, firstRow,
+  onColumnHeaderClick, sortOrder, firstRow,
 }) {
   const { language } = useLanguage();
 
@@ -91,7 +91,7 @@ export default function MethodHeader({
           }
           type="button"
           key={key}
-          onClick={() => onSort(key)}
+          onClick={() => onColumnHeaderClick(key)}
         >
           {text}
           <CaretIcon isSelect={key === sortOrder.key} isAsc={sortOrder.asc} />

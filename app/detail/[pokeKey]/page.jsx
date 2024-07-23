@@ -32,9 +32,9 @@ export default async function DetailPage({ params }) {
   } = detailInfo;
   return (
     <>
-      <Suspense fallback={null}>
+      {/* <Suspense fallback={null}>
         <ScrollTop />
-      </Suspense>
+      </Suspense> */}
       <div className="grid gap-y-12 min-h-screen">
         <PokeNavigation order={order} type={mainType} />
         <BasicInfo basicInfo={basicInfo} />
