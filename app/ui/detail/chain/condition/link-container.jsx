@@ -27,7 +27,8 @@ export function MoveLink({ move, language }) {
 
   return (
     <>
-      <Link href={`move/${move}`} className="underline">{moveText}</Link>
+      {/* <Link href={`move/${move}`} className="underline hover:text-blue-400">{moveText}</Link> */}
+      <span>{moveText}</span>
       {getParticle && <span>{getParticle(move)}</span>}
     </>
   );
@@ -40,7 +41,8 @@ export function ItemLink({ item, language, children }) {
 
   return (
     <>
-      <Link href={`item/${item}`} className="underline">{itemText}</Link>
+      {/* <Link href={`item/${item}`} className="underline hover:text-blue-400">{itemText}</Link> */}
+      <span>{itemText}</span>
       {children}
     </>
   );
@@ -63,7 +65,7 @@ export function PokeLink({ poke, language, children }) {
 
   return (
     <>
-      <Link href={`detail/${poke}`} className="underline">{text}</Link>
+      <Link href={`detail/${poke}`} className="underline hover:text-blue-400">{text}</Link>
       {children}
     </>
   );

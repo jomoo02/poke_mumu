@@ -44,7 +44,6 @@ export default function PokeCardList({ initialData }) {
       style={{
         height: 500,
       }}
-      overscan={300}
       data={initialData}
       useWindowScroll
       totalCount={initialData.length}
