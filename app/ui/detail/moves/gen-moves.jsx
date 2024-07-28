@@ -83,6 +83,7 @@ export default function GenMoves({ genMoves, type }) {
       </div>
       <div className="p-3">
         <VersionMoves
+          key={targetVersion}
           versionMoves={versionMoves}
         />
       </div>
