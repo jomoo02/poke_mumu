@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import Type from '../../type';
+import Type from '../type';
 
 function DamageClass({ damageClass }) {
   const damageClassMap = {

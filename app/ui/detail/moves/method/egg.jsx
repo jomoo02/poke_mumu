@@ -5,11 +5,11 @@ import MethodHeader from '../method-header';
 import Move from '../move';
 
 const subTitleLanguageText = {
-  en: 'move Tutor moves',
-  ko: 'NPC로부터 배울 수 있는 기술',
+  en: 'egg moves',
+  ko: '교배를 통해 유전 받을 수 있는 기술',
 };
 
-function SortMoves({ moves, sortOrder }) {
+function EggMoves({ moves, sortOrder }) {
   const { key, asc } = sortOrder;
 
   const { language } = useLanguage();
@@ -25,11 +25,12 @@ function SortMoves({ moves, sortOrder }) {
   );
 }
 
-export default function LevelUpMethodMoves({ moves }) {
+export default function EggMethodMoves({ moves }) {
   const { language } = useLanguage();
+
   const [sortOrder, setSortOrder] = useState({ key: 'move', asc: true });
 
-  const subTitleText = subTitleLanguageText[language];
+  const subTitleText = subTitleLanguageText[language] || subTitleLanguageText.ko;
 
   const handleColumnHeaderClick = (key) => {
     const isAsc = sortOrder.key === key ? !sortOrder.asc : false;
@@ -47,7 +48,7 @@ export default function LevelUpMethodMoves({ moves }) {
             onColumnHeaderClick={handleColumnHeaderClick}
             sortOrder={sortOrder}
           />
-          <SortMoves moves={moves} sortOrder={sortOrder} />
+          <EggMoves moves={moves} sortOrder={sortOrder} />
         </div>
       </div>
     </div>

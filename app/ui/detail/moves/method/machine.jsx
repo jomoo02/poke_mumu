@@ -4,12 +4,18 @@ import sortMovesWithKey from '@/app/lib/move-sort';
 import MethodHeader from '../method-header';
 import Move from '../move';
 
-const subTitleLanguageText = {
-  en: 'egg moves',
-  ko: '교배를 통해 유전 받을 수 있는 기술',
+const getSubTitleLanguageText = (machineType) => ({
+  en: `moves learnt by ${machineType}`,
+  ko: `기술머신 ${machineType} 으로 익히는 기술`,
+});
+
+const defaultFirstRow = {
+  key: 'machine',
+  width: 'w-14',
+  text: 'TM',
 };
 
-function EggMoves({ moves, sortOrder }) {
+function SortMoves({ moves, sortOrder }) {
   const { key, asc } = sortOrder;
 
   const { language } = useLanguage();
@@ -18,19 +24,25 @@ function EggMoves({ moves, sortOrder }) {
 
   return (
     <div className="grid divide-y border-b">
-      {sortedMoves.map(({ move }) => (
-        <Move key={move.name.en} move={move} language={language} />
+      {sortedMoves.map(({ machine, move }) => (
+        <Move key={move.name.en} move={move} language={language}>
+          <div className="w-14 text-sm px-2 font-medium">{machine.number}</div>
+        </Move>
       ))}
     </div>
   );
 }
 
-export default function EggMethodMoves({ moves }) {
+export default function MachineMethodMoves({ moves, machineType }) {
   const { language } = useLanguage();
 
-  const [sortOrder, setSortOrder] = useState({ key: 'move', asc: true });
+  const [sortOrder, setSortOrder] = useState({ key: 'machine', asc: true });
 
-  const subTitleText = subTitleLanguageText[language];
+  const curMachineType = machineType.toUpperCase();
+
+  const subTitleText = getSubTitleLanguageText(curMachineType)[language] || getSubTitleLanguageText('tm').ko;
+
+  const firstRow = { ...defaultFirstRow, text: curMachineType };
 
   const handleColumnHeaderClick = (key) => {
     const isAsc = sortOrder.key === key ? !sortOrder.asc : false;
@@ -47,8 +59,12 @@ export default function EggMethodMoves({ moves }) {
           <MethodHeader
             onColumnHeaderClick={handleColumnHeaderClick}
             sortOrder={sortOrder}
+            firstRow={firstRow}
           />
-          <EggMoves moves={moves} sortOrder={sortOrder} />
+          <SortMoves
+            moves={moves}
+            sortOrder={sortOrder}
+          />
         </div>
       </div>
     </div>

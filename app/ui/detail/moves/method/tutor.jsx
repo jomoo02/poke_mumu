@@ -4,15 +4,9 @@ import sortMovesWithKey from '@/app/lib/move-sort';
 import MethodHeader from '../method-header';
 import Move from '../move';
 
-const getSubTitleLanguageText = (machineType) => ({
-  en: `moves learnt by ${machineType}`,
-  ko: `기술머신 ${machineType} 으로 익히는 기술`,
-});
-
-const defaultFirstRow = {
-  key: 'machine',
-  width: 'w-14',
-  text: 'TM',
+const subTitleLanguageText = {
+  en: 'move Tutor moves',
+  ko: 'NPC로부터 배울 수 있는 기술',
 };
 
 function SortMoves({ moves, sortOrder }) {
@@ -24,25 +18,18 @@ function SortMoves({ moves, sortOrder }) {
 
   return (
     <div className="grid divide-y border-b">
-      {sortedMoves.map(({ machine, move }) => (
-        <Move key={move.name.en} move={move} language={language}>
-          <div className="w-14 text-sm px-2 font-medium">{machine.number}</div>
-        </Move>
+      {sortedMoves.map(({ move }) => (
+        <Move key={move.name.en} move={move} language={language} />
       ))}
     </div>
   );
 }
 
-export default function MachineMethodMoves({ moves, machineType }) {
+export default function LevelUpMethodMoves({ moves }) {
   const { language } = useLanguage();
+  const [sortOrder, setSortOrder] = useState({ key: 'move', asc: true });
 
-  const [sortOrder, setSortOrder] = useState({ key: 'machine', asc: true });
-
-  const curMachineType = machineType.toUpperCase();
-
-  const subTitleText = getSubTitleLanguageText(curMachineType)[language];
-
-  const firstRow = { ...defaultFirstRow, text: curMachineType };
+  const subTitleText = subTitleLanguageText[language] || subTitleLanguageText.ko;
 
   const handleColumnHeaderClick = (key) => {
     const isAsc = sortOrder.key === key ? !sortOrder.asc : false;
@@ -59,12 +46,8 @@ export default function MachineMethodMoves({ moves, machineType }) {
           <MethodHeader
             onColumnHeaderClick={handleColumnHeaderClick}
             sortOrder={sortOrder}
-            firstRow={firstRow}
           />
-          <SortMoves
-            moves={moves}
-            sortOrder={sortOrder}
-          />
+          <SortMoves moves={moves} sortOrder={sortOrder} />
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ function Content({ preIds }) {
   const sprityUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vii/icons';
   const alterSprityUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
 
-  const initialImageUrls = preIds.map((id) => ({
+  const initialImageUrls = [...new Set(preIds)].map((id) => ({
     id,
     src: `${sprityUrl}/${id}.png`,
     fallback: `${alterSprityUrl}/${id}.png`,
@@ -78,7 +78,7 @@ export default function TutorMethodMoves({ moves }) {
   const { language } = useLanguage();
   const [sortOrder, setSortOrder] = useState({ key: 'preIds', asc: true });
 
-  const subTitleText = subTitleLanguageText[language];
+  const subTitleText = subTitleLanguageText[language] || subTitleLanguageText.ko;
 
   const handleColumnHeaderClick = (key) => {
     const isAsc = sortOrder.key === key ? !sortOrder.asc : false;

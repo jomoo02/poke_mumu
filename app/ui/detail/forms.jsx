@@ -14,7 +14,7 @@ const formClassMap = {
   28: 'grid grid-cols-3 md:grid-cols-7 gap-y-3 md:gap-y-5',
   5: 'flex flex-wrap gap-x-5 justify-around',
   4: 'grid grid-cols-2 lg:grid-cols-4 gap-y-5',
-  6: 'grid grid-cols-3 md:grid-cols-6 gap-y-3 md:gap-y-5',
+  6: 'grid grid-cols-3 lg:grid-cols-6 gap-y-3 md:gap-y-5',
   8: 'grid grid-cols-3 md:grid-cols-4 gap-y-3 md:gap-y-5',
   9: 'grid grid-cols-3 gap-y-3 md:gap-y-5',
   0: 'flex flex-wrap gap-x-5 justify-evenly',
