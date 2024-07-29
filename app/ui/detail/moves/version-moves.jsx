@@ -5,6 +5,21 @@ import PreEvolutionMethodMoves from './v2/method/pre-evolution';
 import TutorMethodMoves from './v2/method/tutor';
 import MachineMethodMoves from './v2/method/machine';
 
+function filterMachineTypeMove(machineMoves) {
+  const machineTypes = ['tm', 'hm', 'tr'];
+
+  const filterMovesMachinType = (type) => (
+    machineMoves
+      .filter(({ machine: machineMove }) => machineMove.type === type)
+      .sort((a, b) => a.machine.number - b.machine.number));
+
+  const machineTypesMoves = machineTypes
+    .map((type) => ({ type, moves: filterMovesMachinType(type) }))
+    .filter(({ moves }) => moves);
+
+  return machineTypesMoves;
+}
+
 export default function VersionMoves({ versionMoves }) {
   const {
     machine,
@@ -20,16 +35,7 @@ export default function VersionMoves({ versionMoves }) {
     );
   }
 
-  const machineTypes = ['tm', 'hm', 'tr'];
-
-  const filterMovesMachinType = (type) => (
-    machine
-      .filter(({ machine: machineMove }) => machineMove.type === type)
-      .sort((a, b) => a.machine.number - b.machine.number));
-
-  const machineTypesMoves = machineTypes
-    .map((type) => ({ type, moves: filterMovesMachinType(type) }))
-    .filter(({ moves }) => moves);
+  const machineTypesMoves = filterMachineTypeMove(machine);
 
   return (
     <div className="flex flex-wrap gap-y-10 py-3 gap-x-10 justify-evenly">

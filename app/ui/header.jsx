@@ -5,7 +5,7 @@ import ThemeToggleButton from './theme-toggle-button';
 
 export default function Header() {
   return (
-    <header className="z-[100] top-0 sticky flex bg-orange-400 h-16 justify-between items-center px-2.5 xs:px-6 sm:px-8 md:px-12">
+    <header className="z-[100] top-0 sticky flex bg-orange-400 h-14 justify-between items-center px-2.5 xs:px-6 sm:px-8 md:px-12">
       <h2 className="text-white text-xl font-black">
         <Link href="/">
           Poke MuMu

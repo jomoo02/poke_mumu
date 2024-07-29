@@ -22,6 +22,7 @@ function GenButton({
   isActive,
 }) {
   const commonClass = 'flex items-center justify-center rounded-md px-2 py-1 h-7 min-w-10 md:min-w-11 md:max-w-11';
+
   if (isActive) {
     return (
       <div className={`${commonClass} ${className} text-white`}>

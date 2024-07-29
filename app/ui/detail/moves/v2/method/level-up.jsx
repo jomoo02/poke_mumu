@@ -47,7 +47,7 @@ export default function LevelUpMethodMoves({ moves }) {
 
   return (
     <div className="overflow-hidden">
-      <h3 className="capitalize font-bold text-slate-800 mb-2.5 text-lg">
+      <h3 className="capitalize font-bold text-slate-800 mb-2.5 text-lg min-w-[600px]">
         {subTitleText}
       </h3>
       <div className="flex">

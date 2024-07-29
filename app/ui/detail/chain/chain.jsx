@@ -9,6 +9,11 @@ import TitleHeader from '../title-header';
 
 const getSprityUrl = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
+const titleLanguageText = {
+  ko: '진화',
+  en: 'Evolution Tree',
+};
+
 const gridColumn = {
   1: 'grid grid-cols-1',
   2: 'grid grid-cols-2 md:grid-cols-1',
@@ -123,7 +128,7 @@ export default function Chain({ chainData, type }) {
     maxDepth,
   } = chainData;
 
-  const title = language === 'ko' ? '진화' : 'Evolution Tree';
+  const title = titleLanguageText[language] || titleLanguageText.ko;
 
   return (
     <div>

@@ -4,12 +4,12 @@ import Image from 'next/image';
 export default function PokeCardSkeleton() {
   return (
     <div
-      className="border-2 animate-pulse rounded-md border-slate-400 w-full min-h-[6.75rem] h-[6.75rem] sm:h-56 px-2 py-1.5 sm:p-3 flex sm:flex-col"
+      className="border-2 animate-pulse rounded-md border-slate-400 w-full min-h-[6.75rem] h-[6.75rem] xs:h-[12.2rem] sm:h-56 px-2 py-1.5 xs:py-2 sm:p-3 flex xs:flex-col"
     >
-      <div className="w-1/2 sm:w-full">
+      <div className="w-1/2 xs:w-full">
         <div className="h-5 flex items-center py-0.5 bg-slate-200 w-1/3 rounded bg-clip-content" />
 
-        <div className="flex sm:my-1 pr-4 sm:pr-0 justify-center">
+        <div className="flex xs:my-1 pr-4 xs:pr-0 justify-center">
           <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
             <Image
               src="/pokeball.svg"

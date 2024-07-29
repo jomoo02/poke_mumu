@@ -59,7 +59,7 @@ function TypeDefenseCompatibility({ types }) {
             </div>
             <div className="flex justify-center md:px-3.5 md:py-3">
               <div
-                className={`grid grid-cols-3 xs:grid-cols-4 ${gridCols} gap-x-1.5 md:gap-x-2 lg:gap-x-2.5 gap-y-1.5 md:gap-y-2 lg:gap-y-2.5 justify-items-center`}
+                className={`grid grid-cols-3 sm:grid-cols-6 ${gridCols} gap-x-2.5 sm:gap-x-3 lg:gap-x-2.5 gap-y-2 sm:gap-y-2 lg:gap-y-2.5 justify-items-center`}
               >
                 {curTypes.map((type) => (
                   <Type type={type} key={type} />

@@ -53,7 +53,7 @@ export default function PokeCardList({ initialData }) {
         }
         return <PokeCard basicInfo={basicInfo} />;
       }}
-      listClassName="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 sm:gap-x-4 gap-y-3 sm:gap-y-4 justify-center items-center"
+      listClassName="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 xs:gap-x-4 gap-y-3 sm:gap-y-4 justify-center items-center"
     />
   );
 }

@@ -24,21 +24,15 @@ function VersionButton({
     );
   }
 
-  return isActive
-    ? (
-      <div className={`${type} ${className} text-white font-semibold`}>
-        {versionText}
-      </div>
-    )
-    : (
-      <button
-        type="button"
-        onClick={() => handleTargetVersionClick(version)}
-        className={`bg-slate-200 ${className} hover:bg-slate-400/70 font-medium`}
-      >
-        {versionText}
-      </button>
-    );
+  return (
+    <button
+      type="button"
+      onClick={() => handleTargetVersionClick(version)}
+      className={`bg-slate-200 ${className} hover:bg-slate-400/70 font-medium`}
+    >
+      {versionText}
+    </button>
+  );
 }
 
 const getClassName = (index, versionCount) => {

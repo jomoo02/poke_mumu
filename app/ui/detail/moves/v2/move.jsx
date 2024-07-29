@@ -46,7 +46,7 @@ export default function Move({ move, children, language }) {
     damage_class: damageClass,
   } = move;
 
-  const nameText = language === 'ko' ? name.ko : name.en;
+  const nameText = name[language] || name.ko;
 
   return (
     <div className="flex min-h-9 items-center">

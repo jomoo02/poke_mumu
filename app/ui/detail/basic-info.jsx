@@ -23,10 +23,32 @@ const languageText = {
   },
 };
 
+function Title({ basicInfo }) {
+  const { no, name, form } = basicInfo;
+  const { language } = useLanguage();
+
+  return (
+    <h2 className="mb-2 sm:mb-3">
+      <span className="sm:text-xl text-slate-500 font-semibold">
+        {`No. ${no}`}
+      </span>
+      <span className="ml-1.5 sm:ml-2 mr-[3px] sm:mr-1 sm:text-xl text-slate-600/90 font-bold">
+        {name[language] || name.ko}
+      </span>
+      {form.en !== 'default' && form.en !== 'mega' && (
+        <span className="text-xs sm:text-base text-slate-600/90 font-semibold">
+          {`(${form[language] || form.ko})`}
+        </span>
+      )}
+    </h2>
+  );
+}
+
 function Info({
   subject, children, className, order,
 }) {
   const containerBorder = order === 'first' ? 'border-y' : 'border-b';
+
   return (
     <div className={`flex gap-x-5 md:gap-x-10 py-1 items-center min-w-72 capitalize ${containerBorder}`}>
       <div className="w-24 text-right text-slate-500 font-semibold text-sm">{subject}</div>
@@ -42,8 +64,8 @@ export default function BasicInfo({ basicInfo }) {
   const { language } = useLanguage();
 
   const exceptionOrder = [];
-  const bascinUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
-  const url = exceptionOrder.includes(Number(order)) ? `/${order}.png` : `${bascinUrl}/${sprity}`;
+  const basicUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
+  const url = exceptionOrder.includes(Number(order)) ? `/${order}.png` : `${basicUrl}/${sprity}`;
 
   const mainType = types[0];
 
@@ -53,6 +75,7 @@ export default function BasicInfo({ basicInfo }) {
 
   return (
     <div>
+      <Title basicInfo={basicInfo} />
       <TitleHeader title={title} type={mainType} />
       <div className={`border-2 border-t-0 ${mainType}-border md:py-3 md:flex md:justify-evenly`}>
         <div className="flex justify-center items-center py-3 md:py-0">
@@ -64,7 +87,6 @@ export default function BasicInfo({ basicInfo }) {
             priority
           />
         </div>
-
         <div className="px-2 pb-1 md:pb-0 flex flex-col justify-center">
           <Info subject={nationalText} order="first">
             {no}
