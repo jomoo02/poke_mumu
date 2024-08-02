@@ -14,8 +14,13 @@ export default function useScrollRestoration() {
     sessionStorage.setItem(KEY, JSON.stringify(scrollPosition));
   };
 
+  const removeScrollPosition = () => {
+    sessionStorage.removeItem(KEY);
+  };
+
   return {
     getScrollPosition,
     setScrollPosition,
+    removeScrollPosition,
   };
 }

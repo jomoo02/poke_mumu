@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import BasicInfo from '@/app/ui/detail/basic-info';
 import Abilities from '@/app/ui/detail/abilities';
 import DefenseCompatibility from '@/app/ui/detail/defense-compatibility';
@@ -10,6 +10,7 @@ import { fetchChain } from '@/app/api/chain';
 import { fetchPokeKey } from '@/app/api/data';
 import PokeNavigation from '@/app/ui/detail/poke-router/poke-navigation';
 import { fetchDetail } from '@/app/api/detail';
+import ScrollTop from '@/app/ui/scrollTop';
 
 export default async function DetailPage({ params }) {
   const { pokeKey } = params;
@@ -31,9 +32,9 @@ export default async function DetailPage({ params }) {
   } = detailInfo;
   return (
     <>
-      {/* <Suspense fallback={null}>
+      <Suspense fallback={null}>
         <ScrollTop />
-      </Suspense> */}
+      </Suspense>
       <div className="grid gap-y-12 min-h-screen">
         <PokeNavigation order={order} type={mainType} />
         <BasicInfo basicInfo={basicInfo} />
