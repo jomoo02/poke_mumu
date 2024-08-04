@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import Type from '../../type';
+import Type from '../type';
 
 function DamageClass({ damageClass }) {
   const damageClassMap = {
@@ -46,7 +46,7 @@ export default function Move({ move, children, language }) {
     damage_class: damageClass,
   } = move;
 
-  const nameText = language === 'ko' ? name.ko : name.en;
+  const nameText = name[language] || name.ko;
 
   return (
     <div className="flex min-h-9 items-center">

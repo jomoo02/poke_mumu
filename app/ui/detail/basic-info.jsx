@@ -13,6 +13,8 @@ const languageText = {
     nationalText: '전국도감 번호',
     nameText: '이름',
     formText: '모습',
+    heightText: '키',
+    weightText: '몸무게',
   },
   en: {
     title: 'default info',
@@ -20,39 +22,72 @@ const languageText = {
     nationalText: 'national no',
     nameText: 'name',
     formText: 'form',
+    heightText: 'height',
+    weightText: 'weight',
   },
 };
+
+function Title({ basicInfo }) {
+  const { no, name, form } = basicInfo;
+  const { language } = useLanguage();
+
+  return (
+    <h2 className="mb-2 sm:mb-4">
+      <span className="sm:text-xl text-slate-500 font-semibold capitalize">
+        {`no. ${no}`}
+      </span>
+      <span className="ml-1.5 sm:ml-2 mr-[3px] sm:mr-1 sm:text-xl text-slate-600/90 font-bold">
+        {name[language] || name.ko}
+      </span>
+      {form.en !== 'default' && form.en !== 'mega' && (
+        <span className="text-xs sm:text-base text-slate-600/90 font-semibold">
+          {`(${form[language] || form.ko})`}
+        </span>
+      )}
+    </h2>
+  );
+}
 
 function Info({
   subject, children, className, order,
 }) {
   const containerBorder = order === 'first' ? 'border-y' : 'border-b';
+
   return (
-    <div className={`flex gap-x-5 md:gap-x-10 py-1 items-center min-w-72 capitalize ${containerBorder}`}>
-      <div className="w-24 text-right text-slate-500 font-semibold text-sm">{subject}</div>
+    <div className={`flex gap-x-5 md:gap-x-10 py-1 items-center min-w-72 ${containerBorder}`}>
+      <div className="w-24 text-right text-slate-500 font-semibold text-sm capitalize">{subject}</div>
       <div className={`${className} text-slate-600 font-semibold text-[15px]`}>{children}</div>
     </div>
   );
 }
 
+function calHeight(height, unit) {
+  const meters = height / 10;
+
+  const formattedMeters = meters.toFixed(1);
+
+  return `${formattedMeters} ${unit}`;
+}
+
 export default function BasicInfo({ basicInfo }) {
   const {
-    no, name, sprity, order, form, types,
+    no, name, sprity, order, form, types, weight, height,
   } = basicInfo;
   const { language } = useLanguage();
 
   const exceptionOrder = [];
-  const bascinUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
-  const url = exceptionOrder.includes(Number(order)) ? `/${order}.png` : `${bascinUrl}/${sprity}`;
+  const basicUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
+  const url = exceptionOrder.includes(Number(order)) ? `/${order}.png` : `${basicUrl}/${sprity}`;
 
   const mainType = types[0];
 
   const {
-    title, typeText, nationalText, nameText, formText,
+    title, typeText, nationalText, nameText, formText, heightText, weightText,
   } = languageText[language];
 
   return (
     <div>
+      <Title basicInfo={basicInfo} />
       <TitleHeader title={title} type={mainType} />
       <div className={`border-2 border-t-0 ${mainType}-border md:py-3 md:flex md:justify-evenly`}>
         <div className="flex justify-center items-center py-3 md:py-0">
@@ -64,7 +99,6 @@ export default function BasicInfo({ basicInfo }) {
             priority
           />
         </div>
-
         <div className="px-2 pb-1 md:pb-0 flex flex-col justify-center">
           <Info subject={nationalText} order="first">
             {no}
@@ -75,8 +109,14 @@ export default function BasicInfo({ basicInfo }) {
           <Info subject={typeText} className="flex gap-x-2">
             {types.map((type) => <Type type={type} key={type} />)}
           </Info>
-          <Info subject={formText}>
+          <Info subject={formText} className="capitalize">
             {form[language]}
+          </Info>
+          <Info subject={heightText}>
+            {calHeight(height, 'm')}
+          </Info>
+          <Info subject={weightText}>
+            {calHeight(weight, 'kg')}
           </Info>
         </div>
       </div>

@@ -9,6 +9,11 @@ import TitleHeader from '../title-header';
 
 const getSprityUrl = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
+const titleLanguageText = {
+  ko: '진화',
+  en: 'Evolution Tree',
+};
+
 const gridColumn = {
   1: 'grid grid-cols-1',
   2: 'grid grid-cols-2 md:grid-cols-1',
@@ -123,10 +128,10 @@ export default function Chain({ chainData, type }) {
     maxDepth,
   } = chainData;
 
-  const title = language === 'ko' ? '진화' : 'Evolution Tree';
+  const title = titleLanguageText[language] || titleLanguageText.ko;
 
   return (
-    <>
+    <div>
       <TitleHeader type={type} title={title} />
       <div className={`md:flex justify-center pt-2 pb-1 border-2 border-t-0 ${type}-border rounded-b-sm`}>
         <div className={`${gridColumn[chain.length]} md:gap-y-4`}>
@@ -140,6 +145,6 @@ export default function Chain({ chainData, type }) {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
