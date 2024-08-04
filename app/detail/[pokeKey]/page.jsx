@@ -8,16 +8,16 @@ import Chain from '@/app/ui/detail/chain/chain';
 import Forms from '@/app/ui/detail/forms';
 import { fetchChain } from '@/app/api/chain';
 import { fetchPokeKey } from '@/app/api/data';
-import PokeNavigation from '@/app/ui/detail/poke-router/poke-navigation';
 import { fetchDetail } from '@/app/api/detail';
 import ScrollTop from '@/app/ui/scrollTop';
+import PokeNavigation from './components/navigation';
 
 export default async function DetailPage({ params }) {
   const { pokeKey } = params;
 
   const [basicInfo, detailInfo] = await Promise.all([fetchPokeKey(pokeKey), fetchDetail(pokeKey)]);
 
-  const { types, order, chainIndex } = basicInfo;
+  const { types, chainIndex } = basicInfo;
 
   const chainData = await fetchChain(chainIndex);
 
@@ -36,7 +36,7 @@ export default async function DetailPage({ params }) {
         <ScrollTop />
       </Suspense>
       <div className="grid gap-y-12 min-h-screen">
-        <PokeNavigation order={order} type={mainType} />
+        <PokeNavigation pokeKey={pokeKey} />
         <BasicInfo basicInfo={basicInfo} />
         <Abilities abilities={abilities} type={mainType} />
         <Forms forms={forms} name={speciesName} type={mainType} />
