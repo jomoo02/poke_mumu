@@ -22,7 +22,7 @@ function Right() {
   );
 }
 
-export default function Loading({ pokeKey }) {
+export default function NavigationSkeleton({ pokeKey }) {
   const isViewLeft = pokeKey !== 'bulbasaur';
   const isViewRight = pokeKey !== 'pecharunt';
 

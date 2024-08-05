@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { fetchSurroundingPokes, fetchPokeKey } from '@/app/api/data';
 import NavButton from './nav-button';
-import Loading from './loading';
+import NavigationSkeleton from './skeleton';
 
 async function Navigation({ pokeKey }) {
   const basicInfo = await fetchPokeKey(pokeKey);
@@ -20,10 +20,12 @@ async function Navigation({ pokeKey }) {
   );
 }
 
-export default async function PokeNavigation({ pokeKey }) {
+export default function PokeNavigation({ pokeKey }) {
   return (
-    <Suspense fallback={<Loading pokeKey={pokeKey} />}>
-      <Navigation pokeKey={pokeKey} />
-    </Suspense>
+    <div>
+      <Suspense fallback={<NavigationSkeleton pokeKey={pokeKey} />}>
+        <Navigation pokeKey={pokeKey} />
+      </Suspense>
+    </div>
   );
 }
