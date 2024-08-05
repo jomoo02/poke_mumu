@@ -20,6 +20,10 @@ const localeTitles = {
     ko: '의 모습들',
     en: "'s forms",
   },
+  defenseCompatibility: {
+    ko: '방어 상성',
+    en: 'defense Compatibility',
+  },
 };
 
 export default function Header({ category = 'basicInfo', type = 'normal', text }) {
