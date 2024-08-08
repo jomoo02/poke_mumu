@@ -22,10 +22,8 @@ async function Navigation({ pokeKey }) {
 
 export default function PokeNavigation({ pokeKey }) {
   return (
-    <div>
-      <Suspense fallback={<NavigationSkeleton pokeKey={pokeKey} />}>
-        <Navigation pokeKey={pokeKey} />
-      </Suspense>
-    </div>
+    <Suspense fallback={<NavigationSkeleton pokeKey={pokeKey} />}>
+      <Navigation pokeKey={pokeKey} />
+    </Suspense>
   );
 }

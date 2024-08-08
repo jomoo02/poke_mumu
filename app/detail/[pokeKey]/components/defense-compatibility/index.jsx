@@ -3,7 +3,6 @@ import { fetchPokeKey } from '@/app/api/data';
 import Type from '@/app/ui/detail/type';
 import TypeDefenseCompatibility from './type-defense-compatibility';
 import Header from '../header';
-
 import DefenseCompatibilitySkeleton from './skeleton';
 
 async function DefenseCompatibility({ pokeKey }) {

@@ -16,7 +16,7 @@ async function Abilities({ pokeKey }) {
   const { abilities } = detailInfo;
 
   return (
-    <>
+    <div>
       <Header type={type} category="abilities" />
       <div className={`grid divide-y border-2 border-t-0 ${type}-border rounded-b-sm`}>
         {abilities.map(({ name, flavorText, isHidden }) => (
@@ -28,16 +28,14 @@ async function Abilities({ pokeKey }) {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
 export default function PokeAbilities({ pokeKey }) {
   return (
-    <div>
-      <Suspense fallback={<AbilitiesSkeleton />}>
-        <Abilities pokeKey={pokeKey} />
-      </Suspense>
-    </div>
+    <Suspense fallback={<AbilitiesSkeleton />}>
+      <Abilities pokeKey={pokeKey} />
+    </Suspense>
   );
 }

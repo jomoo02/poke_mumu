@@ -32,23 +32,21 @@ async function Forms({ pokeKey }) {
   const formsClassName = formsClassMap[formCount] || formsClassMap[0];
 
   return (
-    <>
+    <div>
       <Header type={type} category={category} text={name} />
       <div className={`border-2 border-t-0 ${type}-border rounded-b-sm px-1 md:px-5 pt-2.5 pb-3.5 ${formsClassName}`}>
         {forms.map(({ id, name: formName }) => (
           <Form id={id} name={formName} key={`${id}-${name.en}`} />
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
 export default function PokeForms({ pokeKey }) {
   return (
-    <div>
-      <Suspense fallback={<FormSkeleton />}>
-        <Forms pokeKey={pokeKey} />
-      </Suspense>
-    </div>
+    <Suspense fallback={<FormSkeleton />}>
+      <Forms pokeKey={pokeKey} />
+    </Suspense>
   );
 }

@@ -5,6 +5,8 @@ const statKo = {
   'special-attack': '특수공격',
   'special-defense': '특수방어',
   speed: '스피드',
+  total: '합계',
+  effort: '노력치',
 };
 
 const statEn = {
@@ -14,6 +16,8 @@ const statEn = {
   'special-attack': 'sp.Atk',
   'special-defense': 'sp.Def',
   speed: 'speed',
+  total: 'total',
+  effort: 'effort',
 };
 
 const statTypeKo = {

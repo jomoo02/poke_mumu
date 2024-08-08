@@ -24,6 +24,14 @@ const localeTitles = {
     ko: '방어 상성',
     en: 'defense Compatibility',
   },
+  stats: {
+    ko: '스탯',
+    en: 'stat',
+  },
+  moves: {
+    ko: '기술',
+    en: 'move',
+  },
 };
 
 export default function Header({ category = 'basicInfo', type = 'normal', text }) {

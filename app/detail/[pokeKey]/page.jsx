@@ -12,22 +12,30 @@ import PokeBasicInfo from './components/basic-info';
 import PokeAbilities from './components/abilities';
 import PokeForms from './components/forms';
 import PokeDefenseCompatibility from './components/defense-compatibility';
+import PokeStats from './components/stats';
+
+import NavigationSkeleton from './components/navigation/skeleton';
+import BasicInfoSkeleton from './components/basic-info/skeleton';
+import AbilitiesSkeleton from './components/abilities/skeleton';
+import FormsSkeleton from './components/forms/skeleton';
+import DefenseCompatibilitySkeleton from './components/defense-compatibility/skeleton';
+import StatsSkeleton from './components/stats/skeleton';
 
 export default async function DetailPage({ params }) {
   const { pokeKey } = params;
 
-  // const [basicInfo, detailInfo] = await Promise.all([fetchPokeKey(pokeKey), fetchDetail(pokeKey)]);
+  const [basicInfo, detailInfo] = await Promise.all([fetchPokeKey(pokeKey), fetchDetail(pokeKey)]);
 
-  // const { types, chainIndex } = basicInfo;
+  const { types, chainIndex } = basicInfo;
 
-  // const chainData = await fetchChain(chainIndex);
+  const chainData = await fetchChain(chainIndex);
 
-  // const mainType = types[0];
+  const mainType = types[0];
 
-  // const {
-  //   stats,
-  //   moves,
-  // } = detailInfo;
+  const {
+    stats,
+    moves,
+  } = detailInfo;
   return (
     <>
       <Suspense fallback={null}>
@@ -35,14 +43,26 @@ export default async function DetailPage({ params }) {
       </Suspense>
       <div className="grid gap-y-12">
         <PokeNavigation pokeKey={pokeKey} />
-        {/* <PokeBasicInfo pokeKey={pokeKey} />
+        <NavigationSkeleton />
+
+        <PokeBasicInfo pokeKey={pokeKey} />
+        <BasicInfoSkeleton />
+
         <PokeAbilities pokeKey={pokeKey} />
-        <PokeForms pokeKey={pokeKey} /> */}
-        {/* <DefenseCompatibility types={types} /> */}
+        <AbilitiesSkeleton />
+
+        <PokeForms pokeKey={pokeKey} />
+        <FormsSkeleton />
+
         <PokeDefenseCompatibility pokeKey={pokeKey} />
-        {/* <Chain chainData={chainData} type={mainType} />
-        <Stats base={stats.baseStats} effort={stats.effortStats} type={mainType} />
-        <Moves moves={moves} type={mainType} /> */}
+        <DefenseCompatibilitySkeleton />
+
+        <PokeStats pokeKey={pokeKey} />
+        <StatsSkeleton />
+
+        {/* <Chain chainData={chainData} type={mainType} /> */}
+
+        <Moves moves={moves} type={mainType} />
       </div>
     </>
   );

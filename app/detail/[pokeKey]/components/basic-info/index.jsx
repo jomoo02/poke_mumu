@@ -29,7 +29,7 @@ async function BasicInfo({ pokeKey }) {
   const type = types[0];
 
   return (
-    <>
+    <div>
       <TitleName basicInfo={basicInfo} />
       <Header type={type} category="basicInfo" />
       <div className={`border-2 border-t-0 ${type}-border md:py-3 md:flex md:justify-evenly`}>
@@ -39,16 +39,14 @@ async function BasicInfo({ pokeKey }) {
         />
         <InfoList basicInfo={basicInfo} />
       </div>
-    </>
+    </div>
   );
 }
 
 export default function PokeBasicInfo({ pokeKey }) {
   return (
-    <div>
-      <Suspense fallback={<BasicInfoSkeleton />}>
-        <BasicInfo pokeKey={pokeKey} />
-      </Suspense>
-    </div>
+    <Suspense fallback={<BasicInfoSkeleton />}>
+      <BasicInfo pokeKey={pokeKey} />
+    </Suspense>
   );
 }

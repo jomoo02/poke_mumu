@@ -48,7 +48,7 @@ function InfoSkeleton({ order }) {
 
 export default function BasicInfoSkeleton() {
   return (
-    <>
+    <div className="animate-pulse">
       <TitleNameSkeleton />
       <HeaderSkeleton />
       <div className="border-2 border-t-0 md:py-3 md:flex md:justify-evenly">
@@ -62,6 +62,6 @@ export default function BasicInfoSkeleton() {
           <InfoSkeleton />
         </div>
       </div>
-    </>
+    </div>
   );
 }

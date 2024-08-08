@@ -25,13 +25,13 @@ function AbilitySkeleton() {
 
 export default function AbilitiesSkeleton() {
   return (
-    <>
+    <div className="animate-pulse">
       <HeaderSkeleton />
       <div className="grid divide-y border-2 border-t-0 rounded-b-sm">
         <AbilitySkeleton />
         <AbilitySkeleton />
         <AbilitySkeleton />
       </div>
-    </>
+    </div>
   );
 }
