@@ -14,12 +14,15 @@ import PokeForms from './components/forms';
 import PokeDefenseCompatibility from './components/defense-compatibility';
 import PokeStats from './components/stats';
 
+import PokeMoves from './components/moves2';
+
 import NavigationSkeleton from './components/navigation/skeleton';
 import BasicInfoSkeleton from './components/basic-info/skeleton';
 import AbilitiesSkeleton from './components/abilities/skeleton';
 import FormsSkeleton from './components/forms/skeleton';
 import DefenseCompatibilitySkeleton from './components/defense-compatibility/skeleton';
 import StatsSkeleton from './components/stats/skeleton';
+
 
 export default async function DetailPage({ params }) {
   const { pokeKey } = params;
@@ -62,7 +65,9 @@ export default async function DetailPage({ params }) {
 
         {/* <Chain chainData={chainData} type={mainType} /> */}
 
-        <Moves moves={moves} type={mainType} />
+        <PokeMoves pokeKey={pokeKey} />
+
+        {/* <Moves moves={moves} type={mainType} /> */}
       </div>
     </>
   );

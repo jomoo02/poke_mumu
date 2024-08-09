@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/app/language-provider';
+import Type from '@/app/ui/detail/type';
+import TableRow from './table-row';
 
 function DamageClass({ damageClass }) {
   const damageClassMap = {
@@ -37,7 +39,7 @@ function DamageClass({ damageClass }) {
   );
 }
 
-export default function Move({ move, children }) {
+export default function Move({ move, renderColumn1 }) {
   const {
     name,
     type,
@@ -50,7 +52,31 @@ export default function Move({ move, children }) {
 
   const moveName = name[language] || name.ko;
 
+  const renderColumn2 = () => <span className="text-base font-semibold text-slate-700 px-2.5">{moveName}</span>;
+
+  const renderColumn3 = () => (
+    <div className="w-full flex justify-center">
+      <Type type={type} language={language} />
+    </div>
+  );
+
+  const renderColumn4 = () => (
+    <div className="w-full flex justify-center">
+      <DamageClass damageClass={damageClass} />
+    </div>
+  );
+  const renderColumn5 = () => <div className="text-sm font-medium text-right px-3">{power || '—'}</div>;
+
+  const renderColumn6 = () => <div className="text-sm font-medium text-right px-3">{accuracy || '—'}</div>;
+
   return (
-    
-  )  
+    <TableRow
+      renderColumn1={renderColumn1}
+      renderColumn2={renderColumn2}
+      renderColumn3={renderColumn3}
+      renderColumn4={renderColumn4}
+      renderColumn5={renderColumn5}
+      renderColumn6={renderColumn6}
+    />
+  );
 }
