@@ -1,0 +1,19 @@
+.row-2 {
+  @apply w-[10.5rem]
+}
+
+.row-3 {
+  @apply w-[5.25rem]
+}
+
+.row-4 {
+  @apply w-[5.25rem]
+}
+
+.row-5 {
+  @apply w-[5.55rem]
+}
+
+.row-6 {
+  @apply w-[5rem]
+}

@@ -2,52 +2,43 @@ import React from 'react';
 import {
   checkTargetMovesEmpty,
   groupMovesByMachineType,
+  setMovesKey,
+  getMethodMovesTitle,
+  getMachineMethodMovesTitle,
 } from '../../utils/moves';
 import MethodMovesTable from './method-moves-table';
+import {
+  renderMachineMoveFirstColumn,
+  renderLevelMoveFirstColumn,
+  renderPreMoveFirstColumn,
+} from './target-moves.utils';
 
 function MethodMoves({
   moves,
-  initialSortKey,
   titleObj,
   renderMoveFirstColumn,
   firstColumnInfo,
-  getMovesKey,
 }) {
   if (!moves || moves.length === 0) {
     return null;
   }
 
-  const defaultKey = 'move';
-
-  const defaultGetMovesKey = (move) => move.move.name.en;
-
   return (
     <MethodMovesTable
       moves={moves}
-      initialSortKey={initialSortKey || defaultKey}
       titleObj={titleObj}
       renderMoveFirstColumn={renderMoveFirstColumn}
       firstColumnInfo={firstColumnInfo}
-      getMovesKey={getMovesKey || defaultGetMovesKey}
     />
-  )
+  );
 }
 
-function MachineMoves({ moves }) {
-  if (!moves || moves.length === 0) {
+function MachineMoves({ machineMoves }) {
+  if (!machineMoves || machineMoves.length === 0) {
     return null;
   }
 
-  const machineTypesMoves = groupMovesByMachineType(moves);
-
-  const getTitleObj = (machineType) => ({
-    en: `moves learnt by ${machineType}`,
-    ko: `기술머신 ${machineType} 으로 익히는 기술`,
-  });
-
-  const initialSortkey = 'machine';
-
-  const renderMoveFirstColumn = ({ machine }) => () => <div className="w-14 text-sm px-2 font-medium">{machine.number}</div>
+  const machineTypesMoves = groupMovesByMachineType(machineMoves);
 
   return (
     <div className="flex flex-col gap-y-10 overflow-auto">
@@ -55,11 +46,10 @@ function MachineMoves({ moves }) {
         <MethodMoves
           key={type}
           moves={moves}
-          initialSortKey={initialSortkey}
-          titleObj={getTitleObj(type)}
-          renderMoveFirstColumn={renderMoveFirstColumn}
+          titleObj={getMachineMethodMovesTitle(type)}
+          renderMoveFirstColumn={renderMachineMoveFirstColumn}
           firstColumnInfo={{
-            key: initialSortkey,
+            key: 'machine',
             content: `${type}`,
             className: 'w-14',
           }}
@@ -77,55 +67,40 @@ export default function TargetMoves({ versionMoves }) {
   }
 
   const {
-    machine,
-    egg,
-    pre,
-    tutor,
-    reminder,
-    'level-up': levelUp,
-  } = versionMoves;
+    machineMoves,
+    eggMoves,
+    preMoves,
+    tutorMoves,
+    reminderMoves,
+    levelUpMoves,
+  } = setMovesKey(versionMoves);
 
   return (
     <div className="flex flex-wrap gap-y-10 py-3 gap-x-10 justify-evenly">
       <div className="flex flex-col gap-y-10 overflow-auto">
         <MethodMoves
-          moves={levelUp}
-          initialSortKey="level"
-          titleObj={{
-            en: 'moves learnt by level up',
-            ko: '레벌 업으로 익히는 기술',
-          }}
-          renderMoveFirstColumn={({ level }) => () => <div className="w-14 text-sm px-2 font-medium">{level}</div>}
+          moves={levelUpMoves}
+          renderMoveFirstColumn={renderLevelMoveFirstColumn}
           firstColumnInfo={{
             key: 'level',
             content: 'lv.',
             className: 'w-14',
           }}
-          getMovesKey={(move) => `${move.level}-${move.move.name.en}`}
         />
+        <MethodMoves moves={eggMoves} />
+        <MethodMoves moves={tutorMoves} />
         <MethodMoves
-          moves={egg}
-          titleObj={{
-            en: 'egg',
-            ko: '교배',
+          moves={preMoves}
+          renderMoveFirstColumn={renderPreMoveFirstColumn}
+          firstColumnInfo={{
+            key: 'pre',
+            content: 'poke',
+            className: 'w-[5.5rem]',
           }}
         />
-        <MethodMoves
-          moves={tutor}
-          titleObj={{
-            en: 'tutor',
-            ko: 'tutor',
-          }}
-        />
-        <MethodMoves
-          moves={reminder}
-          titleObj={{
-            en: 'reminder',
-            ko: 'reminder',
-          }}
-        />
+        <MethodMoves moves={reminderMoves} />
       </div>
-      <MachineMoves moves={machine} />
+      <MachineMoves machineMoves={machineMoves} />
     </div>
   );
 }

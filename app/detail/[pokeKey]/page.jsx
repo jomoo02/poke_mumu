@@ -14,7 +14,7 @@ import PokeForms from './components/forms';
 import PokeDefenseCompatibility from './components/defense-compatibility';
 import PokeStats from './components/stats';
 
-import PokeMoves from './components/moves2';
+import PokeMoves from './components/moves';
 
 import NavigationSkeleton from './components/navigation/skeleton';
 import BasicInfoSkeleton from './components/basic-info/skeleton';
@@ -41,9 +41,9 @@ export default async function DetailPage({ params }) {
   } = detailInfo;
   return (
     <>
-      <Suspense fallback={null}>
+      {/* <Suspense fallback={null}>
         <ScrollTop />
-      </Suspense>
+      </Suspense> */}
       <div className="grid gap-y-12">
         <PokeNavigation pokeKey={pokeKey} />
         <NavigationSkeleton />

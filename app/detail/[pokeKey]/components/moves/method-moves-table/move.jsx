@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { useLanguage } from '@/app/language-provider';
 import Type from '@/app/ui/detail/type';
 
 function DamageClass({ damageClass }) {
@@ -37,7 +38,7 @@ function DamageClass({ damageClass }) {
   );
 }
 
-export default function Move({ move, children, language }) {
+export default function Move({ move, children }) {
   const {
     name,
     type,
@@ -46,22 +47,28 @@ export default function Move({ move, children, language }) {
     damage_class: damageClass,
   } = move;
 
-  const nameText = name[language] || name.ko;
+  const { language } = useLanguage();
+
+  const moveName = name[language] || name.ko;
 
   return (
-    <div className="flex min-h-9 items-center">
+    <div className="flex h-9 items-center">
       {children}
-      <div className="text-base px-2.5 w-[10.5rem] font-semibold text-slate-700">
-        {nameText}
+      <div className="row-2 text-base font-semibold text-slate-700 px-2.5">
+        {moveName}
       </div>
-      <div className="flex justify-center w-[5.25rem]">
+      <div className="row-3 flex justify-center">
         <Type type={type} language={language} />
       </div>
-      <div className="flex justify-center w-[5.25rem]">
+      <div className="row-4 flex justify-center">
         <DamageClass damageClass={damageClass} />
       </div>
-      <div className="text-sm font-medium text-right w-[5.55rem] px-3">{power || '—'}</div>
-      <div className="text-sm font-medium text-right w-[5rem] px-3">{accuracy || '—'}</div>
+      <div className="row-5 text-sm font-medium text-right px-3">
+        {power || '—'}
+      </div>
+      <div className="row-6 text-sm font-medium text-right px-3">
+        {accuracy || '—'}
+      </div>
     </div>
   );
 }

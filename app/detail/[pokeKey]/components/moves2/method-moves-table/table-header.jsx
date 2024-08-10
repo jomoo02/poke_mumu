@@ -1,10 +1,75 @@
 import React from 'react';
 import { useLanguage } from '@/app/language-provider';
-import TableRow from './table-row';
-import { createRenderColumn } from './table-header.utils';
+import {
+  IconCaretDownFilled, IconCaretUpFilled, IconCaretUpDownFilled,
+} from '@tabler/icons-react';
 
+function CaretIcon({
+  isSelect = false,
+  isAsc = false,
+  size = 14,
+  stroke = 1,
+}) {
+  if (!isSelect) {
+    return <IconCaretUpDownFilled size={size} stroke={stroke} />;
+  }
+
+  if (isAsc) {
+    return <IconCaretDownFilled size={size} stroke={stroke} />;
+  }
+
+  return <IconCaretUpFilled size={size} stroke={stroke} />;
+}
+
+function Column({
+  columnKey,
+  sortOrder,
+  handleClick,
+  className,
+  children,
+}) {
+  return (
+    <button
+      className={
+        `${sortOrder.key === columnKey ? 'bg-blue-200' : 'bg-slate-200'}
+        flex items-center justify-between px-2 capitalize h-full
+        ${className}
+        `
+      }
+      type="button"
+      onClick={() => handleClick(columnKey)}
+    >
+      {children}
+      <CaretIcon
+        isSelect={sortOrder.key === columnKey}
+        isAsc={sortOrder.asc}
+      />
+    </button>
+  );
+}
+
+function FirstColumn({ firstColumnInfo, sortOrder, handleClick }) {
+  if (!firstColumnInfo) {
+    return null;
+  }
+
+  const { key, className, content } = firstColumnInfo;
+
+  return (
+    <Column
+      columnKey={key}
+      sortOrder={sortOrder}
+      handleClick={handleClick}
+      className={className}
+    >
+      {content}
+    </Column>
+  );
+}
 export default function TableHeaderRow({
-  onTableHeaderClick, sortOrder, firstColumnInfo,
+  onTableHeaderClick,
+  sortOrder,
+  firstColumnInfo,
 }) {
   const { language } = useLanguage();
 
@@ -28,25 +93,58 @@ export default function TableHeaderRow({
   const {
     move,
     type,
-    damage_class: damageClass,
     power,
     accuracy,
+    damage_class: damageClass,
   } = localContent[language] || localContent.ko;
 
-  const renderColumnWithDefaults = createRenderColumn(sortOrder, onTableHeaderClick);
-
   return (
-    <TableRow
-      className="flex border-y border-zinc-700/80 divide-zinc-700/80
-      text-sm md:text-base items-stretch h-[2.4rem] font-medium divide-x"
-      renderColumn1={firstColumnInfo && renderColumnWithDefaults({
-        ...firstColumnInfo,
-      })}
-      renderColumn2={renderColumnWithDefaults({ key: 'move', content: move })}
-      renderColumn3={renderColumnWithDefaults({ key: 'type', content: type })}
-      renderColumn4={renderColumnWithDefaults({ key: 'damageClass', content: damageClass })}
-      renderColumn5={renderColumnWithDefaults({ key: 'power', content: power })}
-      renderColumn6={renderColumnWithDefaults({ key: 'accuracy', content: accuracy })}
-    />
+    <div className="table-header">
+      <FirstColumn
+        firstColumnInfo={firstColumnInfo}
+        sortOrder={sortOrder}
+        handleClick={onTableHeaderClick}
+      />
+      <Column
+        columnKey="move"
+        sortOrder={sortOrder}
+        handleClick={onTableHeaderClick}
+        className="row-second"
+      >
+        {move}
+      </Column>
+      <Column
+        columnKey="type"
+        sortOrder={sortOrder}
+        handleClick={onTableHeaderClick}
+        className="row-third"
+      >
+        {type}
+      </Column>
+      <Column
+        columnKey="damageClass"
+        sortOrder={sortOrder}
+        handleClick={onTableHeaderClick}
+        className="row-fourth"
+      >
+        {damageClass}
+      </Column>
+      <Column
+        columnKey="power"
+        sortOrder={sortOrder}
+        handleClick={onTableHeaderClick}
+        className="row-fifth"
+      >
+        {power}
+      </Column>
+      <Column
+        columnKey="accuracy"
+        sortOrder={sortOrder}
+        handleClick={onTableHeaderClick}
+        className="row-sixth"
+      >
+        {accuracy}
+      </Column>
+    </div>
   );
 }

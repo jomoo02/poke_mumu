@@ -1,10 +1,15 @@
+import './table.css';
 import React, { useState } from 'react';
 import { useLanguage } from '@/app/language-provider';
 import sortMovesWithKey from '@/app/lib/move-sort';
 import Move from './move';
 import TableHeader from './table-header';
 
-function SortedMoves({ moves, sortOrder, renderMoveFirstColumn, getMovesKey }) {
+function SortedMoves({
+  moves,
+  sortOrder,
+  renderMoveFirstColumn,
+}) {
   const { key, asc } = sortOrder;
 
   const { language } = useLanguage();
@@ -15,10 +20,11 @@ function SortedMoves({ moves, sortOrder, renderMoveFirstColumn, getMovesKey }) {
     <div className="grid divide-y border-b">
       {sortedMoves.map((moveData) => (
         <Move
-          key={getMovesKey(moveData)}
+          key={moveData.key}
           move={moveData.move}
-          renderColumn1={renderMoveFirstColumn && renderMoveFirstColumn(moveData)}
-        />
+        >
+          {renderMoveFirstColumn && renderMoveFirstColumn(moveData)}
+        </Move>
       ))}
     </div>
   );
@@ -27,7 +33,7 @@ function SortedMoves({ moves, sortOrder, renderMoveFirstColumn, getMovesKey }) {
 function MethodTitle({ titleObj }) {
   const { language } = useLanguage();
 
-  const title = titleObj[language] || titleObj.ko;
+  const title = titleObj[language] || 'move';
 
   return (
     <h3 className="capitalize font-bold text-slate-800 mb-2.5 text-lg min-w-[600px]">
@@ -38,12 +44,12 @@ function MethodTitle({ titleObj }) {
 
 export default function MethodMovesTable({
   moves,
-  initialSortKey,
   titleObj,
   renderMoveFirstColumn,
   firstColumnInfo,
-  getMovesKey,
 }) {
+  const initialSortKey = firstColumnInfo ? firstColumnInfo.key : 'move';
+
   const [sortOrder, setSortOrder] = useState({ key: initialSortKey, asc: true });
 
   const handleTableHeaderClick = (key) => {
@@ -53,7 +59,7 @@ export default function MethodMovesTable({
 
   return (
     <div className="overflow-hidden">
-      <MethodTitle titleObj={titleObj} />
+      {/* <MethodTitle titleObj={titleObj} /> */}
       <div className="flex">
         <div className="grid overflow-x-auto py-0.5">
           <TableHeader
@@ -65,7 +71,6 @@ export default function MethodMovesTable({
             moves={moves}
             sortOrder={sortOrder}
             renderMoveFirstColumn={renderMoveFirstColumn}
-            getMovesKey={getMovesKey}
           />
         </div>
       </div>

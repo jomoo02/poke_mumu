@@ -36,7 +36,7 @@ async function Forms({ pokeKey }) {
       <Header type={type} category={category} text={name} />
       <div className={`border-2 border-t-0 ${type}-border rounded-b-sm px-1 md:px-5 pt-2.5 pb-3.5 ${formsClassName}`}>
         {forms.map(({ id, name: formName }) => (
-          <Form id={id} name={formName} key={`${id}-${name.en}`} />
+          <Form id={id} name={formName} key={`${id}-${formName.en}`} />
         ))}
       </div>
     </div>

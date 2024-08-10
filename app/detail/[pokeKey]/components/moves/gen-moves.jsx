@@ -43,7 +43,7 @@ function GenGroup({
         <GenButton
           key={gen}
           className={type}
-          handleBtnClick={() => setTargetGen(gen)}
+          handleClick={() => setTargetGen(gen)}
           isActive={gen === targetGen}
         >
           <span className="text-sm md:text-base font-medium text-slate-80">

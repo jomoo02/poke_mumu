@@ -44,7 +44,7 @@ function VersionGroup({
   return (
     <div className="border-b-2 grid gap-y-3 pt-2">
       <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-1 gap-y-px px-2">
-        {versions.map((version, index) => (
+        {versions.map((version) => (
           <VersionButton
             key={version}
             version={version}
