@@ -33,7 +33,7 @@ export default function useTableTitle(method) {
     HM: getMachineTitleObj('HM'),
     TR: getMachineTitleObj('TR'),
   };
-  console.log(method);
+
 
   const title = titleObjMap[method][language] || titleObjMap.level.ko;
 

@@ -4,14 +4,14 @@ import { useLanguage } from '@/app/language-provider';
 function setBaseHeadItems(language) {
   const localeContent = {
     ko: {
-      move: '기술',
+      name: '기술',
       type: '타입',
       damageClass: '분류',
       power: '위력',
       accuracy: '명중률',
     },
     en: {
-      move: 'move',
+      name: 'name',
       type: 'type',
       damageClass: 'cat.',
       power: 'power',
@@ -20,7 +20,7 @@ function setBaseHeadItems(language) {
   };
 
   const keys = {
-    move: 'move',
+    name: 'name',
     type: 'type',
     damageClass: 'damageClass',
     power: 'power',
@@ -30,11 +30,11 @@ function setBaseHeadItems(language) {
   const languageContent = localeContent[language] || localeContent.ko;
 
   const basicItems = [
-    { key: keys.move, content: languageContent.move, className: 'row-2' },
-    { key: keys.type, content: languageContent.type, className: 'row-3' },
-    { key: keys.damageClass, content: languageContent.damageClass, className: 'row-4' },
-    { key: keys.power, content: languageContent.power, className: 'row-5' },
-    { key: keys.accuracy, content: languageContent.accuracy, className: 'row-6' },
+    { key: keys.name, content: languageContent.name, className: 'w-[10.5rem]' },
+    { key: keys.type, content: languageContent.type, className: 'w-[5.25rem]' },
+    { key: keys.damageClass, content: languageContent.damageClass, className: 'w-[5.25rem]' },
+    { key: keys.power, content: languageContent.power, className: 'w-[5.55rem]' },
+    { key: keys.accuracy, content: languageContent.accuracy, className: 'w-[5rem]' },
   ];
 
   return basicItems;

@@ -5,14 +5,20 @@ import {
   setMovesKey,
   getMachineMethodMovesTitle,
 } from '../../utils/moves';
-import MethodMovesTable from './method-moves-table';
+// import MethodMovesTable from './method-moves-table';
 import {
   renderMachineMoveFirstColumn,
   renderLevelMoveFirstColumn,
   renderPreMoveFirstColumn,
   getTableHeadFirstItem,
+  renderAccuracy,
+  renderDamageClass,
+  renderName,
+  renderPower,
+  renderType,
 } from './target-moves.utils';
 import useTableTitle from './hooks/useTableTitle';
+import MethodMove from './method-moves';
 
 function MethodMoves({
   moves,
@@ -27,15 +33,27 @@ function MethodMoves({
 
   const firstHeadColumnInfo = getTableHeadFirstItem(method);
 
+  const renderFn = {
+    name: renderName,
+    power: renderPower,
+    type: renderType,
+    accuracy: renderAccuracy,
+    damageClass: renderDamageClass,
+    machine: renderMachineMoveFirstColumn,
+    level: renderLevelMoveFirstColumn,
+    pre: renderPreMoveFirstColumn,
+  };
+
   return (
     <div className="overflow-auto">
       <h3 className="capitalize font-bold text-slate-800 mb-2.5 text-lg">
         {title}
       </h3>
-      <MethodMovesTable.Table
+      <MethodMove
         moves={moves}
         renderMoveFirstColumn={renderMoveFirstColumn}
         firstColumnInfo={firstHeadColumnInfo}
+        renderFn={renderFn}
       />
     </div>
 

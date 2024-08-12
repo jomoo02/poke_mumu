@@ -4,8 +4,11 @@ import { useLanguage } from '@/app/language-provider';
 import sortMovesWithKey from '@/app/lib/move-sort';
 import useTableHeadItmes from '../hooks/useTableHeadItems';
 import useTableTitle from '../hooks/useTableTitle';
-import Move from './move';
-import TableHead from './table-head';
+// import Move from './move';
+// import TableHead from './table-head';
+
+import Move from '../table/move';
+import TableHead from '../table/head';
 
 function SortedMoves({
   moves,
@@ -46,12 +49,19 @@ function Table({
   return (
     <div className="flex min-w-[600px] max-w-[600px]">
       <div className="grid overflow-x-auto py-0.5">
-        <TableHead
+        {/* <TableHead
           onTableHeadClick={handleTableHeadClick}
           sortKey={sortOrder.key}
           isAsc={sortOrder.asc}
           items={items}
-        />
+        /> */}
+        <TableHead>
+          <TableHead.Cell className="bg-black w-10" onClick={() => console.log(1)}>1</TableHead.Cell>
+          <TableHead.Cell>1</TableHead.Cell>
+          <TableHead.Cell>1</TableHead.Cell>
+          <TableHead.Cell>1</TableHead.Cell>
+          <TableHead.Cell>1</TableHead.Cell>
+        </TableHead>
         <SortedMoves
           moves={moves}
           sortOrder={sortOrder}

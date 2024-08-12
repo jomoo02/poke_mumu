@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Type from '@/app/components/type';
+import DamageClass from '@/app/components/damage-class';
 
 export const renderMachineMoveFirstColumn = ({ machine }) => {
   const machineNumber = Number(machine.number);
@@ -51,6 +53,40 @@ export const renderPreMoveFirstColumn = ({ preIds }) => {
   );
 };
 
+export const renderName = ({ move: { name } }, className) => {
+  const moveName = name.ko;
+
+  return (
+    <div className={`${className} text-base font-semibold text-slate-700 px-2.5`}>
+      {moveName}
+    </div>
+  );
+};
+
+export const renderType = ({ move: { type } }, className) => (
+  <div className={`${className} flex justify-center `}>
+    <Type type={type} />
+  </div>
+);
+
+export const renderDamageClass = ({ move: { damage_class: damageClass } }, className) => (
+  <div className={`${className} flex justify-center`}>
+    <DamageClass damageClass={damageClass} />
+  </div>
+);
+
+export const renderPower = ({ move: { power } }, className) => (
+  <div className={`text-sm font-medium text-right px-3 ${className}`}>
+    {power || '—'}
+  </div>
+);
+
+export const renderAccuracy = ({ move: { accuracy } }, className) => (
+  <div className={`text-sm font-medium text-right px-3 ${className}`}>
+    {accuracy || '—'}
+  </div>
+);
+
 export const getTableHeadFirstItem = (method) => {
   if (['tm', 'tr', 'hm'].includes(method.toLowerCase())) {
     return ({
@@ -73,4 +109,4 @@ export const getTableHeadFirstItem = (method) => {
   };
 
   return itemMap[method];
-}
+};

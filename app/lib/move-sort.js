@@ -50,8 +50,9 @@ export default function sortMovesByKey(moves, key, language, isAsc) {
     case 'level':
       return sortMovesByLevel(moves, isAsc);
     case 'type':
-    case 'damage_class':
       return sortMovesByTextKey(moves, key, isAsc);
+    case 'damageClass':
+      return sortMovesByTextKey(moves, 'damage_class', isAsc);
     case 'move':
       return sortMovesByName(moves, language, isAsc);
     case 'machine':
