@@ -19,8 +19,9 @@ import {
 } from './target-moves.utils';
 import useTableTitle from './hooks/useTableTitle';
 import MethodMove from './method-moves';
+import MethodMoves from '../moves3/method-moves'
 
-function MethodMoves({
+function MethodMoves2({
   moves,
   method,
   renderMoveFirstColumn,
@@ -49,12 +50,15 @@ function MethodMoves({
       <h3 className="capitalize font-bold text-slate-800 mb-2.5 text-lg">
         {title}
       </h3>
-      <MethodMove
+      <MethodMoves method={method}>
+        <MethodMoves.MoveTable moves={moves} />
+      </MethodMoves>
+      {/* <MethodMove
         moves={moves}
         renderMoveFirstColumn={renderMoveFirstColumn}
         firstColumnInfo={firstHeadColumnInfo}
         renderFn={renderFn}
-      />
+      /> */}
     </div>
 
   );
@@ -70,11 +74,12 @@ function MachineMoves({ machineMoves }) {
   return (
     <div className="flex flex-col gap-y-10 overflow-auto">
       {machineTypesMoves.map(({ type, moves }) => (
-        <MethodMoves
+        <MethodMoves2
           key={type}
           moves={moves}
           renderMoveFirstColumn={renderMachineMoveFirstColumn}
           method={type}
+          // method="machine"
         />
       ))}
     </div>
@@ -100,19 +105,19 @@ export default function TargetMoves({ versionMoves }) {
   return (
     <div className="flex flex-wrap gap-y-10 py-3 gap-x-10 justify-evenly">
       <div className="flex flex-col gap-y-10 overflow-auto">
-        <MethodMoves
+        <MethodMoves2
           moves={levelUpMoves}
           renderMoveFirstColumn={renderLevelMoveFirstColumn}
           method="level"
         />
-        <MethodMoves moves={eggMoves} method="egg" />
-        <MethodMoves moves={tutorMoves} method="tutor" />
-        <MethodMoves
+        <MethodMoves2 moves={eggMoves} method="egg" />
+        <MethodMoves2 moves={tutorMoves} method="tutor" />
+        <MethodMoves2
           moves={preMoves}
           renderMoveFirstColumn={renderPreMoveFirstColumn}
           method="pre"
         />
-        <MethodMoves moves={reminderMoves} method="reminder" />
+        <MethodMoves2 moves={reminderMoves} method="reminder" />
       </div>
       <MachineMoves machineMoves={machineMoves} />
     </div>

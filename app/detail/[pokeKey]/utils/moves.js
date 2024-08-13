@@ -24,7 +24,7 @@ export function groupMovesByMachineType(machineMoves) {
   return (
     machineTypes
       .map((type) => (
-        { type: type.toUpperCase(), moves: filterMachineMovesByMachineType(machineMoves, type) }))
+        { type: type, moves: filterMachineMovesByMachineType(machineMoves, type) }))
       .filter(({ moves }) => moves.length > 0)
   );
 }

@@ -29,9 +29,9 @@ export default function useTableTitle(method) {
       en: 'pre-evolution moves',
       ko: '이전 진화에서만 얻을 수 있는 기술',
     },
-    TM: getMachineTitleObj('TM'),
-    HM: getMachineTitleObj('HM'),
-    TR: getMachineTitleObj('TR'),
+    tm: getMachineTitleObj('TM'),
+    hm: getMachineTitleObj('HM'),
+    tr: getMachineTitleObj('TR'),
   };
 
 
