@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useColumns } from './table.context';
 
 export default function Row({ item, rowClassName, renderRowFn }) {

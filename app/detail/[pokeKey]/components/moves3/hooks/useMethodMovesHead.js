@@ -6,7 +6,6 @@ import {
   setInitialSortKeyWithMethod,
 } from '../utils/method-moves';
 
-
 export default function useMethodMovesHead(method) {
   const initialSortKey = setInitialSortKeyWithMethod(method);
 

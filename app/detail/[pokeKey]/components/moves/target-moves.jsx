@@ -47,10 +47,8 @@ function MethodMoves2({
 
   return (
     <div className="overflow-auto">
-      <h3 className="capitalize font-bold text-slate-800 mb-2.5 text-lg">
-        {title}
-      </h3>
       <MethodMoves method={method}>
+        <MethodMoves.Title />
         <MethodMoves.MoveTable moves={moves} />
       </MethodMoves>
       {/* <MethodMove

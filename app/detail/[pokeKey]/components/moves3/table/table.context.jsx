@@ -14,13 +14,8 @@ export function useColumns() {
   return columns;
 }
 
-export function TableProvider({
-  columns,
-  children,
-}) {
-  const value = useMemo(() => (
-    { columns }
-  ), [columns]);
+export function TableProvider({ columns, children }) {
+  const value = useMemo(() => ({ columns }), [columns]);
 
   return (
     <TableContext.Provider value={value}>

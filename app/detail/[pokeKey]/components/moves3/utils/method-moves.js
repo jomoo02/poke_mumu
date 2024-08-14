@@ -31,12 +31,18 @@ export function getMethods() {
 }
 
 export function setInitialSortKeyWithMethod(method) {
-  const { level, pre, tm, tr, hm, name } = getHeadKeys();
+  const {
+    level, pre, tm, tr, hm, name,
+  } = getHeadKeys();
 
   if ([level, pre, tm, tr, hm].includes(method)) {
     return method;
   }
   return name;
+}
+
+function createHeadItem(key, content, className) {
+  return ({ key, content, className });
 }
 
 export function setBaseHeadItems(language) {
@@ -62,38 +68,36 @@ export function setBaseHeadItems(language) {
   const languageContent = localeContent[language] || localeContent.ko;
 
   const basicItems = [
-    { key: keys.name, content: languageContent.name, className: 'w-[10.5rem]' },
-    { key: keys.type, content: languageContent.type, className: 'w-[5.25rem]' },
-    { key: keys.damageClass, content: languageContent.damageClass, className: 'w-[5.25rem]' },
-    { key: keys.power, content: languageContent.power, className: 'w-[5.55rem]' },
-    { key: keys.accuracy, content: languageContent.accuracy, className: 'w-[5rem]' },
+    createHeadItem(keys.name, languageContent.name, 'w-[10.5rem]'),
+    createHeadItem(keys.type, languageContent.type, 'w-[5.25rem]'),
+    createHeadItem(keys.damageClass, languageContent.damageClass, 'w-[5.25rem]'),
+    createHeadItem(keys.power, languageContent.power, 'w-[5.55rem]'),
+    createHeadItem(keys.accuracy, languageContent.accuracy, 'w-[5rem]'),
   ];
 
   return basicItems;
 }
 
 export function setSpecialCaseHeadItem(method) {
-  const { level, tm, tr, hm, pre } = getHeadKeys();
+  const {
+    level, tm, tr, hm, pre,
+  } = getHeadKeys();
 
   if (method === level) {
-    return ({
-      key: level, content: 'Lv.', className: 'w-14',
-    });
+    return createHeadItem(level, 'Lv.', 'w-14');
   } if ([tm, tr, hm].includes(method)) {
-    return ({
-      key: method, content: `${method.toUpperCase()}`, className: 'w-14',
-    });
+    return createHeadItem(method, `${method.toUpperCase()}`, 'w-14');
   } if (method === pre) {
-    return ({
-      key: pre, content: 'Poke', className: 'w-[5.5rem]',
-    });
+    return createHeadItem(pre, 'Poke', 'w-[5.5rem]');
   }
+  return null;
 }
 
 export function getMovesMapKeyFnWithMethod(method) {
   const { level } = getMethods();
 
   const levelMethodFn = (move) => `${move.level}-${move.move.name.en}`;
+
   const defaultFn = (move) => `${move.move.name.en}`;
 
   if (method === level) {

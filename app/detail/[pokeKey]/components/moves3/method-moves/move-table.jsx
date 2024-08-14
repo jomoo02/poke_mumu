@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLanguage } from '@/app/language-provider';
-import Table from '../table';
 import { useMethod } from './method-move.context';
 import useMethodMovesHead from '../hooks/useMethodMovesHead';
+import Table from '../table';
 import { renderHeadColumnWith, renderMoveCellWith } from './move-table.utils';
 import { getMovesMapKeyFnWithMethod } from '../utils/method-moves';
 import sortMovesByKey from '../utils/method-moves-sort';
 
-export default function MoveTable({
-  moves,
-}) {
+export default function MoveTable({ moves }) {
   const method = useMethod();
 
   const {

@@ -14,10 +14,7 @@ export function useMethod() {
   return method;
 }
 
-export function MethodMovesProvider({
-  method,
-  children,
-}) {
+export function MethodMovesProvider({ method, children }) {
   const value = useMemo(() => ({ method }), [method]);
 
   return (

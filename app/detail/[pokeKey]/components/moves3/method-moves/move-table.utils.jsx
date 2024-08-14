@@ -78,7 +78,7 @@ export const renderPrePokeCell = ({ preIds }, className) => (
     preIds={preIds}
     className={className}
   />
-)
+);
 
 export const renderTypeCell = ({ move }, className) => (
   <div
@@ -143,7 +143,7 @@ export const renderMoveCellWith = (key, move, className) => {
     [pre]: renderPrePokeCell,
   };
 
-  const renderFn = renderFnMap[key];
+  const renderFn = renderFnMap[key] || renderFnMap.name;
 
   return renderFn(move, className);
 };
