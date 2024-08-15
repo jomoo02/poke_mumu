@@ -10,12 +10,9 @@ function MethodMovesContainer({ method, className, children }) {
 
   return (
     <MethodMovesProvider method={method}>
-      <div className={`${className}`}>
-        <div className="overflow-x-auto flex">
-          <div>
-            {children}
-          </div>
-
+      <div className={`${className} `}>
+        <div>
+          {children}
         </div>
       </div>
     </MethodMovesProvider>

@@ -12,9 +12,14 @@ function Moves({ method, moves }) {
   }
 
   return (
-    <MethodMoves method={method} className="overflow-hidden">
-      <MethodMoves.Title />
-      <MethodMoves.MoveTable moves={moves} />
+    <MethodMoves method={method} className="overflow-x-auto">
+      <div className="px-2 md:px-4">
+        <MethodMoves.Title />
+      </div>
+      <div className="flex px-1 md:px-4">
+        <MethodMoves.MoveTable moves={moves} />
+      </div>
+
     </MethodMoves>
   );
 }
@@ -27,7 +32,7 @@ function MachineMoves({ machineMoves }) {
   const machineMovesGroup = groupMachineMovesByType(machineMoves);
 
   return (
-    <div className="grid justify-center">
+    <div className="grid w-full xl:w-1/2">
       {machineMovesGroup.map(({ type, moves }) => (
         <Moves
           key={type}
@@ -62,8 +67,8 @@ export default function TargetMoves({ versionMoves }) {
   } = versionMoves;
 
   return (
-    <div className="grid xl:grid-cols-2">
-      <div className="grid justify-center overflow-hidden">
+    <div className="flex flex-wrap xl:px-20">
+      <div className="grid w-full xl:w-1/2">
         <Moves method={level} moves={levelMoves} />
         <Moves method={egg} moves={eggMoves} />
         <Moves method={tutor} moves={tutorMoves} />
