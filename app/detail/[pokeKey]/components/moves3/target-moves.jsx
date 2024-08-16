@@ -12,8 +12,8 @@ function Moves({ method, moves }) {
   }
 
   return (
-    <MethodMoves method={method} className="overflow-x-auto">
-      <div className="px-2 md:px-4">
+    <MethodMoves method={method} className="overflow-x-auto py-3 lg:py-4">
+      <div className="px-1 md:px-4">
         <MethodMoves.Title />
       </div>
       <div className="flex px-1 md:px-4">
@@ -32,7 +32,7 @@ function MachineMoves({ machineMoves }) {
   const machineMovesGroup = groupMachineMovesByType(machineMoves);
 
   return (
-    <div className="grid w-full xl:w-1/2">
+    <div className="grid w-full xl:w-1/2 xl:justify-end">
       {machineMovesGroup.map(({ type, moves }) => (
         <Moves
           key={type}
@@ -67,7 +67,7 @@ export default function TargetMoves({ versionMoves }) {
   } = versionMoves;
 
   return (
-    <div className="flex flex-wrap xl:px-20">
+    <div className="flex flex-wrap xl:py-3">
       <div className="grid w-full xl:w-1/2">
         <Moves method={level} moves={levelMoves} />
         <Moves method={egg} moves={eggMoves} />

@@ -37,7 +37,7 @@ export default function MoveTable({ moves }) {
         <Table.Row
           key={sortedMovesKeyFn(move)}
           item={move}
-          rowClassName="flex h-9 items-center"
+          rowClassName="flex h-9 items-center items-stretch"
           renderRowFn={renderMoveCellWith}
         />
       ))}

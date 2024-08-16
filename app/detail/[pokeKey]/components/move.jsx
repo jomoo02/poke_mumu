@@ -7,7 +7,7 @@ export default function Move({ move, className }) {
   const moveName = move?.name[language] || move.name.ko;
   return (
     <div
-      className={`${className} text-base font-semibold text-slate-700 px-2.5`}
+      className={`${className} text-base font-semibold text-slate-700 px-2.5 flex items-center`}
     >
       {moveName}
     </div>

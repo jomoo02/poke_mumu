@@ -17,7 +17,7 @@ function VersionButton({
   if (isActive) {
     return (
       <div
-        className={`${type} ${className} text-white font-semibold`}
+        className={`${type} ${className} text-white font-semibold text-center flex items-center justify-center`}
       >
         {versionText}
       </div>
@@ -43,7 +43,7 @@ function VersionGroup({
 }) {
   return (
     <div className="border-b-2 grid gap-y-3 pt-2">
-      <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-1 gap-y-px px-2">
+      <div className="grid grid-cols-2 lg:flex gap-x-1 gap-y-1 px-2 lg:gap-x-2">
         {versions.map((version) => (
           <VersionButton
             key={version}
@@ -51,6 +51,7 @@ function VersionGroup({
             isActive={targetVersion === version}
             type={type}
             handleClick={setTargetVersion}
+            className="rounded-t-lg py-px lg:px-3.5 lg:pb-0.5 lg:pt-1 text-sm md:text-base"
           />
         ))}
       </div>
@@ -73,7 +74,7 @@ export default function VersionMoves({ genMoves, type }) {
         targetVersion={targetVersion}
         setTargetVersion={setTargetVersion}
       />
-      <div className="p-3">
+      <div className="p-3 2xl:px-10">
         <TargetMoves
           key={targetVersion}
           versionMoves={versionMoves}

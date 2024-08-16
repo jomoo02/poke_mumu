@@ -18,7 +18,7 @@ export const renderHeadColumnWith = (selectKey, isAsc, select) => (column) => {
 
   const backGroundColor = isSelect ? 'bg-blue-200' : 'bg-slate-200';
 
-  const buttonClassName = `${className} ${backGroundColor} flex items-center justify-between px-2 capitalize h-full`;
+  const buttonClassName = `${className} ${backGroundColor} flex items-center justify-between px-2 capitalize`;
 
   const handleColumnClick = () => {
     select(key);
@@ -44,7 +44,7 @@ export const renderHeadColumnWith = (selectKey, isAsc, select) => (column) => {
 export const renderLevelCell = ({ level }, className) => (
   <div
     key="level"
-    className={`${className} text-sm px-2 font-medium`}
+    className={`${className} text-sm px-2 font-medium flex items-center`}
   >
     {level}
   </div>
@@ -65,7 +65,7 @@ export const renderMachineCell = ({ machine }, className) => {
   return (
     <div
       key="machine"
-      className={`${className} text-sm px-2 font-medium`}
+      className={`${className} text-sm px-2 font-medium flex items-center`}
     >
       {FormattedMachineNumber}
     </div>
@@ -83,7 +83,7 @@ export const renderPrePokeCell = ({ preIds }, className) => (
 export const renderTypeCell = ({ move }, className) => (
   <div
     key="type"
-    className={`${className} flex justify-center`}
+    className={`${className} flex justify-center items-center`}
   >
     <Type type={move.type} />
   </div>
@@ -92,7 +92,7 @@ export const renderTypeCell = ({ move }, className) => (
 export const renderDamageClassCell = ({ move }, className) => (
   <div
     key="damage-class"
-    className={`${className} flex justify-center`}
+    className={`${className} flex justify-center items-center`}
   >
     <DamageClass damageClass={move.damage_class} />
   </div>
@@ -101,7 +101,7 @@ export const renderDamageClassCell = ({ move }, className) => (
 export const renderPowerCell = ({ move }, className) => (
   <div
     key="power"
-    className={`text-sm font-medium text-right px-3 ${className}`}
+    className={`text-sm font-medium px-3 ${className} flex items-center justify-end`}
   >
     {move.power || '—'}
   </div>
@@ -110,7 +110,7 @@ export const renderPowerCell = ({ move }, className) => (
 export const renderAccuracyCell = ({ move }, className) => (
   <div
     key="accuracy"
-    className={`text-sm font-medium text-right px-3 ${className}`}
+    className={`text-sm font-medium px-3 ${className}  flex items-center justify-end`}
   >
     {move.accuracy || '—'}
   </div>

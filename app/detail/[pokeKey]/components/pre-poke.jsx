@@ -25,7 +25,7 @@ export default function PrePoke({ preIds, className }) {
   };
 
   return (
-    <div className={`${className} flex`}>
+    <div className={`${className} flex items-center`}>
       {imageUrls.map(({ id, src }, index) => (
         <Image
           key={id}
@@ -39,4 +39,4 @@ export default function PrePoke({ preIds, className }) {
       ))}
     </div>
   );
-};
+}
