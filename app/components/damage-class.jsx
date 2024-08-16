@@ -30,6 +30,7 @@ export default function DamageClass({ damageClass = 'status' }) {
         alt={damageClass}
         fill
         size="20px"
+        priority
         style={{ objectFit: 'contain', padding: '2px 0' }}
       />
     </div>

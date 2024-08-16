@@ -14,7 +14,7 @@ import PokeForms from './components/forms';
 import PokeDefenseCompatibility from './components/defense-compatibility';
 import PokeStats from './components/stats';
 
-import PokeMoves from './components/moves3';
+import PokeMoves from './components/moves4';
 
 import NavigationSkeleton from './components/navigation/skeleton';
 import BasicInfoSkeleton from './components/basic-info/skeleton';
