@@ -50,7 +50,7 @@ export default async function DetailPage({ params }) {
         <PokeNavigation pokeKey={pokeKey} />
         <NavigationSkeleton />
 
-        {/* <PokeBasicInfo pokeKey={pokeKey} />
+        <PokeBasicInfo pokeKey={pokeKey} />
         <BasicInfoSkeleton />
 
         <PokeAbilities pokeKey={pokeKey} />
@@ -63,7 +63,7 @@ export default async function DetailPage({ params }) {
         <DefenseCompatibilitySkeleton />
 
         <PokeStats pokeKey={pokeKey} />
-        <StatsSkeleton /> */}
+        <StatsSkeleton />
 
         {/* <Chain chainData={chainData} type={mainType} /> */}
 

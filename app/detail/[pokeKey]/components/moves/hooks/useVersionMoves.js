@@ -11,12 +11,20 @@ function useVersionLocaleText(versions) {
   }));
 }
 
+function setInitialTargetVersion(genMoves) {
+  const targetVersionMoves = genMoves.find(({ versionMoves }) => (
+    Object.values(versionMoves).some((moves) => moves.length > 0)
+  ));
+
+  return targetVersionMoves.version;
+}
+
 export default function useVersionMoves(genMoves) {
   const versions = genMoves.map(({ version }) => version);
-
   const localeVersions = useVersionLocaleText(versions);
 
-  const [targetVersion, setTargetVersion] = useState(versions[0]);
+  const initialTargetVersion = setInitialTargetVersion(genMoves);
+  const [targetVersion, setTargetVersion] = useState(initialTargetVersion);
 
   const versionMoves = genMoves.find(({ version }) => version === targetVersion)?.versionMoves;
 
