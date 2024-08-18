@@ -3,6 +3,7 @@ import { fetchPokeKey } from '@/app/api/data';
 import { fetchDetail } from '@/app/api/detail';
 import Header from '../header';
 import GenMoves from './gen-moves';
+import MovesSkeleton from './skeleton';
 
 async function Moves({ pokeKey }) {
   const [{ types }, { moves }] = await Promise.all([
@@ -24,7 +25,7 @@ async function Moves({ pokeKey }) {
 
 export default function PokeMoves({ pokeKey }) {
   return (
-    <Suspense>
+    <Suspense fallback={<MovesSkeleton />}>
       <Moves pokeKey={pokeKey} />
     </Suspense>
   );

@@ -15,6 +15,7 @@ import PokeDefenseCompatibility from './components/defense-compatibility';
 import PokeStats from './components/stats';
 
 import PokeMoves from './components/moves';
+import MovesSkeleton from './components/moves/skeleton';
 // import PokeMoves from './components/moves4';
 
 import NavigationSkeleton from './components/navigation/skeleton';
@@ -28,18 +29,18 @@ import StatsSkeleton from './components/stats/skeleton';
 export default async function DetailPage({ params }) {
   const { pokeKey } = params;
 
-  const [basicInfo, detailInfo] = await Promise.all([fetchPokeKey(pokeKey), fetchDetail(pokeKey)]);
+  // const [basicInfo, detailInfo] = await Promise.all([fetchPokeKey(pokeKey), fetchDetail(pokeKey)]);
 
-  const { types, chainIndex } = basicInfo;
+  // const { types, chainIndex } = basicInfo;
 
-  const chainData = await fetchChain(chainIndex);
+  // const chainData = await fetchChain(chainIndex);
 
-  const mainType = types[0];
+  // const mainType = types[0];
 
-  const {
-    stats,
-    moves,
-  } = detailInfo;
+  // const {
+  //   stats,
+  //   moves,
+  // } = detailInfo;
   return (
     <>
       {/* <Suspense fallback={null}>
@@ -49,7 +50,7 @@ export default async function DetailPage({ params }) {
         <PokeNavigation pokeKey={pokeKey} />
         <NavigationSkeleton />
 
-        <PokeBasicInfo pokeKey={pokeKey} />
+        {/* <PokeBasicInfo pokeKey={pokeKey} />
         <BasicInfoSkeleton />
 
         <PokeAbilities pokeKey={pokeKey} />
@@ -62,11 +63,12 @@ export default async function DetailPage({ params }) {
         <DefenseCompatibilitySkeleton />
 
         <PokeStats pokeKey={pokeKey} />
-        <StatsSkeleton />
+        <StatsSkeleton /> */}
 
         {/* <Chain chainData={chainData} type={mainType} /> */}
 
         <PokeMoves pokeKey={pokeKey} />
+        <MovesSkeleton />
 
         {/* <Moves moves={moves} type={mainType} /> */}
       </div>
