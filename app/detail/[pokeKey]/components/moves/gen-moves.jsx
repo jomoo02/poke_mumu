@@ -1,93 +1,35 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useLanguage } from '@/app/language-provider';
+import React from 'react';
+import useGenMoves from './hooks/useGenMoves';
+import ButtonGroup from './button-group';
 import VersionMoves from './version-moves';
 
-function GenButton({
-  className,
-  isActive,
-  handleClick,
-  children,
-}) {
-  const commonClassName = 'flex items-center justify-center rounded-md px-2 py-1 h-7 min-w-10 md:min-w-11 md:max-w-11';
-
-  if (isActive) {
-    return (
-      <div className={`${commonClassName} ${className} text-white`}>
-        {children}
-      </div>
-    );
-  }
-
-  return (
-    <button
-      type="button"
-      className={`bg-slate-200 hover:bg-slate-400/90 ${commonClassName}`}
-      onClick={handleClick}
-    >
-      {children}
-    </button>
-  );
-}
-
-function GenGroup({
-  gens,
-  type,
-  targetGen,
-  setTargetGen,
-}) {
-  return (
-    <div className="flex gap-x-2 flex-wrap gap-y-2 items-center">
-      {gens.map((gen) => (
-        <GenButton
-          key={gen}
-          className={type}
-          handleClick={() => setTargetGen(gen)}
-          isActive={gen === targetGen}
-        >
-          <span className="text-sm md:text-base font-medium text-slate-80">
-            {gen}
-          </span>
-          <span className="font-semibold text-[12px] leading-[24px]">
-            th
-          </span>
-        </GenButton>
-      ))}
-    </div>
-  );
-}
-
 export default function GenMoves({ moves, type }) {
-  const { language } = useLanguage();
-
-  const localeOtherGenText = {
-    ko: '다른 세대',
-    en: 'In other generations',
-  };
-
-  const gens = moves.map(({ gen }) => gen);
-
-  const [targetGen, setTargetGen] = useState(gens.at(-1));
-
-  const genMoves = moves.find(({ gen }) => gen === targetGen)?.genMoves;
+  const {
+    title,
+    gens,
+    targetGen,
+    updateTargetGen,
+    targetGenMoves,
+  } = useGenMoves(moves);
 
   return (
     <>
-      <div className="flex gap-x-1.5 items-center px-2 py-2.5 border-b">
+      <div className={`flex gap-x-1.5 items-center px-2.5 lg:px-8 py-2.5 border-b-2 ${type}-border`}>
         <div className="text-sm font-medium pr-2 text-nowrap">
-          {localeOtherGenText[language]}
+          {title}
         </div>
-        <GenGroup
-          gens={gens}
+        <ButtonGroup.Gen
           type={type}
+          gens={gens}
           targetGen={targetGen}
-          setTargetGen={setTargetGen}
+          setTargetGen={updateTargetGen}
         />
       </div>
       <VersionMoves
         key={targetGen}
-        genMoves={genMoves}
+        genMoves={targetGenMoves}
         type={type}
       />
     </>

@@ -57,7 +57,6 @@ export function setMoveKeyTagetMoves(targetMoves) {
       })),
     });
   });
-  console.log(levelUpCategoryMoves, restCategoriesMoves)
 
   return restCategoriesMoves.reduce((acc, cur) => ({
     ...acc, ...cur,

@@ -1,19 +1,6 @@
-import React from 'react';
+import TableContainer from './table';
 import Head from './head';
 import Row from './row';
-import { TableProvider } from './table.context';
-
-function TableContainer({
-  columns,
-  renderFn,
-  children,
-}) {
-  return (
-    <TableProvider columns={columns} renderFn={renderFn}>
-      {children}
-    </TableProvider>
-  );
-}
 
 const Table = Object.assign(TableContainer, {
   Head,

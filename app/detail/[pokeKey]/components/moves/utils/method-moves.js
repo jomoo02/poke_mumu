@@ -88,7 +88,7 @@ export function setSpecialCaseHeadItem(method) {
   } if ([tm, tr, hm].includes(method)) {
     return createHeadItem(method, `${method.toUpperCase()}`, 'w-14');
   } if (method === pre) {
-    return createHeadItem(pre, 'Poke', 'w-[5.5rem]');
+    return createHeadItem(pre, 'Poke', 'w-[4.85rem]');
   }
   return null;
 }

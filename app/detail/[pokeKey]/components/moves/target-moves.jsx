@@ -1,64 +1,44 @@
 import React from 'react';
+import { useLanguage } from '@/app/language-provider';
+import MethodMoves from './method-moves';
 import {
   checkTargetMovesEmpty,
-  groupMovesByMachineType,
-  setMovesKey,
-  getMachineMethodMovesTitle,
-} from '../../utils/moves';
-// import MethodMovesTable from './method-moves-table';
-import {
-  renderMachineMoveFirstColumn,
-  renderLevelMoveFirstColumn,
-  renderPreMoveFirstColumn,
-  getTableHeadFirstItem,
-  renderAccuracy,
-  renderDamageClass,
-  renderName,
-  renderPower,
-  renderType,
-} from './target-moves.utils';
-import useTableTitle from './hooks/useTableTitle';
-import MethodMove from './method-moves';
-import MethodMoves from '../moves3/method-moves'
+  groupMachineMovesByType,
+} from './utils/target-moves';
+import { getMethods } from './utils/method-moves';
 
-function MethodMoves2({
-  moves,
-  method,
-  renderMoveFirstColumn,
-}) {
-  const { title } = useTableTitle(method);
+function NotExistInVersion() {
+  const { language } = useLanguage();
 
+  const localeText = {
+    en: 'A version where the Pokémon does not exist',
+    ko: '해당 포켓몬이 존재하지 않는 버전',
+  };
+
+  const text = localeText[language] || localeText.ko;
+
+  return (
+    <div className="flex justify-center min-h-44 md:min-h-96 items-center py-3 px-2 font-semibold text-xl">
+      {text}
+    </div>
+  );
+}
+
+function Moves({ method, moves }) {
   if (!moves || moves.length === 0) {
     return null;
   }
 
-  const firstHeadColumnInfo = getTableHeadFirstItem(method);
-
-  const renderFn = {
-    name: renderName,
-    power: renderPower,
-    type: renderType,
-    accuracy: renderAccuracy,
-    damageClass: renderDamageClass,
-    machine: renderMachineMoveFirstColumn,
-    level: renderLevelMoveFirstColumn,
-    pre: renderPreMoveFirstColumn,
-  };
-
   return (
-    <div className="overflow-auto">
-      <MethodMoves method={method}>
+    <MethodMoves method={method} className="overflow-x-auto py-0.5 my-4 sm:my-3 lg:my-4">
+      <div className="px-1 md:px-4">
         <MethodMoves.Title />
+      </div>
+      <div className="flex px-1 md:px-4">
         <MethodMoves.MoveTable moves={moves} />
-      </MethodMoves>
-      {/* <MethodMove
-        moves={moves}
-        renderMoveFirstColumn={renderMoveFirstColumn}
-        firstColumnInfo={firstHeadColumnInfo}
-        renderFn={renderFn}
-      /> */}
-    </div>
+      </div>
 
+    </MethodMoves>
   );
 }
 
@@ -67,17 +47,15 @@ function MachineMoves({ machineMoves }) {
     return null;
   }
 
-  const machineTypesMoves = groupMovesByMachineType(machineMoves);
+  const machineMovesGroup = groupMachineMovesByType(machineMoves);
 
   return (
-    <div className="flex flex-col gap-y-10 overflow-auto">
-      {machineTypesMoves.map(({ type, moves }) => (
-        <MethodMoves2
+    <div className="grid w-full xl:w-1/2 xl:justify-end">
+      {machineMovesGroup.map(({ type, moves }) => (
+        <Moves
           key={type}
-          moves={moves}
-          renderMoveFirstColumn={renderMachineMoveFirstColumn}
           method={type}
-          // method="machine"
+          moves={moves}
         />
       ))}
     </div>
@@ -85,37 +63,35 @@ function MachineMoves({ machineMoves }) {
 }
 
 export default function TargetMoves({ versionMoves }) {
-  const isMovesEmpty = checkTargetMovesEmpty(versionMoves);
-
-  if (isMovesEmpty) {
-    return <div>none</div>;
+  if (checkTargetMovesEmpty(versionMoves)) {
+    return <NotExistInVersion />;
   }
 
   const {
-    machineMoves,
-    eggMoves,
-    preMoves,
-    tutorMoves,
-    reminderMoves,
-    levelUpMoves,
-  } = setMovesKey(versionMoves);
+    level,
+    pre,
+    egg,
+    tutor,
+    reminder,
+  } = getMethods();
+
+  const {
+    machine: machineMoves,
+    egg: eggMoves,
+    pre: preMoves,
+    tutor: tutorMoves,
+    reminder: reminderMoves,
+    'level-up': levelMoves,
+  } = versionMoves;
 
   return (
-    <div className="flex flex-wrap gap-y-10 py-3 gap-x-10 justify-evenly">
-      <div className="flex flex-col gap-y-10 overflow-auto">
-        <MethodMoves2
-          moves={levelUpMoves}
-          renderMoveFirstColumn={renderLevelMoveFirstColumn}
-          method="level"
-        />
-        <MethodMoves2 moves={eggMoves} method="egg" />
-        <MethodMoves2 moves={tutorMoves} method="tutor" />
-        <MethodMoves2
-          moves={preMoves}
-          renderMoveFirstColumn={renderPreMoveFirstColumn}
-          method="pre"
-        />
-        <MethodMoves2 moves={reminderMoves} method="reminder" />
+    <div className="flex flex-wrap xl:py-3">
+      <div className="grid w-full xl:w-1/2">
+        <Moves method={level} moves={levelMoves} />
+        <Moves method={egg} moves={eggMoves} />
+        <Moves method={tutor} moves={tutorMoves} />
+        <Moves method={pre} moves={preMoves} />
+        <Moves method={reminder} moves={reminderMoves} />
       </div>
       <MachineMoves machineMoves={machineMoves} />
     </div>

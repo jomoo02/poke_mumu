@@ -1,18 +1,21 @@
-'use client';
-
-import React, { createContext, useContext, useMemo } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useMemo,
+} from 'react';
 
 const TableContext = createContext({
   columns: [],
-  renderFn: {},
 });
 
-export function TableProvider({
-  columns,
-  renderFn,
-  children,
-}) {
-  const value = useMemo(() => ({ columns, renderFn }), [columns, renderFn]);
+export function useColumns() {
+  const { columns } = useContext(TableContext);
+
+  return columns;
+}
+
+export function TableProvider({ columns, children }) {
+  const value = useMemo(() => ({ columns }), [columns]);
 
   return (
     <TableContext.Provider value={value}>
@@ -20,9 +23,3 @@ export function TableProvider({
     </TableContext.Provider>
   );
 }
-
-export function useColumns() {
-  return useContext(TableContext);
-}
-
-

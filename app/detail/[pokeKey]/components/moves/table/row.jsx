@@ -1,16 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useColumns } from './table.context';
 
-export default function Row({ move, ...props }) {
-  const { columns, renderFn } = useColumns();
+export default function Row({ item, rowClassName, renderRowFn }) {
+  const columns = useColumns();
 
   return (
-    <div {...props}>
-      {columns.map(({ key, className }) => (
-        <Fragment key={key}>
-          {renderFn[key](move, className)}
-        </Fragment>
-      ))}
+    <div className={rowClassName}>
+      {columns.map(({ key, className }) => renderRowFn(key, item, className))}
     </div>
   );
 }
