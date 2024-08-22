@@ -2,13 +2,14 @@ import React from 'react';
 import { fetchPokeKey } from '@/app/api/data';
 import { fetchChain } from '@/app/api/chain';
 import Header from '../header';
+import ChainNode from './chain-node';
 
 async function Chain({ pokeKey }) {
   const { types, chainIndex } = await fetchPokeKey(pokeKey);
   const chainData = await fetchChain(chainIndex);
   const type = types[0];
 
-  if (!chainData.length) {
+  if (!chainData) {
     return null;
   }
 
@@ -29,9 +30,23 @@ async function Chain({ pokeKey }) {
     <div>
       <Header type={type} category="chain" />
       <div className={`md:flex justify-center pt-2 pb-1 border-2 border-t-0 ${type}-border rounded-b-sm`}>
-        <div className={`${gridColumn[chain.length]} md:gap-y-4`}>
+        <div className={`${gridClassName} md:gap-y-4`}>
+          {chain.map((item) => (
+            <ChainNode
+              key={`${item.pokeKey}-${item.id}-${item.name.en}`}
+              {...item}
+              maxDepth={maxDepth}
+              maxWidth={maxWidth}
+            />
+          ))}
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PokeChain({ pokeKey }) {
+  return (
+    <Chain pokeKey={pokeKey} />
   );
 }

@@ -1,7 +1,4 @@
 import React, { Suspense } from 'react';
-import DefenseCompatibility from '@/app/ui/detail/defense-compatibility';
-import Stats from '@/app/ui/detail/stats/stats';
-import Moves from '@/app/ui/detail/moves/moves';
 import Chain from '@/app/ui/detail/chain/chain';
 import { fetchChain } from '@/app/api/chain';
 import { fetchPokeKey } from '@/app/api/data';
@@ -13,11 +10,9 @@ import PokeAbilities from './components/abilities';
 import PokeForms from './components/forms';
 import PokeDefenseCompatibility from './components/defense-compatibility';
 import PokeStats from './components/stats';
-
 import PokeMoves from './components/moves';
-import MovesSkeleton from './components/moves/skeleton';
-// import PokeMoves from './components/moves4';
 
+import MovesSkeleton from './components/moves/skeleton';
 import NavigationSkeleton from './components/navigation/skeleton';
 import BasicInfoSkeleton from './components/basic-info/skeleton';
 import AbilitiesSkeleton from './components/abilities/skeleton';
@@ -25,6 +20,8 @@ import FormsSkeleton from './components/forms/skeleton';
 import DefenseCompatibilitySkeleton from './components/defense-compatibility/skeleton';
 import StatsSkeleton from './components/stats/skeleton';
 
+import PokeChain from './components/chain';
+import PokeEvolution from './components/evolution'
 
 export default async function DetailPage({ params }) {
   const { pokeKey } = params;
@@ -66,6 +63,9 @@ export default async function DetailPage({ params }) {
         <StatsSkeleton />
 
         {/* <Chain chainData={chainData} type={mainType} /> */}
+        <PokeChain pokeKey={pokeKey} />
+        <PokeEvolution pokeKey={pokeKey} />
+
 
         <PokeMoves pokeKey={pokeKey} />
         <MovesSkeleton />

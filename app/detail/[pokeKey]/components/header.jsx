@@ -32,6 +32,10 @@ const localeTitles = {
     ko: '기술',
     en: 'move',
   },
+  chain: {
+    ko: '진화',
+    en: 'Evolution Tree',
+  },
 };
 
 export default function Header({ category = 'basicInfo', type = 'normal', text }) {
