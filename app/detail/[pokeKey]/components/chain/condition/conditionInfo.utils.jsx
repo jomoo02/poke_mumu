@@ -11,6 +11,7 @@ import {
   makeFirstUpperCase,
   makeFirstUpperCaseTextArray,
 } from '@/app/lib/utils';
+import Location from '../../evolution/chain/chain-node/node-detail/condition/location';
 
 const contentMap = {
   agile_style: {
@@ -268,6 +269,9 @@ const contentMap = {
 
       return <span>{localeContent[language] || localeContent.ko}</span>;
     },
+  },
+  location: {
+    renderContent: (value, language) => <Location value={value} language={language} />,
   },
 };
 

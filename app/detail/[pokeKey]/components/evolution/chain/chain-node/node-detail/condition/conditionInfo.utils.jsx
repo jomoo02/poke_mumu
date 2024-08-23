@@ -11,6 +11,7 @@ import {
   makeFirstUpperCase,
   makeFirstUpperCaseTextArray,
 } from '@/app/lib/utils';
+import Location from './location';
 
 const contentMap = {
   agile_style: {
@@ -269,10 +270,14 @@ const contentMap = {
       return <span>{localeContent[language] || localeContent.ko}</span>;
     },
   },
+  location: {
+    renderContent: (value, language) => <Location value={value} language={language} />,
+  },
 };
 
 export default function getConditionInfo(condition) {
-  const { affix, renderContent } = contentMap[condition];
+  console.log(condition);
+  const { affix = {}, renderContent } = contentMap[condition];
 
   return {
     affix,

@@ -16,10 +16,10 @@ export default function ConditionInfo({
   const { prefix, suffix } = affix || {};
 
   return (
-    <>
+    <span>
       {prefix && <span className="mr-1">{prefix[language]}</span>}
       {renderContent(value, language)}
       {suffix && <span className="ml-1">{suffix[language]}</span>}
-    </>
+    </span>
   );
 }

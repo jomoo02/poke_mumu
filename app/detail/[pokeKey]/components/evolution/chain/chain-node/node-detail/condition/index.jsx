@@ -29,13 +29,13 @@ export default function Condition({ condition }) {
   const sortedCondition = sortCondition(condition, language);
 
   return (
-    <span>
+    <>
       {sortedCondition.map(({ key, value }, index) => (
         <Fragment key={value}>
-          {index > 0 && <span className="mx-1">+</span>}
+          {index > 0 && <span>+</span>}
           <ConditionInfo condition={key} value={value} />
         </Fragment>
       ))}
-    </span>
+    </>
   );
 }

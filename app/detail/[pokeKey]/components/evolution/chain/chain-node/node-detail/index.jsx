@@ -31,9 +31,10 @@ export default function ChainNodeDetail({ detail = [] }) {
         {detail.map(({ trigger, condition }, index) => (
           <div key={createDetailKey(trigger, condition)}>
             {index > 0 && <span>or</span>}
-            <p className={`flex gap-x-1 flex-wrap text-center ${language === 'ko' ? 'flex-row-reverse' : ''}`}>
-              <Trigger trigger={trigger} condition={condition} />
+            <p className="text-center space-x-1">
+              {language === 'en' && <Trigger trigger={trigger} condition={condition} />}
               <Condition condition={condition} />
+              {language === 'ko' && <Trigger trigger={trigger} condition={condition} />}
             </p>
           </div>
         ))}

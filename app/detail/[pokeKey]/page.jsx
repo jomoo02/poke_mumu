@@ -45,7 +45,7 @@ export default async function DetailPage({ params }) {
       </Suspense> */}
       <div className="grid gap-y-12">
         <PokeNavigation pokeKey={pokeKey} />
-        <NavigationSkeleton />
+        {/* <NavigationSkeleton />
 
         <PokeBasicInfo pokeKey={pokeKey} />
         <BasicInfoSkeleton />
@@ -60,7 +60,7 @@ export default async function DetailPage({ params }) {
         <DefenseCompatibilitySkeleton />
 
         <PokeStats pokeKey={pokeKey} />
-        <StatsSkeleton />
+        <StatsSkeleton /> */}
 
         {/* <Chain chainData={chainData} type={mainType} /> */}
         <PokeChain pokeKey={pokeKey} />
