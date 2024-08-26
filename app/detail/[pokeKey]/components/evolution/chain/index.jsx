@@ -53,7 +53,10 @@ export default function Chain({
       <div className={`md:flex justify-center pt-2 pb-1 border-2 border-t-0 ${type}-border rounded-b-sm`}>
         <div className={`${gridColumn[chain.length]} md:gap-y-4`}>
           {chain.map((chainItem) => (
-            <NestedChain key={chainItem.id} chainItem={chainItem} />
+            <NestedChain
+              key={`${chainItem.id}-${chainItem.name.en}`}
+              chainItem={chainItem}
+            />
           ))}
         </div>
       </div>

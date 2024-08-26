@@ -3,6 +3,7 @@ import { fetchPokeKey } from '@/app/api/data';
 import { fetchChain } from '@/app/api/chain';
 import Header from '../header';
 import Chain from './chain';
+import EvolutionInfo from './evolution-info';
 
 async function Evolution({ pokeKey }) {
   const { types, chainIndex } = await fetchPokeKey(pokeKey);
@@ -17,8 +18,10 @@ async function Evolution({ pokeKey }) {
 
   return (
     <div>
+      {chainIndex}
       <Header type={type} category="chain" />
       <Chain chain={chain} type={type} maxWidth={maxWidth} maxDepth={maxDepth} />
+      <EvolutionInfo chainIndex={chainIndex} />
     </div>
   );
 }

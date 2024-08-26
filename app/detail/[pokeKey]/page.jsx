@@ -21,7 +21,7 @@ import DefenseCompatibilitySkeleton from './components/defense-compatibility/ske
 import StatsSkeleton from './components/stats/skeleton';
 
 import PokeChain from './components/chain';
-import PokeEvolution from './components/evolution'
+import PokeEvolution from './components/evolution';
 
 export default async function DetailPage({ params }) {
   const { pokeKey } = params;
@@ -63,9 +63,8 @@ export default async function DetailPage({ params }) {
         <StatsSkeleton /> */}
 
         {/* <Chain chainData={chainData} type={mainType} /> */}
-        <PokeChain pokeKey={pokeKey} />
+        {/* <PokeChain pokeKey={pokeKey} /> */}
         <PokeEvolution pokeKey={pokeKey} />
-
 
         <PokeMoves pokeKey={pokeKey} />
         <MovesSkeleton />

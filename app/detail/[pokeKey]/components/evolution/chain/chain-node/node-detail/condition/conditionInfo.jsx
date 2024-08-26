@@ -13,13 +13,13 @@ export default function ConditionInfo({
     renderContent,
   } = getConditionInfo(condition);
 
-  const { prefix, suffix } = affix || {};
+  const { prefix, suffix } = affix[language] || {};
 
   return (
     <span>
-      {prefix && <span className="mr-1">{prefix[language]}</span>}
+      {prefix && <span className="mr-1">{prefix}</span>}
       {renderContent(value, language)}
-      {suffix && <span className="ml-1">{suffix[language]}</span>}
+      {suffix && <span className="ml-1">{suffix}</span>}
     </span>
   );
 }

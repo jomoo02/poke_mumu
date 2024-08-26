@@ -8,6 +8,7 @@ export default function PokeImage({ id, alt }) {
     <div className="w-16 h-16 md:w-20 relative md:h-20">
       <Image
         src={src}
+        // src="/pokeball.svg"
         alt={alt}
         fill
         size="70px"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useLanguage } from '@/app/language-provider';
 import EvolutionArrowIcon from '@/app/components/icons/evolution-arrow';
 import Trigger from './trigger';
@@ -26,21 +26,19 @@ export default function ChainNodeDetail({ detail = [] }) {
   const { width, height } = getDetailWidthAndHeigt(maxWidth, maxDepth);
 
   return (
-    <div className={`flex items-center justify-center px-3.5 ${width} ${height}`}>
-      <div className="text-xs md:text-sm text-center text-balance">
+    <div className={`flex flex-col items-center justify-center px-3.5 ${width} ${height}`}>
+      <div className="text-xs md:text-sm text-center break-words space-x-1 w-full">
         {detail.map(({ trigger, condition }, index) => (
-          <div key={createDetailKey(trigger, condition)}>
-            {index > 0 && <span>or</span>}
-            <p className="text-center space-x-1">
-              {language === 'en' && <Trigger trigger={trigger} condition={condition} />}
-              <Condition condition={condition} />
-              {language === 'ko' && <Trigger trigger={trigger} condition={condition} />}
-            </p>
-          </div>
+          <Fragment key={createDetailKey(trigger, condition)}>
+            {index > 0 && <div>or</div>}
+            {language === 'en' && <Trigger trigger={trigger} condition={condition} />}
+            <Condition condition={condition} />
+            {language === 'ko' && <Trigger trigger={trigger} condition={condition} />}
+          </Fragment>
         ))}
-        <div className="flex justify-center mt-2.5 md:mt-0.5 ">
-          <EvolutionArrowIcon maxWidth={maxWidth} />
-        </div>
+      </div>
+      <div className="flex justify-center mt-2.5 md:mt-0.5 ">
+        <EvolutionArrowIcon maxWidth={maxWidth} />
       </div>
     </div>
   );

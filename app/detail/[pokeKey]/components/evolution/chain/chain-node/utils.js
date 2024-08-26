@@ -8,4 +8,3 @@ export function splitPokeLinkName(name) {
 
   return [name];
 }
-

@@ -5,15 +5,6 @@ import PokeImage from './node-image';
 import PokeLink from './node-link';
 import { useChainMaxWidth } from '../chain.context';
 
-function PokeInfo({ name, id, pokeKey }) {
-  return (
-    <div className="min-w-20 max-w-24 xs:w-24 md:w-24 flex flex-col items-center justify-center">
-      <PokeImage id={id} alt={name} />
-      <PokeLink pokeKey={pokeKey} name={name} />
-    </div>
-  );
-}
-
 export default function ChainNode({ chainNodeData }) {
   const {
     pokeKey,
@@ -31,7 +22,10 @@ export default function ChainNode({ chainNodeData }) {
   return (
     <div className={`flex flex-col justify-center items-center ${maxWidth === 8 ? '' : 'md:flex-row'}`}>
       <ChainNodeDetail detail={detail} />
-      <PokeInfo name={localeName} id={id} pokeKey={pokeKey} />
+      <div className="min-w-20 max-w-24 xs:w-24 md:w-24 flex flex-col items-center justify-center py-4">
+        <PokeImage id={id} alt={localeName} />
+        <PokeLink pokeKey={pokeKey} name={localeName} />
+      </div>
     </div>
   );
 }

@@ -11,6 +11,7 @@ import {
   makeFirstUpperCase,
   makeFirstUpperCaseTextArray,
 } from '@/app/lib/utils';
+import { getOtherConditionContent } from './condtion.utils';
 import Location from './location';
 
 const contentMap = {
@@ -132,7 +133,7 @@ const contentMap = {
       },
     },
     renderContent: (value, language) => (
-      <PokeLinkWithSbjectParticle poke={value} laguage={language} />
+      <PokeLinkWithSbjectParticle poke={value} language={language} />
     ),
   },
   party_type: {
@@ -140,7 +141,7 @@ const contentMap = {
       const content = language === 'ko'
         ? `${typesKo[value]} 타입 포켓몬을 지니고 있는 상태`
         : `with a ${makeFirstUpperCase(value)}-type Pokémon in the party`;
-      return <span>{content[language] || content.ko}</span>;
+      return <span>{content}</span>;
     },
   },
   recoil_damage: {
@@ -148,7 +149,7 @@ const contentMap = {
       const content = language === 'ko'
         ? `누적 반동 데미지 ${value} 이상 입은 상태에서`
         : `after losing at least ${value} HP from recoil damage`;
-      return <span>{content[language] || content.ko}</span>;
+      return <span>{content}</span>;
     },
   },
   relative_nature: {
@@ -228,7 +229,7 @@ const contentMap = {
         suffix: 'in the strong style 20 times in LA only',
       },
     },
-    renderContent: (value, language) => <MoveLink move={value} laguage={language} />,
+    renderContent: (value, language) => <MoveLink move={value} language={language} />,
   },
   time_of_day: {
     renderContent: (value, language) => {
@@ -241,7 +242,9 @@ const contentMap = {
 
       const localeContent = {
         ko: timeKoTexts[value],
-        en: ['dusk', 'full-mon'].includes(value) ? value : `${makeFirstUpperCaseTextArray(value.split('-'))}time`,
+        en: ['dusk', 'full-moon'].includes(value)
+          ? makeFirstUpperCaseTextArray(value.split('-'))
+          : `${makeFirstUpperCaseTextArray(value.split('-'))}time`,
       };
 
       const content = localeContent[language] || localeContent.ko;
@@ -257,7 +260,18 @@ const contentMap = {
       },
     },
     renderContent: (value, language) => (
-      <PokeLinkWithParticleForAnd poke={value} laguage={language} />
+      <PokeLinkWithParticleForAnd poke={value} language={language} />
+    ),
+  },
+  trade_species: {
+    affix: {
+      ko: {},
+      en: {
+        prefix: 'for',
+      },
+    },
+    renderContent: (value, language) => (
+      <PokeLinkWithParticleForAnd poke={value} language={language} />
     ),
   },
   turn_upside_down: {
@@ -270,14 +284,40 @@ const contentMap = {
       return <span>{localeContent[language] || localeContent.ko}</span>;
     },
   },
+  use_move: {
+    affix: {
+      ko: {
+        suffix: '20번 사용 후',
+      },
+      en: {
+        prefix: 'after using',
+        suffix: '20 times',
+      },
+    },
+    renderContent: (value, language) => <MoveLink move={value} language={language} />,
+  },
   location: {
     renderContent: (value, language) => <Location value={value} language={language} />,
+  },
+  other: {
+    renderContent: (value, language) => {
+      const pokeContent = getOtherConditionContent(value);
+
+      if (!pokeContent) {
+        return null;
+      }
+
+      return <span>{pokeContent[language] || pokeContent.ko}</span>;
+    },
+  },
+  default: {
+    affix: {},
+    renderContent: () => <></>,
   },
 };
 
 export default function getConditionInfo(condition) {
-  console.log(condition);
-  const { affix = {}, renderContent } = contentMap[condition];
+  const { affix = {}, renderContent } = contentMap[condition] || contentMap.default;
 
   return {
     affix,

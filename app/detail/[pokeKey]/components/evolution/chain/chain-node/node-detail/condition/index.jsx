@@ -1,32 +1,12 @@
 import React, { Fragment } from 'react';
 import { useLanguage } from '@/app/language-provider';
 import ConditionInfo from './conditionInfo';
-
-function sortCondition(condition, language) {
-  if (language === 'en') {
-    return condition;
-  }
-
-  const keyObjects = [];
-  const otherObjects = [];
-  const lastObjects = [];
-
-  condition.forEach((obj) => {
-    if (obj.key === 'time_of_day' || obj.key === 'location') {
-      keyObjects.push(obj);
-    } else if (obj.key === 'min_level') {
-      lastObjects.push(obj);
-    } else {
-      otherObjects.push(obj);
-    }
-  });
-  return [...keyObjects, ...otherObjects, ...lastObjects];
-}
+import { sortConditionByLanguage } from './condtion.utils';
 
 export default function Condition({ condition }) {
   const { language } = useLanguage();
 
-  const sortedCondition = sortCondition(condition, language);
+  const sortedCondition = sortConditionByLanguage(condition, language);
 
   return (
     <>

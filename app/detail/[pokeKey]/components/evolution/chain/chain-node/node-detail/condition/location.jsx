@@ -14,27 +14,29 @@ const locationsKo = {
   ...regionsKo,
 };
 
-const locaitionHandlerWithLanguage = {
+const localeAffix = {
   en: {
-    getLocation: (location) => `in ${location}`,
+    prefix: 'in',
   },
   ko: {
-    getLocation: (location) => {
-      const locationText = locationsKo[location] || '';
-      const particle = !Object.keys(regionsKo).includes(location) ? '에서' : '';
-      return `${locationText}${particle}`;
-    },
+    suffix: '에서',
   },
 };
 
-export default function Location({ value, language }) {
-  const { getLocation } = locaitionHandlerWithLanguage[language];
+function checkKoLocationParticle(location) {
+  return !Object.keys(regionsKo).includes(location) ? '에서' : '';
+}
 
-  const content = getLocation(value);
+export default function Location({ value, language }) {
+  const { prefix, suffix } = localeAffix[language] || localeAffix.en;
+
+  const location = language === 'ko' ? locationsKo[value] : value;
 
   return (
     <>
-      {content}
+      {prefix && <span className="mr-1">{prefix}</span>}
+      <span className="capitalize inline-block">{location}</span>
+      {suffix && checkKoLocationParticle(value) && <>{suffix}</>}
     </>
   );
 }

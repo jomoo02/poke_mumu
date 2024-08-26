@@ -42,7 +42,7 @@ export function ItemLink({ item, language, children }) {
   return (
     <>
       {/* <Link href={`item/${item}`} className="underline hover:text-blue-400">{itemText}</Link> */}
-      <span>{itemText}</span>
+      <span className="text-nowrap">{itemText}</span>
       {children}
     </>
   );
@@ -65,7 +65,7 @@ export function PokeLink({ poke, language, children }) {
 
   return (
     <>
-      <Link href={`detail/${poke}`} className="underline hover:text-blue-400">{text}</Link>
+      <Link href={`/detail/${poke}`} className="underline hover:text-blue-400">{text}</Link>
       {children}
     </>
   );
