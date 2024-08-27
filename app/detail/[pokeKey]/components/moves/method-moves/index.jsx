@@ -11,9 +11,7 @@ function MethodMovesContainer({ method, className, children }) {
   return (
     <MethodMovesProvider method={method}>
       <div className={`${className} `}>
-        <div>
-          {children}
-        </div>
+        {children}
       </div>
     </MethodMovesProvider>
   );

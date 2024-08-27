@@ -30,11 +30,11 @@ function Moves({ method, moves }) {
   }
 
   return (
-    <MethodMoves method={method} className="overflow-x-auto py-0.5 my-4 sm:my-3 lg:my-4">
+    <MethodMoves method={method} className="overflow-x-hidden py-0.5 my-4 sm:my-3 lg:my-4">
       <div className="px-1 md:px-4">
         <MethodMoves.Title />
       </div>
-      <div className="flex px-1 md:px-4">
+      <div className="flex px-1 md:px-4 overflow-x-auto">
         <MethodMoves.MoveTable moves={moves} />
       </div>
 

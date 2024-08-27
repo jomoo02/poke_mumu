@@ -4,7 +4,7 @@ export function sumStats(stats) {
 
 export function combineStatsWithEffort(stats, efforts) {
   return stats.map(({ stat, value }) => {
-    const foundEffort = efforts.find((effortStat) => effortStat === stat);
+    const foundEffort = efforts.find((effortStat) => effortStat.stat === stat);
     const effortValue = foundEffort ? foundEffort.value : 0;
 
     return {

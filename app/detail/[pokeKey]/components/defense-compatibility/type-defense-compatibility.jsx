@@ -14,6 +14,7 @@ const TYPE_GRID_COLS_MAP = {
   12: 'md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6',
   13: 'md:grid-cols-6 lg:grid-cols-7',
   14: 'md:grid-cols-6 lg:grid-cols-7',
+  15: 'md:grid-cols-5 lg:grid-cols-6',
   16: 'md:grid-cols-6 lg:grid-cols-7',
   0: 'md:grid-cols-2 lg:grid-cols-3',
 };

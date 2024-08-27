@@ -17,9 +17,9 @@ export default function GenMoves({ moves, type }) {
   return (
     <>
       <div className={`flex gap-x-1.5 items-center px-2.5 lg:px-8 py-2.5 border-b-2 ${type}-border`}>
-        <div className="text-sm font-medium pr-2 text-nowrap">
+        {/* <div className="text-sm font-medium pr-2 text-nowrap">
           {title}
-        </div>
+        </div> */}
         <ButtonGroup.Gen
           type={type}
           gens={gens}

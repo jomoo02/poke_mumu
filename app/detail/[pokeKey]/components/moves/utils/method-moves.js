@@ -68,10 +68,10 @@ export function setBaseHeadItems(language) {
   const languageContent = localeContent[language] || localeContent.ko;
 
   const basicItems = [
-    createHeadItem(keys.name, languageContent.name, 'w-[10.5rem]'),
+    createHeadItem(keys.name, languageContent.name, 'w-[10.2rem]'),
     createHeadItem(keys.type, languageContent.type, 'w-[5.25rem]'),
     createHeadItem(keys.damageClass, languageContent.damageClass, 'w-[5.25rem]'),
-    createHeadItem(keys.power, languageContent.power, 'w-[5.55rem]'),
+    createHeadItem(keys.power, languageContent.power, 'w-[5.25rem]'),
     createHeadItem(keys.accuracy, languageContent.accuracy, 'w-[5rem]'),
   ];
 
@@ -84,11 +84,11 @@ export function setSpecialCaseHeadItem(method) {
   } = getHeadKeys();
 
   if (method === level) {
-    return createHeadItem(level, 'Lv.', 'w-14');
+    return createHeadItem(level, 'Lv.', 'w-[3.25rem]');
   } if ([tm, tr, hm].includes(method)) {
     return createHeadItem(method, `${method.toUpperCase()}`, 'w-14');
   } if (method === pre) {
-    return createHeadItem(pre, 'Poke', 'w-[4.85rem]');
+    return createHeadItem(pre, 'Poke', 'w-[4.8rem]');
   }
   return null;
 }

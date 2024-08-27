@@ -1,26 +1,17 @@
 import React, { Suspense } from 'react';
 import { fetchPokeKey } from '@/app/api/data';
 import { fetchDetail } from '@/app/api/detail';
-import { sumStats, combineStatsWithEffort, calculateMaxStat } from '../../utils/stats';
+import {
+  combineStatsWithEffort,
+  calculateMaxStat,
+} from '../../utils/stats';
 import BarChart from './bar';
 import StatRow from './stat-row';
 import Header from '../header';
+import TotalStatRow from './total-stat-row';
 import SubHeader from './sub-header';
 import StatsSkeleton from './skeleton';
 
-function TotalStatRow({ baseStats, effortStats }) {
-  const totalStat = sumStats(baseStats);
-  const totalEffort = sumStats(effortStats);
-
-  return (
-    <StatRow
-      stat="total"
-      value={totalStat}
-      effortValue={totalEffort}
-      className="font-semibold"
-    />
-  );
-}
 async function Stats({ pokeKey }) {
   const [{ types }, { stats: { baseStats, effortStats } }] = await Promise.all([
     fetchPokeKey(pokeKey),
@@ -32,6 +23,7 @@ async function Stats({ pokeKey }) {
   const statObj = combineStatsWithEffort(baseStats, effortStats);
 
   const maxStatValue = calculateMaxStat(baseStats);
+
   return (
     <div>
       <Header category="stats" type={type} />
