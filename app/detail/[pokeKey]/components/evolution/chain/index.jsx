@@ -37,7 +37,6 @@ function NestedChain({ chainItem }) {
 
 export default function Chain({
   chain,
-  type,
   maxDepth,
   maxWidth,
 }) {
@@ -50,7 +49,7 @@ export default function Chain({
       maxDepth={maxDepth}
       maxWidth={maxWidth}
     >
-      <div className={`md:flex justify-center pt-2 pb-1 border-2 border-t-0 ${type}-border rounded-b-sm`}>
+      <div className="md:flex justify-center pt-2 pb-1">
         <div className={`${gridColumn[chain.length]} md:gap-y-4`}>
           {chain.map((chainItem) => (
             <NestedChain

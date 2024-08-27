@@ -9,9 +9,9 @@ export function getDetailWidthAndHeigt(maxWidth, maxDepth) {
     } if (maxWidth === 4) {
       return 'w-full md:w-80';
     } if (maxDepth === 2) {
-      return 'w-full max-w-52 md:w-80 md:max-w-80 lg:w-96 lg:max-w-96';
+      return 'w-full md:max-w-52 md:w-80 md:max-w-80 lg:w-96 lg:max-w-96';
     }
-    return 'w-full max-w-52 md:w-40 lg:w-52 xl:max-w-72 xl:w-72';
+    return 'w-full md:max-w-52 md:w-40 lg:w-52 xl:max-w-72 xl:w-72';
   })();
 
   const height = (() => {

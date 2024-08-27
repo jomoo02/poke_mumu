@@ -15,7 +15,7 @@ export default function ChainNode({ chainNodeData }) {
 
   const { language } = useLanguage();
 
-  const { maxWidth } = useChainMaxWidth();
+  const maxWidth = useChainMaxWidth();
 
   const localeName = name[language] || name.en;
 

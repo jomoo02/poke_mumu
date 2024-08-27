@@ -11,8 +11,10 @@ import {
   makeFirstUpperCase,
   makeFirstUpperCaseTextArray,
 } from '@/app/lib/utils';
-import { getOtherConditionContent } from './condtion.utils';
-import Location from './location';
+import {
+  getOtherConditionContent,
+  getAreaInfoWithKey,
+} from './condtion.utils';
 
 const contentMap = {
   agile_style: {
@@ -297,7 +299,23 @@ const contentMap = {
     renderContent: (value, language) => <MoveLink move={value} language={language} />,
   },
   location: {
-    renderContent: (value, language) => <Location value={value} language={language} />,
+    affix: {
+      en: {
+        prefix: 'in',
+      },
+      ko: {},
+    },
+    renderContent: (value, language) => {
+      const regionsKo = {
+        alola: '알로라지방',
+        galar: '가라르지방',
+        hisui: '히스이지방',
+      };
+
+      const localeRegion = language === 'ko' ? regionsKo[value] : value;
+
+      return <span className="capitalize inline-block">{localeRegion}</span>;
+    },
   },
   other: {
     renderContent: (value, language) => {
@@ -308,6 +326,17 @@ const contentMap = {
       }
 
       return <span>{pokeContent[language] || pokeContent.ko}</span>;
+    },
+  },
+  area: {
+    renderContent: (value, language) => {
+      const areaContent = getAreaInfoWithKey(value);
+
+      const localeArea = language === 'ko'
+        ? `${areaContent.ko}에서`
+        : areaContent.en;
+
+      return <>{localeArea}</>;
     },
   },
   default: {

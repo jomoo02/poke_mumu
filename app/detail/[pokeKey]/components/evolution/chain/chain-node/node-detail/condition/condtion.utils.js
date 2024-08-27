@@ -1,3 +1,5 @@
+import { areas, areasKey } from '../../../../area';
+
 function sortEnCondition(conditions) {
   const generalConditions = [];
   const lastConditions = [];
@@ -23,7 +25,7 @@ function sortKoCondition(conditions) {
   const generalConditions = [];
 
   const firstConditionKeys = [
-    'time_if_day',
+    'time_of_day',
     'location',
   ];
 
@@ -49,6 +51,39 @@ export function sortConditionByLanguage(conditions, language) {
     return sortEnCondition(conditions);
   }
   return sortKoCondition(conditions);
+}
+
+export function getAreaInfoWithKey(key) {
+  const {
+    mossyRock,
+    icyRock,
+    magneticField,
+    mountLanakila,
+  } = areasKey;
+
+  const areaMap = {
+    [mossyRock]: {
+      en: `near a ${areas.mossyRock.en}`,
+      ...areas.mossyRock,
+    },
+    [icyRock]: {
+      en: `near an ${areas.icyRock.en}`,
+      ...areas.icyRock,
+    },
+    [magneticField]: {
+      en: `in a ${areas.magneticField.en}`,
+      ...areas.magneticField,
+    },
+    [mountLanakila]: {
+      en: `at ${areas.mountLanakila.en}`,
+      ...areas.mountLanakila,
+    },
+    default: {
+      en: `in ${areas.default.en}`,
+      ...areas.default,
+    },
+  };
+  return areaMap[key] || areaMap.default;
 }
 
 export function getOtherConditionContent(poke) {

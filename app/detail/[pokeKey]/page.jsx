@@ -20,7 +20,7 @@ import FormsSkeleton from './components/forms/skeleton';
 import DefenseCompatibilitySkeleton from './components/defense-compatibility/skeleton';
 import StatsSkeleton from './components/stats/skeleton';
 
-import PokeChain from './components/chain';
+// import PokeChain from './components/chain';
 import PokeEvolution from './components/evolution';
 
 export default async function DetailPage({ params }) {
