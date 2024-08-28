@@ -6,39 +6,44 @@ import Move from '../../move';
 import PrePoke from '../../pre-poke';
 import { getHeadKeys } from '../utils/method-moves';
 
-export const renderHeadColumnWith = (selectKey, isAsc, select) => (column) => {
-  const {
-    key,
-    content,
-    className,
-    ...rest
-  } = column;
+export const renderHeadColumnWith = (selectKey, isAsc, select) => {
+  const renderHeadColumn = (column) => {
+    const {
+      key,
+      content,
+      className,
+      ...rest
+    } = column;
 
-  const isSelect = selectKey === key;
+    const isSelect = selectKey === key;
 
-  const backGroundColor = isSelect ? 'bg-blue-200' : 'bg-slate-200';
+    const backGroundColor = isSelect ? 'bg-blue-200' : 'bg-slate-200';
 
-  const buttonClassName = `${className} ${backGroundColor} flex items-center justify-between px-2 capitalize`;
+    const buttonClassName = `${className} ${backGroundColor} flex items-center justify-between px-2 capitalize`;
 
-  const handleColumnClick = () => {
-    select(key);
+    const handleColumnClick = () => {
+      select(key);
+    };
+
+    return (
+      <button
+        key={key}
+        type="button"
+        onClick={handleColumnClick}
+        className={buttonClassName}
+        {...rest}
+      >
+        {content}
+        <CaretIcon
+          isSelect={isSelect}
+          isAsc={isAsc}
+        />
+      </button>
+    );
   };
 
-  return (
-    <button
-      key={key}
-      type="button"
-      onClick={handleColumnClick}
-      className={buttonClassName}
-      {...rest}
-    >
-      {content}
-      <CaretIcon
-        isSelect={isSelect}
-        isAsc={isAsc}
-      />
-    </button>
-  );
+  renderHeadColumn.displayName = 'RenderHeadColumn';
+  return renderHeadColumn;
 };
 
 export const renderLevelCell = ({ level }, className) => (
@@ -116,6 +121,15 @@ export const renderAccuracyCell = ({ move }, className) => (
   </div>
 );
 
+renderLevelCell.displayName = 'RenderLevelCell';
+renderNameCell.displayName = 'RenderNameCell';
+renderMachineCell.displayName = 'RenderMachineCell';
+renderPrePokeCell.displayName = 'RenderPrePokeCell';
+renderTypeCell.displayName = 'RenderTypeCell';
+renderDamageClassCell.displayName = 'RenderDamageClassCell';
+renderPowerCell.displayName = 'RenderPowerCell';
+renderAccuracyCell.displayName = 'RenderAccuracyCell';
+
 export function renderMoveCellWith(key, move, className) {
   const {
     name,
@@ -144,6 +158,7 @@ export function renderMoveCellWith(key, move, className) {
   };
 
   const renderFn = renderFnMap[key] || renderFnMap.name;
+
   renderFn.displayName = `RenderMoveCellWith_${key}`;
 
   return renderFn(move, className);
