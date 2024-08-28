@@ -116,7 +116,7 @@ export const renderAccuracyCell = ({ move }, className) => (
   </div>
 );
 
-export const renderMoveCellWith = (key, move, className) => {
+export function renderMoveCellWith(key, move, className) {
   const {
     name,
     type,
@@ -146,4 +146,4 @@ export const renderMoveCellWith = (key, move, className) => {
   const renderFn = renderFnMap[key] || renderFnMap.name;
 
   return renderFn(move, className);
-};
+}
