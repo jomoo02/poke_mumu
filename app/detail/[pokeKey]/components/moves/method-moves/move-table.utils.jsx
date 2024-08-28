@@ -144,6 +144,7 @@ export function renderMoveCellWith(key, move, className) {
   };
 
   const renderFn = renderFnMap[key] || renderFnMap.name;
+  renderFn.displayName = `RenderMoveCellWith_${key}`;
 
   return renderFn(move, className);
 }
