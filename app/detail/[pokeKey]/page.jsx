@@ -13,9 +13,6 @@ export default async function DetailPage({ params }) {
 
   return (
     <>
-      {/* <Suspense fallback={null}>
-        <ScrollTop />
-      </Suspense> */}
       <div className="grid gap-y-12">
         <PokeNavigation pokeKey={pokeKey} />
         <PokeBasicInfo pokeKey={pokeKey} />

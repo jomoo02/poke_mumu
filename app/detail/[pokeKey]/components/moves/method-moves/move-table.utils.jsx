@@ -6,7 +6,7 @@ import Move from '../../move';
 import PrePoke from '../../pre-poke';
 import { getHeadKeys } from '../utils/method-moves';
 
-export const renderHeadColumnWith = (selectKey, isAsc, select) => {
+export const RenderHeadColumnWith = (selectKey, isAsc, select) => {
   const renderHeadColumn = (column) => {
     const {
       key,

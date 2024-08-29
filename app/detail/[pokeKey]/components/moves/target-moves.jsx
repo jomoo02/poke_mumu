@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLanguage } from '@/app/language-provider';
-import MethodMoves from './method-moves';
+import MethodMoves from './method-moves-v2';
 import {
   checkTargetMovesEmpty,
   groupMachineMovesByType,

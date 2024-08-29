@@ -2,8 +2,10 @@
 
 import React from 'react';
 import { TableProvider } from './table.context';
+import Head from './head';
+import Row from './row';
 
-export default function TableContainer({ columns, children }) {
+function Table({ columns, children }) {
   if (!columns || columns.length === 0) {
     return null;
   }
@@ -18,3 +20,8 @@ export default function TableContainer({ columns, children }) {
     </TableProvider>
   );
 }
+
+Table.Head = Head;
+Table.Row = Row;
+
+export default Table;
