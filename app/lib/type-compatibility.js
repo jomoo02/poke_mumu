@@ -21,7 +21,7 @@ const SUPER_EFFECTIVE = 'superEffective';
 const NOT_VERY_EFFECTIVE = 'notVeryEffective';
 const NO_EFFECT = 'noEffect';
 
-const defenseCompatibility = {
+const defenseCompatibilities = {
   [NORMAL]: {
     [SUPER_EFFECTIVE]: [FIGHTING],
     [NO_EFFECT]: [GHOST],
@@ -120,7 +120,7 @@ function getDefenseCompatibility(types) {
       superEffective,
       notVeryEffective,
       noEffect,
-    } = defenseCompatibility[type];
+    } = defenseCompatibilities[type];
 
     if (superEffective) {
       superEffective.forEach((target) => {
@@ -141,7 +141,7 @@ function getDefenseCompatibility(types) {
     }
   });
 
-  return Object.keys(dfCompatibility).reduce((acc, type) => {
+  const defenseCompatibility = Object.keys(dfCompatibility).reduce((acc, type) => {
     const effectiveness = dfCompatibility[type];
     if (acc[effectiveness]) {
       acc[effectiveness].push(type);
@@ -150,6 +150,13 @@ function getDefenseCompatibility(types) {
     }
     return acc;
   }, {});
+
+  return Object.keys(defenseCompatibility)
+    .sort((a, b) => b - a)
+    .map((key) => ({
+      damageRate: key,
+      types: defenseCompatibility[key],
+    }));
 }
 
 export { getDefenseCompatibility };

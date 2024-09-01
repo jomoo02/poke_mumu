@@ -11,7 +11,7 @@ async function DefenseCompatibility({ pokeKey }) {
 
   return (
     <>
-      <Header type={mainType} category="defenseCompatibility" />
+      {/* <Header type={mainType} category="defenseCompatibility" /> */}
       <div className={`border-2 border-t-0 ${mainType}-border rounded-b-sm`}>
         <div className={`flex py-1 md:py-1.5 justify-center items-center gap-x-2.5 ${mainType}-bg1 border-b-2 ${mainType}-border`}>
           <div className="flex gap-x-2">

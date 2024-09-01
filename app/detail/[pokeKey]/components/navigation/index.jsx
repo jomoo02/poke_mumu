@@ -11,7 +11,7 @@ async function Navigation({ pokeKey }) {
   const { before, next } = await fetchSurroundingPokes(order);
 
   return (
-    <div className="grid gap-y-3 md:flex-row md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-12 lg:gap-x-20 xl:gap-x-0">
+    <div className="grid gap-y-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-12 lg:gap-x-20 xl:gap-x-0">
       {before && <NavButton pokeKey={before.pokeKey} direction="before" info={before} type={type} /> }
       <div className="md:col-start-2 xl:col-span-1 lg:col-start-3 xl:col-start-4">
         {next && <NavButton pokeKey={next.pokeKey} direction="next" info={next} type={type} /> }

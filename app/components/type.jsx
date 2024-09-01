@@ -9,6 +9,7 @@ export default function Type({
   width = 'w-[60px] xs:w-[63px]',
 }) {
   const { language } = useLanguage();
+
   const typeText = language === 'ko' ? typesKo[type] : type;
 
   return (
