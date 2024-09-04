@@ -4,7 +4,7 @@ import {
   combineStatsWithEffort,
   calculateMaxStat,
 } from './utils';
-import TotalStatRow from './stat-row-total';
+import TotalStatRow from './total-row';
 
 export default function Stats({
   baseStats,
@@ -12,8 +12,6 @@ export default function Stats({
   type,
 }) {
   const combinedStats = combineStatsWithEffort(baseStats, effortStats);
-
-  console.log(combinedStats);
 
   const maxStatValue = calculateMaxStat(baseStats);
 

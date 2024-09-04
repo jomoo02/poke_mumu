@@ -20,7 +20,7 @@ export default async function DetailPage({ params }) {
         <PokeForms pokeKey={pokeKey} />
         <PokeDefenseCompatibility pokeKey={pokeKey} />
         <PokeStats pokeKey={pokeKey} />
-        {/* <PokeEvolution pokeKey={pokeKey} /> */}
+        <PokeEvolution pokeKey={pokeKey} />
         {/* <PokeMoves pokeKey={pokeKey} /> */}
       </div>
     </>

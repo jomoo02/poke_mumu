@@ -14,7 +14,10 @@ export default function useStatRow(statObj) {
     ? statKo[stat]
     : statEn[stat];
 
+  const isShowBar = stat !== 'total';
+
   return {
+    isShowBar,
     statType: localeStat,
     statValue: value,
     effortStatValue: effortValue,

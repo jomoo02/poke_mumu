@@ -13,6 +13,7 @@ export default function StatRow({
     statType,
     statValue,
     effortStatValue,
+    isShowBar,
   } = useStatRow(statObj);
 
   return (
@@ -24,10 +25,12 @@ export default function StatRow({
         <div className={`min-w-9 max-w-9 text-center text-[13px] leading-5 sm:text-sm ${className}`}>
           {statValue}
         </div>
-        <StatRowBar
-          value={statValue}
-          max={maxStatValue}
-        />
+        {isShowBar && (
+          <StatRowBar
+            value={statValue}
+            max={maxStatValue}
+          />
+        )}
       </div>
       <div className={`text-center text-[13px] leading-5 sm:text-sm ${className}`}>
         {effortStatValue}
