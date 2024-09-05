@@ -3,8 +3,8 @@ import { fetchPokeKey } from '@/app/api/data';
 import { fetchChain } from '@/app/api/chain';
 import Header from '../header';
 import Chain from './chain';
-// import EvolutionAreas from './evolution-areas';
-import EvolutionAreas from '../../modules/evolution/components/areas';
+import EvolutionAreas from './evolution-areas';
+// import EvolutionAreas from '../../modules/evolution/components/areas';
 import EvolutionSkeleton from './skeleton';
 
 async function Evolution({ pokeKey }) {

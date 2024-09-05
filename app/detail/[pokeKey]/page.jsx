@@ -5,8 +5,8 @@ import PokeAbilities from './modules/abilities';
 import PokeForms from './modules/forms';
 import PokeDefenseCompatibility from './modules/defense-compatibility';
 import PokeStats from './modules/stats';
+import PokeEvolution from './modules/evolution';
 import PokeMoves from './components/moves';
-import PokeEvolution from './components/evolution';
 
 export default async function DetailPage({ params }) {
   const { pokeKey } = params;

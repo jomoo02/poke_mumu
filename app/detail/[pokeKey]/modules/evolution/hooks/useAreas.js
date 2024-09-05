@@ -1,7 +1,7 @@
 import { useLanguage } from '@/app/language-provider';
 import { getLocationInfos } from '../utils/area';
 
-export default function useAreaInfos(chainIndex) {
+export default function useAreas(chainIndex) {
   const { language } = useLanguage();
 
   const areaInfos = getLocationInfos(chainIndex) || [];
@@ -17,6 +17,6 @@ export default function useAreaInfos(chainIndex) {
   });
 
   return {
-    areaInfos: localeAreaInfos,
+    areas: localeAreaInfos,
   };
 }

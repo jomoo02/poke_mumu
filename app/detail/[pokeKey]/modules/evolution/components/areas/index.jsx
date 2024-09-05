@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import useAreaInfos from '../../hooks/useArea';
+import useAreas from '../../hooks/useAreas';
 
 function Header({ title, type }) {
   return (
@@ -39,15 +39,15 @@ export default function EvolutionAreas({
   chainIndex,
   type,
 }) {
-  const { areaInfos } = useAreaInfos(chainIndex);
+  const { areas } = useAreas(chainIndex);
 
-  if (areaInfos.length === 0) {
+  if (areas.length === 0) {
     return null;
   }
 
   return (
     <>
-      {areaInfos.map(({ key, areaInfo, title }) => (
+      {areas.map(({ key, areaInfo, title }) => (
         <div key={key}>
           <Header title={title} type={type} />
           <Info areaInfo={areaInfo} />
