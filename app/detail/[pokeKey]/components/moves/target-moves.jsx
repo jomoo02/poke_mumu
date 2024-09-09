@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '@/app/language-provider';
-import MethodMoves from './method-moves-v2';
+// import MethodMoves from './method-moves-v2';
+import MethodMoves from '@/app/detail/[pokeKey]/modules/moves/components/method-moves';
 import {
   checkTargetMovesEmpty,
   groupMachineMovesByType,
@@ -30,17 +31,31 @@ function Moves({ method, moves }) {
   }
 
   return (
-    <MethodMoves method={method} className="overflow-x-hidden py-0.5 my-4 sm:my-3 lg:my-4">
-      <div className="px-1 md:px-4">
-        <MethodMoves.Title />
-      </div>
-      <div className="flex px-1 md:px-4 overflow-x-auto">
-        <MethodMoves.MoveTable moves={moves} />
-      </div>
-
-    </MethodMoves>
-  );
+    <MethodMoves
+      method={method}
+      moves={moves}
+      className="overflow-x-hidden py-0.5 my-4 sm:my-3 lg:my-4"
+    />
+  )
 }
+
+// function Moves({ method, moves }) {
+//   if (!moves || moves.length === 0) {
+//     return null;
+//   }
+
+//   return (
+//     <MethodMoves method={method} className="overflow-x-hidden py-0.5 my-4 sm:my-3 lg:my-4">
+//       <div className="px-1 md:px-4">
+//         <MethodMoves.Title />
+//       </div>
+//       <div className="flex px-1 md:px-4 overflow-x-auto">
+//         <MethodMoves.MoveTable moves={moves} />
+//       </div>
+
+//     </MethodMoves>
+//   );
+// }
 
 function MachineMoves({ machineMoves }) {
   if (!machineMoves || machineMoves.length === 0) {

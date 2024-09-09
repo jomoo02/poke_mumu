@@ -6,7 +6,7 @@ import PokeForms from './modules/forms';
 import PokeDefenseCompatibility from './modules/defense-compatibility';
 import PokeStats from './modules/stats';
 import PokeEvolution from './modules/evolution';
-import PokeMoves from './components/moves';
+import PokeMoves from './modules/moves';
 
 export default async function DetailPage({ params }) {
   const { pokeKey } = params;
@@ -21,7 +21,7 @@ export default async function DetailPage({ params }) {
         <PokeDefenseCompatibility pokeKey={pokeKey} />
         <PokeStats pokeKey={pokeKey} />
         <PokeEvolution pokeKey={pokeKey} />
-        {/* <PokeMoves pokeKey={pokeKey} /> */}
+        <PokeMoves pokeKey={pokeKey} />
       </div>
     </>
   );

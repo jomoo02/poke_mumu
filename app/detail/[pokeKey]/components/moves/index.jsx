@@ -15,7 +15,7 @@ async function Moves({ pokeKey }) {
 
   return (
     <div className="overflow-hidden">
-      <Header type={type} category="moves" />
+      {/* <Header type={type} category="moves" /> */}
       <div className={`border-2 border-t-0 ${type}-border rounded-b-sm`}>
         <GenMoves moves={moves} type={type} />
       </div>

@@ -1,9 +1,9 @@
 import React from 'react';
 import Type from '@/app/components/type';
 import DamageClass from '@/app/components/damage-class';
-import { heads } from '../../data/head';
-import Move from '../../../../components/move';
-import PrePoke from '../../../../components/pre-poke';
+import { getMoveTableHeads } from '../../utils/moveTableHeadUtils';
+import Move from '../move';
+import PrePoke from '../pre-poke';
 
 function LevelCell({ move, className }) {
   return (
@@ -90,7 +90,7 @@ function AccuracyCell({ move, className }) {
   return (
     <div
       key="accuracy"
-      className={`text-sm font-medium px-3 ${className}  flex items-center justify-end`}
+      className={`text-sm font-medium px-3 ${className} flex items-center justify-end`}
     >
       {move.move.accuracy || '—'}
     </div>
@@ -113,7 +113,7 @@ function CellByKey({
     hm,
     tm,
     tr,
-  } = heads();
+  } = getMoveTableHeads();
 
   const cellMap = {
     [name]: NameCell,
@@ -134,16 +134,16 @@ function CellByKey({
 }
 
 export default function MoveTableRow({
-  item,
-  columns,
+  move,
+  headItems,
 }) {
   return (
     <div className="flex h-9 items-stretch">
-      {columns.map(({ key, className }) => (
+      {headItems.map(({ key, className }) => (
         <CellByKey
           key={key}
           className={className}
-          move={item}
+          move={move}
           cellKey={key}
         />
       ))}
