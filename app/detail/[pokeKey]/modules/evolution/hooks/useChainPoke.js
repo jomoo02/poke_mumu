@@ -1,9 +1,9 @@
 import { useLanguage } from '@/app/language-provider';
-import { splitPokeLinkName } from '../utils/chain';
+import { splitPokeLinkName } from '../utils/chainUtils';
 import {
   createDetailKey,
   getDetailWidthAndHeigt,
-} from '../utils/poke-info';
+} from '../utils/pokeInfoUtils';
 
 export function useChainPokeLink(name) {
   const defaultName = {

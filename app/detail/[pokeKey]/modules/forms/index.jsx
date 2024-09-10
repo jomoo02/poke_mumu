@@ -2,8 +2,8 @@ import React from 'react';
 import { fetchPokeKey } from '@/app/api/data';
 import { fetchDetail } from '@/app/api/detail';
 import Header from '../../components/header';
-import Forms from './forms';
-import { setFormHeaderText } from './utils';
+import Forms from './components/forms';
+import { setFormHeaderText } from './utils/utils';
 
 export default async function PokeForms({ pokeKey }) {
   const [

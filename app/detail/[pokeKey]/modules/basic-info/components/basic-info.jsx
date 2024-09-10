@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Type from '@/app/components/type';
-import useBasicInfo from './useBasicInfo';
+import useBasicInfo from '../hooks/useBasicInfo';
 
 function Content({ contentKey, content }) {
   if (contentKey === 'types') {

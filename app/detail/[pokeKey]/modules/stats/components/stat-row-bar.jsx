@@ -1,6 +1,7 @@
 import React from 'react';
+import { calculateBarWidth } from '../utils/statUtils';
 
-function getBarColor(value) {
+function setBarColor(value) {
   if (value > 200) {
     return '#06b6d4';
   } if (value >= 130) {
@@ -16,16 +17,14 @@ function getBarColor(value) {
 }
 
 export default function StatRowBar({ value, max }) {
-  const normalizationFactor = max < 200 ? 255 : 300;
+  const width = calculateBarWidth(value, max);
 
-  const normalizedWidth = `${(value / normalizationFactor) * 100}%`;
-
-  const barColor = getBarColor(value);
+  const barColor = setBarColor(value);
 
   return (
     <svg width="100%" height="11">
       <g className="bars">
-        <rect fill={barColor} width={normalizedWidth} height="11" rx="4" />
+        <rect fill={barColor} width={width} height="11" rx="4" />
       </g>
     </svg>
   );

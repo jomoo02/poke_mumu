@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import HeaderSkeleton from '../../components/header-skeleton';
+import HeaderSkeleton from '../../../components/header-skeleton';
 
 function IamgeSkeleton() {
   return (

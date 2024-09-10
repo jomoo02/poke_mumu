@@ -1,9 +1,10 @@
 import React from 'react';
-import { sumStats } from './utils';
+import { sumStats } from '../utils/statUtils';
 import StatRow from './stat-row';
 
 export default function TotalStatRow({ baseStats, effortStats }) {
   const totalStat = sumStats(baseStats);
+
   const totalEffort = sumStats(effortStats);
 
   const statObj = {

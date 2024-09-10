@@ -18,3 +18,11 @@ export function combineStatsWithEffort(stats, efforts) {
 export function calculateMaxStat(stats) {
   return Math.max(...stats.map(({ value }) => value));
 }
+
+export function calculateBarWidth(currentStat, referenceStat) {
+  const scaleFactor = referenceStat < 200 ? 255 : 300;
+
+  const barWidth = `${(currentStat / scaleFactor) * 100}%`;
+
+  return barWidth;
+}

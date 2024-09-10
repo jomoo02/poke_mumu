@@ -14,7 +14,7 @@ import {
 import {
   getOtherConditionContent,
   getAreaInfoWithKey,
-} from '../../utils/condition';
+} from '../../utils/conditionUtils';
 
 const contentMap = {
   agile_style: {

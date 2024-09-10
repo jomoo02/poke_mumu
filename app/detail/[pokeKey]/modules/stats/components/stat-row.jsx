@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import useStatRow from './useStatRow';
+import useStatRow from '../hooks/useStatRow';
 import StatRowBar from './stat-row-bar';
 
 export default function StatRow({

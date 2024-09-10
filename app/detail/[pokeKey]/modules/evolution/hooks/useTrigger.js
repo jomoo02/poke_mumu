@@ -1,5 +1,5 @@
 import { useLanguage } from '@/app/language-provider';
-import { getTriggerLocaleContent } from '../utils/trigger';
+import { getTriggerLocaleContent } from '../utils/triggerUtils';
 
 export default function useTrigger(trigger, condition) {
   const defaultTriggerContent = '';

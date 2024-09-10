@@ -14,7 +14,9 @@ export default function useStatRow(statObj) {
     ? statKo[stat]
     : statEn[stat];
 
-  const isShowBar = stat !== 'total';
+  const { total } = statEn;
+
+  const isShowBar = stat !== total;
 
   return {
     isShowBar,

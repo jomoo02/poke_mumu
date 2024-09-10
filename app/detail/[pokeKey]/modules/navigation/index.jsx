@@ -1,6 +1,6 @@
 import React from 'react';
 import { fetchSurroundingPokes, fetchPokeKey } from '@/app/api/data';
-import NavButton from './nav-button';
+import NavButton from './components/nav-button';
 
 export default async function PokeNavigaition({ pokeKey }) {
   const { types, order } = await fetchPokeKey(pokeKey);

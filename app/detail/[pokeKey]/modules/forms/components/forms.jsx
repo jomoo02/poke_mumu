@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
-import useForm from './useForm';
+import Form from './form';
 
 const formsContainerClassNameMap = {
   4: 'grid grid-cols-2 lg:grid-cols-4 gap-y-5',
@@ -16,30 +15,6 @@ const formsContainerClassNameMap = {
   28: 'grid grid-cols-3 md:grid-cols-7 gap-y-3 md:gap-y-5',
   default: 'flex flex-wrap gap-x-5 justify-evenly',
 };
-
-function Form({ form }) {
-  const {
-    src,
-    alt,
-    formName,
-  } = useForm(form);
-
-  return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="w-16 h-16 sm:w-20 sm:h-20 relative">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          priority
-        />
-      </div>
-      <div className="text-center text-sm font-medium capitalize">
-        {formName}
-      </div>
-    </div>
-  );
-}
 
 export default function Forms({
   forms,

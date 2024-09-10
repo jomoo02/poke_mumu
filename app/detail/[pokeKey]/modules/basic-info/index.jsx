@@ -1,9 +1,9 @@
 import React from 'react';
 import { fetchPokeKey } from '@/app/api/data';
 import Header from '../../components/header';
-import PokeIdentifiers from './poke-identifiers';
-import PokeImage from './poke-image';
-import BasicInfo from './basic-info';
+import PokeIdentifiers from './components/poke-identifiers';
+import PokeImage from './components/poke-image';
+import BasicInfo from './components/basic-info';
 
 export default async function PokeBasicInfo({ pokeKey }) {
   const pokeInfo = await fetchPokeKey(pokeKey);

@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderSkeleton from '../../components/header-skeleton';
+import HeaderSkeleton from '../../../components/header-skeleton';
 
 function AbilitySkeleton() {
   return (

@@ -2,18 +2,26 @@ import { useLanguage } from '@/app/language-provider';
 
 const DEFAULT_NO = 1000;
 
-function checkIsShow(form) {
+function getLocaleForm(form, language) {
   const excludedForms = ['default', 'mega'];
 
-  return !excludedForms.some((excludedForm) => form === excludedForm);
+  const isShowForm = !excludedForms.some((excludedForm) => form.en === excludedForm);
+
+  if (isShowForm) {
+    const localeForm = form[language] || form.ko || '';
+
+    return `(${localeForm})`;
+  }
+
+  return '';
 }
 
-export default function usePokeIdentifiers(pokeInfo) {
+export default function useNavButtonInfo(info) {
   const {
     name,
     form,
     no,
-  } = pokeInfo;
+  } = info;
 
   const { language } = useLanguage();
 
@@ -21,13 +29,11 @@ export default function usePokeIdentifiers(pokeInfo) {
 
   const noText = `no. ${no || DEFAULT_NO}`;
 
-  const localeForm = form[language] || form.ko || '';
-
-  const isShowFrom = checkIsShow(form.en);
+  const localeForm = getLocaleForm(form, language);
 
   return {
     name: localeName,
     no: noText,
-    form: isShowFrom ? `(${localeForm})` : '',
+    form: localeForm,
   };
 }

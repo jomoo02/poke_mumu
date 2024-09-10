@@ -22,10 +22,9 @@ export default function DefenseCompatibility({ pokeTypes }) {
 
   const damageRateContainerClassName = (typesCount) => {
     const defaultClassName = 'flex gap-x-2 md:flex-col border-b last:border-b-0 md:border-b-0 py-1.5 md:py-0 md:border-r';
-    const flexAutoClassName = typesCount > 4 ? 'flex-auto' : '';
 
-    if (flexAutoClassName) {
-      return `${defaultClassName} ${flexAutoClassName}`;
+    if (typesCount > 4) {
+      return `${defaultClassName} flex-auto`;
     }
 
     return defaultClassName;

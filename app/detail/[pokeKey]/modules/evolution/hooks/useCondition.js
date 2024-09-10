@@ -1,5 +1,5 @@
 import { useLanguage } from '@/app/language-provider';
-import { sortConditionByLanguage } from '../utils/condition';
+import { sortConditionByLanguage } from '../utils/conditionUtils';
 
 export function useSortCondition(condition) {
   const { language } = useLanguage();

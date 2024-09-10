@@ -1,7 +1,7 @@
 import React from 'react';
 import { fetchPokeKey } from '@/app/api/data';
 import { fetchDetail } from '@/app/api/detail';
-import Abilities from './abilities';
+import Abilities from './components/abilities';
 import Header from '../../components/header';
 
 export default async function PokeAbilities({ pokeKey }) {

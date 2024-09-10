@@ -1,5 +1,5 @@
 import { useLanguage } from '@/app/language-provider';
-import { getLocationInfos } from '../utils/area';
+import { getLocationInfos } from '../utils/areaUtils';
 
 export default function useAreas(chainIndex) {
   const { language } = useLanguage();

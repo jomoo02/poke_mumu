@@ -1,24 +1,9 @@
 import { useLanguage } from '@/app/language-provider';
 import { formatMeasurement } from '@/app/utils/format';
-
-const subjectsWithLanguage = {
-  ko: {
-    no: '전국도감 번호',
-    name: '이름',
-    types: '타입',
-    form: '모습',
-    height: '키',
-    weight: '몸무게',
-  },
-  en: {
-    no: 'national no',
-    name: 'name',
-    types: 'type',
-    form: 'form',
-    height: 'height',
-    weight: 'weight',
-  },
-};
+import {
+  localizedSubjects,
+  subjectKo,
+} from '../data/subject';
 
 export default function useBasicInfo(pokeInfo) {
   const {
@@ -32,7 +17,7 @@ export default function useBasicInfo(pokeInfo) {
 
   const { language } = useLanguage();
 
-  const subjects = subjectsWithLanguage[language] || subjectsWithLanguage.ko;
+  const subjects = localizedSubjects[language] || subjectKo;
 
   const basicInfos = {
     no: {

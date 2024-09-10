@@ -3,7 +3,7 @@ import StatRow from './stat-row';
 import {
   combineStatsWithEffort,
   calculateMaxStat,
-} from './utils';
+} from '../utils/statUtils';
 import TotalStatRow from './total-row';
 
 export default function Stats({

@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import useAbility from './useAbility';
+import useAbility from '../hooks/useAbility';
 
-function Ability({ ability }) {
+export default function Ability({ ability }) {
   const {
     name,
     flavorText,
@@ -27,18 +27,5 @@ function Ability({ ability }) {
         {flavorText}
       </p>
     </div>
-  );
-}
-
-export default function Abilities({ abilities }) {
-  return (
-    <>
-      {abilities.map((ability) => (
-        <Ability
-          key={ability.name.en}
-          ability={ability}
-        />
-      ))}
-    </>
   );
 }

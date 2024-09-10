@@ -1,9 +1,9 @@
 import React from 'react';
 import { fetchPokeKey } from '@/app/api/data';
 import { fetchDetail } from '@/app/api/detail';
-import Stats from './stats';
+import Stats from './components/stats';
 import Header from '../../components/header';
-import SubHeader from './sub-header';
+import SubHeader from './components/sub-header';
 
 export default async function PokeStats({ pokeKey }) {
   const [

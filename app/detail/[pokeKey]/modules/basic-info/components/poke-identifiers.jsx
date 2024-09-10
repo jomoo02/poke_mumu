@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import usePokeIdentifiers from '../../hooks/usePokeIdentifiers';
+import usePokeIdentifiers from '../../../hooks/usePokeIdentifiers';
 
 export default function PokeIdentifiers({ pokeInfo }) {
   const {
