@@ -15,6 +15,7 @@ const pokeScema = new mongoose.Schema({
   chainIndex: Number,
   height: Number,
   weight: Number,
+  basicInfo: Object,
 });
 
 const PokeModel = mongoose.models.Poke || mongoose.model('Poke', pokeScema);

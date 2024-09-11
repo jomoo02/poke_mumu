@@ -18,7 +18,7 @@ function IamgeSkeleton() {
 
 function TitleNameSkeleton() {
   return (
-    <div className="mb-2 sm:mb-4 w-32 h-7 bg-slate-200 rounded-md" />
+    <div className="mb-2 sm:mb-4 w-32 h-6 sm:h-7 bg-slate-200 rounded-md" />
   );
 }
 

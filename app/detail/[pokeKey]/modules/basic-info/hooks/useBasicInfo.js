@@ -13,6 +13,7 @@ export default function useBasicInfo(pokeInfo) {
     types,
     weight,
     height,
+    basicInfo,
   } = pokeInfo;
 
   const { language } = useLanguage();
@@ -49,6 +50,31 @@ export default function useBasicInfo(pokeInfo) {
       key: 'weight',
       subject: subjects.weight,
       content: formatMeasurement(weight, 'kg'),
+    },
+    genera: {
+      key: 'genera',
+      subject: subjects.genera,
+      content: basicInfo.genera[language] || basicInfo.genera.ko,
+    },
+    eggGroups: {
+      key: 'egg-groups',
+      subject: subjects.eggGroups,
+      content: basicInfo.eggGroups,
+    },
+    genderRate: {
+      key: 'gender-rate',
+      subject: subjects.genderRate,
+      content: basicInfo.genderRate,
+    },
+    captureRate: {
+      key: 'capture-rate',
+      subject: subjects.captureRate,
+      content: basicInfo.captureRate,
+    },
+    growthRate: {
+      key: 'growth-rate',
+      subject: subjects.growthRate,
+      content: basicInfo.growthRate,
     },
   };
 

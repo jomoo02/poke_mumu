@@ -17,6 +17,12 @@ function Content({ contentKey, content }) {
         {content}
       </div>
     );
+  } if (contentKey === 'egg-groups') {
+    return (
+      <div className="flex gap-x-2">
+        {content.map((group) => <span key={group}>{group}</span>)}
+      </div>
+    );
   }
 
   return (
