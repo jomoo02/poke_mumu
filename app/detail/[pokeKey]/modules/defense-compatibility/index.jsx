@@ -2,6 +2,7 @@ import React from 'react';
 import { fetchPokeKey } from '@/app/api/data';
 import Header from '../../components/header';
 import DefenseCompatibility from './components/defense-compatibility';
+import { headerKeys } from '../../data/header';
 
 export default async function PokeDefenseCompatibility({ pokeKey }) {
   const { types } = await fetchPokeKey(pokeKey);
@@ -12,16 +13,13 @@ export default async function PokeDefenseCompatibility({ pokeKey }) {
 
   const mainType = types[0];
 
-  const headerTexts = {
-    ko: '방어 상성',
-    en: 'defense Compatibility',
-  };
+  const headerKey = headerKeys.defenseCompatibility;
 
   return (
     <div>
       <Header
         type={mainType}
-        headerTexts={headerTexts}
+        headerKey={headerKey}
       />
       <DefenseCompatibility pokeTypes={types} />
     </div>

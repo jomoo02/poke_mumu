@@ -4,6 +4,7 @@ import { fetchChain } from '@/app/api/chain';
 import Header from '../../components/header';
 import Chain from './components/chain';
 import EvolutionAreas from './components/areas';
+import { headerKeys } from '../../data/header';
 
 export default async function PokeEvolution({ pokeKey }) {
   const { types, chainIndex } = await fetchPokeKey(pokeKey);
@@ -14,16 +15,13 @@ export default async function PokeEvolution({ pokeKey }) {
     return null;
   }
 
-  const headerTexts = {
-    ko: '진화',
-    en: 'Evolution Tree',
-  };
+  const headerKey = headerKeys.evolution;
 
   return (
     <div>
       <Header
         type={type}
-        headerTexts={headerTexts}
+        headerKey={headerKey}
       />
       <div className={`border-2 border-t-0 ${type}-border rounded-b-sm`}>
         <Chain chainObj={chainData} />

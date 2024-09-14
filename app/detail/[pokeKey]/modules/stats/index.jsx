@@ -4,6 +4,7 @@ import { fetchDetail } from '@/app/api/detail';
 import Stats from './components/stats';
 import Header from '../../components/header';
 import SubHeader from './components/sub-header';
+import { headerKeys } from '../../data/header';
 
 export default async function PokeStats({ pokeKey }) {
   const [
@@ -16,14 +17,11 @@ export default async function PokeStats({ pokeKey }) {
 
   const type = types[0];
 
-  const headerTexts = {
-    ko: '스탯',
-    en: 'stat',
-  };
+  const headerKey = headerKeys.stats;
 
   return (
     <div>
-      <Header type={type} headerTexts={headerTexts} />
+      <Header type={type} headerKey={headerKey} />
       <SubHeader type={type} />
       <Stats
         baseStats={baseStats}

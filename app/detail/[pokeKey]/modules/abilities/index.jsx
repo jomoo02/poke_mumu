@@ -3,6 +3,7 @@ import { fetchPokeKey } from '@/app/api/data';
 import { fetchDetail } from '@/app/api/detail';
 import Abilities from './components/abilities';
 import Header from '../../components/header';
+import { headerKeys } from '../../data/header';
 
 export default async function PokeAbilities({ pokeKey }) {
   const [{ types }, { abilities }] = await Promise.all([
@@ -16,16 +17,13 @@ export default async function PokeAbilities({ pokeKey }) {
 
   const type = types[0];
 
-  const headerTexts = {
-    ko: '특성',
-    en: 'ability',
-  };
+  const headerKey = headerKeys.abilities;
 
   return (
     <div>
       <Header
         type={type}
-        headerTexts={headerTexts}
+        headerKey={headerKey}
       />
       <div className={`grid divide-y border-2 border-t-0 ${type}-border rounded-b-sm`}>
         <Abilities abilities={abilities} />
