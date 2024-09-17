@@ -22,10 +22,17 @@ function GenderRate({ genderRate }) {
 }
 
 function EggGroups({ eggGroups }) {
-  const e = useEggGroups(eggGroups);
+  const localeEggGroups = useEggGroups(eggGroups);
 
   return (
-    <div>{e}</div>
+    <div className="flex">
+      {localeEggGroups.map((eggGroup, index) => (
+        <div key={eggGroup}>
+          {index > 0 && ', '}
+          {eggGroup}
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -40,34 +47,14 @@ function HatchCounter({ eggGroups, hatchCounter }) {
   );
 }
 
-function GrowthRate({ growthRate }) {
-  return <span>{growthRate}</span>;
-}
-
-function LocaleNo({ pokedexNumbers }) {
-  return (
-    <>
-      {pokedexNumbers.map(({ entryNumber, pokedex }) => (
-        <div key={pokedex}>
-          <>{entryNumber}</>
-          <>{pokedex}</>
-        </div>
-      ))}
-    </>
-  );
-}
-
 export default function BasicInfoBreeding({
   basicInfo,
 }) {
-  console.log(basicInfo);
   return (
     <div>
       <GenderRate genderRate={basicInfo.genderRate} />
       <EggGroups eggGroups={basicInfo.eggGroups} />
       <HatchCounter eggGroups={basicInfo.eggGroups} hatchCounter={basicInfo.hatchCounter} />
-      <GrowthRate growthRate={basicInfo.growthRate} />
-      <LocaleNo pokedexNumbers={basicInfo.pokedexNumbers} />
     </div>
   );
 }
