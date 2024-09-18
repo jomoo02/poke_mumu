@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/basicInfo.css';
 import { fetchPokeKey } from '@/app/api/data';
 import Header from '../../components/header';
 import PokeIdentifiers from './components/poke-identifiers';

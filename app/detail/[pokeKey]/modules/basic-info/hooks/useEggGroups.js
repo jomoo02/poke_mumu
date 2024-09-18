@@ -3,15 +3,23 @@ import {
   noEggs,
   eggGroupsKo,
   eggGroupsEn,
-} from '../data/egg-groups';
+  subjectEn,
+  subjectKo,
+} from '../data/eggGroups';
+import { checkNoEggs } from '../utils/eggGroups';
 
 export default function useEggGroups(eggGroups) {
   const { language } = useLanguage();
 
+  const localeSubject = language === 'en' ? subjectEn : subjectKo;
+
   const localeEggGroups = language === 'en' ? eggGroupsEn : eggGroupsKo;
 
-  if (eggGroups.length === 0) {
-    return [localeEggGroups[noEggs]];
+  if (checkNoEggs(eggGroups)) {
+    return {
+      subject: localeSubject,
+      eggGroups: [localeEggGroups[noEggs]],
+    };
   }
 
   const pokeEggGroups = eggGroups.map((eggGroup) => {
@@ -19,5 +27,8 @@ export default function useEggGroups(eggGroups) {
     return localeEggGroup;
   });
 
-  return pokeEggGroups;
+  return {
+    subject: localeSubject,
+    eggGroups: pokeEggGroups,
+  };
 }

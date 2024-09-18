@@ -27,7 +27,7 @@ function Content({ contentKey, content }) {
   }
 
   return (
-    <div className="text-slate-600 text-sm sm:text-[15px] flex items-center">
+    <div className="info-content">
       {content}
     </div>
   );
@@ -41,8 +41,8 @@ function Info({ info }) {
   } = info;
 
   return (
-    <div className="flex gap-x-5 md:gap-x-10 py-1 items-center font-semibold min-w-72 min-h-[35px] border-b">
-      <div className="w-24 text-slate-500 text-[13px] sm:text-sm capitalize flex items-center justify-end">
+    <div className="info-container">
+      <div className="info-subject">
         {subject}
       </div>
       <Content

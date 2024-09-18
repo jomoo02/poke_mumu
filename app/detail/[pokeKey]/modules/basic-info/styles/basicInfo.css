@@ -1,0 +1,15 @@
+.info-title {
+  @apply text-lg font-bold px-3 py-2 text-slate-600;
+}
+
+.info-container {
+  @apply flex gap-x-5 md:gap-x-10 py-1 items-center font-semibold min-w-72 min-h-[35px] border-b;
+}
+
+.info-subject {
+  @apply w-24 text-slate-500 text-[13px] sm:text-sm capitalize flex items-center justify-end font-semibold;
+}
+
+.info-content {
+  @apply text-slate-600 text-sm sm:text-[15px] font-semibold;
+}

@@ -50,8 +50,14 @@ const eggGroupsEn = {
   [noEggs]: 'Undiscovered',
 };
 
+const subjectEn = 'Egg Groups';
+
+const subjectKo = '알 그룹';
+
 export {
   noEggs,
   eggGroupsKo,
   eggGroupsEn,
+  subjectEn,
+  subjectKo,
 };
