@@ -4,6 +4,7 @@ import React from 'react';
 import Type from '@/app/components/type';
 import useBasicInfo from '../hooks/useBasicInfo';
 import BasicInfoBreeding from './basic-info-breeding';
+import BasicInfoDetail from './basic-info-detail';
 
 function Content({ contentKey, content }) {
   if (contentKey === 'types') {
@@ -66,6 +67,9 @@ export default function BasicInfo({ pokeInfo }) {
       ))}
       <div>
         <BasicInfoBreeding basicInfo={pokeInfo.basicInfo} />
+      </div>
+      <div>
+        <BasicInfoDetail basicInfo={pokeInfo.basicInfo} />
       </div>
     </div>
   );
