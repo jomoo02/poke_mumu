@@ -1,8 +1,10 @@
 import React from 'react';
+import useBasicInfoDetail from '../hooks/useBasicInfoDetail';
 import useGenera from '../hooks/useGenera';
 import useWeight from '../hooks/useWeight';
 import useHeight from '../hooks/useHeight';
 import useCaptureRate from '../hooks/useCaptuerRate';
+import useGrowthRate from '../hooks/useGrowthRate';
 
 function Genera({ genera }) {
   const {
@@ -76,8 +78,28 @@ function CaptureRate({ captureRate }) {
   );
 }
 
-function GrowhRate({ growhRate }) {
+function GrowthRate({ growthRate }) {
+  const {
+    subject,
+    maximumExperience,
+    growthRate: pokeGrowthRate,
 
+  } = useGrowthRate(growthRate);
+  return (
+    <div className="info-container">
+      <div className="info-subject">
+        {subject}
+      </div>
+      <div className="info-content">
+        <div className="capitalize px-2">
+          {pokeGrowthRate}
+        </div>
+        <div>
+          {maximumExperience}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function BasicInfoDetail({ basicInfo }) {
@@ -86,14 +108,21 @@ export default function BasicInfoDetail({ basicInfo }) {
     height = 100,
     weight = 100,
     captureRate,
+    growthRate,
   } = basicInfo;
+
+  const { title } = useBasicInfoDetail();
+
   return (
     <div>
-      <div className="info-title">title</div>
+      <div className="info-title">
+        {title}
+      </div>
       <Genera genera={genera} />
       <Height height={height} />
       <Weight weight={weight} />
       <CaptureRate captureRate={captureRate} />
+      <GrowthRate growthRate={growthRate} />
     </div>
   );
 }
