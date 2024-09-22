@@ -31,11 +31,14 @@ export default async function PokeBasicInfo({ pokeKey }) {
         type={type}
         headerKey={headerKey}
       />
-      <div className={`border-2 border-t-0 ${type}-border md:py-3 md:flex md:justify-evenly`}>
-        <PokeImage
-          sprity={sprity}
-          alt={name.en}
-        />
+      <div className={`border-2 border-t-0 ${type}-border`}>
+        <div>
+          <PokeImage
+            sprity={sprity}
+            alt={name.en}
+          />
+        </div>
+
         <BasicInfo pokeInfo={pokeInfo} />
       </div>
     </div>
