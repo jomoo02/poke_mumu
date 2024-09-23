@@ -31,15 +31,14 @@ export default async function PokeBasicInfo({ pokeKey }) {
         type={type}
         headerKey={headerKey}
       />
-      <div className={`border-2 border-t-0 ${type}-border`}>
-        <div>
-          <PokeImage
-            sprity={sprity}
-            alt={name.en}
-          />
+      <div className={`border-2 border-t-0 ${type}-border grid xl:grid-cols-3 items-center`}>
+        <PokeImage
+          sprity={sprity}
+          alt={name.en}
+        />
+        <div className="col-span-2">
+          <BasicInfo pokeInfo={pokeInfo} />
         </div>
-
-        <BasicInfo pokeInfo={pokeInfo} />
       </div>
     </div>
   );

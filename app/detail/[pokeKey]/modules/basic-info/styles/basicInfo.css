@@ -1,5 +1,5 @@
 .info-title {
-  @apply text-lg font-bold px-3 py-2 text-slate-600;
+  @apply text-xl font-bold px-3 py-3 text-slate-600;
 }
 
 .info-container {
@@ -7,7 +7,7 @@
 }
 
 .info-subject {
-  @apply w-24 text-slate-500 text-[13px] sm:text-sm capitalize flex items-center justify-end font-semibold;
+  @apply w-[5.5rem] text-slate-500 text-[13px] sm:text-sm capitalize flex items-center justify-end font-semibold;
 }
 
 .info-content {

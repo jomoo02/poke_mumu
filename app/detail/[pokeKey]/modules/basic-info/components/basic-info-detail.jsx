@@ -83,8 +83,8 @@ function GrowthRate({ growthRate }) {
     subject,
     maximumExperience,
     growthRate: pokeGrowthRate,
-
   } = useGrowthRate(growthRate);
+
   return (
     <div className="info-container">
       <div className="info-subject">
@@ -102,11 +102,9 @@ function GrowthRate({ growthRate }) {
   );
 }
 
-export default function BasicInfoDetail({ basicInfo }) {
+export default function BasicInfoDetail({ basicInfo, weight, height }) {
   const {
     genera,
-    height = 100,
-    weight = 100,
     captureRate,
     growthRate,
   } = basicInfo;

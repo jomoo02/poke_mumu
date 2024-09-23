@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Type from '@/app/components/type';
-import useBasicInfo from '../hooks/useBasicInfo';
 import BasicInfoBreeding from './basic-info-breeding';
 import BasicInfoDetail from './basic-info-detail';
 import BasicInfoBasic from './info-basic';
@@ -56,10 +55,8 @@ function Info({ info }) {
 }
 
 export default function BasicInfo({ pokeInfo }) {
-  const basicInfos = useBasicInfo(pokeInfo);
-
   return (
-    <div className="px-2 pb-1 md:pb-4 grid lg:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-4">
+    <div className="px-2 2xl:px-10 pb-1 md:pb-4 grid xl:grid-cols-2 xl:gap-x-8 2xl:gap-x-14 gap-y-4">
       <BasicInfoBasic
         basicInfo={pokeInfo.basicInfo}
         types={pokeInfo.types}
@@ -67,8 +64,12 @@ export default function BasicInfo({ pokeInfo }) {
         form={pokeInfo.form}
         name={pokeInfo.name}
       />
-      <div className="xl:col-span-2 grid xl:grid-cols-2 gap-y-4 gap-x-6">
-        <BasicInfoDetail basicInfo={pokeInfo.basicInfo} />
+      <div className="grid gap-y-4 gap-x-6 xl:gap-y-6">
+        <BasicInfoDetail
+          basicInfo={pokeInfo.basicInfo}
+          weight={pokeInfo.weight}
+          height={pokeInfo.height}
+        />
         <BasicInfoBreeding basicInfo={pokeInfo.basicInfo} />
       </div>
     </div>

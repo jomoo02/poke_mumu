@@ -96,20 +96,20 @@ const localesKo = {
   [updatedHoenn]: '오메가루비/알파사파이어',
 
   [originalAlola]: '썬/문',
-  [originalMelemele]: '썬/문 - 멜레멜레',
-  [originalAkala]: '썬/문 - 아칼라',
-  [originalUlaula]: '썬/문 - 울라울라',
-  [originalPoni]: '썬/문 - 포니',
+  // [originalMelemele]: '썬/문 - 멜레멜레',
+  // [originalAkala]: '썬/문 - 아칼라',
+  // [originalUlaula]: '썬/문 - 울라울라',
+  // [originalPoni]: '썬/문 - 포니',
 
   [updatedAlola]: '울트라썬/울트라문',
-  [updatedMelemele]: '울트라썬/울트라문 - 멜레멜레',
-  [updatedAkala]: '울트라썬/울트라문 - 아칼라',
-  [updatedUlaula]: '울트라썬/울트라문 - 울라울라',
-  [updatedPoni]: '울트라썬/울트라문 - 포니',
+  // [updatedMelemele]: '울트라썬/울트라문 - 멜레멜레',
+  // [updatedAkala]: '울트라썬/울트라문 - 아칼라',
+  // [updatedUlaula]: '울트라썬/울트라문 - 울라울라',
+  // [updatedPoni]: '울트라썬/울트라문 - 포니',
 
   [letsgoKanto]: '레츠고피카츄/레츠고이브이',
 
-  [galar]: '소드/실드 - 가라르(본토)',
+  [galar]: '소드/실드 - 가라르',
   [isleOfArmor]: '소드/실드 - 갑옷섬',
   [crownTundra]: '소드/실드 - 왕관의 설원',
 
