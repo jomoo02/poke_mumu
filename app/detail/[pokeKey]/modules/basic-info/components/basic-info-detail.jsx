@@ -81,7 +81,8 @@ function CaptureRate({ captureRate }) {
 function GrowthRate({ growthRate }) {
   const {
     subject,
-    maximumExperience,
+    expPointAtLevel50,
+    expPointAtLevel100,
     growthRate: pokeGrowthRate,
   } = useGrowthRate(growthRate);
 
@@ -90,12 +91,23 @@ function GrowthRate({ growthRate }) {
       <div className="info-subject">
         {subject}
       </div>
-      <div className="info-content">
-        <div className="capitalize px-2">
+      <div className="info-content grid gap-y-0.5">
+        <div className="capitalize">
           {pokeGrowthRate}
         </div>
-        <div>
-          {maximumExperience}
+        <div className="flex gap-x-2">
+          <span className="text-slate-500/90 text-sm">
+            {expPointAtLevel50.text}
+          </span>
+          :
+          <span>{expPointAtLevel50.content}</span>
+        </div>
+        <div className="flex gap-x-2">
+          <span className="text-slate-500/90 text-sm">
+            {expPointAtLevel100.text}
+          </span>
+          :
+          <span>{expPointAtLevel100.content}</span>
         </div>
       </div>
     </div>

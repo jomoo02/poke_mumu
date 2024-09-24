@@ -1,4 +1,35 @@
 import { useLanguage } from '@/app/language-provider';
+import {
+  growthRatesEn,
+  growthRatesKo,
+  expPointsAtLevel50,
+  expPointsAtLevel100,
+  defaultGrowthRate,
+} from '../data/growthRate';
+
+function getExpPointAtLevel50Info(growthRate) {
+  const expPoint = expPointsAtLevel50[growthRate]
+  || expPointsAtLevel100[defaultGrowthRate];
+
+  const expText = 'Lv.1 -> Lv.50';
+
+  return {
+    text: expText,
+    content: expPoint.toLocaleString(),
+  };
+}
+
+function getExpPointAtLevel100Info(growthRate) {
+  const expPoint = expPointsAtLevel100[growthRate]
+    || expPointsAtLevel100[defaultGrowthRate];
+
+  const expText = 'Lv.1 -> Lv.100';
+
+  return {
+    text: expText,
+    content: expPoint.toLocaleString(),
+  };
+}
 
 export default function useGrowthRate(growthRate) {
   const { language } = useLanguage();
@@ -10,12 +41,18 @@ export default function useGrowthRate(growthRate) {
 
   const localeSubject = subjects[language] || subjects.ko;
 
-  const localeGrowthRate = growthRate;
+  const localeGrowthRateMap = language === 'en' ? growthRatesEn : growthRatesKo;
 
-  const maximumExperience = 10000;
+  const localeGrowthRate = localeGrowthRateMap[growthRate]
+    || localeGrowthRateMap[defaultGrowthRate];
+
+  const expPointAtLevel50 = getExpPointAtLevel50Info(growthRate);
+
+  const expPointAtLevel100 = getExpPointAtLevel100Info(growthRate);
 
   return {
-    maximumExperience,
+    expPointAtLevel50,
+    expPointAtLevel100,
     subject: localeSubject,
     growthRate: localeGrowthRate,
   };
