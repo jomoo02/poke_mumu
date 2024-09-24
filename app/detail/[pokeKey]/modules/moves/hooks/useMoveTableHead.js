@@ -7,7 +7,7 @@ import {
 } from '../utils/moveTableHeadUtils';
 
 export default function useMoveTableHead(method) {
-  const { langauge } = useLanguage();
+  const { language } = useLanguage();
 
   const initialSortKey = setInitialSortKeyWithMethod(method);
 
@@ -20,9 +20,9 @@ export default function useMoveTableHead(method) {
     setSortOrder({ key: selectKey, asc: isAsc });
   };
 
-  const basicHeadItems = setBasicHeadItems(langauge);
+  const basicHeadItems = setBasicHeadItems(language);
 
-  const specialCaseHeadItem = setSpecialCaseHeadItem(method, langauge);
+  const specialCaseHeadItem = setSpecialCaseHeadItem(method, language);
 
   const headItems = specialCaseHeadItem
     ? [{ ...specialCaseHeadItem }, ...basicHeadItems]

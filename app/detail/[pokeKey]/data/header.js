@@ -18,7 +18,7 @@ const headerKeys = {
 
 const headerContentsKo = {
   [abilities]: '특성',
-  [basicInfo]: '기본 정보',
+  [basicInfo]: '포켓몬 정보',
   [defenseCompatibility]: '방어 상성',
   [evolution]: '진화',
   [forms]: '모습',
@@ -29,7 +29,7 @@ const headerContentsKo = {
 
 const headerContentsEn = {
   [abilities]: 'ability',
-  [basicInfo]: 'default info',
+  [basicInfo]: 'poké Information',
   [defenseCompatibility]: 'defense Compatibility',
   [evolution]: 'Evolution Tree',
   [forms]: 'form',

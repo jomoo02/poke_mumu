@@ -1,11 +1,11 @@
 const genderTextsEn = {
-  genderLess: 'Genderless',
+  genderless: 'Genderless',
   male: 'Male',
   female: 'Female',
 };
 
 const genderTextsKo = {
-  genderLess: '무성',
+  genderless: '무성',
   male: '수컷',
   female: '암컷',
 };

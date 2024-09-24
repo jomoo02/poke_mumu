@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import PokeNavigation from './modules/navigation';
-import PokeBasicInfo from './modules/basic-info';
+import PokeInformation from './modules/information';
 import PokeAbilities from './modules/abilities';
 import PokeForms from './modules/forms';
 import PokeDefenseCompatibility from './modules/defense-compatibility';
@@ -17,7 +17,7 @@ export default async function DetailPage({ params }) {
       <Suspense fallback={<PageSkeleton />}>
         <div className="grid gap-y-12">
           <PokeNavigation pokeKey={pokeKey} />
-          <PokeBasicInfo pokeKey={pokeKey} />
+          <PokeInformation pokeKey={pokeKey} />
           <PokeAbilities pokeKey={pokeKey} />
           <PokeForms pokeKey={pokeKey} />
           <PokeDefenseCompatibility pokeKey={pokeKey} />
@@ -27,6 +27,5 @@ export default async function DetailPage({ params }) {
         </div>
       </Suspense>
     </>
-
   );
 }

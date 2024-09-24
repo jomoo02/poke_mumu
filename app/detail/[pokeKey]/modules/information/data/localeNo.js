@@ -1,3 +1,12 @@
+import {
+  versionGroupLanguage,
+} from '@/app/translations/version';
+
+const {
+  en: versionsEn,
+  ko: versionsKo,
+} = versionGroupLanguage;
+
 const national = 'national'; // 삭제
 const kanto = 'kanto';
 
@@ -79,7 +88,7 @@ const localeIndexs = {
   [bluberry]: 32,
 };
 
-const localesKo = {
+const localesPokedexKo = {
   // [national]: '전국',
   [kanto]: '레드/블루/피카츄',
   [originalJohto]: '골드/실버/크리스탈',
@@ -120,8 +129,50 @@ const localesKo = {
   [bluberry]: '스칼렛/바이올렛 - 블루베리',
 };
 
+const localesPokedexEn = {
+  // [national]: '전국',
+  [kanto]: `${versionsEn['red-blue']}/${versionsEn.yellow}`,
+  [originalJohto]: `${versionsEn['gold-silver']}/${versionsEn.crystal}`,
+  [hoenn]: `${versionsEn['ruby-sapphire']}/${versionsEn.emerald}`,
+  [updatedKanto]: `${versionsEn['firered-leafgreen']}`,
+  [originalSinnoh]: `${versionsEn['diamond-pearl']}`,
+  [extendedSinnoh]: `${versionsEn.platinum}`,
+  [updatedJohto]: `${versionsEn['heartgold-soulsilver']}`,
+  [originalUnova]: `${versionsEn['black-white']}`,
+  [updatedUnova]: `${versionsEn['black-2-white-2']}`,
+  [kalosCentral]: `${versionsEn['x-y']} - Central Kalos`,
+  [kalosCoastal]: `${versionsEn['x-y']} - Coastal Kalos`,
+  [kalosMountain]: `${versionsEn['x-y']} - Mountain Kalos`,
+  [updatedHoenn]: `${versionsEn['omega-ruby-alpha-sapphire']}`,
+
+  [originalAlola]: `${versionsEn['sun-moon']}`,
+  // [originalMelemele]: '썬/문 - 멜레멜레',
+  // [originalAkala]: '썬/문 - 아칼라',
+  // [originalUlaula]: '썬/문 - 울라울라',
+  // [originalPoni]: '썬/문 - 포니',
+
+  [updatedAlola]: `${versionsEn['ultra-sun-ultra-moon']}`,
+  // [updatedMelemele]: '울트라썬/울트라문 - 멜레멜레', 'sword-shield'
+  // [updatedAkala]: '울트라썬/울트라문 - 아칼라',
+  // [updatedUlaula]: '울트라썬/울트라문 - 울라울라',
+  // [updatedPoni]: '울트라썬/울트라문 - 포니',
+
+  [letsgoKanto]: `${versionsEn['lets-go-pikachu-lets-go-eevee']}`,
+
+  [galar]: `${versionsEn['sword-shield']} - Galar`,
+  [isleOfArmor]: `${versionsEn['sword-shield']} - The Isle of Armor`,
+  [crownTundra]: `${versionsEn['sword-shield']} - The Crown Tundra`,
+
+  [hisui]: 'Legends: Arceus',
+
+  [paldea]: `${versionsEn['scarlet-violet']} - Paldea`,
+  [kitakami]: `${versionsEn['scarlet-violet']} - The Teal Mask`,
+  [bluberry]: `${versionsEn['scarlet-violet']} - The Indigo Disk`,
+};
+
 export {
   updatedKanto,
   localeIndexs,
-  localesKo,
+  localesPokedexKo,
+  localesPokedexEn,
 };

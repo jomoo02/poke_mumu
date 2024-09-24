@@ -1,13 +1,13 @@
 import React from 'react';
-import './styles/basicInfo.css';
+import './styles/information.css';
 import { fetchPokeKey } from '@/app/api/data';
 import Header from '../../components/header';
-import PokeIdentifiers from './components/poke-identifiers';
-import PokeImage from './components/poke-image';
-import BasicInfo from './components/basic-info';
 import { headerKeys } from '../../data/header';
+import Information from './components/information';
+import PokeImage from './components/poke-image';
+import PokeIdentifiers from './components/poke-identifiers';
 
-export default async function PokeBasicInfo({ pokeKey }) {
+export default async function PokeInformation({ pokeKey }) {
   const pokeInfo = await fetchPokeKey(pokeKey);
 
   if (!pokeInfo) {
@@ -32,12 +32,15 @@ export default async function PokeBasicInfo({ pokeKey }) {
         headerKey={headerKey}
       />
       <div className={`border-2 border-t-0 ${type}-border grid xl:grid-cols-3 items-center`}>
-        {/* <PokeImage
-          sprity={sprity}
-          alt={name.en}
-        /> */}
-        <div className="col-span-2">
-          <BasicInfo pokeInfo={pokeInfo} />
+        <div className="py-10">
+          <PokeImage
+            sprity={sprity}
+            alt={name.en}
+          />
+        </div>
+
+        <div className="xl:col-span-2">
+          <Information pokeInfo={pokeInfo} />
         </div>
       </div>
     </div>
