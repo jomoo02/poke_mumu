@@ -33,6 +33,8 @@ function PokeImage({ src, alt }) {
   return (
     <div className="w-[64px] h-[64px] sm:w-20 sm:h-20 relative">
       <Image
+        placeholder="blur"
+        blurDataURL="/pokeball.svg"
         src={src}
         alt={alt}
         fill
@@ -40,9 +42,6 @@ function PokeImage({ src, alt }) {
         style={{
           objectFit: 'contain',
         }}
-        priority
-        placeholder="blur"
-        blurDataURL="/pokeball.svg"
       />
     </div>
   );

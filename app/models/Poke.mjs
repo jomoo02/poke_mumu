@@ -15,6 +15,14 @@ const pokeScema = new mongoose.Schema({
   chainIndex: Number,
   height: Number,
   weight: Number,
+
+  genera: Object,
+  eggGroups: Array,
+  genderRate: Number,
+  captureRate: Number,
+  growthRate: String,
+  hatchCounter: Number,
+  pokedexNumbers: Array,
 });
 
 const PokeModel = mongoose.models.Poke || mongoose.model('Poke', pokeScema);

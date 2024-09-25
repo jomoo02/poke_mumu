@@ -48,6 +48,12 @@ export default function Move({ move, children, language }) {
 
   const nameText = name[language] || name.ko;
 
+  const renderMove = () => <span className="text-base font-semibold text-slate-700">{nameText}</span>;
+  const renderType = () => <Type type={type} language={language} />;
+  const renderDamageClass = () => <DamageClass damageClass={damageClass} />;
+  const renderPower = () => <span className="text-sm font-medium text-right px-3">{power || '-'}</span>;
+  const renderAccuracy = () => <span className="text-sm font-medium text-right px-3">{accuracy || '-'}</span>;
+
   return (
     <div className="flex min-h-9 items-center">
       {children}
@@ -65,3 +71,4 @@ export default function Move({ move, children, language }) {
     </div>
   );
 }
+ 
