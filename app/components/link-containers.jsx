@@ -7,7 +7,7 @@ import {
   makeFirstUpperCase,
   getKoreanParticleForAnd,
   getKoreanSubjectParticle,
-} from '@/app/lib/utils';
+} from '@/app/utils/utils';
 import { ALL_ITEM_KO, ITEM_EN } from '@/app/translations/item';
 import { POKE_KO } from '@/app/translations/poke';
 

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Type from '@/app/components/type';
-import { formatPokedexNumber } from '@/app/utils/formatPokedexNumber';
+import { formatPokedexNumber } from '@/app/utils/format';
 import useInformationBasic from '../hooks/useInformationBasic';
 import InfoContainer from './info-container';
 

@@ -5,6 +5,7 @@ import { useLanguage } from '@/app/language-provider';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
 import useScrollRestoration from '@/app/hooks/useScrollRestoration';
 import Type from '@/app/components/type';
+import { formatPokedexNumber } from '@/app/utils/format';
 
 const SPRITY_BASE_URL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
 
@@ -62,6 +63,8 @@ export default function Card({ basicInfo }) {
   const { saveLocalPoke } = useLocalStorage();
   const { setScrollPosition } = useScrollRestoration();
 
+  const noText = `No.${formatPokedexNumber(no)}`;
+
   const handleClick = () => {
     saveLocalPoke(basicInfo);
     setScrollPosition(window.scrollY);
@@ -71,7 +74,7 @@ export default function Card({ basicInfo }) {
     <Container>
       <div className="w-1/2 xs:w-full">
         <div className="text-sm text-slate-600 font-semibold">
-          {`No.${no}`}
+          {noText}
         </div>
         <Link
           onClick={handleClick}

@@ -1,5 +1,6 @@
 import { useLanguage } from '@/app/language-provider';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
+import { formatPokedexNumber } from '@/app/utils/format';
 
 export function useSearchPokeInfo(pokeInfo) {
   const {
@@ -14,7 +15,7 @@ export function useSearchPokeInfo(pokeInfo) {
   const localeForm = form.en === 'default' ? '' : form[language];
   const localeMainName = name[language] || '포켓몬';
   const localeSubName = language === 'ko' ? name.en : name.ko;
-  const noText = `no.${no}`;
+  const noText = `no.${formatPokedexNumber(no)}`;
 
   const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${sprity}`;
 

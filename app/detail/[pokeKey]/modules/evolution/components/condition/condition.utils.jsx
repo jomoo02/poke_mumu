@@ -10,7 +10,7 @@ import typesKo from '@/app/translations/type';
 import {
   makeFirstUpperCase,
   makeFirstUpperCaseTextArray,
-} from '@/app/lib/utils';
+} from '@/app/utils/utils';
 import {
   getOtherConditionContent,
   getAreaInfoWithKey,

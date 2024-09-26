@@ -28,10 +28,10 @@ export async function generateMetadata({ params }) {
     if (index === 0) {
       return typesKo[type];
     }
-    return `${acc}, ${typesKo[type]}`;
+    return `${acc} ${typesKo[type]}`;
   }, '');
 
-  const description = `도감 번호 ${no} ${name.ko} ${genera.ko} ${typeText} 타입`;
+  const description = `도감 번호 ${no}, ${name.ko}, ${genera.ko}, ${typeText} 타입,`;
 
   const images = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
 
