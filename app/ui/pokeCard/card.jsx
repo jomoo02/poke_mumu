@@ -76,6 +76,7 @@ export default function Card({ basicInfo }) {
         <Link
           onClick={handleClick}
           href={`/detail/${pokeKey}`}
+          prefetch
         >
           <div className="flex xs:my-1 pr-4 xs:pr-0 justify-center poke-card">
             <PokeImage src={sprityUrl} alt={name.en} />

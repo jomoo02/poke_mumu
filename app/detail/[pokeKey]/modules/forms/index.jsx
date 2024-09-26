@@ -3,7 +3,6 @@ import { fetchPokeKey } from '@/app/api/data';
 import { fetchDetail } from '@/app/api/detail';
 import Header from '../../components/header';
 import Forms from './components/forms';
-// import { setFormHeaderText } from './utils/utils';
 import { headerKeys } from '../../data/header';
 
 export default async function PokeForms({ pokeKey }) {
@@ -24,8 +23,6 @@ export default async function PokeForms({ pokeKey }) {
   }
 
   const type = types[0];
-
-  // const headerTexts = setFormHeaderText(forms.length, name);
 
   const headerKey = headerKeys.forms;
 
