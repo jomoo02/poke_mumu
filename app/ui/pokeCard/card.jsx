@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useLanguage } from '@/app/language-provider';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
 import useScrollRestoration from '@/app/hooks/useScrollRestoration';
-import Type from '../detail/type';
+import Type from '@/app/components/type';
 
 const SPRITY_BASE_URL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
 

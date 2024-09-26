@@ -6,10 +6,7 @@ import Forms from './components/forms';
 import { headerKeys } from '../../data/header';
 
 export default async function PokeForms({ pokeKey }) {
-  const [
-    { types, name },
-    { forms },
-  ] = await Promise.all([
+  const [{ types, name }, { forms }] = await Promise.all([
     fetchPokeKey(pokeKey),
     fetchDetail(pokeKey),
   ]);

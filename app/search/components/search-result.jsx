@@ -1,20 +1,21 @@
 import React from 'react';
-import useLocalStorage from '@/app/hooks/useLocalStorage';
-import { useLanguage } from '@/app/language-provider';
-import { checkTextNumberType } from '@/app/lib/utils';
-import SearchPoke from './poke';
+import SearchPoke from './search-poke';
+import {
+  useSearchDescription,
+  useSearchResult,
+} from '../hooks/useSearchResult';
 
 function SearchDescription({ inputText }) {
-  const { language } = useLanguage();
-
-  const isTextNumber = checkTextNumberType(inputText);
+  const {
+    isTextNumber,
+    notInputText,
+    normalCaseText,
+    numberCaseText,
+    language,
+  } = useSearchDescription(inputText);
 
   if (!inputText) {
-    return (
-      <div>
-        {language === 'ko' ? '최근 검색한 포켓몬' : 'Recently searched Pokemon'}
-      </div>
-    );
+    return <div>{notInputText}</div>;
   }
 
   if (language === 'ko') {
@@ -24,7 +25,7 @@ function SearchDescription({ inputText }) {
           <span className="text-slate-600 underline">
             {inputText}
           </span>
-          <span>{isTextNumber ? '도감번호' : '(이)가 포함된'}</span>
+          <span>{isTextNumber ? numberCaseText : normalCaseText}</span>
         </div>
         <span>포켓몬</span>
       </div>
@@ -33,14 +34,16 @@ function SearchDescription({ inputText }) {
 
   return (
     <div className="flex gap-x-1">
-      <span>{isTextNumber ? 'Pokedex is' : 'Pokemon containing'}</span>
+      <span>{isTextNumber ? numberCaseText : normalCaseText}</span>
       <span className="text-slate-600 underline">{inputText}</span>
     </div>
   );
 }
 
-export default function SearchResult({ inputText, result }) {
-  const { localPokes } = useLocalStorage();
+export default function SearchResult({ inputText, searchResult }) {
+  const {
+    resultPokes,
+  } = useSearchResult(inputText, searchResult);
 
   return (
     <>
@@ -48,7 +51,7 @@ export default function SearchResult({ inputText, result }) {
         <SearchDescription inputText={inputText} />
       </div>
       <div className="grid grid-cols-1 divide-y gap-y-1">
-        {(!inputText ? localPokes : result).map((poke) => (
+        {resultPokes.map((poke) => (
           <div key={poke.id} className="h-[75px] xs:px-2 py-0.5">
             <SearchPoke pokeInfo={poke} />
           </div>

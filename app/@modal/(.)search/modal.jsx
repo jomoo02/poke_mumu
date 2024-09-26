@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { createPortal } from 'react-dom';
-import Search from '@/app/ui/search/search';
+import Search from '@/app/search/components/search';
 
 export default function Modal() {
   return createPortal(

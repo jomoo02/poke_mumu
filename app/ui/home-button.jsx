@@ -10,7 +10,7 @@ export default function HomeButton() {
   return (
     <div className="text-white text-xl font-black">
       <Link href="/" onClick={removeScrollPosition}>
-        Poke MuMu
+        Poké MuMu
       </Link>
     </div>
   );
