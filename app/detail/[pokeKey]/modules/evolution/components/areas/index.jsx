@@ -6,9 +6,7 @@ import useAreas from '../../hooks/useAreas';
 function Header({ title, type }) {
   return (
     <div
-      className={
-        `flex justify-center py-0.5 font-semibold items-center ${type} text-white text-sm`
-      }
+      className={`flex justify-center py-0.5 font-semibold items-center ${type} text-white text-sm`}
     >
       {title}
     </div>

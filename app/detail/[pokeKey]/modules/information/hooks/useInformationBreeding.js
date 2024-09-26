@@ -86,11 +86,11 @@ function setEggGroups(eggGroups, localeSubjects, localeEggGroupsMap) {
 function setHatchCounter(hatchCounter, localeSubjects, eggGroups) {
   const localeSubject = localeSubjects.hatchCounter || 'egg Cycles';
 
-  const formattedHatchCounter = checkNoEggs(eggGroups) ? 0 : hatchCounter;
+  // const formattedHatchCounter = checkNoEggs(eggGroups) ? 0 : hatchCounter;
 
   return {
     subject: localeSubject,
-    content: formattedHatchCounter,
+    content: hatchCounter,
   };
 }
 

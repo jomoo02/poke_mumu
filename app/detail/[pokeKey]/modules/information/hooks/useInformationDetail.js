@@ -66,7 +66,7 @@ function setGrowthRate(growthRate, localeSubjects, localeGrowthRateMap) {
 
   const atLevel50 = {
     text: 'Lv.1 -> Lv.50',
-    value: expPointAtLevel50,
+    value: expPointAtLevel50.toLocaleString(),
   };
 
   const expPointAtLevel100 = expPointsAtLevel100[growthRate]
@@ -74,7 +74,7 @@ function setGrowthRate(growthRate, localeSubjects, localeGrowthRateMap) {
 
   const atLevel100 = {
     text: 'Lv.1 -> Lv.100',
-    value: expPointAtLevel100,
+    value: expPointAtLevel100.toLocaleString(),
   };
 
   return {

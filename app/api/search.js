@@ -1,6 +1,6 @@
 'use server';
 
-import { checkTextLanguageKo, checkTextNumberType } from '../lib/utils';
+import { checkTextLanguageKo, checkTextNumberType } from '../utils/utils';
 import PokeModel from '../models/Poke.mjs';
 import dbConnect from './db/connect.ts';
 

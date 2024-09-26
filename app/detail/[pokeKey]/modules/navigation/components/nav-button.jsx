@@ -14,6 +14,7 @@ function Before({
     <Link
       href={`/detail/${pokeKey}`}
       className={`flex border-2 ${type}-border rounded-lg items-center h-14 md:h-16`}
+      prefetch
     >
       <div className="flex justify-center items-center h-full border-r px-4">
         <ArrowLeftIcon />

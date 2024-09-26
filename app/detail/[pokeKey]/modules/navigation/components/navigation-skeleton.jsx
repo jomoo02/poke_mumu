@@ -1,6 +1,6 @@
 import React from 'react';
-import ArrowRightIcon from '@/app/ui/icons/arrow-right';
-import ArrowLeftIcon from '@/app/ui/icons/arrow-left';
+import ArrowRightIcon from '@/app/components/icons/arrow-right';
+import ArrowLeftIcon from '@/app/components/icons/arrow-left';
 
 function Left() {
   return (
@@ -23,8 +23,11 @@ function Right() {
 }
 
 export default function NavigationSkeleton({ pokeKey }) {
-  const isViewLeft = pokeKey !== 'bulbasaur';
-  const isViewRight = pokeKey !== 'pecharunt';
+  const start = 'bulbasaur';
+  const end = 'pecharunt';
+
+  const isViewLeft = pokeKey !== start;
+  const isViewRight = pokeKey !== end;
 
   return (
     <div className="grid gap-y-3 md:flex-row md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-12 lg:gap-x-20 xl:gap-x-0 animate-pulse">

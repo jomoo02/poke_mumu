@@ -1,4 +1,5 @@
 import { useLanguage } from '@/app/language-provider';
+import { formatPokedexNumber } from '@/app/utils/format';
 
 const DEFAULT_NO = 1000;
 
@@ -27,7 +28,7 @@ export default function useNavButtonInfo(info) {
 
   const localeName = name[language] || name.ko || '포켓몬';
 
-  const noText = `no. ${no || DEFAULT_NO}`;
+  const noText = `no. ${formatPokedexNumber(no || DEFAULT_NO)}`;
 
   const localeForm = getLocaleForm(form, language);
 

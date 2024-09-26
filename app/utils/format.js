@@ -1,4 +1,4 @@
-function formatMeasurement(value, unit) {
+export function formatMeasurement(value, unit) {
   const meters = value / 10;
 
   const formattedMeters = meters.toFixed(1);
@@ -6,4 +6,6 @@ function formatMeasurement(value, unit) {
   return `${formattedMeters} ${unit}`;
 }
 
-export { formatMeasurement };
+export function formatPokedexNumber(pokedexNumber) {
+  return pokedexNumber.toString().padStart(4, '0');
+}

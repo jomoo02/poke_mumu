@@ -1,6 +1,6 @@
 import React from 'react';
-import { getDefenseCompatibility } from '@/app/lib/type-compatibility';
 import Type from '@/app/components/type';
+import { getDefenseCompatibility } from '../utils/type-compatibility';
 import DamageRate from './damage-rate';
 
 function PokeTypes({ pokeTypes }) {

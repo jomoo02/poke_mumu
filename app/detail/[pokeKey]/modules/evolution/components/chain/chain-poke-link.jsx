@@ -12,6 +12,7 @@ export default function ChainPokeLink({ pokeKey, name }) {
     <Link
       href={`/detail/${pokeKey}`}
       className="text-center min-h-10 max-h-20 flex flex-col underline underline-offset-2 hover:text-blue-400"
+      prefetch
     >
       <span className="text-sm md:text-[15px]">
         {mainName}
