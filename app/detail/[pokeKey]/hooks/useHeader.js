@@ -2,7 +2,7 @@ import { useLanguage } from '@/app/language-provider';
 import {
   headerContentsKo,
   headerContentsEn,
-} from '../data/header';
+} from '../data/header.ts';
 
 export default function useHeader(headerKey) {
   const { language } = useLanguage();
