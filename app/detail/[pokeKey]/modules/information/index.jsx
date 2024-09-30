@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/information.css';
 import { fetchPokeKey } from '@/app/api/data';
 import Header from '../../components/header';
-import { headerKeys } from '../../data/header.ts';
+import { headerKeys } from '../../data/header';
 import Information from './components/information';
 import PokeImage from './components/poke-image';
 import PokeIdentifiers from './components/poke-identifiers';

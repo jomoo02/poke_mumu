@@ -1,14 +1,6 @@
-import { HeaderKey } from './header.type';
+import { HeaderKeyType } from './header.typs';
 
-const abilities: string = 'abilities';
-const information = 'information';
-const defenseCompatibility = 'defenseCompatibility';
-const evolution = 'evolution';
-const forms = 'forms';
-const moves = 'moves';
-const stats = 'stats';
-
-const headerKeys: Record<HeaderKey, string> = {
+const headerKeys: Record<HeaderKeyType, HeaderKeyType> = {
   abilities: 'abilities',
   information: 'information',
   defenseCompatibility: 'defenseCompatibility',
@@ -16,9 +8,10 @@ const headerKeys: Record<HeaderKey, string> = {
   forms: 'forms',
   moves: 'moves',
   stats: 'stats',
+  default: 'default',
 };
 
-const headerContentsKo: Record<HeaderKey | 'default', string> = {
+const headerContentsKo: Record<HeaderKeyType, string> = {
   abilities: '특성',
   information: '포켓몬 정보',
   defenseCompatibility: '방어 상성',
@@ -29,14 +22,14 @@ const headerContentsKo: Record<HeaderKey | 'default', string> = {
   default: '',
 };
 
-const headerContentsEn = {
-  [abilities]: 'ability',
-  [information]: 'poké Information',
-  [defenseCompatibility]: 'defense Compatibility',
-  [evolution]: 'Evolution Tree',
-  [forms]: 'form',
-  [moves]: 'moves',
-  [stats]: 'stat',
+const headerContentsEn: Record<HeaderKeyType, string> = {
+  abilities: 'ability',
+  information: 'poké Information',
+  defenseCompatibility: 'defense Compatibility',
+  evolution: 'Evolution Tree',
+  forms: 'form',
+  moves: 'moves',
+  stats: 'stat',
   default: '',
 };
 

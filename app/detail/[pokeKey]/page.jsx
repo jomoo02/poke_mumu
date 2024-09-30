@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { fetchPokeKey } from '@/app/api/data';
+import { fetchDetail } from '@/app/api/detail';
 import typesKo from '@/app/translations/type';
 import PokeNavigation from './modules/navigation';
 import PokeInformation from './modules/information';
@@ -46,6 +47,9 @@ export async function generateMetadata({ params }) {
 
 export default async function DetailPage({ params }) {
   const { pokeKey } = params;
+
+  fetchPokeKey(pokeKey);
+  fetchDetail(pokeKey);
 
   return (
     <Suspense fallback={<PageSkeleton />}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import AbilitiesSkeleton from '../modules/abilities/components/abilities-skeleton';
 import InformationSkeleton from '../modules/information/components/information-skeleton';
 import DefenseCompatibilitySkeleton from '../modules/defense-compatibility/components/defense-compatibility-skeleton';

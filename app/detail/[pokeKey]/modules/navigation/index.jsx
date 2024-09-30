@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchSurroundingPokes, fetchPokeKey } from '@/app/api/data';
+import { fetchSurroundingPokes, fetchPokeKey } from '@/app/api/poke.ts';
 import NavButton from './components/nav-button';
 
 export default async function PokeNavigaition({ pokeKey }) {

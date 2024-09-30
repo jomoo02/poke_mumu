@@ -1,7 +1,12 @@
 import React from 'react';
 import Ability from './ability';
+import { AbilitiesType } from '../types/ability';
 
-export default function Abilities({ abilities }) {
+type AbilitiesProps = {
+  abilities: AbilitiesType,
+};
+
+export default function Abilities({ abilities }: AbilitiesProps) {
   return (
     <>
       {abilities.map((ability) => (

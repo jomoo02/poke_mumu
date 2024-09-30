@@ -2,8 +2,13 @@
 
 import React from 'react';
 import useAbility from '../hooks/useAbility';
+import { AbilityType } from '../types/ability';
 
-export default function Ability({ ability }) {
+type AbilityProps = {
+  ability: AbilityType,
+};
+
+export default function Ability({ ability }: AbilityProps) {
   const {
     name,
     flavorText,

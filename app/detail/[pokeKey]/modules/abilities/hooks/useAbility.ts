@@ -1,29 +1,30 @@
-import { useLanguage } from '@/app/language-provider';
+import { useLanguage, Language } from '@/app/language-provider';
+import { AbilityType } from '../types/ability';
 
-function getHiddenAbilityInfo(language) {
+function getHiddenAbilityInfo(language: Language) {
   const hiddenAbilityLabels = {
     ko: '숨겨진 특성',
     en: 'hidden ability',
   };
 
-  const localeHiddenAbilityLabel = hiddenAbilityLabels[language] || hiddenAbilityLabels.ko;
+  const localeHiddenAbilityLabel = `(${hiddenAbilityLabels[language]})`;
 
   const hiddenAbilityBackGroundColor = 'bg-slate-100';
 
   return {
     hiddenAbilityBackGroundColor,
-    localeHiddenAbilityLabel: `(${localeHiddenAbilityLabel})`,
+    localeHiddenAbilityLabel,
   };
 }
 
-export default function useAbility(ability) {
+export default function useAbility(ability: AbilityType) {
   const { name, flavorText, isHidden } = ability;
 
   const { language } = useLanguage();
 
-  const localeName = name[language] || name.ko || '특성';
+  const localeName = name[language];
 
-  const localeFlavorText = flavorText[language] || flavorText.ko || '';
+  const localeFlavorText = flavorText[language];
 
   const abilityBackGroundColor = 'bg-white';
 
