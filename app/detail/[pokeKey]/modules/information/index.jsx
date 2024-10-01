@@ -38,8 +38,7 @@ export default async function PokeInformation({ pokeKey }) {
             alt={name.en}
           />
         </div>
-
-        <div className="xl:col-span-2">
+        <div className="xl:col-span-2 xl:py-4">
           <Information pokeInfo={pokeInfo} />
         </div>
       </div>

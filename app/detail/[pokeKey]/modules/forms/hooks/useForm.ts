@@ -1,9 +1,9 @@
 import { useLanguage } from '@/app/language-provider';
 
-function setImageSrc(id) {
+function setImageSrc(id: number) {
   const basicUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
 
-  const specialIdCase = {
+  const specialIdCase: Record<string, string> = {
     666: '/vivillon-icy-snow.png',
     '666-meadow': '/vivillon-meadow.png',
   };
@@ -13,7 +13,7 @@ function setImageSrc(id) {
   return src;
 }
 
-export default function useForm(form) {
+export default function useForm(form: { id: number, name: { en: string, ko: string } }) {
   const { language } = useLanguage();
 
   const {
@@ -25,7 +25,7 @@ export default function useForm(form) {
 
   const localeFormName = name[language] || name.ko || '모습';
 
-  const alt = id;
+  const alt = String(id);
 
   return {
     src,

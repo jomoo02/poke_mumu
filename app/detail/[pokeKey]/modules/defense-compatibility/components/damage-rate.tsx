@@ -1,7 +1,7 @@
 import React from 'react';
 import Type from '@/app/components/type';
 
-function DamageRateText({ damageRate }) {
+function DamageRateText({ damageRate }: { damageRate: number }) {
   return (
     <div className="flex justify-center items-center md:py-1 md:border-b text-[13px] md:text-sm font-semibold min-w-16">
       {`x ${damageRate}`}
@@ -9,8 +9,8 @@ function DamageRateText({ damageRate }) {
   );
 }
 
-function DamageRateTypes({ types }) {
-  const gridColsClassNameMap = {
+function DamageRateTypes({ types }: { types: string[] }) {
+  const gridColsClassNameMap: Record<number, string> = {
     1: 'md:grid-cols-1',
     2: 'md:grid-cols-1',
     3: 'md:grid-cols-1 lg:grid-cols-2',
@@ -24,10 +24,9 @@ function DamageRateTypes({ types }) {
     14: 'md:grid-cols-6 lg:grid-cols-7',
     15: 'md:grid-cols-5 lg:grid-cols-6',
     16: 'md:grid-cols-6 lg:grid-cols-7',
-    default: 'md:grid-cols-2 lg:grid-cols-3',
   };
 
-  const gridColsClassName = gridColsClassNameMap[types.length] || gridColsClassNameMap.default;
+  const gridColsClassName = gridColsClassNameMap[types.length] || 'md:grid-cols-2 lg:grid-cols-3';
 
   return (
     <div className="flex justify-center md:px-3.5 md:py-3">

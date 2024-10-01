@@ -38,7 +38,7 @@ type DetailResultType = {
   forms: {
     id: string;
     name: LocaleContent;
-  };
+  }[];
   speciesName: LocaleContent;
   pokeKey: string;
 };

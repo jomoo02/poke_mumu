@@ -4,7 +4,7 @@ import { fetchDetail } from '@/app/api/detail';
 import Abilities from './components/abilities';
 import Header from '../../components/header';
 import { headerKeys } from '../../data/header';
-import { AbilitiesType } from './types/ability';
+import { AbilitiesType } from '../../types/abilities.type';
 
 type PokeAbilitiesProps = {
   pokeKey: string,

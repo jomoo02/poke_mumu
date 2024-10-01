@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import useForm from '../hooks/useForm';
 
-export default function Form({ form }) {
+export default function Form({ form }: { form: { id: number, name: { en: string, ko: string } } }) {
   const {
     src,
     alt,
