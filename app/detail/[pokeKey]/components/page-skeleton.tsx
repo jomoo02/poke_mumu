@@ -8,10 +8,10 @@ import MovesSkeleton from '../modules/moves/components/moves-skeleton';
 import NavigationSkeleton from '../modules/navigation/components/navigation-skeleton';
 import StatsSkeleton from '../modules/stats/components/stats-skeleton';
 
-export default function PageSkeletons() {
+export default function PageSkeletons({ pokeKey }: { pokeKey: string }) {
   return (
     <div className="grid gap-y-12">
-      <NavigationSkeleton />
+      <NavigationSkeleton pokeKey={pokeKey} />
       <InformationSkeleton />
       <AbilitiesSkeleton />
       <FormsSkeleton />

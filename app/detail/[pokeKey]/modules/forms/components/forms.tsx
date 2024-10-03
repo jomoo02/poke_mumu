@@ -1,9 +1,11 @@
 'use client';
 
 import React from 'react';
+import { PokeTypeType } from '@/app/types/pokeType.type';
 import Form from './form';
+import { FormType } from '../../../types/forms.type';
 
-const formsContainerClassNameMap = {
+const formsContainerClassNameMap: Record<number, string> = {
   4: 'grid grid-cols-2 lg:grid-cols-4 gap-y-5',
   5: 'flex flex-wrap gap-x-5 justify-around',
   6: 'grid grid-cols-3 lg:grid-cols-6 gap-y-3 md:gap-y-5',
@@ -13,15 +15,19 @@ const formsContainerClassNameMap = {
   18: 'grid grid-cols-3 md:grid-cols-6 gap-y-3 md:gap-y-5',
   20: 'grid grid-cols-3 md:grid-cols-5 gap-y-3 md:gap-y-5',
   28: 'grid grid-cols-3 md:grid-cols-7 gap-y-3 md:gap-y-5',
-  default: 'flex flex-wrap gap-x-5 justify-evenly',
 };
 
 export default function Forms({
   forms,
   type,
+}: {
+  forms: FormType[],
+  type: PokeTypeType,
 }) {
+  const defaultClassName = 'flex flex-wrap gap-x-5 justify-evenly';
+
   const formContainerClassName = formsContainerClassNameMap[forms.length]
-    || formsContainerClassNameMap.default;
+    || defaultClassName;
 
   return (
     <div

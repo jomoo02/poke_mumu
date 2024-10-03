@@ -1,25 +1,11 @@
 import { useLanguage, Language } from '@/app/language-provider';
 import { formatPokedexNumber } from '@/app/utils/format';
-
-interface Form {
-  en: string,
-  ko: string,
-}
-
-interface Name {
-  en: string,
-  ko: string,
-}
-
-interface Info {
-  name: Name,
-  form: Form,
-  no?: number,
-}
+import { LanguageContentType } from '@/app/types/languageContent.type';
+import { PokeDataType } from '../types/pokeData.type';
 
 const DEFAULT_NO = 1000;
 
-function getLocaleForm(form: Form, language: Language) {
+function getLocaleForm(form: LanguageContentType, language: Language) {
   const excludedForms = ['default', 'mega'];
 
   const isShowForm = !excludedForms.some((excludedForm) => form.en === excludedForm);
@@ -33,7 +19,7 @@ function getLocaleForm(form: Form, language: Language) {
   return '';
 }
 
-export default function useNavButtonInfo(info: Info) {
+export default function useNavButtonInfo(info: PokeDataType) {
   const {
     name,
     form,

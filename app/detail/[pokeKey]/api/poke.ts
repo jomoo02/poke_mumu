@@ -3,54 +3,10 @@
 import { cache } from 'react';
 import dbConnect from '@/app/api/db/connect';
 import PokeModel from '../../../models/Poke';
-import {
-  PokeTypesType,
-} from '../types/defense-compatibility.type';
+import { PokeDataType } from '../types/pokeData.type';
+import { SurroundingPokesType } from '../types/navigation.type';
 
-type PokeDataType = {
-  pokeKey: string;
-  sprity: string;
-  order: number;
-  name: string;
-  form: string;
-  no: number;
-};
-
-type SurroundingPokesType = {
-  before?: PokeDataType;
-  next?: PokeDataType;
-};
-
-type LocaleContent = {
-  en: string;
-  ko: string;
-};
-
-type PokeResultType = {
-  id?: number;
-  no?: number;
-  types?: PokeTypesType;
-  sprity?: string;
-  name?: LocaleContent;
-  form?: LocaleContent;
-  order?: number;
-  pokeKey?: string;
-  chainIndex?: number;
-  height?: number;
-  weight?: number;
-  captureRate?: number;
-  eggGroups?: string[];
-  genderRate?: number;
-  genera?: LocaleContent;
-  growthRate?: string;
-  hatchCounter?: number;
-  pokedexNumbers?: {
-    entryNumber: number;
-    pokedex: string;
-  }[];
-};
-
-export const fetchPokeKey = cache(async (pokeKey: string): Promise<PokeResultType | undefined> => {
+export const fetchPokeKey = cache(async (pokeKey: string): Promise<PokeDataType | undefined> => {
   await dbConnect();
   const query = { pokeKey };
   const projection = {
@@ -59,7 +15,7 @@ export const fetchPokeKey = cache(async (pokeKey: string): Promise<PokeResultTyp
 
   const result = await PokeModel
     .findOne(query, projection)
-    .lean<PokeResultType>();
+    .lean<PokeDataType>();
 
   if (result) {
     return result;

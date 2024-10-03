@@ -1,4 +1,5 @@
 import { useLanguage } from '@/app/language-provider';
+import { FormType } from '../../../types/forms.type';
 
 function setImageSrc(id: number) {
   const basicUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
@@ -13,7 +14,7 @@ function setImageSrc(id: number) {
   return src;
 }
 
-export default function useForm(form: { id: number, name: { en: string, ko: string } }) {
+export default function useForm(form: FormType) {
   const { language } = useLanguage();
 
   const {

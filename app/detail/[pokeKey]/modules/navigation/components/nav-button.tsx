@@ -2,13 +2,18 @@ import React from 'react';
 import Link from 'next/link';
 import ArrowRightIcon from '@/app/components/icons/arrow-right';
 import ArrowLeftIcon from '@/app/components/icons/arrow-left';
+import { PokeTypeType } from '@/app/types/pokeType.type';
 import NavButtonInfo from './nav-button-info';
+import { PokeDataType } from '../../../types/pokeData.type';
 
 function Before({
   type,
   pokeInfo,
+}: {
+  type: PokeTypeType,
+  pokeInfo: PokeDataType,
 }) {
-  const { pokeKey, ...info } = pokeInfo;
+  const { pokeKey } = pokeInfo;
 
   return (
     <Link
@@ -20,7 +25,7 @@ function Before({
         <ArrowLeftIcon />
       </div>
       <div className="flex-1">
-        <NavButtonInfo pokeInfo={info} />
+        <NavButtonInfo pokeInfo={pokeInfo} />
       </div>
     </Link>
   );
@@ -29,8 +34,11 @@ function Before({
 function Next({
   type,
   pokeInfo,
+}: {
+  type: PokeTypeType,
+  pokeInfo: PokeDataType,
 }) {
-  const { pokeKey, ...info } = pokeInfo;
+  const { pokeKey } = pokeInfo;
 
   return (
     <Link
@@ -41,7 +49,7 @@ function Next({
         <ArrowRightIcon />
       </div>
       <div className="flex-1">
-        <NavButtonInfo pokeInfo={info} />
+        <NavButtonInfo pokeInfo={pokeInfo} />
       </div>
     </Link>
   );

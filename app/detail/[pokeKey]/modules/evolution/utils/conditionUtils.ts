@@ -1,5 +1,5 @@
 import { Language } from '@/app/language-provider';
-import { LocaleContentType } from '@/app/types/localeContent.type';
+import { LanguageContentType } from '@/app/types/languageContent.type';
 import {
   areasKo,
   areasEn,
@@ -97,13 +97,13 @@ export function getAreaInfoWithKey(key: string) {
   return areaMap[key] || areaMap.default;
 }
 
-export function getOtherConditionContent(poke: OtherCaseType): LocaleContentType {
+export function getOtherConditionContent(poke: OtherCaseType): LanguageContentType {
   const defaultContent = {
     en: '',
     ko: '',
   };
 
-  const otherCasePokeLocaleContent: Record<OtherCaseType, LocaleContentType> = {
+  const otherCasePokeLocaleContent: Record<OtherCaseType, LanguageContentType> = {
     sirfetchD: {
       en: 'achieve 3 critical hits in one battle',
       ko: '한 전투에서 급소를 3번 맞힌다',

@@ -1,9 +1,5 @@
 import mongoose from 'mongoose';
-
-type LocaleContent = {
-  en: string;
-  ko: string;
-};
+import { LanguageContentType } from '../types/languageContent.type';
 
 type Pokedex = {
   entryNumber: number;
@@ -15,14 +11,14 @@ interface Poke {
   no: number;
   types: string[];
   sprity: string;
-  name: LocaleContent;
-  form: LocaleContent;
+  name: LanguageContentType;
+  form: LanguageContentType;
   order: number;
   pokeKey: string;
   chainIndex: number;
   height: number;
   weight: number;
-  genera: LocaleContent;
+  genera: LanguageContentType;
   eggGroups?: string[];
   genderRate: number;
   captureRate: number;

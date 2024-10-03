@@ -1,7 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 
-export default function DamageClass({ damageClass = 'status' }) {
+type DamageClassType = 'physical' | 'special' | 'status';
+
+export default function DamageClass({ damageClass = 'status' }: { damageClass: DamageClassType }) {
   const damageClassMap = {
     physical: {
       src: '/damage/physical.png',
@@ -29,7 +31,7 @@ export default function DamageClass({ damageClass = 'status' }) {
         src={src}
         alt={damageClass}
         fill
-        size="20px"
+        sizes="20px"
         priority
         style={{ objectFit: 'contain', padding: '2px 0' }}
       />

@@ -52,7 +52,7 @@ export default async function DetailPage({ params }) {
   fetchDetail(pokeKey);
 
   return (
-    <Suspense fallback={<PageSkeleton />}>
+    <Suspense fallback={<PageSkeleton pokeKey={pokeKey} />}>
       <div className="grid gap-y-12">
         <PokeNavigation pokeKey={pokeKey} />
         <PokeInformation pokeKey={pokeKey} />

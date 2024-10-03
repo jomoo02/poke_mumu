@@ -3,8 +3,9 @@
 import React from 'react';
 import Image from 'next/image';
 import useForm from '../hooks/useForm';
+import { FormType } from '../../../types/forms.type';
 
-export default function Form({ form }: { form: { id: number, name: { en: string, ko: string } } }) {
+export default function Form({ form }: { form: FormType }) {
   const {
     src,
     alt,

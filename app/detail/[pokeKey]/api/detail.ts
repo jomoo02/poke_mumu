@@ -3,17 +3,14 @@
 import { cache } from 'react';
 import DetailModel from '@/app/models/Detail';
 import dbConnect from '@/app/api/db/connect';
+import { LanguageContentType } from '@/app/types/languageContent.type';
 import { StatType } from '../modules/stats/types/stat.type';
-
-type LocaleContent = {
-  ko: string;
-  en: string;
-};
+import { FormType } from '../types/forms.type';
 
 type Ability = {
   isHidden: boolean;
-  name: LocaleContent;
-  flavorText: LocaleContent;
+  name: LanguageContentType;
+  flavorText: LanguageContentType;
 };
 
 type genMoves = {
@@ -31,11 +28,8 @@ type DetailResultType = {
     gen: number;
     genMoves: genMoves;
   }[];
-  forms: {
-    id: string;
-    name: LocaleContent;
-  }[];
-  speciesName: LocaleContent;
+  forms: FormType[],
+  speciesName: LanguageContentType;
   pokeKey: string;
 };
 

@@ -3,16 +3,12 @@
 import { cache } from 'react';
 import DetailModel from '../models/Detail';
 import dbConnect from './db/connect';
-
-type LocaleContent = {
-  ko: string;
-  en: string;
-};
+import { LanguageContentType } from '../types/languageContent.type';
 
 type Ability = {
   isHidden: boolean;
-  name: LocaleContent;
-  flavorText: LocaleContent;
+  name: LanguageContentType;
+  flavorText: LanguageContentType;
 };
 
 type Stat = {
@@ -37,9 +33,9 @@ type DetailResultType = {
   }[];
   forms: {
     id: string;
-    name: LocaleContent;
+    name: LanguageContentType;
   }[];
-  speciesName: LocaleContent;
+  speciesName: LanguageContentType;
   pokeKey: string;
 };
 

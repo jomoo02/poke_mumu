@@ -2,8 +2,9 @@
 
 import React from 'react';
 import usePokeIdentifiers from '../../../hooks/usePokeIdentifiers';
+import { PokeDataType } from '../../../types/pokeData.type';
 
-export default function NavButtonInfo({ pokeInfo }) {
+export default function NavButtonInfo({ pokeInfo }: { pokeInfo: PokeDataType }) {
   const {
     no,
     name,

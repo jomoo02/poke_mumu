@@ -12,11 +12,11 @@ import {
   makeFirstUpperCase,
   makeFirstUpperCaseTextArray,
 } from '@/app/utils/utils';
+import { LanguageContentType } from '@/app/types/languageContent.type';
 import {
   getOtherConditionContent,
   getAreaInfoWithKey,
 } from '../../utils/conditionUtils';
-import { LocaleContentType } from '@/app/types/localeContent.type';
 
 const contentMap = {
   agile_style: {
@@ -33,7 +33,7 @@ const contentMap = {
   },
   gender: {
     renderContent: (value: number, language: Language) => {
-      const genderText: Record<number, LocaleContentType> = {
+      const genderText: Record<number, LanguageContentType> = {
         2: {
           ko: '수컷',
           en: 'Male',

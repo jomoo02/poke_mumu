@@ -2,8 +2,16 @@
 
 import React from 'react';
 import useHeader from '../hooks/useHeader';
+import { PokeTypeType } from '../types/defense-compatibility.type';
+import { HeaderKeyType } from '../data/header.typs';
 
-export default function Header({ type, headerKey }) {
+export default function Header({
+  type,
+  headerKey,
+}: {
+  type: PokeTypeType,
+  headerKey: HeaderKeyType,
+}) {
   const { headerContent } = useHeader(headerKey);
 
   return (

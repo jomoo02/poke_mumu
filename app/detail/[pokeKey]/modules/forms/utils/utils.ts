@@ -1,4 +1,6 @@
-function setFormHeaderText(formCount, pokeName) {
+import { LanguageContentType } from '@/app/types/languageContent.type';
+
+function setFormHeaderText(formCount: number, pokeName: LanguageContentType): LanguageContentType {
   const formTexts = {
     form: {
       en: `${pokeName.en}'s form`,

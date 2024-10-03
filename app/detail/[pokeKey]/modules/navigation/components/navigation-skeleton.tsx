@@ -22,7 +22,7 @@ function Right() {
   );
 }
 
-export default function NavigationSkeleton({ pokeKey }) {
+export default function NavigationSkeleton({ pokeKey }: { pokeKey: string }) {
   const start = 'bulbasaur';
   const end = 'pecharunt';
 
