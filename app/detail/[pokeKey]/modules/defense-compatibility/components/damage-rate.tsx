@@ -1,5 +1,6 @@
 import React from 'react';
 import Type from '@/app/components/type';
+import { PokeTypesType } from '../../../types/defense-compatibility.type';
 
 function DamageRateText({ damageRate }: { damageRate: number }) {
   return (
@@ -9,7 +10,7 @@ function DamageRateText({ damageRate }: { damageRate: number }) {
   );
 }
 
-function DamageRateTypes({ types }: { types: string[] }) {
+function DamageRateTypes({ types }: { types: PokeTypesType }) {
   const gridColsClassNameMap: Record<number, string> = {
     1: 'md:grid-cols-1',
     2: 'md:grid-cols-1',

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Language } from '@/app/language-provider';
 import {
   MoveLink,
   ItemLink,
@@ -15,6 +16,7 @@ import {
   getOtherConditionContent,
   getAreaInfoWithKey,
 } from '../../utils/conditionUtils';
+import { LocaleContentType } from '@/app/types/localeContent.type';
 
 const contentMap = {
   agile_style: {
@@ -27,11 +29,11 @@ const contentMap = {
         suffix: 'in the agile style 20 times in Hisui',
       },
     },
-    renderContent: (value, language) => <MoveLink move={value} language={language} />,
+    renderContent: (value: string, language: Language) => <MoveLink move={value} language={language} />,
   },
   gender: {
-    renderContent: (value, language) => {
-      const genderText = {
+    renderContent: (value: number, language: Language) => {
+      const genderText: Record<number, LocaleContentType> = {
         2: {
           ko: '수컷',
           en: 'Male',
@@ -55,13 +57,13 @@ const contentMap = {
         prefix: 'holding',
       },
     },
-    renderContent: (value, language) => <ItmeLinkWithParticle item={value} language={language} />,
+    renderContent: (value: string, language: Language) => <ItmeLinkWithParticle item={value} language={language} />,
   },
   item: {
-    renderContent: (value, language) => <ItemLink item={value} language={language} />,
+    renderContent: (value: string, language: Language) => <ItemLink item={value} language={language} />,
   },
   known_move_type: {
-    renderContent: (value, language) => {
+    renderContent: (value: string, language: Language) => {
       const content = language === 'ko' ? `${typesKo[value]}타입 기술을 배우고` : `after ${value}-type move learned`;
       return <span>{content}</span>;
     },
@@ -75,10 +77,10 @@ const contentMap = {
         prefix: 'knowing',
       },
     },
-    renderContent: (value, language) => <MoveLink move={value} language={language} />,
+    renderContent: (value: string, language: Language) => <MoveLink move={value} language={language} />,
   },
   min_affection: {
-    renderContent: (value, language) => {
+    renderContent: (value: string, language: Language) => {
       const text = language === 'ko' ? `절친도 ${value}단계 이상일 때`
         : `min affection ${value}`;
 
@@ -86,7 +88,7 @@ const contentMap = {
     },
   },
   min_beauty: {
-    renderContent: (_, language) => {
+    renderContent: (_, language: Language) => {
       const localeText = {
         ko: '아름다움 수치 MAX 상태에서',
         en: 'max Beauty',
@@ -96,7 +98,7 @@ const contentMap = {
     },
   },
   min_happiness: {
-    renderContent: (_, language) => {
+    renderContent: (_, language: Language) => {
       const localeText = {
         en: 'with high Friendship',
         ko: '친밀도가 높은 상태에서',
@@ -106,7 +108,7 @@ const contentMap = {
     },
   },
   min_level: {
-    renderContent: (value) => (
+    renderContent: (value: number) => (
       <>
         <span className="mr-1">Level</span>
         <span>{value}</span>
@@ -114,7 +116,7 @@ const contentMap = {
     ),
   },
   needs_overworld_rain: {
-    renderContent: (_, language) => {
+    renderContent: (_, language: Language) => {
       const localeText = {
         en: 'during rain',
         ko: '비가 오는 필드',
@@ -134,12 +136,12 @@ const contentMap = {
         suffix: 'in party',
       },
     },
-    renderContent: (value, language) => (
+    renderContent: (value: string, language: Language) => (
       <PokeLinkWithSbjectParticle poke={value} language={language} />
     ),
   },
   party_type: {
-    renderContent: (value, language) => {
+    renderContent: (value: string, language: Language) => {
       const content = language === 'ko'
         ? `${typesKo[value]} 타입 포켓몬을 지니고 있는 상태`
         : `with a ${makeFirstUpperCase(value)}-type Pokémon in the party`;
@@ -147,7 +149,7 @@ const contentMap = {
     },
   },
   recoil_damage: {
-    renderContent: (value, language) => {
+    renderContent: (value: number, language: string) => {
       const content = language === 'ko'
         ? `누적 반동 데미지 ${value} 이상 입은 상태에서`
         : `after losing at least ${value} HP from recoil damage`;
@@ -163,7 +165,7 @@ const contentMap = {
         prefix: 'Nature:',
       },
     },
-    renderContent: (value, language) => {
+    renderContent: (value: string, language: Language) => {
       const natureLocaleMap = {
         ko: {
           amped: '노력, 고집, 개구쟁이, 용감, 온순, 장난꾸러기, 촐랑, 덜렁, 변덕, 건방, 성급, 명랑, 천진난만',
@@ -182,9 +184,9 @@ const contentMap = {
     },
   },
   relative_physical_stats: {
-    renderContent: (value, language) => {
+    renderContent: (value: number, language: Language) => {
       const localeContentWithStat = {
-        en: (stat) => {
+        en: (stat: number) => {
           if (stat === 1) {
             return 'Attack > Defense';
           } if (stat === -1) {
@@ -192,7 +194,7 @@ const contentMap = {
           }
           return 'Attack = Defense';
         },
-        ko: (stat) => {
+        ko: (stat: number) => {
           if (stat === 1) {
             return '공격이 방어보다 높다';
           } if (stat === -1) {
@@ -216,7 +218,7 @@ const contentMap = {
         prefix: 'Spin holding a',
       },
     },
-    renderContent: (_, language) => {
+    renderContent: (_, language: Language) => {
       const content = language === 'ko' ? '사탕공예를' : 'Sweet';
       return <span>{content}</span>;
     },
@@ -231,10 +233,10 @@ const contentMap = {
         suffix: 'in the strong style 20 times in LA only',
       },
     },
-    renderContent: (value, language) => <MoveLink move={value} language={language} />,
+    renderContent: (value: string, language: Language) => <MoveLink move={value} language={language} />,
   },
   time_of_day: {
-    renderContent: (value, language) => {
+    renderContent: (value: string, language: Language) => {
       const timeKoTexts = {
         night: '밤',
         day: '낮',
@@ -261,7 +263,7 @@ const contentMap = {
         prefix: 'for',
       },
     },
-    renderContent: (value, language) => (
+    renderContent: (value: string, language: Language) => (
       <PokeLinkWithParticleForAnd poke={value} language={language} />
     ),
   },

@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
+import { PokeTypeType } from '@/app/types/pokeType.type';
 import useSubHeader from '../hooks/useSubHeader';
 
-export default function SubHeader({ type }) {
+export default function SubHeader({ type }: { type: PokeTypeType }) {
   const { baseText, effortText } = useSubHeader();
 
   return (

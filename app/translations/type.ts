@@ -1,4 +1,6 @@
-const typesKo = {
+import { PokeTypeType } from "../types/pokeType.type";
+
+const typesKo: Record<PokeTypeType, string> = {
   normal: '노말',
   fire: '불꽃',
   water: '물',

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import useAbility from '../hooks/useAbility';
-import { AbilityType } from '../types/ability';
+import { AbilityType } from '../../../types/abilities.type';
 
 type AbilityProps = {
   ability: AbilityType,

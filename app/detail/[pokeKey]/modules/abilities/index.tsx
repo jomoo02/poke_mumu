@@ -1,6 +1,6 @@
 import React from 'react';
-import { fetchPokeKey } from '@/app/api/poke';
-import { fetchDetail } from '@/app/api/detail';
+import { fetchPokeKey } from '../../api/poke';
+import { fetchDetail } from '../../api/detail';
 import Abilities from './components/abilities';
 import Header from '../../components/header';
 import { headerKeys } from '../../data/header';

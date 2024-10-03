@@ -1,7 +1,7 @@
 import React from 'react';
 import { calculateBarWidth } from '../utils/statUtils';
 
-function setBarColor(value) {
+function setBarColor(value: number) {
   if (value > 200) {
     return '#06b6d4';
   } if (value >= 130) {
@@ -16,7 +16,13 @@ function setBarColor(value) {
   return '#dc2626';
 }
 
-export default function StatRowBar({ value, max }) {
+export default function StatRowBar({
+  value,
+  max,
+}: {
+  value: number,
+  max: number,
+}) {
   const width = calculateBarWidth(value, max);
 
   const barColor = setBarColor(value);

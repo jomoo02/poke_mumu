@@ -3,10 +3,14 @@
 import React from 'react';
 import { useLanguage } from '@/app/language-provider';
 import typesKo from '@/app/translations/type';
+import { PokeTypeType } from '../types/pokeType.type';
 
 export default function Type({
   type,
   width = 'w-[60px] xs:w-[63px]',
+}: {
+  type: PokeTypeType,
+  width?: string,
 }) {
   const { language } = useLanguage();
 

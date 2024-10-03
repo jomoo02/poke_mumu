@@ -1,11 +1,17 @@
 import React from 'react';
-import { fetchPokeKey } from '@/app/api/data';
+import { fetchPokeKey } from '../../api/poke';
 import Header from '../../components/header';
 import DefenseCompatibility from './components/defense-compatibility';
 import { headerKeys } from '../../data/header';
 
-export default async function PokeDefenseCompatibility({ pokeKey }) {
-  const { types } = await fetchPokeKey(pokeKey);
+export default async function PokeDefenseCompatibility({ pokeKey }: { pokeKey: string }) {
+  const poke = await fetchPokeKey(pokeKey);
+
+  if (!poke) {
+    return null;
+  }
+
+  const { types } = poke;
 
   if (!types || types.length === 0) {
     return null;

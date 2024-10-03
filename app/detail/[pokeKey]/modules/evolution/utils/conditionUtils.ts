@@ -1,8 +1,18 @@
-import { areas, areasKey } from '../data/area';
+import { Language } from '@/app/language-provider';
+import { LocaleContentType } from '@/app/types/localeContent.type';
+import {
+  areasKo,
+  areasEn,
+  areasKey,
+} from '../data/area';
+import {
+  ConditionType,
+  OtherCaseType,
+} from '../types/condition.type';
 
-function sortEnCondition(conditions) {
-  const generalConditions = [];
-  const lastConditions = [];
+function sortEnCondition(conditions: ConditionType[]) {
+  const generalConditions: ConditionType[] = [];
+  const lastConditions: ConditionType[] = [];
 
   const lastConditionKeys = [
     'gender',
@@ -19,10 +29,10 @@ function sortEnCondition(conditions) {
   return [...generalConditions, ...lastConditions];
 }
 
-function sortKoCondition(conditions) {
-  const firstConditions = [];
-  const lastConditions = [];
-  const generalConditions = [];
+function sortKoCondition(conditions: ConditionType[]) {
+  const firstConditions: ConditionType[] = [];
+  const lastConditions: ConditionType[] = [];
+  const generalConditions: ConditionType[] = [];
 
   const firstConditionKeys = [
     'time_of_day',
@@ -46,7 +56,7 @@ function sortKoCondition(conditions) {
   return [...firstConditions, ...generalConditions, ...lastConditions];
 }
 
-export function sortConditionByLanguage(conditions, language) {
+export function sortConditionByLanguage(conditions: ConditionType[], language: Language) {
   if (language === 'en') {
     return sortEnCondition(conditions);
   }
@@ -54,7 +64,7 @@ export function sortConditionByLanguage(conditions, language) {
   return sortKoCondition(conditions);
 }
 
-export function getAreaInfoWithKey(key) {
+export function getAreaInfoWithKey(key: string) {
   const {
     mossyRock,
     icyRock,
@@ -64,36 +74,36 @@ export function getAreaInfoWithKey(key) {
 
   const areaMap = {
     [mossyRock]: {
-      en: `near a ${areas.mossyRock.en}`,
-      ...areas.mossyRock,
+      en: `near a ${areasEn.mossyRock}`,
+      ko: areasKo.mossyRock,
     },
     [icyRock]: {
-      en: `near an ${areas.icyRock.en}`,
-      ...areas.icyRock,
+      en: `near an ${areasEn.icyRock}`,
+      ko: areasKo.icyRock,
     },
     [magneticField]: {
-      en: `in a ${areas.magneticField.en}`,
-      ...areas.magneticField,
+      en: `in a ${areasEn.magneticField}`,
+      ko: areasKo.magneticField,
     },
     [mountLanakila]: {
-      en: `at ${areas.mountLanakila.en}`,
-      ...areas.mountLanakila,
+      en: `at ${areasEn.mountLanakila}`,
+      ko: areasKo.mountLanakila,
     },
     default: {
-      en: `in ${areas.default.en}`,
-      ...areas.default,
+      en: 'in specific place',
+      ko: '특정 장소',
     },
   };
   return areaMap[key] || areaMap.default;
 }
 
-export function getOtherConditionContent(poke) {
+export function getOtherConditionContent(poke: OtherCaseType): LocaleContentType {
   const defaultContent = {
     en: '',
     ko: '',
   };
 
-  const otherCasePokeLocaleContent = {
+  const otherCasePokeLocaleContent: Record<OtherCaseType, LocaleContentType> = {
     sirfetchD: {
       en: 'achieve 3 critical hits in one battle',
       ko: '한 전투에서 급소를 3번 맞힌다',

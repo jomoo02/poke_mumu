@@ -2,8 +2,9 @@ import React from 'react';
 import Type from '@/app/components/type';
 import { getDefenseCompatibility } from '../utils/type-compatibility';
 import DamageRate from './damage-rate';
+import { PokeTypesType } from '../../../types/defense-compatibility.type';
 
-function PokeTypes({ pokeTypes }) {
+function PokeTypes({ pokeTypes }: { pokeTypes: PokeTypesType }) {
   const mainType = pokeTypes[0];
 
   return (
@@ -15,12 +16,12 @@ function PokeTypes({ pokeTypes }) {
   );
 }
 
-export default function DefenseCompatibility({ pokeTypes }) {
+export default function DefenseCompatibility({ pokeTypes }: { pokeTypes: PokeTypesType }) {
   const mainType = pokeTypes[0];
 
   const defenseCompatibility = getDefenseCompatibility(pokeTypes);
 
-  const damageRateContainerClassName = (typesCount) => {
+  const damageRateContainerClassName = (typesCount: number) => {
     const defaultClassName = 'flex gap-x-2 md:flex-col border-b last:border-b-0 md:border-b-0 py-1.5 md:py-0 md:border-r';
 
     if (typesCount > 4) {

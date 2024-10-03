@@ -1,27 +1,34 @@
-const NORMAL = 'normal';
-const FIRE = 'fire';
-const ROCK = 'rock';
-const GHOST = 'ghost';
-const POISON = 'poison';
-const GRASS = 'grass';
-const DRAGON = 'dragon';
-const WATER = 'water';
-const FLYING = 'flying';
-const BUG = 'bug';
-const DARK = 'dark';
-const ELECTRIC = 'electric';
-const GROUND = 'ground';
-const ICE = 'ice';
-const STEEL = 'steel';
-const FAIRY = 'fairy';
-const FIGHTING = 'fighting';
-const PSYCHIC = 'psychic';
+import { PokeTypeType } from '@/app/types/pokeType.type';
+import {
+  PokeTypesType,
+  EffectiveType,
+  DefenseCompatibilityType,
+} from '../../../types/defense-compatibility.type';
 
-const SUPER_EFFECTIVE = 'superEffective';
-const NOT_VERY_EFFECTIVE = 'notVeryEffective';
-const NO_EFFECT = 'noEffect';
+const NORMAL: PokeTypeType = 'normal';
+const FIRE: PokeTypeType = 'fire';
+const ROCK: PokeTypeType = 'rock';
+const GHOST: PokeTypeType = 'ghost';
+const POISON: PokeTypeType = 'poison';
+const GRASS: PokeTypeType = 'grass';
+const DRAGON: PokeTypeType = 'dragon';
+const WATER: PokeTypeType = 'water';
+const FLYING: PokeTypeType = 'flying';
+const BUG: PokeTypeType = 'bug';
+const DARK: PokeTypeType = 'dark';
+const ELECTRIC: PokeTypeType = 'electric';
+const GROUND: PokeTypeType = 'ground';
+const ICE: PokeTypeType = 'ice';
+const STEEL: PokeTypeType = 'steel';
+const FAIRY: PokeTypeType = 'fairy';
+const FIGHTING: PokeTypeType = 'fighting';
+const PSYCHIC: PokeTypeType = 'psychic';
 
-const defenseCompatibilities = {
+const SUPER_EFFECTIVE: EffectiveType = 'superEffective';
+const NOT_VERY_EFFECTIVE: EffectiveType = 'notVeryEffective';
+const NO_EFFECT: EffectiveType = 'noEffect';
+
+const defenseCompatibilities: Record<PokeTypeType, DefenseCompatibilityType> = {
   [NORMAL]: {
     [SUPER_EFFECTIVE]: [FIGHTING],
     [NO_EFFECT]: [GHOST],
@@ -109,10 +116,10 @@ function setInitialCompatibility() {
   ].reduce((acc, type) => {
     acc[type] = 1;
     return acc;
-  }, {});
+  }, {} as Record<PokeTypeType, number>);
 }
 
-function getDefenseCompatibility(types) {
+function getDefenseCompatibility(types: PokeTypesType) {
   const dfCompatibility = setInitialCompatibility();
 
   types.forEach((type) => {
@@ -141,7 +148,9 @@ function getDefenseCompatibility(types) {
     }
   });
 
-  const defenseCompatibility = Object.keys(dfCompatibility).reduce((acc, type) => {
+  const targetTypes = Object.keys(dfCompatibility) as Array<keyof typeof dfCompatibility>;
+
+  const defenseCompatibility = targetTypes.reduce((acc, type) => {
     const effectiveness = dfCompatibility[type];
     if (acc[effectiveness]) {
       acc[effectiveness].push(type);
@@ -149,9 +158,10 @@ function getDefenseCompatibility(types) {
       acc[effectiveness] = [type];
     }
     return acc;
-  }, {});
+  }, {} as Record<number, PokeTypesType>);
 
   return Object.keys(defenseCompatibility)
+    .map(Number)
     .sort((a, b) => b - a)
     .map((key) => ({
       damageRate: key,

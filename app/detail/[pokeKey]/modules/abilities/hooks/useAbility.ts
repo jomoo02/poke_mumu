@@ -1,5 +1,5 @@
 import { useLanguage, Language } from '@/app/language-provider';
-import { AbilityType } from '../types/ability';
+import { AbilityType } from '../../../types/abilities.type';
 
 function getHiddenAbilityInfo(language: Language) {
   const hiddenAbilityLabels = {

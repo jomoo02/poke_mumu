@@ -6,6 +6,9 @@ import getConditionInfo from './condition.utils';
 export default function ConditionInfo({
   condition,
   value,
+}: {
+  condition: string,
+  value: number,
 }) {
   const { language } = useLanguage();
 
