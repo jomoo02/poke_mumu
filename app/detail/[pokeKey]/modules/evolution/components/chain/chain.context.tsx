@@ -25,6 +25,10 @@ export function ChainProvider({
   maxWidth,
   maxDepth,
   children,
+}: {
+  maxWidth: number,
+  maxDepth: number,
+  children?: React.ReactNode,
 }) {
   const value = useMemo(() => ({
     maxDepth,

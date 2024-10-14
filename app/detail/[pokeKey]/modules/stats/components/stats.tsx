@@ -7,15 +7,15 @@ import {
   combineStatsWithEffort,
   calculateMaxStat,
 } from '../utils/statUtils';
-import { StatType } from '../types/stat.type';
+import type { Stat } from '../types/stat.type';
 
 export default function Stats({
   baseStats,
   effortStats,
   type,
 }: {
-  baseStats: StatType[],
-  effortStats: StatType[],
+  baseStats: Stat[],
+  effortStats: Stat[],
   type: PokeTypeType,
 }) {
   const combinedStats = combineStatsWithEffort(baseStats, effortStats);

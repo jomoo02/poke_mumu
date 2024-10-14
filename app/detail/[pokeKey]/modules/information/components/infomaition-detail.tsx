@@ -3,8 +3,21 @@
 import React from 'react';
 import useInformationDetail from '../hooks/useInformationDetail';
 import InfoContainer from './info-container';
+import { PokeDataType } from '../../../types/pokeData.type';
 
-function GrowthRate({ growthRate }) {
+interface GrowthRateContent {
+  text: string;
+  value: string;
+}
+
+function GrowthRate({ growthRate }: { growthRate: {
+  subject: string;
+  content: {
+    atLevel50: GrowthRateContent;
+    atLevel100: GrowthRateContent;
+    growthRate: string;
+  };
+} }) {
   const {
     subject,
     content,
@@ -39,7 +52,7 @@ function GrowthRate({ growthRate }) {
   );
 }
 
-export default function InformationDetail({ pokeInfo }) {
+export default function InformationDetail({ pokeInfo }: { pokeInfo: PokeDataType }) {
   const {
     title,
     genera,

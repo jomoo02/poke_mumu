@@ -1,26 +1,28 @@
 'use client';
 
 import React, {
-  createContext, useState, useMemo, useContext, ReactNode, Dispatch, SetStateAction,
+  createContext,
+  useState,
+  useMemo,
+  useContext,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
 } from 'react';
-
-interface LanguageProviderProps {
-  children: ReactNode,
-}
 
 export type Language = 'ko' | 'en';
 
-interface LanguageContextType {
+interface Context {
   language: Language;
   setLanguage: Dispatch<SetStateAction<Language>>;
 }
 
-const LanguageContext = createContext<LanguageContextType>({
+const LanguageContext = createContext<Context>({
   language: 'ko',
   setLanguage: () => {},
 });
 
-export function LanguageProvider({ children }: LanguageProviderProps) {
+export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('ko');
 
   const value = useMemo(() => ({

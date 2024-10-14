@@ -6,7 +6,7 @@ import PokeNavigation from './modules/navigation';
 import PokeInformation from './modules/information';
 import PokeAbilities from './modules/abilities';
 import PokeForms from './modules/forms';
-import PokeDefenseCompatibility from './modules/defense-compatibility';
+import PokeDefenseCompatibility from './modules/defense-compatibility-2';
 import PokeStats from './modules/stats';
 import PokeEvolution from './modules/evolution';
 import PokeMoves from './modules/moves';

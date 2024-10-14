@@ -1,11 +1,12 @@
 import React from 'react';
 import Trigger from '../trigger';
 import Condition from '../condition';
+import type { ConditionType } from '../../types/condition.type';
 
 export function renderChainPokeDetail(
   trigger,
-  condition,
-  isReverse,
+  condition: ConditionType,
+  isReverse: boolean,
 ) {
   const components = [
     <Trigger key="trigger" trigger={trigger} condition={condition} />,

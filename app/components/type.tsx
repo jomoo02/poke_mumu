@@ -3,13 +3,32 @@
 import React from 'react';
 import { useLanguage } from '@/app/language-provider';
 import typesKo from '@/app/translations/type';
-import { PokeTypeType } from '../types/pokeType.type';
+
+export type TypeItem =
+  'normal'
+  | 'fire'
+  | 'water'
+  | 'grass'
+  | 'electric'
+  | 'ice'
+  | 'fighting'
+  | 'poison'
+  | 'ground'
+  | 'flying'
+  | 'psychic'
+  | 'bug'
+  | 'rock'
+  | 'ghost'
+  | 'dragon'
+  | 'dark'
+  | 'steel'
+  | 'fairy';
 
 export default function Type({
   type,
   width = 'w-[60px] xs:w-[63px]',
 }: {
-  type: PokeTypeType,
+  type: TypeItem,
   width?: string,
 }) {
   const { language } = useLanguage();

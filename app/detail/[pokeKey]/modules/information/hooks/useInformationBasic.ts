@@ -7,7 +7,7 @@ import {
   localesPokedexEn,
 } from '../data/localeNo';
 
-function setNationalNo(nationalNo, localeSubjects) {
+function setNationalNo(nationalNo: number, localeSubjects) {
   const localeSubject = localeSubjects.nationalNo || 'national No';
 
   return {

@@ -1,11 +1,12 @@
 import { useLanguage } from '@/app/language-provider';
+import { LanguageContent } from '@/app/types/languageContent.type';
 import { splitPokeLinkName } from '../utils/chainUtils';
 import {
   createDetailKey,
   getDetailWidthAndHeigt,
 } from '../utils/pokeInfoUtils';
 
-export function useChainPokeLink(name) {
+export function useChainPokeLink(name: LanguageContent) {
   const defaultName = {
     mainName: 'poke',
     subName: '',
@@ -13,7 +14,7 @@ export function useChainPokeLink(name) {
 
   const { language } = useLanguage();
 
-  const localeName = name[language] || name.ko || '';
+  const localeName = name[language];
 
   if (!localeName) {
     return { ...defaultName };

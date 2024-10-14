@@ -11,6 +11,6 @@ export default function Modal() {
         <Search />
       </div>
     </div>,
-    document.getElementById('modal'),
+    document.getElementById('modal') as HTMLElement,
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchPokeKey } from '../../api/poke'
+import { fetchPokeKey } from '../../api/poke';
 import { fetchDetail } from '../../api/detail';
 import Stats from './components/stats';
 import Header from '../../components/header';
@@ -23,7 +23,6 @@ export default async function PokeStats({ pokeKey }: { pokeKey: string }) {
   }
 
   const { stats: { baseStats, effortStats } } = detail;
-
 
   const type = types[0];
 

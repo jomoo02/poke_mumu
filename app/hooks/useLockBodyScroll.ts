@@ -6,10 +6,14 @@ export default function useLockBodyScroll() {
   useEffect(() => {
     const body = document.querySelector('body');
 
-    body.classList.add(className);
+    if (body) {
+      body.classList.add(className);
+    }
 
     return () => {
-      body.classList.remove(className);
+      if (body) {
+        body.classList.remove(className);
+      }
     };
   }, []);
 }

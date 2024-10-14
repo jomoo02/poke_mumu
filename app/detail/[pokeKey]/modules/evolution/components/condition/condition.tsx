@@ -8,7 +8,7 @@ export default function ConditionInfo({
   value,
 }: {
   condition: string,
-  value: number,
+  value: number | string,
 }) {
   const { language } = useLanguage();
 

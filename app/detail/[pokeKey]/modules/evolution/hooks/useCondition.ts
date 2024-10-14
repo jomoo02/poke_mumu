@@ -1,8 +1,8 @@
 import { useLanguage } from '@/app/language-provider';
 import { sortConditionByLanguage } from '../utils/conditionUtils';
-import { AffixType } from '../types/condition.type';
+import { AffixType, ConditionType } from '../types/condition.type';
 
-export function useSortCondition(condition: { key: string, value: number }[]) {
+export function useSortCondition(condition: ConditionType[]) {
   const { language } = useLanguage();
 
   const sortedCondition = sortConditionByLanguage(condition, language);

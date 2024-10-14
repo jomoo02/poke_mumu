@@ -6,7 +6,7 @@ type StatKeyType =
   | 'special-defense'
   | 'speed';
 
-interface StatType {
+interface Stat {
   stat: StatKeyType;
   value: number;
 }
@@ -19,6 +19,6 @@ interface StatObjType {
 
 export type {
   StatKeyType,
-  StatType,
+  Stat,
   StatObjType,
 };

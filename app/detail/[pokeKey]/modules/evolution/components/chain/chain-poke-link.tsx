@@ -1,8 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
+import { LanguageContent } from '@/app/types/languageContent.type';
 import { useChainPokeLink } from '../../hooks/useChainPoke';
 
-export default function ChainPokeLink({ pokeKey, name }) {
+interface ChainPokeLinkProps {
+  pokeKey: string;
+  name: LanguageContent
+}
+
+export default function ChainPokeLink({ pokeKey, name }: ChainPokeLinkProps) {
   const {
     mainName,
     subName,

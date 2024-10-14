@@ -3,8 +3,9 @@ import Image from 'next/image';
 import { useChainMaxWidth } from './chain.context';
 import ChainPokeDetail from './chain-poke-detail';
 import ChainPokeLink from './chain-poke-link';
+import { ChainItem } from '../../../../types/evolution.type';
 
-function PokeImage({ id, alt }) {
+function PokeImage({ id, alt }: { id: string, alt: string }) {
   const src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
   return (
@@ -13,7 +14,7 @@ function PokeImage({ id, alt }) {
         src={src}
         alt={alt}
         fill
-        size="70px"
+        sizes="70px"
         priority
         style={{ objectFit: 'contain' }}
       />
@@ -21,7 +22,7 @@ function PokeImage({ id, alt }) {
   );
 }
 
-export default function ChainPoke({ pokeInfo }) {
+export default function ChainPoke({ pokeInfo }: { pokeInfo: ChainItem }) {
   const {
     pokeKey,
     id,

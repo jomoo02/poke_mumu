@@ -16,7 +16,7 @@ type PokeTypeType =
   | 'dragon'
   | 'dark'
   | 'steel'
-  | 'fairy'
+  | 'fairy';
 
 export type {
   PokeTypeType,

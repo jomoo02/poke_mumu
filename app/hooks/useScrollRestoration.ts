@@ -10,7 +10,7 @@ export default function useScrollRestoration() {
     return 0;
   };
 
-  const setScrollPosition = (scrollPosition) => {
+  const setScrollPosition = (scrollPosition: number) => {
     sessionStorage.setItem(KEY, JSON.stringify(scrollPosition));
   };
 

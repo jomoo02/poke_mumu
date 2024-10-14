@@ -1,8 +1,13 @@
 import React, { Fragment } from 'react';
 import { useSortCondition } from '../../hooks/useCondition';
 import ConditionInfo from './condition';
+import type { ConditionType } from '../../types/condition.type';
 
-export default function Condition({ condition }: { condition: { key: string, value: number }[] }) {
+interface ConditionProps {
+  condition: ConditionType[];
+}
+
+export default function Condition({ condition }: ConditionProps) {
   const { sortedCondition } = useSortCondition(condition);
 
   return (

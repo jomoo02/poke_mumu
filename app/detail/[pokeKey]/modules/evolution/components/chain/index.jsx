@@ -16,23 +16,18 @@ const gridColumnClassNames = {
 function NestedChain({ chainItem }) {
   const maxWidth = useChainMaxWidth();
 
-  const {
-    to,
-    ...pokeInfo
-  } = chainItem;
-
-  const nextChainCount = to.length;
+  const nextChainCount = chainItem.to.length;
 
   const nextChainGridClassName = gridColumnClassNames[nextChainCount];
 
   return (
     <div className={maxWidth === 8 ? '' : 'md:flex'}>
-      <ChainPoke pokeInfo={pokeInfo} />
+      <ChainPoke pokeInfo={chainItem} />
       {nextChainCount > 0 && (
         <div
           className={`${nextChainGridClassName} gap-y-4`}
         >
-          {to.map((nestedChainItem) => (
+          {chainItem.to.map((nestedChainItem) => (
             <NestedChain
               key={nestedChainItem.id}
               chainItem={nestedChainItem}

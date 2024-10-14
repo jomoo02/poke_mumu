@@ -1,13 +1,13 @@
 import React from 'react';
 import './styles/information.css';
-import { fetchPokeKey } from '@/app/api/data';
+import { fetchPokeKey } from '../../api/poke';
 import Header from '../../components/header';
 import { headerKeys } from '../../data/header';
 import Information from './components/information';
 import PokeImage from './components/poke-image';
 import PokeIdentifiers from './components/poke-identifiers';
 
-export default async function PokeInformation({ pokeKey }) {
+export default async function PokeInformation({ pokeKey }: { pokeKey: string }) {
   const pokeInfo = await fetchPokeKey(pokeKey);
 
   if (!pokeInfo) {
@@ -19,6 +19,10 @@ export default async function PokeInformation({ pokeKey }) {
     sprity,
     name,
   } = pokeInfo;
+
+  if (!types || types.length === 0) {
+    return null;
+  }
 
   const type = types[0];
 

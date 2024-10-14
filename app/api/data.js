@@ -4,6 +4,17 @@ import { cache } from 'react';
 import PokeModel from '../models/Poke.mjs';
 import dbConnect from './db/connect.ts';
 
+export const fetchTest = async () => {
+  const query = {};
+  const projection = {
+    _id: 0,
+  };
+
+  const pokes = await PokeModel.find(query, projection).sort({ order: 1 }).lean();
+
+  return pokes;
+};
+
 export const fetchPokeKey = cache(async (pokeKey) => {
   await dbConnect();
 

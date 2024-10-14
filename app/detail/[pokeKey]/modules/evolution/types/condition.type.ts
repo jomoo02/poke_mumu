@@ -1,6 +1,6 @@
 interface ConditionType {
   key: string,
-  value: number,
+  value: number | string,
 }
 
 type OtherCaseType =
@@ -24,4 +24,4 @@ export type {
   ConditionType,
   OtherCaseType,
   AffixType,
-}
+};
