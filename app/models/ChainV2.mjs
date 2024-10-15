@@ -11,6 +11,6 @@ const chainScema = new mongoose.Schema({
   maxDepth: Number,
 });
 
-const ChainV2Model = mongoose.models.ChainV2 || mongoose.model('ChainV2', chainScema);
+const ChainModel = mongoose.models.Chain || mongoose.model('Chain', chainScema);
 
-export default ChainV2Model;
+export default ChainModel;
