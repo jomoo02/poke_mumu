@@ -10,21 +10,23 @@ type Stats = {
 interface PokeV2 {
   sprite: string;
   name: LanguageContent;
-  type: PokeTypeItem[];
+  types: PokeTypeItem[];
   form: LanguageContent;
   stats: Stats[];
   pokeKey: string;
-  no: number;
+  no: string;
+  order: number;
 }
 
 const PokeV2Scema = new mongoose.Schema({
   sprite: String,
   name: Object,
-  type: Array,
+  types: Array,
   form: Object,
   stats: Object,
   pokeKey: String,
-  no: Number,
+  no: String,
+  order: Number,
 });
 
 const PokeV2Model = mongoose.models?.PokeV2 || mongoose.model<PokeV2>('PokeV2', PokeV2Scema);

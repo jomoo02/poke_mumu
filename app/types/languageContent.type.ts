@@ -6,7 +6,7 @@ type LanguageContentType = {
 type LanguageContent = {
   en: string;
   ko: string;
-}
+};
 
 export type {
   LanguageContentType,

@@ -1,6 +1,6 @@
 'use server';
 
-import ChainModelV2 from '../models/ChainV2.mjs';
+import ChainModel from '../models/ChainV2.mjs';
 import dbConnect from './db/connect.ts';
 
 export async function fetchAllChainIds() {
@@ -15,7 +15,7 @@ export async function fetchAllChainIds() {
       maxDepth: 1,
     };
 
-    const result = await ChainModelV2.find({}, projection).lean();
+    const result = await ChainModel.find({}, projection).lean();
 
     return result;
   } catch (error) {
@@ -38,7 +38,7 @@ export async function fetchChain(index) {
       maxDepth: 1,
     };
 
-    const result = await ChainModelV2
+    const result = await ChainModel
       .findOne(query, projection)
       .lean();
 
@@ -59,7 +59,7 @@ export async function fetchAllChain() {
       _id: 0,
     };
 
-    const result = await ChainModelV2
+    const result = await ChainModel
       .find(query, projection)
       .sort({ index: 1 })
       .lean();
