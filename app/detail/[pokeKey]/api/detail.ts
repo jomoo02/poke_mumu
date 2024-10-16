@@ -4,7 +4,7 @@ import { cache } from 'react';
 import DetailModel from '@/app/models/Detail';
 import dbConnect from '@/app/api/db/connect';
 import { LanguageContentType } from '@/app/types/languageContent.type';
-import { StatType } from '../modules/stats/types/stat.type';
+import { Stat } from '../modules/stats/types/stat.type';
 import { FormType } from '../types/forms.type';
 
 type Ability = {
@@ -21,8 +21,8 @@ type genMoves = {
 type DetailResultType = {
   abilities: Ability[];
   stats: {
-    baseStats: StatType[];
-    effortStats: StatType[];
+    baseStats: Stat[];
+    effortStats: Stat[];
   };
   moves: {
     gen: number;
