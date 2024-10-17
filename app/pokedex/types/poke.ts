@@ -18,5 +18,6 @@ type PokeItem = {
 };
 
 export type {
+  Stats,
   PokeItem,
 };

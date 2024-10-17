@@ -1,11 +1,10 @@
 'use server';
 
-import { cache } from 'react';
 import PokeV2Model from '@/app/models/PokeV2';
 import dbConnect from '@/app/api/db/connect';
 import type { PokeItem } from '../types/poke';
 
-export const fetchAllPoke = cache(async (): Promise<PokeItem[] | undefined> => {
+export async function fetchAllPoke(): Promise<PokeItem[] | undefined> {
   await dbConnect();
 
   const query = {};
@@ -17,4 +16,4 @@ export const fetchAllPoke = cache(async (): Promise<PokeItem[] | undefined> => {
     .lean<PokeItem[]>();
 
   return res;
-});
+}

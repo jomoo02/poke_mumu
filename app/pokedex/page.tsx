@@ -1,23 +1,26 @@
-import React, { Suspense } from 'react';
-import { fetchAllPoke } from './api/poke';
+import React from 'react';
+import { preload, getPokes } from './utils/get-poke';
+import PokeCard from './components/poke-card';
 import PokeCardList from './components/poke-card-list';
 
 async function PokeCards() {
-  const allPoke = await fetchAllPoke();
+  const allPoke = await getPokes();
 
   if (!allPoke) {
     return null;
   }
 
-  return <PokeCardList pokeList={allPoke} />;
+  return (
+    <div className="grid justify-center">
+      <PokeCardList pokes={allPoke} />
+    </div>
+  );
 }
 
 export default async function Page() {
-  fetchAllPoke();
+  preload();
 
   return (
-    <Suspense fallback={<div>...loading</div>}>
-      <PokeCards />
-    </Suspense>
+    <PokeCards />
   );
 }
