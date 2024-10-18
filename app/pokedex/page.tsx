@@ -1,6 +1,5 @@
 import React from 'react';
 import { preload, getPokes } from './utils/get-poke';
-import PokeCard from './components/poke-card';
 import PokeCardList from './components/poke-card-list';
 
 async function PokeCards() {
@@ -11,7 +10,7 @@ async function PokeCards() {
   }
 
   return (
-    <div className="grid justify-center">
+    <div className="lg:mx-20">
       <PokeCardList pokes={allPoke} />
     </div>
   );
