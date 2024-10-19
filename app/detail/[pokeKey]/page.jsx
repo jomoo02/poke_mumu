@@ -8,7 +8,7 @@ import PokeAbilities from './modules/abilities';
 import PokeForms from './modules/forms';
 import PokeDefenseCompatibility from './modules/defense-compatibility-2';
 import PokeStats from './modules/stats';
-import PokeEvolution from './modules/evolution';
+import PokeEvolution from './modules/evolution-2';
 import PokeMoves from './modules/moves';
 import PageSkeleton from './components/page-skeleton';
 

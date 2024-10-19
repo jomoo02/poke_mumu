@@ -1,7 +1,15 @@
 'use server';
 
-import ChainModel from '../models/Chain.mjs';
-import dbConnect from './db/connect.ts';
+import dbConnect from '@/app/api/db/connect';
+import ChainModel from '@/app/models/Chain';
+import type { ChainItem } from '../modules/evolution-2/types/chain';
+
+interface Chain {
+  maxWidth: number;
+  maxDepth: number;
+  index?: number;
+  chain: ChainItem[];
+}
 
 export async function fetchAllChainIds() {
   try {
@@ -19,13 +27,13 @@ export async function fetchAllChainIds() {
 
     return result;
   } catch (error) {
-    console.error(`fetchAllChainIds error: ${error.message}`);
+    console.error('fetchAllChainIds error');
 
     return error;
   }
 }
 
-export async function fetchChain(index) {
+export async function fetchChain(index: number): Promise<Chain | undefined> {
   try {
     await dbConnect();
 
@@ -40,13 +48,15 @@ export async function fetchChain(index) {
 
     const result = await ChainModel
       .findOne(query, projection)
-      .lean();
+      .lean<Chain>();
 
-    return result;
+    if (result) {
+      return result;
+    }
+    return undefined;
   } catch (error) {
-    console.error(`fechChain error index ${index}: ${error.message}`);
-
-    return error;
+    console.error('fetchChain error');
+    return undefined;
   }
 }
 
@@ -66,8 +76,7 @@ export async function fetchAllChain() {
 
     return result;
   } catch (error) {
-    console.error(`fetchAllChain error: ${error.message}`);
-
+    console.error('fetchAllChain error');
     return error;
   }
 }
