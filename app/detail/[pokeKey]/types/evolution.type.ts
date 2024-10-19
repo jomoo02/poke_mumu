@@ -1,14 +1,5 @@
 import type { LanguageContent } from '@/app/types/languageContent.type';
-
-type Condition = {
-  key: string;
-  value: number | string;
-};
-
-type Detail = {
-  trigger: string;
-  condition: Condition[];
-};
+import type { Detail } from '../modules/evolution-2/types/chain';
 
 interface ChainItem {
   pokeKey: string;

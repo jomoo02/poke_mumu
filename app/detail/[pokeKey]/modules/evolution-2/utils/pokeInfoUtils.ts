@@ -1,6 +1,7 @@
 import type { ConditionItem } from '../types/condition';
+import type { TriggerKey } from '../types/trigger';
 
-export function createDetailKey(trigger: string, condition: ConditionItem[]) {
+export function createDetailKey(trigger: TriggerKey, condition: ConditionItem[]) {
   return `${trigger}-${condition.map(({ key }) => key).join('/')}`;
 }
 

@@ -1,6 +1,7 @@
 type TriggerKey =
   'level-up'
   | 'use-item'
-  | 'trade';
+  | 'trade'
+  | 'other';
 
 export type { TriggerKey };

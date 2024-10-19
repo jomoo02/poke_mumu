@@ -6,8 +6,13 @@ import {
 } from './chain.context';
 import { useChainPokeDetail } from '../../hooks/useChainPoke';
 import { renderChainPokeDetail } from './chain-poke-detail.utils';
+import type { Detail } from '../../types/chain';
 
-export default function ChainPokeDetail({ detail = [] }) {
+interface ChainPokeDetailProps {
+  detail: Detail[];
+}
+
+export default function ChainPokeDetail({ detail }: ChainPokeDetailProps) {
   const maxWidth = useChainMaxWidth();
   const maxDepth = useChainMaxDepth();
 
