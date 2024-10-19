@@ -5,29 +5,28 @@ import { Virtuoso } from 'react-virtuoso';
 import PokeCard from './poke-card';
 import type { PokeItem } from '../types/poke';
 
-
 interface PokeCardListProps {
   pokes: PokeItem[];
 }
+
+const itemContent = (index: number, poke: PokeItem) => (
+  <div className={index === 0 ? 'border-y' : 'border-b'}>
+    <PokeCard poke={poke} />
+  </div>
+);
 
 export default function PokeCardList({ pokes }: PokeCardListProps) {
   const momoedPokes = useMemo(() => pokes, []);
 
   return (
-    // <div className="grid divide-y-2 overflow-x-auto">
-    //   {pokes.map((p) => <PokeCard key={p.order} poke={p} />)}
-    // </div>
-    <div className="overflow-x-ato">
+    <div className="overflow-x-auto">
       <Virtuoso
         useWindowScroll
         data={momoedPokes}
-        itemContent={(_ , poke) => (
-          // <div className="grid justify-center">
-            <PokeCard poke={poke} />
-          // </div>
-        )}
+        totalCount={momoedPokes.length}
+        itemContent={itemContent}
+        className="w-[1200px]"
       />
     </div>
-
   );
 }

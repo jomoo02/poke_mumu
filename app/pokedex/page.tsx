@@ -10,7 +10,7 @@ async function PokeCards() {
   }
 
   return (
-    <div className="lg:mx-20">
+    <div className="2xl:mx-20 flex justify-center">
       <PokeCardList pokes={allPoke} />
     </div>
   );

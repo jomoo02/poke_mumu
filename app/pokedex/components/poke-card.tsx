@@ -45,7 +45,7 @@ export default function PokeCard({ poke }: PokeCardProps) {
   const src = `https://raw.githubusercontent.com/jomoo02/poke_sprites/refs/heads/main/home/${sprite}.png`;
 
   return (
-    <div className="flex h-16 items-stretch gap-x-3 hover:bg-blue-100 w-full sm:w-[1200px]">
+    <div className="flex h-16 items-stretch gap-x-3 hover:bg-blue-100">
       <div id="no" className="w-[4.5rem] text-sm text-slate-600 font-semibold flex items-center px-1">
         {`#${no}`}
       </div>
