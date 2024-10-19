@@ -13,18 +13,24 @@ import {
   makeFirstUpperCaseTextArray,
 } from '@/app/utils/utils';
 import { LanguageContentType } from '@/app/types/languageContent.type';
-import type { PokeTypeItem } from '@/app/data/pokeType';
-import type { ItemKey } from '@/app/translations/item';
-import type { PokeKey } from '@/app/translations/poke';
-import type { MoveKey } from '@/app/translations/move';
 import {
   getOtherConditionContent,
   getAreaInfoWithKey,
 } from '../../utils/conditionUtils';
-import type { ConditionOtherCase } from '../../types/condition';
 import type { AreaKey } from '../../types/area';
+import type { RenderContentValueMap, ConditionKey } from '../../types/condition';
 
-const contentMap = {
+type ContentMapType = {
+  [K in keyof RenderContentValueMap]: {
+    affix: {
+      ko?: { suffix?: string, prefix?: string },
+      en?: { suffix?: string, prefix?: string },
+    };
+    renderContent: (value: RenderContentValueMap[K], language: Language) => JSX.Element;
+  };
+};
+
+const contentMap: ContentMapType = {
   agile_style: {
     affix: {
       ko: {
@@ -35,13 +41,13 @@ const contentMap = {
         suffix: 'in the agile style 20 times in Hisui',
       },
     },
-    renderContent: (value: MoveKey, language: Language) => (
+    renderContent: (value, language) => (
       <MoveLink move={value} language={language} />
     ),
   },
   gender: {
     affix: {},
-    renderContent: (value: number, language: Language) => {
+    renderContent: (value, language) => {
       const genderText: Record<number, LanguageContentType> = {
         2: {
           ko: '수컷',
@@ -54,7 +60,7 @@ const contentMap = {
       };
       const gender = genderText[value] || genderText[2];
 
-      return gender[language] || gender.ko;
+      return <span>{gender[language] || gender.ko}</span>;
     },
   },
   held_item: {
@@ -66,19 +72,19 @@ const contentMap = {
         prefix: 'holding',
       },
     },
-    renderContent: (value: ItemKey, language: Language) => (
+    renderContent: (value, language) => (
       <ItmeLinkWithParticle item={value} language={language} />
     ),
   },
   item: {
     affix: {},
-    renderContent: (value: ItemKey, language: Language) => (
+    renderContent: (value, language) => (
       <ItemLink item={value} language={language} />
     ),
   },
   known_move_type: {
     affix: {},
-    renderContent: (value: PokeTypeItem, language: Language) => {
+    renderContent: (value, language) => {
       const content = language === 'ko' ? `${typesKo[value]}타입 기술을 배우고` : `after ${value}-type move learned`;
       return <span>{content}</span>;
     },
@@ -92,13 +98,13 @@ const contentMap = {
         prefix: 'knowing',
       },
     },
-    renderContent: (value: MoveKey, language: Language) => (
+    renderContent: (value, language) => (
       <MoveLink move={value} language={language} />
     ),
   },
   min_affection: {
     affix: {},
-    renderContent: (value: string, language: Language) => {
+    renderContent: (value, language) => {
       const text = language === 'ko' ? `절친도 ${value}단계 이상일 때`
         : `min affection ${value}`;
 
@@ -107,7 +113,7 @@ const contentMap = {
   },
   min_beauty: {
     affix: {},
-    renderContent: (value: string, language: Language) => {
+    renderContent: (_, language) => {
       const localeText = {
         ko: '아름다움 수치 MAX 상태에서',
         en: 'max Beauty',
@@ -118,7 +124,7 @@ const contentMap = {
   },
   min_happiness: {
     affix: {},
-    renderContent: (value: string, language: Language) => {
+    renderContent: (_, language) => {
       const localeText = {
         en: 'with high Friendship',
         ko: '친밀도가 높은 상태에서',
@@ -129,7 +135,7 @@ const contentMap = {
   },
   min_level: {
     affix: {},
-    renderContent: (value: number) => (
+    renderContent: (value) => (
       <>
         <span className="mr-1">Level</span>
         <span>{value}</span>
@@ -138,7 +144,7 @@ const contentMap = {
   },
   needs_overworld_rain: {
     affix: {},
-    renderContent: (value: string, language: Language) => {
+    renderContent: (_, language) => {
       const localeText = {
         en: 'during rain',
         ko: '비가 오는 필드',
@@ -158,13 +164,13 @@ const contentMap = {
         suffix: 'in party',
       },
     },
-    renderContent: (value: PokeKey, language: Language) => (
+    renderContent: (value, language) => (
       <PokeLinkWithSbjectParticle poke={value} language={language} />
     ),
   },
   party_type: {
     affix: {},
-    renderContent: (value: PokeTypeItem, language: Language) => {
+    renderContent: (value, language) => {
       const content = language === 'ko'
         ? `${typesKo[value]} 타입 포켓몬을 지니고 있는 상태`
         : `with a ${makeFirstUpperCase(value)}-type Pokémon in the party`;
@@ -173,7 +179,7 @@ const contentMap = {
   },
   recoil_damage: {
     affix: {},
-    renderContent: (value: number, language: string) => {
+    renderContent: (value, language) => {
       const content = language === 'ko'
         ? `누적 반동 데미지 ${value} 이상 입은 상태에서`
         : `after losing at least ${value} HP from recoil damage`;
@@ -189,7 +195,7 @@ const contentMap = {
         prefix: 'Nature:',
       },
     },
-    renderContent: (value: 'amped' | 'lowKey', language: Language) => {
+    renderContent: (value, language) => {
       const natureLocaleMap = {
         ko: {
           amped: '노력, 고집, 개구쟁이, 용감, 온순, 장난꾸러기, 촐랑, 덜렁, 변덕, 건방, 성급, 명랑, 천진난만',
@@ -209,7 +215,7 @@ const contentMap = {
   },
   relative_physical_stats: {
     affix: {},
-    renderContent: (value: number, language: Language) => {
+    renderContent: (value, language) => {
       const localeContentWithStat = {
         en: (stat: number) => {
           if (stat === 1) {
@@ -243,7 +249,7 @@ const contentMap = {
         prefix: 'Spin holding a',
       },
     },
-    renderContent: (value: string, language: Language) => {
+    renderContent: (_, language) => {
       const content = language === 'ko' ? '사탕공예를' : 'Sweet';
       return <span>{content}</span>;
     },
@@ -258,13 +264,13 @@ const contentMap = {
         suffix: 'in the strong style 20 times in LA only',
       },
     },
-    renderContent: (value: MoveKey, language: Language) => (
+    renderContent: (value, language) => (
       <MoveLink move={value} language={language} />
     ),
   },
   time_of_day: {
     affix: {},
-    renderContent: (value: 'night' | 'day' | 'dusk' | 'full-moon', language: Language) => {
+    renderContent: (value, language) => {
       const timeKoTexts = {
         night: '밤',
         day: '낮',
@@ -291,7 +297,7 @@ const contentMap = {
         prefix: 'for',
       },
     },
-    renderContent: (value: PokeKey, language: Language) => (
+    renderContent: (value, language) => (
       <PokeLinkWithParticleForAnd poke={value} language={language} />
     ),
   },
@@ -302,13 +308,13 @@ const contentMap = {
         prefix: 'for',
       },
     },
-    renderContent: (value: PokeKey, language: Language) => (
+    renderContent: (value, language) => (
       <PokeLinkWithParticleForAnd poke={value} language={language} />
     ),
   },
   turn_upside_down: {
     affix: {},
-    renderContent: (value: string, language: Language) => {
+    renderContent: (_, language) => {
       const localeContent = {
         ko: '기기를 위아래 거꾸로 잡은 상태',
         en: 'holding console upside down',
@@ -327,7 +333,7 @@ const contentMap = {
         suffix: '20 times',
       },
     },
-    renderContent: (value: MoveKey, language: Language) => (
+    renderContent: (value, language) => (
       <MoveLink move={value} language={language} />
     ),
   },
@@ -338,7 +344,7 @@ const contentMap = {
       },
       ko: {},
     },
-    renderContent: (value: 'alola' | 'galar' | 'hisui', language: Language) => {
+    renderContent: (value, language) => {
       const regionsKo = {
         alola: '알로라지방',
         galar: '가라르지방',
@@ -352,12 +358,8 @@ const contentMap = {
   },
   other: {
     affix: {},
-    renderContent: (value: ConditionOtherCase, language: Language) => {
+    renderContent: (value, language) => {
       const pokeContent = getOtherConditionContent(value);
-
-      if (!pokeContent) {
-        return null;
-      }
 
       return <span>{pokeContent[language] || pokeContent.ko}</span>;
     },
@@ -376,9 +378,10 @@ const contentMap = {
   },
 };
 
-export type ConditionKey = keyof typeof contentMap;
-
-export default function getConditionInfo(condition: ConditionKey) {
+export default function getConditionInfo(condition: ConditionKey): {
+  affix: object,
+  renderContent: (value: any, langauge: Language) => JSX.Element,
+} {
   const {
     renderContent,
     affix,
