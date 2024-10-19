@@ -14,6 +14,9 @@ import {
 } from '@/app/utils/utils';
 import { LanguageContentType } from '@/app/types/languageContent.type';
 import type { PokeTypeItem } from '@/app/data/pokeType';
+import type { ItemKey } from '@/app/translations/item';
+import type { PokeKey } from '@/app/translations/poke';
+import type { MoveKey } from '@/app/translations/move';
 import {
   getOtherConditionContent,
   getAreaInfoWithKey,
@@ -32,7 +35,7 @@ const contentMap = {
         suffix: 'in the agile style 20 times in Hisui',
       },
     },
-    renderContent: (value: string, language: Language) => (
+    renderContent: (value: MoveKey, language: Language) => (
       <MoveLink move={value} language={language} />
     ),
   },
@@ -63,13 +66,13 @@ const contentMap = {
         prefix: 'holding',
       },
     },
-    renderContent: (value: string, language: Language) => (
+    renderContent: (value: ItemKey, language: Language) => (
       <ItmeLinkWithParticle item={value} language={language} />
     ),
   },
   item: {
     affix: {},
-    renderContent: (value: string, language: Language) => (
+    renderContent: (value: ItemKey, language: Language) => (
       <ItemLink item={value} language={language} />
     ),
   },
@@ -89,7 +92,7 @@ const contentMap = {
         prefix: 'knowing',
       },
     },
-    renderContent: (value: string, language: Language) => (
+    renderContent: (value: MoveKey, language: Language) => (
       <MoveLink move={value} language={language} />
     ),
   },
@@ -155,7 +158,7 @@ const contentMap = {
         suffix: 'in party',
       },
     },
-    renderContent: (value: string, language: Language) => (
+    renderContent: (value: PokeKey, language: Language) => (
       <PokeLinkWithSbjectParticle poke={value} language={language} />
     ),
   },
@@ -255,7 +258,7 @@ const contentMap = {
         suffix: 'in the strong style 20 times in LA only',
       },
     },
-    renderContent: (value: string, language: Language) => (
+    renderContent: (value: MoveKey, language: Language) => (
       <MoveLink move={value} language={language} />
     ),
   },
@@ -288,7 +291,7 @@ const contentMap = {
         prefix: 'for',
       },
     },
-    renderContent: (value: string, language: Language) => (
+    renderContent: (value: PokeKey, language: Language) => (
       <PokeLinkWithParticleForAnd poke={value} language={language} />
     ),
   },
@@ -299,7 +302,7 @@ const contentMap = {
         prefix: 'for',
       },
     },
-    renderContent: (value: string, language: Language) => (
+    renderContent: (value: PokeKey, language: Language) => (
       <PokeLinkWithParticleForAnd poke={value} language={language} />
     ),
   },
@@ -324,7 +327,7 @@ const contentMap = {
         suffix: '20 times',
       },
     },
-    renderContent: (value: string, language: Language) => (
+    renderContent: (value: MoveKey, language: Language) => (
       <MoveLink move={value} language={language} />
     ),
   },
@@ -368,7 +371,7 @@ const contentMap = {
         ? `${areaContent.ko}에서`
         : areaContent.en;
 
-      return <>{localeArea}</>;
+      return <span>{localeArea}</span>;
     },
   },
 };

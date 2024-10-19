@@ -67,3 +67,5 @@ export {
   ALL_ITEM_KO,
   ITEM_EN,
 };
+
+export type ItemKey = keyof typeof ALL_ITEM_KO;

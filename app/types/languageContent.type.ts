@@ -3,6 +3,10 @@ type LanguageContentType = {
   ko: string,
 };
 
+type LanguageKey =
+  'en'
+  | 'ko';
+
 type LanguageContent = {
   en: string;
   ko: string;
@@ -10,5 +14,6 @@ type LanguageContent = {
 
 export type {
   LanguageContentType,
+  LanguageKey,
   LanguageContent,
 };

@@ -14,4 +14,6 @@ const MOVE_KO = {
   'rage-fist': '분노의주먹',
 };
 
+export type MoveKey = keyof typeof MOVE_KO;
+
 export { MOVE_KO };

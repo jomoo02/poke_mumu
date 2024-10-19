@@ -5,3 +5,5 @@ const POKE_KO = {
 };
 
 export { POKE_KO };
+
+export type PokeKey = keyof typeof POKE_KO;
