@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { useSortCondition } from '../../hooks/useCondition';
 import ConditionInfo from './condition';
-import type { ConditionType } from '../../types/condition.type';
+import type { ConditionItem } from '../../types/condition';
 
 interface ConditionProps {
-  condition: ConditionType[];
+  condition: ConditionItem[];
 }
 
 export default function Condition({ condition }: ConditionProps) {
