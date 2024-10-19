@@ -4,7 +4,7 @@ import {
   useTotalStat,
 } from '../hooks/useStatRow';
 import StatRowBar from './stat-row-bar';
-import { StatObjType, StatType } from '../types/stat.type';
+import { StatObjType, Stat } from '../types/stat.type';
 
 function RowContainer({
   statType,
@@ -41,8 +41,8 @@ function TotalStat({
   baseStats,
   effortStats,
 }: {
-  baseStats: StatType[],
-  effortStats: StatType[],
+  baseStats: Stat[],
+  effortStats: Stat[],
 }) {
   const {
     statType,

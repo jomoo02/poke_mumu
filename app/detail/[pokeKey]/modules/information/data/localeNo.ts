@@ -4,7 +4,7 @@ import {
 
 const {
   en: versionsEn,
-  ko: versionsKo,
+  // ko: versionsKo,
 } = versionGroupLanguage;
 
 const national = 'national'; // 삭제

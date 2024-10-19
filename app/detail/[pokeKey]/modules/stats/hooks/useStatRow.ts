@@ -5,10 +5,10 @@ import {
   totalEn,
   totalKo,
 } from '@/app/translations/stat';
-import { StatObjType, StatType } from '../types/stat.type';
+import { StatObjType, Stat } from '../types/stat.type';
 import { sumStats } from '../utils/statUtils';
 
-export function useTotalStat(baseStats: StatType[], effortStats: StatType[]) {
+export function useTotalStat(baseStats: Stat[], effortStats: Stat[]) {
   const { language } = useLanguage();
 
   const totalStat = sumStats(baseStats);
