@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { PokeDataType } from '../detail/[pokeKey]/types/pokeData.type';
 import type { PokeItem } from '../pokedex/types/poke';
 
 const KEY = 'poke_local';

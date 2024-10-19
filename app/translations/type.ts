@@ -1,4 +1,4 @@
-import { PokeTypeType } from "../types/pokeType.type";
+import { PokeTypeType } from '../types/pokeType.type';
 
 const typesKo: Record<PokeTypeType, string> = {
   normal: '노말',
