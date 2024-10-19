@@ -1,10 +1,10 @@
-import { StatType, StatObjType } from '../types/stat.type';
+import { Stat, StatObjType } from '../types/stat.type';
 
-export function sumStats(stats: StatType[]) {
+export function sumStats(stats: Stat[]) {
   return stats.reduce((acc, { value }) => acc + value, 0);
 }
 
-export function combineStatsWithEffort(stats: StatType[], efforts: StatType[]): StatObjType[] {
+export function combineStatsWithEffort(stats: Stat[], efforts: Stat[]): StatObjType[] {
   return stats.map(({ stat, value }) => {
     const foundEffort = efforts.find((effortStat) => effortStat.stat === stat);
     const effortValue = foundEffort ? foundEffort.value : 0;
@@ -17,7 +17,7 @@ export function combineStatsWithEffort(stats: StatType[], efforts: StatType[]): 
   });
 }
 
-export function calculateMaxStat(stats: StatType[]) {
+export function calculateMaxStat(stats: Stat[]) {
   return Math.max(...stats.map(({ value }) => value));
 }
 
