@@ -20,9 +20,9 @@ function PokeCardStats({ stats }: PokeCardStatsProps) {
 
   return (
     <>
-      <div className="font-bold text-slate-800 w-20 sm:w-24 text-right">{total}</div>
+      <div className="font-bold text-slate-800 w-20 sm:w-24 px-3 text-right">{total}</div>
       {stats.map(({ stat, value }) => (
-        <div key={stat} className="w-20 sm:w-24 text-right font-semibold text-slate-700/90">
+        <div key={stat} className="w-20 sm:w-24 text-right px-3 font-semibold text-slate-700/90 hidden xl:block">
           {value}
         </div>
       ))}
@@ -45,11 +45,11 @@ export default function PokeCard({ poke }: PokeCardProps) {
   const src = `https://raw.githubusercontent.com/jomoo02/poke_sprites/refs/heads/main/home/${sprite}.png`;
 
   return (
-    <div className="flex h-16 items-stretch gap-x-3 hover:bg-blue-100">
+    <div className="flex h-16 items-stretch hover:bg-blue-100">
       <div id="no" className="w-[4.5rem] text-sm text-slate-600 font-semibold flex items-center px-1">
         {`#${no}`}
       </div>
-      <div id="img" className="flex items-center">
+      <div id="img" className="flex items-center px-2">
         <div className="w-[58px] h-[56px] relative">
           <Image
             placeholder="blur"
@@ -78,14 +78,14 @@ export default function PokeCard({ poke }: PokeCardProps) {
           </div>
         )}
       </div>
-      <div id="types" className="flex flex-col gap-y-1 items-center w-[4.5rem] justify-center">
+      <div id="types" className="flex flex-col gap-y-1 items-center w-24 justify-center">
         {types.map((type) => (
           <div key={type}>
             <PokeType type={type} />
           </div>
         ))}
       </div>
-      <div id="stats" className="flex items-center gap-x-3.5 px-3.5">
+      <div id="stats" className="items-center hidden md:flex">
         <PokeCardStats stats={stats} />
       </div>
     </div>

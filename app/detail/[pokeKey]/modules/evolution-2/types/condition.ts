@@ -47,6 +47,22 @@ export type RenderContentValueMap = {
 
 export type ConditionKey = keyof RenderContentValueMap;
 
+// type Amped = 'amped' | 'lowKey';
+// type Region = 'alola' | 'galar' | 'hisui';
+// type TimeNow = 'night' | 'day' | 'dusk' | 'full-moon';
+
+// type ValueKey =
+//   ItemKey
+//   | PokeKey
+//   | MoveKey
+//   | ConditionOtherCase
+//   | AreaKey
+//   | PokeTypeItem
+//   | Amped
+//   | Region
+//   | TimeNow
+//   | string
+//   | number;
 // export type ValueKey =
 //   number
 //   | string

@@ -4,12 +4,12 @@ import { useConditionInfoLocaleAffix } from '../../hooks/useCondition';
 import getConditionInfo from './condition.utils';
 import type { ConditionKey, RenderContentValueMap } from '../../types/condition';
 
-export default function ConditionInfo({
+export default function ConditionInfo<K extends ConditionKey>({
   condition,
   value,
 }: {
-  condition: ConditionKey,
-  value: RenderContentValueMap[ConditionKey],
+  condition: K;
+  value: RenderContentValueMap[K];
 }) {
   const { language } = useLanguage();
 

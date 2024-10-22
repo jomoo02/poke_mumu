@@ -378,10 +378,7 @@ const contentMap: ContentMapType = {
   },
 };
 
-export default function getConditionInfo(condition: ConditionKey): {
-  affix: object,
-  renderContent: (value: any, langauge: Language) => JSX.Element,
-} {
+export default function getConditionInfo<K extends ConditionKey>(condition: K) {
   const {
     renderContent,
     affix,
