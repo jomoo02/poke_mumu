@@ -20,9 +20,9 @@ function PokeCardStats({ stats }: PokeCardStatsProps) {
 
   return (
     <>
-      <div className="font-bold text-slate-800 w-20 sm:w-24 px-3 text-right">{total}</div>
+      <div className="w-card-stat font-bold text-slate-800 flex justify-end">{total}</div>
       {stats.map(({ stat, value }) => (
-        <div key={stat} className="w-20 sm:w-24 text-right px-3 font-semibold text-slate-700/90 hidden xl:block">
+        <div key={stat} className="w-card-stat font-semibold text-slate-700/90 hidden lg:flex justify-end">
           {value}
         </div>
       ))}
@@ -45,47 +45,51 @@ export default function PokeCard({ poke }: PokeCardProps) {
   const src = `https://raw.githubusercontent.com/jomoo02/poke_sprites/refs/heads/main/home/${sprite}.png`;
 
   return (
-    <div className="flex h-16 items-stretch hover:bg-blue-100">
-      <div id="no" className="w-[4.5rem] text-sm text-slate-600 font-semibold flex items-center px-1">
+    <div className="flex items-stretch h-16 hover:bg-blue-100">
+      <div className="w-card-number flex items-center text-[13px] xl:text-sm text-slate-600 font-semibold">
         {`#${no}`}
       </div>
-      <div id="img" className="flex items-center px-2">
-        <div className="w-[58px] h-[56px] relative">
-          <Image
-            placeholder="blur"
-            blurDataURL="/pokeball.svg"
-            src={src}
-            alt={name}
-            fill
-            sizes="48px"
-            style={{
-              objectFit: 'contain',
-            }}
-          />
+      <div className="w-card-name flex">
+        <div className="flex items-center px-2">
+          <div className="w-card-img">
+            <Image
+              placeholder="blur"
+              blurDataURL="/pokeball.svg"
+              src={src}
+              alt={name}
+              fill
+              sizes="48px"
+              style={{
+                objectFit: 'contain',
+              }}
+            />
+          </div>
+        </div>
+        <div className="grid grow items-center px-2 xl:px-3">
+          <div>
+            <Link
+              href={`/detail/${pokeKey}`}
+              className="font-bold text-blue-800 leading-4 text-[15px] xl:text-base"
+              onClick={handlePokeCardClick}
+            >
+              {name}
+            </Link>
+            {form && (
+              <div className="text-xs lg:text-sm leading-4 font-semibold text-slate-500/90 capitalize">
+                {form}
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      <div id="name_form" className="min-w-36 sm:w-48 flex justify-center flex-col px-2">
-        <Link
-          href={`/detail/${pokeKey}`}
-          className="text-sm sm:text-base font-bold text-blue-800"
-          onClick={handlePokeCardClick}
-        >
-          {name}
-        </Link>
-        {form && (
-          <div className="text-xs sm:text-sm leading-4 font-semibold text-slate-500/90 capitalize">
-            {form}
-          </div>
-        )}
-      </div>
-      <div id="types" className="flex flex-col gap-y-1 items-center w-24 justify-center">
+      <div className="w-card-type flex flex-col gap-y-1 items-center justify-center">
         {types.map((type) => (
           <div key={type}>
             <PokeType type={type} />
           </div>
         ))}
       </div>
-      <div id="stats" className="items-center hidden md:flex">
+      <div className="text-sm hidden md:flex items-center">
         <PokeCardStats stats={stats} />
       </div>
     </div>

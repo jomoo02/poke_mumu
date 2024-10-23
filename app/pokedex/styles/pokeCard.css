@@ -1,0 +1,27 @@
+.card-list-container {
+  @apply w-full sm:w-[420px] md:w-[520px] lg:w-[920px] xl:w-[1100px];
+}
+
+.card-number {
+  @apply min-w-[4rem] w-[4rem] xl:min-w-[4.5rem] xl:w-[4.5rem] flex items-center px-2.5 text-[13px] xl:text-sm;
+}
+
+.card-name {
+  @apply flex grow xs:px-1 xl:px-2;
+}
+
+.card-img {
+  @apply w-[50px] h-[48px] xl:w-[58px] xl:h-[56px] relative;
+}
+
+.card-type {
+  @apply min-w-24 w-24 flex items-center px-2;
+}
+
+.card-stats {
+  @apply hidden md:flex md:items-center;
+}
+
+.card-stats-item {
+  @apply w-20 xl:w-24 px-3;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/pokedex.css';
 import { preload, getPokes } from './utils/get-poke';
 import PokeCardList from './components/poke-card-list';
 
