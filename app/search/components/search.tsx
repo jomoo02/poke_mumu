@@ -12,6 +12,9 @@ import SearchResult from './search-result';
 function SearchInput({
   handleInputTextChange,
   handleCloseClick,
+}: {
+  handleInputTextChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  handleCloseClick: () => void,
 }) {
   const { placeholderText } = useSearchPlaceholder();
 

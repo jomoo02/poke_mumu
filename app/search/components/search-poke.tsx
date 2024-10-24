@@ -2,12 +2,14 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Type from '@/app/components/type';
+import { PokeTypeItem } from '@/app/data/pokeType';
 import {
   useSearchPokeInfo,
   useSearchPokeHandle,
-} from '../hooks/useSearchPoke';
+} from '../hooks/usePoke';
+import type { SearchPoke } from '../types/search';
 
-function PokeInfo({ pokeInfo }) {
+function PokeInfo({ pokeInfo }: { pokeInfo: SearchPoke }) {
   const {
     noText,
     mainName,
@@ -15,6 +17,7 @@ function PokeInfo({ pokeInfo }) {
     form,
     imageSrc,
   } = useSearchPokeInfo(pokeInfo);
+
   return (
     <div className="grid w-[225px] xs:w-[250px] sm:w-[250px] md:w-[325px] xl:w-[350px] grid-cols-4 items-center h-full">
       <span className="text-[10px] xs:text-[12px] sm:text-[13px] text-slate-600/95 font-semibold">
@@ -51,7 +54,7 @@ function PokeInfo({ pokeInfo }) {
   );
 }
 
-function PokeTypes({ types }) {
+function PokeTypes({ types }: { types: PokeTypeItem[] }) {
   return (
     <div
       className="flex flex-col sm:flex-row gap-y-1 items-center sm:gap-x-2 md:gap-x-3 w-[62px] sm:w-[132px] md:w-[145px] lg:w-[140px] xl:w-[158px]"
@@ -63,8 +66,10 @@ function PokeTypes({ types }) {
   );
 }
 
-export default function SearchPoke({ pokeInfo }) {
+export default function SearchdPoke({ pokeInfo }: { pokeInfo: SearchPoke }) {
   const { types, pokeKey } = pokeInfo;
+
+  console.log(pokeInfo);
 
   const {
     handleEnterKeyForSave,

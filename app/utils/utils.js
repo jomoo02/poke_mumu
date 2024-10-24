@@ -1,6 +1,16 @@
-export function checkTextNumberType(text = '') {
-  const trimmedText = text.trim();
-  return /^\d+$/.test(trimmedText);
+// export function checkTextNumberType(text = '') {
+//   const trimmedText = text.trim();
+//   return /^\d+$/.test(trimmedText);
+// }
+
+export function checkTextNumberType(str) {
+  // 빈 문자열이면 false 반환
+  if (str.trim() === '') return false;
+
+  // 숫자로 변환 후 NaN이 아닌지 확인
+  const num = Number(str);
+
+  return !Number.isNaN(num);
 }
 
 export function checkTextLanguageKo(text) {

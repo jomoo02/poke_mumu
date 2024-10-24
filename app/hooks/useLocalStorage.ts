@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { PokeItem } from '../pokedex/types/poke';
+import type { SearchPoke } from '../search/types/search';
 
 const KEY = 'poke_local';
 
@@ -45,10 +46,10 @@ export default function useLocalStorage() {
   const [localPokes, setLocalPokes] = useState([]);
 
   const excludePokeByOrder = (order: number) => (
-    localPokes.filter((poke: PokeItem) => poke.order !== order)
+    localPokes.filter((poke: SearchPoke) => poke.order !== order)
   );
 
-  const saveLocalPoke = (poke: PokeItem) => {
+  const saveLocalPoke = (poke: SearchPoke) => {
     const filteredPokes = excludePokeByOrder(poke.order);
 
     const savingPokes = JSON.stringify(

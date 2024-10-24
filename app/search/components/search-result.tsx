@@ -1,31 +1,36 @@
 import React from 'react';
-import SearchPoke from './search-poke';
+import SearchdPoke from './search-poke';
 import {
-  useSearchDescription,
+  useSearchResultDescription,
   useSearchResult,
 } from '../hooks/useSearchResult';
+import { SearchPoke } from '../types/search';
 
-function SearchDescription({ inputText }) {
+function SearchDescription({ inputText }: { inputText: string }) {
   const {
-    isTextNumber,
-    notInputText,
-    normalCaseText,
-    numberCaseText,
     language,
-  } = useSearchDescription(inputText);
+    isInputTextNumber,
+    descriptions,
+  } = useSearchResultDescription(inputText);
+
+  const {
+    notInput,
+    pokeName,
+    pokeNo,
+  } = descriptions;
 
   if (!inputText) {
-    return <div>{notInputText}</div>;
+    return <div>{notInput}</div>;
   }
 
   if (language === 'ko') {
     return (
       <div className="flex gap-x-1">
-        <div className={`flex gap-x-1 ${isTextNumber && 'flex-row-reverse'}`}>
+        <div className={`flex gap-x-1 ${isInputTextNumber && 'flex-row-reverse'}`}>
           <span className="text-slate-600 underline">
             {inputText}
           </span>
-          <span>{isTextNumber ? numberCaseText : normalCaseText}</span>
+          <span>{isInputTextNumber ? pokeNo : pokeName}</span>
         </div>
         <span>포켓몬</span>
       </div>
@@ -34,13 +39,16 @@ function SearchDescription({ inputText }) {
 
   return (
     <div className="flex gap-x-1">
-      <span>{isTextNumber ? numberCaseText : normalCaseText}</span>
+      <span>{isInputTextNumber ? pokeNo : pokeName}</span>
       <span className="text-slate-600 underline">{inputText}</span>
     </div>
   );
 }
 
-export default function SearchResult({ inputText, searchResult }) {
+export default function SearchResult({ inputText, searchResult }: {
+  inputText: string,
+  searchResult: SearchPoke[],
+}) {
   const {
     resultPokes,
   } = useSearchResult(inputText, searchResult);
@@ -52,8 +60,8 @@ export default function SearchResult({ inputText, searchResult }) {
       </div>
       <div className="grid grid-cols-1 divide-y gap-y-1">
         {resultPokes.map((poke) => (
-          <div key={poke.id} className="h-[75px] xs:px-2 py-0.5">
-            <SearchPoke pokeInfo={poke} />
+          <div key={poke.order} className="h-[75px] xs:px-2 py-0.5">
+            <SearchdPoke pokeInfo={poke} />
           </div>
         ))}
       </div>
