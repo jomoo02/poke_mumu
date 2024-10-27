@@ -4,9 +4,10 @@ import React from 'react';
 import CloseIcon from '@/app/components/icons/close';
 import SearchIcon from '@/app/components/icons/search';
 import {
+  usePokeSearch,
   useSearchPlaceholder,
-  useSearch,
-} from '../hooks/useSearch';
+}
+  from '../hooks/usePokeSearch';
 import SearchResult from './search-result';
 
 function SearchInput({
@@ -45,7 +46,7 @@ export default function Search() {
     closeSearch,
     handleInputTextChange,
     searchResult,
-  } = useSearch();
+  } = usePokeSearch();
 
   return (
     <div className="flex flex-col bg-white h-full lg:border lg:border-zinc-400/80 lg:rounded-l-xl lg:rounded-tr-xl py-0.5 lg:shadow-lg">

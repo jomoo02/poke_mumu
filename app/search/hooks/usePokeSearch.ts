@@ -1,3 +1,4 @@
+import { useLanguage } from '@/app/language-provider';
 import useDebouncedInput from '@/app/hooks/useDebouncedInput';
 import useLockBodyScroll from '@/app/hooks/useLockBodyScroll';
 import useEscKeyListener from '@/app/hooks/useEscKeyListener';
@@ -6,7 +7,23 @@ import { useRouter } from 'next/navigation';
 import { fetchSearch } from '../api/search';
 import type { SearchPoke } from '../types/search';
 
-export default function usePokeSearch() {
+export function useSearchPlaceholder() {
+  const { language } = useLanguage();
+
+  const placeholderLanguageText = {
+    ko: '도감 번호 또는 포켓몬 이름',
+    en: 'Pokédex Number or Pokémon Name',
+  };
+
+  const localePlaceholderText = placeholderLanguageText[language]
+    || placeholderLanguageText.ko;
+
+  return {
+    placeholderText: localePlaceholderText,
+  };
+}
+
+export function usePokeSearch() {
   const {
     inputText,
     handleChange,
