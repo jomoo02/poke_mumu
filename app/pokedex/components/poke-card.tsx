@@ -4,15 +4,18 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import PokeType from '@/app/components/poke-type';
+import type { CardPoke } from '@/app/models/PokeV2';
 import usePokeCard from '../hooks/usePokeCard';
-import type { PokeItem, Stats } from '../types/poke';
 
 interface PokeCardStatsProps {
-  stats: Stats[],
+  stats: {
+    stat: string;
+    value: number;
+  }[],
 }
 
 interface PokeCardProps {
-  poke: PokeItem;
+  poke: CardPoke;
 }
 
 function PokeCardStats({ stats }: PokeCardStatsProps) {
@@ -68,7 +71,7 @@ export default function PokeCard({ poke }: PokeCardProps) {
         <div className="grid grow items-center px-2 xl:px-3">
           <div>
             <Link
-              href={`/detail/${pokeKey}`}
+              href={`/pokedex/${pokeKey}`}
               className="font-bold text-blue-800 leading-4 text-[15px] xl:text-base"
               onClick={handlePokeCardClick}
             >

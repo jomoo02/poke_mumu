@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchdPoke from './search-poke';
+import SearchResultPoke from './search-result-poke';
 import {
   useSearchResultDescription,
   useSearchResult,
@@ -61,7 +61,7 @@ export default function SearchResult({ inputText, searchResult }: {
       <div className="grid grid-cols-1 divide-y gap-y-1">
         {resultPokes.map((poke) => (
           <div key={poke.order} className="h-[75px] xs:px-2 py-0.5">
-            <SearchdPoke pokeInfo={poke} />
+            <SearchResultPoke pokeInfo={poke} />
           </div>
         ))}
       </div>

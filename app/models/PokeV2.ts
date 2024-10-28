@@ -1,24 +1,26 @@
 import mongoose from 'mongoose';
 import { LanguageContent } from '../types/languageContent.type';
-import { PokeTypeItem } from '../data/pokeType';
+import { PokeType } from '../data/pokeType';
 
 type Stats = {
-  stat: string,
-  value: number,
+  stat: string;
+  value: number;
 };
 
-interface PokeV2 {
-  sprite: string;
-  name: LanguageContent;
-  types: PokeTypeItem[];
-  form: LanguageContent;
-  stats: Stats[];
+export type Poke = {
   pokeKey: string;
-  no: string;
-  order: number;
-}
+  sprite?: string;
+  name?: LanguageContent;
+  form?: LanguageContent;
+  types?: PokeType[];
+  stats?: Stats[];
+  no?: string;
+  order?: number;
+};
 
-const PokeV2Scema = new mongoose.Schema({
+export type CardPoke = Required<Poke>;
+
+const PokeV2Scema = new mongoose.Schema<Poke>({
   sprite: String,
   name: Object,
   types: Array,
@@ -29,6 +31,6 @@ const PokeV2Scema = new mongoose.Schema({
   order: Number,
 });
 
-const PokeV2Model = mongoose.models?.PokeV2 || mongoose.model<PokeV2>('PokeV2', PokeV2Scema);
+const PokeV2Model = mongoose.models?.PokeV2 || mongoose.model<Poke>('PokeV2', PokeV2Scema);
 
 export default PokeV2Model;

@@ -2,13 +2,13 @@
 
 import React, { useMemo } from 'react';
 import { Virtuoso } from 'react-virtuoso';
+import type { CardPoke } from '@/app/models/PokeV2';
 import PokeCard from './poke-card';
 import ListHeader from './list-header';
 import usePokeCardList from '../hooks/usePokeCardList';
-import type { PokeItem } from '../types/poke';
 
 interface PokeCardListProps {
-  pokes: PokeItem[];
+  pokes: CardPoke[];
 }
 
 function Ske() {
@@ -22,7 +22,7 @@ export default function PokeCardList({ pokes }: PokeCardListProps) {
 
   const { isLoading } = usePokeCardList();
 
-  const itemContent = (index: number, poke: PokeItem) => (
+  const itemContent = (index: number, poke: CardPoke) => (
     <div className="border-b">
       {isLoading ? <Ske /> : <PokeCard poke={poke} />}
     </div>

@@ -4,9 +4,9 @@ import Link from 'next/link';
 import Type from '@/app/components/type';
 import { PokeTypeItem } from '@/app/data/pokeType';
 import {
-  useSearchPokeInfo,
-  useSearchPokeHandle,
-} from '../hooks/usePoke';
+  useSearchResultPokeInfo,
+  useSavePokeInfo,
+} from '../hooks/useSearchResultPoke';
 import type { SearchPoke } from '../types/search';
 
 function PokeInfo({ pokeInfo }: { pokeInfo: SearchPoke }) {
@@ -16,7 +16,7 @@ function PokeInfo({ pokeInfo }: { pokeInfo: SearchPoke }) {
     subName,
     form,
     imageSrc,
-  } = useSearchPokeInfo(pokeInfo);
+  } = useSearchResultPokeInfo(pokeInfo);
 
   return (
     <div className="grid w-[225px] xs:w-[250px] sm:w-[250px] md:w-[325px] xl:w-[350px] grid-cols-4 items-center h-full">
@@ -66,23 +66,25 @@ function PokeTypes({ types }: { types: PokeTypeItem[] }) {
   );
 }
 
-export default function SearchdPoke({ pokeInfo }: { pokeInfo: SearchPoke }) {
+export default function SearchResultPoke({ pokeInfo }: { pokeInfo: SearchPoke }) {
   const { types, pokeKey } = pokeInfo;
 
-  console.log(pokeInfo);
-
   const {
-    handleEnterKeyForSave,
-    handlePokeClick,
-  } = useSearchPokeHandle(pokeInfo);
+    savePokeOnEnter,
+    savePokeOnClick,
+  } = useSavePokeInfo(pokeInfo);
+
+  const handleOnClick = () => savePokeOnClick();
+
+  const handleOnEnter = (e: React.KeyboardEvent) => savePokeOnEnter(e);
 
   return (
     <div className="px-2.5 sm:px-3 md:px-4 h-full">
       <div className="flex h-full justify-between items-center">
         <Link
           href={`/detail/${pokeKey}`}
-          onClick={handlePokeClick}
-          onKeyDown={handleEnterKeyForSave}
+          onClick={handleOnClick}
+          onKeyDown={handleOnEnter}
           prefetch
         >
           <PokeInfo pokeInfo={pokeInfo} />

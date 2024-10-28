@@ -1,10 +1,9 @@
 'use server';
 
-import PokeV2Model from '@/app/models/PokeV2';
+import PokeV2Model, { type CardPoke } from '@/app/models/PokeV2';
 import dbConnect from '@/app/api/db/connect';
-import type { PokeItem } from '../types/poke';
 
-export async function fetchAllPoke(): Promise<PokeItem[] | undefined> {
+export async function fetchAllPoke() {
   await dbConnect();
 
   const query = {};
@@ -13,7 +12,7 @@ export async function fetchAllPoke(): Promise<PokeItem[] | undefined> {
   const res = await PokeV2Model
     .find(query, projection)
     .sort({ order: 1 })
-    .lean<PokeItem[]>();
+    .lean<CardPoke[]>();
 
   return res;
 }

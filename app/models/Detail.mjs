@@ -1,15 +1,9 @@
 import mongoose from 'mongoose';
 
-const MoveSchema = new mongoose.Schema({
-  accuracy: Number,
-  power: Number,
-  damage_class: String,
-  type: String,
-  name: {
-    en: String,
-    ko: String,
-  },
-});
+// type PokedexNumber = {
+//   entryNumber: number;
+//   pokedex: string;
+// };
 
 const VersionMovesSchema = new mongoose.Schema({
   version: String,
@@ -28,14 +22,17 @@ const GenMovesSchema = new mongoose.Schema({
 });
 
 const detailScema = new mongoose.Schema({
-  // id: Number,
-  // chainIndex: Number,
   pokeKey: String,
   abilities: Array,
-  stats: Object,
+  stats: Object, // 삭제
   moves: [GenMovesSchema],
   forms: Array,
   speciesName: Object,
+
+  pokedexNumbers: Array,
+  chainIndex: Number,
+  breeding: Object,
+  detail: Object,
 });
 
 const DetailModel = mongoose.models.Detail || mongoose.model('Detail', detailScema);

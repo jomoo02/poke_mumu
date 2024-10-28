@@ -20,3 +20,5 @@ export const pokeTypesObj = {
 } as const;
 
 export type PokeTypeItem = keyof typeof pokeTypesObj;
+
+export type PokeType = keyof typeof pokeTypesObj;

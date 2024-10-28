@@ -1,9 +1,9 @@
 import { useLanguage } from '@/app/language-provider';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
 import useScrollRestoration from '@/app/hooks/useScrollRestoration';
-import type { PokeItem } from '../types/poke';
+import type { CardPoke } from '@/app/models/PokeV2';
 
-export default function usePokeCard(pokeItem: PokeItem) {
+export default function usePokeCard(pokeItem: CardPoke) {
   const { language } = useLanguage();
 
   const name = pokeItem.name[language];

@@ -2,7 +2,7 @@ import { useLanguage } from '@/app/language-provider';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
 import type { SearchPoke } from '../types/search';
 
-export function useSearchPokeInfo(pokeInfo: SearchPoke) {
+export function useSearchResultPokeInfo(pokeInfo: SearchPoke) {
   const {
     name,
     no,
@@ -28,21 +28,21 @@ export function useSearchPokeInfo(pokeInfo: SearchPoke) {
   };
 }
 
-export function useSearchPokeHandle(targetPoke: SearchPoke) {
+export function useSavePokeInfo(targetPoke: SearchPoke) {
   const { saveLocalPoke } = useLocalStorage();
 
-  const handlePokeClick = () => {
+  const savePokeOnClick = () => {
     saveLocalPoke(targetPoke);
   };
 
-  const handleEnterKeyForSave = (e: React.KeyboardEvent) => {
+  const savePokeOnEnter = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       saveLocalPoke(targetPoke);
     }
   };
 
   return {
-    handleEnterKeyForSave,
-    handlePokeClick,
+    savePokeOnClick,
+    savePokeOnEnter,
   };
 }

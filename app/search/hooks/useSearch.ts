@@ -23,7 +23,7 @@ export function useSearchPlaceholder() {
   };
 }
 
-export function usePokeSearch() {
+export function useSearch() {
   const {
     inputText,
     handleChange,
@@ -51,7 +51,7 @@ export function usePokeSearch() {
   return {
     inputText,
     closeSearch,
-    handleInputTextChange: handleChange,
+    inputTextOnChange: handleChange,
     searchResult: result,
   };
 }

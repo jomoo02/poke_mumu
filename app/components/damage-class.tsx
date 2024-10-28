@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-type DamageClassType = 'physical' | 'special' | 'status';
+export type DamageClassType = 'physical' | 'special' | 'status';
 
 export default function DamageClass({ damageClass = 'status' }: { damageClass: DamageClassType }) {
   const damageClassMap = {
