@@ -15,9 +15,11 @@ export type EggGroup =
   | 'water2'
   | 'water3'
   | 'ditto'
-  | 'noEggs';
+  | 'no-eggs';
 
-const eggGroupsKo: Record<EggGroup, string> = {
+export type EggGroups = Record<EggGroup, string>;
+
+const eggGroupsKo: EggGroups = {
   indeterminate: '부정형',
   bug: '벌레',
   dragon: '드래곤',
@@ -32,10 +34,10 @@ const eggGroupsKo: Record<EggGroup, string> = {
   water1: '수중1',
   water2: '수중2',
   water3: '수중3',
-  noEggs: '미발견',
+  'no-eggs': '미발견',
 };
 
-const eggGroupsEn = {
+const eggGroupsEn: EggGroups = {
   indeterminate: 'Amorphous',
   bug: 'Bug',
   dragon: 'Dragon',
@@ -50,11 +52,17 @@ const eggGroupsEn = {
   water1: 'Water 1',
   water2: 'Water 2',
   water3: 'Water 3',
-  noEggs: 'Undiscovered',
+  'no-eggs': 'Undiscovered',
+};
+
+const localizedEggGroups: Record<'ko' | 'en', EggGroups> = {
+  en: eggGroupsEn,
+  ko: eggGroupsKo,
 };
 
 export {
   noEggs,
   eggGroupsKo,
   eggGroupsEn,
+  localizedEggGroups,
 };

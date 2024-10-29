@@ -3,7 +3,7 @@ import { LanguageContent } from '@/app/types/languageContent.type';
 import type { EggGroup } from '@/app/data/eggGroup';
 import type { GrowthRate } from '@/app/data/growthRate';
 import type { Stat } from '@/app/data/stats';
-import type { LocalePokedex } from '@/app/data/localePokedex';
+
 import type { Moves } from '@/app/pokedex/[pokeKey]/types/moves';
 
 export type Ability = {
@@ -20,16 +20,16 @@ type Form = {
 export type PokeDetail = {
   pokeKey: string;
   chainIndex: number;
-  abilities?: Ability[];
-  moves?: Moves;
-  forms?: Form[];
-  speciesName?: LanguageContent;
-  breeding?: {
+  abilities: Ability[];
+  moves: Moves;
+  forms: Form[];
+  speciesName: LanguageContent;
+  breeding: {
     eggGroups: EggGroup[];
     hatchCounter: number;
     genderRate: number;
   };
-  detail?: {
+  detail: {
     genera: LanguageContent;
     height: number;
     weight: number;
@@ -40,10 +40,7 @@ export type PokeDetail = {
       value: number;
     }[];
   };
-  pokedexNumbers?: {
-    pokedex: LocalePokedex,
-    entryNumber: number;
-  }[];
+
 };
 
 const detailScema = new mongoose.Schema<PokeDetail>({
@@ -53,8 +50,6 @@ const detailScema = new mongoose.Schema<PokeDetail>({
   moves: Array,
   forms: Array,
   speciesName: Object,
-
-  pokedexNumbers: Array,
   chainIndex: Number,
   breeding: Object,
   detail: Object,

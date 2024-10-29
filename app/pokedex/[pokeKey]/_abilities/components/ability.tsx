@@ -16,7 +16,6 @@ export default function PokeAbility({ ability }: PokeAbilityProps) {
     hiddenAbilityLabel,
   } = useAbility(ability);
 
-  console.log(name);
   return (
     <div className={`grid grid-cols-10 gap-x-1 min-h-12 ${backGroundColor}`}>
       <h3

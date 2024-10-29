@@ -15,7 +15,9 @@ export type GrowthRate =
 
 const defaultGrowthRate = medium;
 
-const growthRatesEn: Record<GrowthRate, string> = {
+export type GrowthRates = Record<GrowthRate, string>;
+
+const growthRatesEn: GrowthRates = {
   [slow]: 'Slow',
   [mediumSlow]: 'Medium Slow',
   [medium]: 'Medium Fast',
@@ -24,13 +26,18 @@ const growthRatesEn: Record<GrowthRate, string> = {
   [fastThenVerySlow]: 'fluctuating',
 };
 
-const growthRatesKo: Record<GrowthRate, string> = {
+const growthRatesKo: GrowthRates = {
   [slow]: '항상 많음',
   [mediumSlow]: '초반 매우 적음, 후반 보통',
   [medium]: '항상 보통',
   [fast]: '항상 적음',
   [slowThenVeryFast]: '초반 매우 많음, 후반 매우 적음',
   [fastThenVerySlow]: '초반 매우 적음, 후반 매우 많음',
+};
+
+const localizedGrowthRates: Record<'en' | 'ko', GrowthRates> = {
+  en: growthRatesEn,
+  ko: growthRatesKo,
 };
 
 const expPointsAtLevel50: Record<GrowthRate, number> = {
@@ -52,8 +59,7 @@ const expPointsAtLevel100: Record<GrowthRate, number> = {
 };
 
 export {
-  growthRatesEn,
-  growthRatesKo,
+  localizedGrowthRates,
   expPointsAtLevel50,
   expPointsAtLevel100,
   defaultGrowthRate,

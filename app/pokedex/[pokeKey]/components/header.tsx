@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import type { PokeType } from '@/app/data/pokeType';
+import type { Type } from '@/app/data/pokeType';
 import useHeader from '../hooks/useHeader';
 import type { HeaderKey } from '../data/header';
 
@@ -9,7 +9,7 @@ export default function Header({
   type,
   headerKey,
 }: {
-  type: PokeType,
+  type: Type,
   headerKey: HeaderKey,
 }) {
   const { headerContent } = useHeader(headerKey);

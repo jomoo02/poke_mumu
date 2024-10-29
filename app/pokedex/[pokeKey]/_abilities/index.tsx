@@ -23,13 +23,9 @@ export default async function PokeAbilities({ pokeKey }: PokeAbilitiesProps) {
 
   const { types } = poke;
 
-  if (!types || types.length === 0) {
-    return null;
-  }
-
   const { abilities } = detail;
 
-  if (!abilities || abilities.length === 0) {
+  if (abilities.length === 0) {
     return null;
   }
 

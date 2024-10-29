@@ -26,7 +26,7 @@ const paldea = 'paldea';
 const kitakami = 'kitakami';
 const bluberry = 'blueberry';
 
-const localePokedexIndexs = {
+const localPokedexIndexs = {
   [kanto]: 2,
   [originalJohto]: 3,
   [hoenn]: 4,
@@ -52,9 +52,11 @@ const localePokedexIndexs = {
   [bluberry]: 24,
 };
 
-export type LocalePokedex = keyof typeof localePokedexIndexs;
+export type LocalPokedex = keyof typeof localPokedexIndexs;
 
-const localesPokedexKo: Record<LocalePokedex, string> = {
+export type LocalPokedexs = Record<LocalPokedex, string>;
+
+const localPokedexsKo: LocalPokedexs = {
   [kanto]: '레드/블루/피카츄',
   [originalJohto]: '골드/실버/크리스탈',
   [hoenn]: '루비/사파이어/에메랄드',
@@ -80,7 +82,7 @@ const localesPokedexKo: Record<LocalePokedex, string> = {
   [bluberry]: '스칼렛/바이올렛 - 블루베리',
 };
 
-const localesPokedexEn: Record<LocalePokedex, string> = {
+const localPokedexsEn: LocalPokedexs = {
   [kanto]: `${versionsEn['red-blue']}/${versionsEn.yellow}`,
   [originalJohto]: `${versionsEn['gold-silver']}/${versionsEn.crystal}`,
   [hoenn]: `${versionsEn['ruby-sapphire']}/${versionsEn.emerald}`,
@@ -106,9 +108,17 @@ const localesPokedexEn: Record<LocalePokedex, string> = {
   [bluberry]: `${versionsEn['scarlet-violet']} - The Indigo Disk`,
 };
 
+type LocalizedLocalPokedexs = Record<'ko' | 'en', LocalPokedexs>;
+
+const localizedLocalPokedexs: LocalizedLocalPokedexs = {
+  en: localPokedexsEn,
+  ko: localPokedexsKo,
+};
+
 export {
   updatedKanto,
-  localePokedexIndexs,
-  localesPokedexKo,
-  localesPokedexEn,
+  localizedLocalPokedexs,
+  localPokedexIndexs,
+  localPokedexsKo,
+  localPokedexsEn,
 };
