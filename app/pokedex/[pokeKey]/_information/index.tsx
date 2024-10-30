@@ -2,6 +2,8 @@ import React from 'react';
 import './styles/information.css';
 import { getPoke, getPokeDetail } from '../utils/get';
 import { headerKeys } from '../data/header';
+import Information from './components/information';
+import Header from '../components/header';
 
 interface PokeInformationProps {
   pokeKey: string;
@@ -36,4 +38,24 @@ export default async function PokeInformation({ pokeKey }: PokeInformationProps)
   }
 
   const headerKey = headerKeys.information;
+
+  return (
+    <div>
+      <Header
+        type={type}
+        headerKey={headerKey}
+      />
+      <div className={`border-2 border-t-0 ${type}-border grid xl:grid-cols-3 items-center`}>
+        {/* <div className="py-10">
+          <PokeImage
+            sprity={sprity}
+            alt={name.en}
+          />
+        </div> */}
+        <div className="xl:col-span-2 xl:py-4">
+          <Information poke={poke} pokeDetail={pokeDetail} />
+        </div>
+      </div>
+    </div>
+  );
 }

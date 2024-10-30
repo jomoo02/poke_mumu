@@ -1,5 +1,5 @@
 import { Language, useLanguage } from '@/app/language-provider';
-import { PokeDetail } from '@/app/models/Detail';
+import type { PokeDetail } from '@/app/models/Detail';
 import {
   noEggs,
   localizedEggGroups,
@@ -48,12 +48,12 @@ function setGenderRate(genderRate: number, language: Language) {
 
   return {
     male: {
-      text: maleValue,
-      value: 0,
+      text: male,
+      value: maleValue,
     },
     female: {
-      text: femaleValue,
-      value: 0,
+      text: female,
+      value: femaleValue,
     },
     genderless: {
       text: genderless,

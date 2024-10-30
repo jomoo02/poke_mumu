@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { preload } from './utils/get';
 import PokeAbilities from './_abilities';
 import PokeDefenseCompatibility from './_defense-compatibility';
+import PokeInformation from './_information';
 
 interface PageProps {
   params: {
@@ -19,6 +20,7 @@ export default async function Page({ params }: PageProps) {
       <Suspense fallback={<div>1</div>}>
         <PokeAbilities pokeKey={pokeKey} />
         <PokeDefenseCompatibility pokeKey={pokeKey} />
+        <PokeInformation pokeKey={pokeKey} />
       </Suspense>
     </div>
   );
