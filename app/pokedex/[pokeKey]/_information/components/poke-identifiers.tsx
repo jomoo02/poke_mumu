@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type { Poke } from '@/app/models/PokeV2';
-import usePokeIdentifiers from '../hooks/usePokeIdentifiers';
+import usePokeIdentifiers from '../../hooks/usePokeIdentifiers';
 
 interface PokeIdentifiersProps {
   poke: Poke;

@@ -44,40 +44,53 @@ export async function fetchAllPoke() {
 }
 
 export async function fetchSurroundingPokes(order: number) {
-  const surroundingPokes = {
-    before: {},
-    next: {},
-  };
+  // const surroundingPokes: Record<'before' | 'next', Poke | undefined> = {
+  //   before: undefined,
+  //   next: undefined,
+  // };
+
+  let beforeOrder = Number(order) - 1;
+  let nextOrder = Number(order) + 1;
+
+  if (order === 844) {
+    beforeOrder = 843;
+    nextOrder = 848;
+  }
+
+  if (order === 848) {
+    beforeOrder = 844;
+    nextOrder = 852;
+  }
 
   try {
     await dbConnect();
 
     const projection = {
       _id: 0,
-      pokeKey: 1,
-      sprite: 1,
-      order: 1,
-      name: 1,
-      form: 1,
-      no: 1,
     };
 
     const beforePoke = await PokeV2Model
-      .findOne({ order: Number(order) - 1 }, projection)
-      .lean();
+      .findOne({ order: beforeOrder }, projection)
+      .lean<Poke>();
 
     const nextPoke = await PokeV2Model
-      .findOne({ order: Number(order) + 1 }, projection)
-      .lean();
+      .findOne({ order: nextOrder }, projection)
+      .lean<Poke>();
 
-    if (beforePoke) {
-      surroundingPokes.before = beforePoke;
-    } if (nextPoke) {
-      surroundingPokes.next = nextPoke;
-    }
-    return surroundingPokes;
+    return {
+      before: beforePoke,
+      next: nextPoke,
+    };
+
+    // if (beforePoke) {
+    //   surroundingPokes.before = beforePoke;
+    // } if (nextPoke) {
+    //   surroundingPokes.next = nextPoke;
+    // }
+    // return surroundingPokes;
   } catch (error) {
     console.error(error);
-    return surroundingPokes;
+    return {};
+    // return surroundingPokes;
   }
 }
