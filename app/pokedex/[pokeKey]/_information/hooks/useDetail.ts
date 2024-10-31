@@ -7,6 +7,7 @@ import {
   defaultGrowthRate,
   type GrowthRate,
 } from '@/app/data/growthRate';
+import { localizedStats } from '@/app/data/stats';
 import { PokeDetail } from '@/app/models/Detail';
 import { localizedSubjects } from '../data/subject';
 
@@ -49,6 +50,11 @@ export default function useDetail(pokeDetail: PokeDetail) {
 
   const localeGrowthRate = setGrowthRate(language, growthRate);
 
+  const localeStats = localizedStats[language];
+  const localeEffortsStats = effortStats
+    .map(({ stat, value }) => `${localeStats[stat]}: ${value}`)
+    .join(', ');
+
   return {
     title,
     genera: {
@@ -73,7 +79,7 @@ export default function useDetail(pokeDetail: PokeDetail) {
     },
     effortStats: {
       subject: localeSubjects.effortStats,
-      content: effortStats,
+      content: localeEffortsStats,
     },
   };
 }

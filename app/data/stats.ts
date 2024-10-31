@@ -6,7 +6,9 @@ export type Stat =
   | 'special-defense'
   | 'speed';
 
-const statKo: Record<Stat, string> = {
+export type Stats = Record<Stat, string>;
+
+const statKo: Stats = {
   hp: '체력',
   attack: '공격',
   defense: '방어',
@@ -15,7 +17,7 @@ const statKo: Record<Stat, string> = {
   speed: '스피드',
 };
 
-const statEn: Record<Stat, string> = {
+const statEn: Stats = {
   hp: 'hp',
   attack: 'attack',
   defense: 'defense',
@@ -24,7 +26,13 @@ const statEn: Record<Stat, string> = {
   speed: 'speed',
 };
 
+const localizedStats: Record<'ko' | 'en', Stats> = {
+  ko: statKo,
+  en: statEn,
+};
+
 export {
+  localizedStats,
   statEn,
   statKo,
 };

@@ -24,7 +24,7 @@ export default function PokeAbility({ ability }: PokeAbilityProps) {
         {name}
         {hiddenAbilityLabel && (
           <span className="text-xs md:text-sm text-center">
-            {hiddenAbilityLabel}
+            {`(${hiddenAbilityLabel})`}
           </span>
         )}
       </h3>

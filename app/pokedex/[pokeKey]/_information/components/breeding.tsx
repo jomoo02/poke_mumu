@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import type { PokeDetail } from '@/app/models/Detail';
 import useBreeding from '../hooks/useBreeding';
 import InfoItem from './info-item';
@@ -32,32 +32,15 @@ function GenderRate({
 
   return (
     <InfoItem subject={subject}>
-      <span className="text-blue-500">
-        {`${male.text}: ${male.value}`}
-      </span>
-      {', '}
-      <span className="text-pink">
-        {`${female.text}: ${female.value}`}
-      </span>
-    </InfoItem>
-  );
-}
-
-function EggGroups({
-  subject,
-  eggGroups,
-}: {
-  subject: string;
-  eggGroups: string[];
-}) {
-  return (
-    <InfoItem subject={subject}>
-      {eggGroups.map((eggGroup, index) => (
-        <Fragment key={eggGroup}>
-          {index > 0 && ', '}
-          {eggGroup}
-        </Fragment>
-      ))}
+      <div className="text-slate-600 text-sm sm:text-[15px] font-semibold capitalize">
+        <span className="text-blue-500">
+          {`${male.text}: ${male.value}`}
+        </span>
+        {', '}
+        <span className="text-pink-500">
+          {`${female.text}: ${female.value}`}
+        </span>
+      </div>
     </InfoItem>
   );
 }
@@ -82,10 +65,10 @@ export default function Breeding({
 
   return (
     <div>
-      <h3 className="">{title}</h3>
-      <EggGroups
+      <h3 className="info-title">{title}</h3>
+      <InfoItem
         subject={eggGroups.subject}
-        eggGroups={eggGroups.content}
+        content={eggGroups.content.join(', ')}
       />
       <GenderRate
         subject={genderRate.subject}
@@ -93,9 +76,10 @@ export default function Breeding({
         female={female}
         genderless={genderless}
       />
-      <InfoItem subject={hatchCounter.subject}>
-        {hatchCounter.content || '—'}
-      </InfoItem>
+      <InfoItem
+        subject={hatchCounter.subject}
+        content={hatchCounter.content || '—'}
+      />
     </div>
   );
 }

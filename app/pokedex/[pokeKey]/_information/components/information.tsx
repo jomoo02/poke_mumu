@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Poke } from '@/app/models/PokeV2';
 import type { PokeDetail } from '@/app/models/Detail';
+import Basic from './basic';
 import Detail from './detail';
 import Breeding from './breeding';
 
@@ -14,9 +15,12 @@ export default function Information({
   pokeDetail,
 }: InformationProps) {
   return (
-    <div>
-      <Detail pokeDetail={pokeDetail} />
-      <Breeding pokeDetail={pokeDetail} />
+    <div className="px-2 2xl:px-10 pb-1 md:pb-4 grid xl:grid-cols-2 xl:gap-x-8 2xl:gap-x-14 gap-y-4 xl:min-h-[500px]">
+      <Basic poke={poke} />
+      <div className="grid gap-y-4 gap-x-6 xl:gap-y-6">
+        <Detail pokeDetail={pokeDetail} />
+        <Breeding pokeDetail={pokeDetail} />
+      </div>
     </div>
   );
 }

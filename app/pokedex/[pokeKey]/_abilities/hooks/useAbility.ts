@@ -16,8 +16,8 @@ export default function useAbility({
 
   const localeName = name[language];
   const localeFlavorText = flavorText[language];
-  const backGroundColor = isHidden ? 'bg-slate-200' : 'bg-white';
-  const localeHiddenAbilityLabel = languageHiddenAbilityLabel[language];
+  const backGroundColor = isHidden ? 'bg-slate-100' : 'bg-white';
+  const localeHiddenAbilityLabel = isHidden ? languageHiddenAbilityLabel[language] : '';
 
   return {
     backGroundColor,

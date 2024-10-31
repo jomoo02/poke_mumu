@@ -2,7 +2,6 @@
 
 import React from 'react';
 import type { PokeDetail } from '@/app/models/Detail';
-import type { Stat } from '@/app/data/stats';
 import useDetail from '../hooks/useDetail';
 import InfoItem from './info-item';
 
@@ -24,42 +23,23 @@ function GrowthRate({
 }) {
   return (
     <InfoItem subject={subject}>
-      <div className="capitalize">{growthRate}</div>
-      <div className="flex gap-x-2 items-center">
-        <span className="text-slate-500/90 text-xs xs:text-[13px] sm:text-sm">
-          {atLevel50.text}
-        </span>
-        :
-        <span>{atLevel50.value}</span>
-      </div>
-      <div className="flex gap-x-2 items-center">
-        <span className="text-slate-500/90 text-xs xs:text-[13px] sm:text-sm">
-          {atLevel100.text}
-        </span>
-        :
-        <span>{atLevel100.value}</span>
-      </div>
-    </InfoItem>
-  );
-}
-
-function EffortStats({
-  subject,
-  effortStats,
-}: {
-  subject: string;
-  effortStats: {
-    stat: Stat;
-    value: number;
-  }[]
-}) {
-  return (
-    <InfoItem subject={subject}>
-      {effortStats.map(({ stat, value }) => (
-        <div key={stat}>
-          {`${stat}: ${value}`}
+      <div className="text-slate-600 text-sm sm:text-[15px] font-semibold capitalize">
+        <div className="capitalize">{growthRate}</div>
+        <div className="flex gap-x-2 items-center">
+          <span className="text-slate-500/90 text-xs xs:text-[13px] sm:text-sm">
+            {atLevel50.text}
+          </span>
+          :
+          <span>{atLevel50.value}</span>
         </div>
-      ))}
+        <div className="flex gap-x-2 items-center">
+          <span className="text-slate-500/90 text-xs xs:text-[13px] sm:text-sm">
+            {atLevel100.text}
+          </span>
+          :
+          <span>{atLevel100.value}</span>
+        </div>
+      </div>
     </InfoItem>
   );
 }
@@ -83,7 +63,7 @@ export default function Detail({
 
   return (
     <div>
-      <h3>{title}</h3>
+      <h3 className="info-title">{title}</h3>
       <InfoItem
         subject={genera.subject}
         content={genera.content}
@@ -106,9 +86,9 @@ export default function Detail({
         atLevel100={growthRateContent.atLevel100}
         growthRate={growthRateContent.growthRate}
       />
-      <EffortStats
+      <InfoItem
         subject={effortStats.subject}
-        effortStats={effortStats.content}
+        content={effortStats.content}
       />
     </div>
   );
