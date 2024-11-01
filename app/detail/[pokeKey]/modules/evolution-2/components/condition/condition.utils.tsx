@@ -4,7 +4,7 @@ import {
   MoveLink,
   ItemLink,
   ItmeLinkWithParticle,
-  PokeLinkWithSbjectParticle,
+  PokeLinkWithSubjectParticle,
   PokeLinkWithParticleForAnd,
 } from '@/app/components/link-containers';
 import typesKo from '@/app/translations/type';
@@ -41,8 +41,8 @@ const contentMap: ContentMapType = {
         suffix: 'in the agile style 20 times in Hisui',
       },
     },
-    renderContent: (value, language) => (
-      <MoveLink move={value} language={language} />
+    renderContent: (value) => (
+      <MoveLink move={value} />
     ),
   },
   gender: {
@@ -72,14 +72,14 @@ const contentMap: ContentMapType = {
         prefix: 'holding',
       },
     },
-    renderContent: (value, language) => (
-      <ItmeLinkWithParticle item={value} language={language} />
+    renderContent: (value) => (
+      <ItmeLinkWithParticle item={value} />
     ),
   },
   item: {
     affix: {},
-    renderContent: (value, language) => (
-      <ItemLink item={value} language={language} />
+    renderContent: (value) => (
+      <ItemLink item={value} />
     ),
   },
   known_move_type: {
@@ -98,8 +98,8 @@ const contentMap: ContentMapType = {
         prefix: 'knowing',
       },
     },
-    renderContent: (value, language) => (
-      <MoveLink move={value} language={language} />
+    renderContent: (value) => (
+      <MoveLink move={value} />
     ),
   },
   min_affection: {
@@ -164,8 +164,8 @@ const contentMap: ContentMapType = {
         suffix: 'in party',
       },
     },
-    renderContent: (value, language) => (
-      <PokeLinkWithSbjectParticle poke={value} language={language} />
+    renderContent: (value) => (
+      <PokeLinkWithSubjectParticle poke={value} />
     ),
   },
   party_type: {
@@ -264,8 +264,8 @@ const contentMap: ContentMapType = {
         suffix: 'in the strong style 20 times in LA only',
       },
     },
-    renderContent: (value, language) => (
-      <MoveLink move={value} language={language} />
+    renderContent: (value) => (
+      <MoveLink move={value} />
     ),
   },
   time_of_day: {
@@ -297,8 +297,8 @@ const contentMap: ContentMapType = {
         prefix: 'for',
       },
     },
-    renderContent: (value, language) => (
-      <PokeLinkWithParticleForAnd poke={value} language={language} />
+    renderContent: (value) => (
+      <PokeLinkWithParticleForAnd poke={value} />
     ),
   },
   trade_species: {
@@ -308,8 +308,8 @@ const contentMap: ContentMapType = {
         prefix: 'for',
       },
     },
-    renderContent: (value, language) => (
-      <PokeLinkWithParticleForAnd poke={value} language={language} />
+    renderContent: (value) => (
+      <PokeLinkWithParticleForAnd poke={value} />
     ),
   },
   turn_upside_down: {
