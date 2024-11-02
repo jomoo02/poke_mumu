@@ -1,10 +1,6 @@
-export type Trigger =
-  'level-up'
-  | 'use-item'
-  | 'trade'
-  | 'other';
+import type { TriggerKey } from '@/app/models/chain.type';
 
-type TriggerContent = Record<Trigger, string>;
+type TriggerContent = Record<TriggerKey, string>;
 
 const triggerContentsKo: TriggerContent = {
   'level-up': '레벨 업',

@@ -15,8 +15,12 @@ function Other({ value }: { value: OtherPoke }) {
   return <span>{content}</span>;
 }
 
-function Spin() {
+function Spin({ value }: { value: string }) {
   const { language } = useLanguage();
+
+  if (value !== 'spin') {
+    return null;
+  }
 
   const localizedAffix = {
     en: {
@@ -42,8 +46,12 @@ function Spin() {
   );
 }
 
-function TurnUpsideDown() {
+function TurnUpsideDown({ value }: { value: boolean }) {
   const { language } = useLanguage();
+
+  if (!value) {
+    return null;
+  }
 
   const localizedContent = {
     ko: '기기를 위아래 거꾸로 잡은 상태',

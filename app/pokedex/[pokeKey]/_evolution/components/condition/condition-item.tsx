@@ -24,10 +24,10 @@ function HeldItem({
     );
   }
   return (
-    <span>
+    <>
       <ItmeLinkWithParticle item={value} />
       <span className="ml-1">지닌채</span>
-    </span>
+    </>
   );
 }
 

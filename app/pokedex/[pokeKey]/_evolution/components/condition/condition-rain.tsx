@@ -1,8 +1,12 @@
 import React from 'react';
 import { useLanguage } from '@/app/language-provider';
 
-function NeedsOverworldRain() {
+function NeedsOverworldRain({ value }: { value: boolean }) {
   const { language } = useLanguage();
+
+  if (!value) {
+    return null;
+  }
 
   const localizedContent = {
     en: 'during rain',

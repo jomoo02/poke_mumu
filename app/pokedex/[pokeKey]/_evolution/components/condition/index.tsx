@@ -1,15 +1,18 @@
 import React, { Fragment } from 'react';
-import type { ConditionItem, ConditionKey } from '../../data/condition';
+import type { ConditionItem, ConditionKey } from '@/app/models/chain.type';
 import Condition from './condition';
+import useCondition from '../../hooks/useCondition';
 
-export default function ConditionList<C extends ConditionKey>({
+export default function ConditionList({
   condition,
 }: {
-  condition: ConditionItem<C>[];
+  condition: ConditionItem<ConditionKey>[];
 }) {
+  const { sortedCondition } = useCondition(condition);
+
   return (
     <>
-      {condition.map(({ key, value }, index) => (
+      {sortedCondition.map(({ key, value }, index) => (
         <Fragment key={key}>
           {index > 0 && <span>+</span>}
           <Condition

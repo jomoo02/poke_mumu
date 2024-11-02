@@ -1,10 +1,13 @@
 import React from 'react';
+import type {
+  ConditionItem,
+  ConditionKey,
+  TriggerKey,
+} from '@/app/models/chain.type';
 import useEvolutionTrigger from '../hooks/useEvolutionTrigger';
-import type { Trigger } from '../data/evolutionTrigger';
-import type { ConditionItem, ConditionKey } from '../data/condition';
 
 interface EvolutionTriggerProps<C extends ConditionKey> {
-  trigger: Trigger;
+  trigger: TriggerKey;
   condition: ConditionItem<C>[];
 }
 
@@ -20,5 +23,5 @@ export default function EvolutionTrigger<C extends ConditionKey>({
     return null;
   }
 
-  return <span>{triggerContent}</span>;
+  return <span className="text-nowrap">{triggerContent}</span>;
 }

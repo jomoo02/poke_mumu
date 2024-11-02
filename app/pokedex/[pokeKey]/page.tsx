@@ -4,6 +4,7 @@ import PokeNavigation from './_navigation';
 import PokeAbilities from './_abilities';
 import PokeDefenseCompatibility from './_defense-compatibility';
 import PokeInformation from './_information';
+import PokeEvolution from './_evolution';
 
 interface PageProps {
   params: {
@@ -23,6 +24,7 @@ export default async function Page({ params }: PageProps) {
         <PokeAbilities pokeKey={pokeKey} />
         <PokeDefenseCompatibility pokeKey={pokeKey} />
         <PokeInformation pokeKey={pokeKey} />
+        <PokeEvolution pokeKey={pokeKey} />
       </Suspense>
     </div>
   );

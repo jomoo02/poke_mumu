@@ -1,12 +1,15 @@
 import { useLanguage } from '@/app/language-provider';
+import type {
+  ConditionItem,
+  ConditionKey,
+  TriggerKey,
+} from '@/app/models/chain.type';
 import {
   localizedTriggerContents,
-  type Trigger,
 } from '../data/evolutionTrigger';
-import type { ConditionItem, ConditionKey } from '../data/condition';
 
 export default function useEvolutionTrigger<C extends ConditionKey>(
-  trigger: Trigger,
+  trigger: TriggerKey,
   condition: ConditionItem<C>[],
 ) {
   const { language } = useLanguage();

@@ -14,24 +14,24 @@ function MinAffection({ value }: { value: number }) {
   return <span>{localeContent}</span>;
 }
 
-function MinBeauty() {
+function MinBeauty({ value }: { value: number }) {
   const { language } = useLanguage();
 
   const localizedContent = {
-    ko: '아름다움 수치 MAX 상태에서',
-    en: 'max Beauty',
+    ko: `아름다움 수치 MAX(${value}) 상태에서`,
+    en: `max Beauty(${value})`,
   };
   const localeContent = localizedContent[language];
 
   return <span>{localeContent}</span>;
 }
 
-function MinHappiness() {
+function MinHappiness({ value }: { value: number }) {
   const { language } = useLanguage();
 
   const localizedContent = {
-    en: 'with high Friendship',
-    ko: '친밀도가 높은 상태에서',
+    en: `with high Friendship${value}`,
+    ko: `친밀도가 높은 상태(${value})에서`,
   };
   const localeContent = localizedContent[language];
 
@@ -39,9 +39,12 @@ function MinHappiness() {
 }
 
 function MinLevel({ value }: { value: number }) {
-  const content = `Level ${value}`;
-
-  return <span>{content}</span>;
+  return (
+    <>
+      <span className="mr-1">Level</span>
+      <span>{value}</span>
+    </>
+  );
 }
 
 const ConditionMin = {

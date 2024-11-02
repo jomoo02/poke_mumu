@@ -1,14 +1,4 @@
-export type OtherPoke =
-  'sirfetchD'
-  | 'shedinja'
-  | 'runerigus'
-  | 'kingambit'
-  | 'urshifu_single'
-  | 'urshifu_rapid'
-  | 'lets_go'
-  | 'maushold'
-  | 'palafin'
-  | 'gholdengo';
+import type { OtherPoke } from '@/app/models/chain.type';
 
 type OtherPokeContents = Record<OtherPoke, string>;
 
