@@ -1,7 +1,8 @@
 'use server';
 
 import dbConnect from '@/app/api/db/connect';
-import PokeV2Model, { type Poke } from '@/app/models/PokeV2';
+import PokeV2Model from '@/app/models/PokeV2';
+import type { Poke } from '@/app/models/poke.type';
 
 export async function fetchPoke(pokeKey: string) {
   try {

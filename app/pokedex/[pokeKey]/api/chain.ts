@@ -1,7 +1,8 @@
 'use server';
 
 import dbConnect from '@/app/api/db/connect';
-import ChainModel, { type Chain } from '@/app/models/Chain';
+import ChainModel from '@/app/models/Chain';
+import type { Chain } from '@/app/models/chain.type';
 
 export async function fetchChain(chainIndex: number) {
   try {

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import type { Poke } from '@/app/models/PokeV2';
+import type { Poke } from '@/app/models/poke.type';
 import usePokeIdentifiers from '../../hooks/usePokeIdentifiers';
 
 interface PokeIdentifiersProps {

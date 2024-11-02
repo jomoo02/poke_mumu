@@ -1,5 +1,6 @@
 import { useLanguage } from '@/app/language-provider';
-import type { Poke, PokedexNumber } from '@/app/models/PokeV2';
+import type { PokedexNumber } from '@/app/models/PokeV2';
+import type { Poke } from '@/app/models/poke.type';
 import {
   localPokedexIndexs,
   localizedLocalPokedexs,

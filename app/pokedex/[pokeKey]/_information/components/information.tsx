@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Poke } from '@/app/models/PokeV2';
+import type { Poke } from '@/app/models/poke.type';
 import type { PokeDetail } from '@/app/models/Detail';
 import Basic from './basic';
 import Detail from './detail';

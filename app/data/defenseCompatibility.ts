@@ -1,6 +1,6 @@
 import {
   pokeTypesObj,
-  type PokeType,
+  type Type,
 } from '@/app/data/pokeType';
 
 export type EffectiveItem =
@@ -8,7 +8,7 @@ export type EffectiveItem =
   | 'notVeryEffective'
   | 'noEffect';
 
-export type EffectiveItemList = Partial<Record<EffectiveItem, PokeType[]>>;
+export type EffectiveItemList = Partial<Record<EffectiveItem, Type[]>>;
 
 const {
   normal,
@@ -31,7 +31,7 @@ const {
   psychic,
 } = pokeTypesObj;
 
-const typeDefenseCompatibility: Record<PokeType, EffectiveItemList> = {
+const typeDefenseCompatibility: Record<Type, EffectiveItemList> = {
   normal: {
     superEffective: [fighting],
     noEffect: [ghost],

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import type { Poke } from '@/app/models/PokeV2';
+import type { Poke } from '@/app/models/poke.type';
 import usePokeIdentifiers from '../../hooks/usePokeIdentifiers';
 
 interface ButtonInfoProps {
@@ -19,7 +19,7 @@ export default function ButtonInfo({
 
   const {
     no,
-    sprite
+    sprite,
   } = poke;
 
   const src = `https://raw.githubusercontent.com/jomoo02/poke_sprites/refs/heads/main/home/${sprite}.png`;

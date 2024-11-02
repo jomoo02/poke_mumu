@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PokeType from '@/app/components/poke-type';
-import { Poke } from '@/app/models/PokeV2';
+import type { Poke } from '@/app/models/poke.type';
 import InfoItem from './info-item';
 import useBasic, { type LocalNo } from '../hooks/useBasic';
 

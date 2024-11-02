@@ -2,13 +2,15 @@ import React from 'react';
 import PokeType from '@/app/components/poke-type';
 import type { Type } from '@/app/data/pokeType';
 
+interface DamageRateProps {
+  damageRate: number;
+  types: Type[];
+}
+
 export default function DamageRate({
   damageRate,
   types,
-}: {
-  damageRate: number,
-  types: Type[],
-}) {
+}: DamageRateProps) {
   const getGridColsClassName = (count: number) => {
     if (count <= 2) return 'md:grid-cols-1';
     if (count <= 4) return 'md:grid-cols-2';

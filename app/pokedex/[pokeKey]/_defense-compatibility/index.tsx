@@ -8,7 +8,9 @@ interface PokeDefenseCompatibilityProps {
   pokeKey: string;
 }
 
-export default async function PokeDefenseCompatibility({ pokeKey }: PokeDefenseCompatibilityProps) {
+export default async function PokeDefenseCompatibility({
+  pokeKey,
+}: PokeDefenseCompatibilityProps) {
   const poke = await getPoke(pokeKey);
 
   if (!poke) {

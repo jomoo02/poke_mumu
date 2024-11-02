@@ -8,7 +8,9 @@ interface PokeAbilityProps {
   ability: Ability;
 }
 
-export default function PokeAbility({ ability }: PokeAbilityProps) {
+export default function PokeAbility({
+  ability,
+}: PokeAbilityProps) {
   const {
     name,
     flavorText,

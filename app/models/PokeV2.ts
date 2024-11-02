@@ -1,28 +1,10 @@
 import mongoose from 'mongoose';
 import type { LocalPokedex } from '@/app/data/localPokedex';
-import { LanguageContent } from '../types/languageContent.type';
-import { PokeType } from '../data/pokeType';
-
-type Stats = {
-  stat: string;
-  value: number;
-};
+import type { Poke } from './poke.type';
 
 export type PokedexNumber = {
   pokedex: LocalPokedex,
   entryNumber: number;
-};
-
-export type Poke = {
-  pokeKey: string;
-  sprite: string;
-  name: LanguageContent;
-  form: LanguageContent;
-  types: PokeType[];
-  stats: Stats[];
-  no: string;
-  order: number;
-  pokedexNumbers: PokedexNumber[];
 };
 
 export type CardPoke = Required<Poke>;

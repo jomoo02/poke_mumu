@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Poke } from '@/app/models/PokeV2';
+import type { Poke } from '@/app/models/poke.type';
 import type { Type } from '@/app/data/pokeType';
 import Link from 'next/link';
 import ArrowRightIcon from '@/app/components/icons/arrow-right';

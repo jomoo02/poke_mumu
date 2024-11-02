@@ -5,6 +5,7 @@ import PokeAbilities from './_abilities';
 import PokeDefenseCompatibility from './_defense-compatibility';
 import PokeInformation from './_information';
 import PokeEvolution from './_evolution';
+import PokeStats from './_stats';
 
 interface PageProps {
   params: {
@@ -25,6 +26,7 @@ export default async function Page({ params }: PageProps) {
         <PokeDefenseCompatibility pokeKey={pokeKey} />
         <PokeInformation pokeKey={pokeKey} />
         <PokeEvolution pokeKey={pokeKey} />
+        <PokeStats pokeKey={pokeKey} />
       </Suspense>
     </div>
   );

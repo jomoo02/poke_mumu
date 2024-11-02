@@ -14,6 +14,8 @@ export async function fetchPokeDetail(pokeKey: string) {
       .findOne(query, projection)
       .lean<PokeDetail>();
 
+    console.log(result);
+
     if (!result) {
       return undefined;
     }
