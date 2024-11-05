@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import type { Ability } from '@/app/models/Detail';
+import type { Ability } from '@/app/models/detail.type';
 import useAbility from '../hooks/useAbility';
 
 interface PokeAbilityProps {
