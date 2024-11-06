@@ -23,7 +23,9 @@ const versionsKo = {
 
 export type Version = keyof typeof versionsKo;
 
-const versionsEn: Record<Version, string> = {
+type Versions = Record<Version, string>;
+
+const versionsEn: Versions = {
   'red-blue': 'Red/Blue',
   yellow: 'Yellow',
   'gold-silver': 'Gold/Silver',
@@ -46,7 +48,12 @@ const versionsEn: Record<Version, string> = {
   'scarlet-violet': 'Scarlet/Violet',
 };
 
+const localizedVersions: Record<'en' | 'ko', Versions> = {
+  en: versionsEn,
+  ko: versionsKo,
+};
+
 export {
   versionsEn,
-  versionsKo,
+  localizedVersions,
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Type } from '@/app/data/pokeType';
+import { Version } from '@/app/data/version';
 // import { Version } from '@/app/data/version';
 
 function Button({
@@ -9,7 +10,7 @@ function Button({
   children,
 }: {
   isActive: boolean;
-  onClickButton: () => React.MouseEventHandler<HTMLButtonElement>;
+  onClickButton: () => void;
   className?: string;
   children?: React.ReactNode;
 }) {
@@ -34,7 +35,7 @@ function Button({
   );
 }
 
-function Gen({
+function GenGroup({
   type,
   gens,
   targetGen,
@@ -43,7 +44,7 @@ function Gen({
   type: Type;
   gens: number[];
   targetGen: number;
-  setTargetGen: (gen: number) => React.MouseEventHandler<HTMLButtonElement>;
+  setTargetGen: (gen: number) => void;
 }) {
   return (
     <div className="flex gap-x-2 flex-wrap gap-y-2 items-center">
@@ -70,19 +71,19 @@ function Gen({
   );
 }
 
-function Version({
+function VersionGroup({
   type,
   versions,
   targetVersion,
-  setTargetVersion,
+  handleTargetVersion,
 }: {
   type: Type;
   versions: {
-    version: string;
+    version: Version;
     localeVersion: string;
   }[];
-  targetVersion: string;
-  setTargetVersion: (version: string) => React.MouseEventHandler<HTMLButtonElement>;
+  targetVersion: Version;
+  handleTargetVersion: (version: Version) => void;
 }) {
   return (
     <div className="grid grid-cols-2 lg:flex gap-x-1 gap-y-1 lg:gap-x-1.5">
@@ -93,7 +94,7 @@ function Version({
           <Button
             key={version}
             isActive={isActive}
-            onClickButton={() => setTargetVersion(version)}
+            onClickButton={() => handleTargetVersion(version)}
             className={`version-btn ${isActive ? `${type} active-version-btn` : 'inactive-btn'}`}
           >
             {localeVersion}
@@ -105,8 +106,8 @@ function Version({
 }
 
 const GroupButton = {
-  Gen,
-  Version,
+  Gen: GenGroup,
+  Version: VersionGroup,
 };
 
 export default GroupButton;

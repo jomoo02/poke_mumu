@@ -1,20 +1,21 @@
 import React from 'react';
 import CaretIcon from '@/app/components/icons/caret';
+import type { CellKey } from '../../data/cellKey';
 
 interface HeadCellProps {
   headItem: {
-    key: string;
+    key: CellKey;
     content: string;
     className: string;
   };
-  onClickHeadItem: (itemKey: string) => React.MouseEventHandler<HTMLButtonElement>;
+  handleHeadItem: (itemKey: CellKey) => void;
   selectedKey: string;
   isAsc: boolean;
 }
 
-function HeadCell({
+export default function HeadCell({
   headItem,
-  onClickHeadItem,
+  handleHeadItem,
   selectedKey,
   isAsc,
 }: HeadCellProps) {
@@ -31,7 +32,7 @@ function HeadCell({
   const buttonClassName = `${className} ${backGroundColor} flex items-center justify-between px-2 capitalize`;
 
   const handleClickHeadItem = () => {
-    onClickHeadItem(key);
+    handleHeadItem(key);
   };
 
   return (
@@ -49,10 +50,3 @@ function HeadCell({
     </button>
   );
 }
-
-// export default function TableHead({
-//   headItems,
-//   selectedKey,
-//   isAsc,
-//   onClick
-// })

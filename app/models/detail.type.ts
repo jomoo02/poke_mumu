@@ -14,19 +14,33 @@ export type MoveItem = {
   name: LanguageContent;
 };
 
-type VersionMove = {
+export type MachineType = 'tm' | 'hm' | 'tr';
+
+export type Move = {
+  move: MoveItem;
+  level?: number;
+  machine?: {
+    id: number;
+    type: MachineType;
+    number: number;
+  };
+  preIds?: number[];
+};
+
+export type MachineMove = Omit<Move, 'machine'> & {
+  machine: {
+    id: number;
+    type: MachineType;
+    number: number;
+  };
+};
+
+export type VersionMove = {
   'level-up': {
     level: number;
     move: MoveItem;
   }[] | [];
-  machine: {
-    move: MoveItem;
-    machine: {
-      id: number;
-      type: string;
-      number: number;
-    };
-  }[] | [];
+  machine: MachineMove[] | [];
   tutor: {
     move: MoveItem;
   }[] | [];
@@ -38,16 +52,19 @@ type VersionMove = {
     level: number;
     preIds: number[];
   }[] | [];
+  reminder: {
+    move: MoveItem;
+  }[] | [];
 };
 
-type GenMove = {
+export type GenMove = {
   version: Version;
   versionMoves: VersionMove;
 }[];
 
 export type Moves = {
   gen: number;
-  genMoves: GenMove[];
+  genMoves: GenMove;
 }[];
 
 export type Ability = {
