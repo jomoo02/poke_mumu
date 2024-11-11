@@ -16,9 +16,9 @@ const methodMoveTitlesKo: MethodTitles = {
   tutor: 'NPC로부터 배울 수 있는 기술',
   reminder: '떠올리기로 익히는 기술',
   pre: '이전 진화에서만 얻을 수 있는 기술',
-  hm: '기술머신 HM 으로 익히는 기술',
-  tm: '기술머신 TM 으로 익히는 기술',
-  tr: '기술머신 TR 으로 익히는 기술',
+  hm: '기술머신 HM으로 익히는 기술',
+  tm: '기술머신 TM으로 익히는 기술',
+  tr: '기술머신 TR로 익히는 기술',
 };
 
 const methodMoveTitlesEn: MethodTitles = {

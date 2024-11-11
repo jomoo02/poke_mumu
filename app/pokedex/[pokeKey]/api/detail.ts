@@ -1,6 +1,7 @@
 'use server';
 
-import DetailModel, { type PokeDetail } from '@/app/models/Detail';
+import DetailModel from '@/app/models/Detail';
+import type { PokeDetail } from '@/app/models/detail.type';
 import dbConnect from '@/app/api/db/connect';
 
 export async function fetchPokeDetail(pokeKey: string) {
@@ -13,8 +14,6 @@ export async function fetchPokeDetail(pokeKey: string) {
     const result = await DetailModel
       .findOne(query, projection)
       .lean<PokeDetail>();
-
-    console.log(result);
 
     if (!result) {
       return undefined;

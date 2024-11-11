@@ -1,6 +1,6 @@
 import React from 'react';
-import { Poke } from '@/app/models/poke.type';
-import { PokeDetail } from '@/app/models/detail.type';
+import './styles/button.css';
+import './styles/move.css';
 import { getPoke, getPokeDetail } from '../utils/get';
 import MoveList from './components/moves';
 import Header from '../components/header';
@@ -13,7 +13,7 @@ interface PokeMovesProps {
 export default async function PokeMoves({
   pokeKey,
 }: PokeMovesProps) {
-  const [poke, pokeDetail]: [Poke, PokeDetail] = await Promise.all([
+  const [poke, pokeDetail] = await Promise.all([
     getPoke(pokeKey),
     getPokeDetail(pokeKey),
   ]);

@@ -1,0 +1,19 @@
+.inactive-btn {
+  @apply bg-slate-200 hover:bg-slate-400/70;
+}
+
+.version-btn {
+  @apply font-medium rounded-t-lg py-1 px-1 lg:px-3.5 text-sm md:text-base;
+}
+
+.gen-btn {
+  @apply flex items-center justify-center rounded-md px-2 py-1 h-7 min-w-10 md:min-w-11 md:max-w-11;
+}
+
+.active-version-btn {
+  @apply text-white text-center flex items-center justify-center;
+}
+
+.active-gen-btn {
+  @apply text-white;
+}

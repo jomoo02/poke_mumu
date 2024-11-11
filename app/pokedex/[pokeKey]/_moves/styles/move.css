@@ -1,0 +1,39 @@
+.head-name {
+  @apply w-[10.2rem];
+}
+
+.head-type {
+  @apply w-[5.25rem];
+}
+
+.head-damageClass {
+  @apply w-[5.25rem];
+}
+
+.head-power {
+  @apply w-[5.25rem];
+}
+
+.head-accuracy {
+  @apply w-[5.25rem];
+}
+
+.head-level {
+  @apply w-[3.25rem];
+}
+
+.head-hm {
+  @apply w-14;
+}
+
+.head-tm {
+  @apply w-14;
+}
+
+.head-tr {
+  @apply w-14;
+}
+
+.head-pre {
+  @apply w-[4.8rem];
+}

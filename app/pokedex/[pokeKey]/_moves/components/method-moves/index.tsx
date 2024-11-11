@@ -4,7 +4,12 @@ import TableCell from './table-cell';
 import HeadCell from './table-head';
 import useMethodMoveTableHead from '../../hooks/useMethodMoveTableHead';
 import useMethodMoveTableMove from '../../hooks/useMethodMoveTableMove';
+import useMethodMoveTitle from '../../hooks/useMethodMoveTitle';
 import { Method } from '../../data/method';
+
+interface MethodMoveTitleProps {
+  method: Method;
+}
 
 interface MethodMoveTableProps {
   moves: Move[];
@@ -13,6 +18,18 @@ interface MethodMoveTableProps {
 
 interface MethodMovesProps extends MethodMoveTableProps {
   className?: string;
+}
+
+function MethodMoveTitle({
+  method,
+}: MethodMoveTitleProps) {
+  const { title } = useMethodMoveTitle(method);
+
+  return (
+    <h3 className="capitalize font-bold text-slate-800 mb-2.5 text-lg">
+      {title}
+    </h3>
+  );
 }
 
 function MethodMoveTable({
@@ -70,7 +87,9 @@ export default function MethodMoves({
 }: MethodMovesProps) {
   return (
     <div className={className}>
-      <div className="px-1 md:px-4">title</div>
+      <div className="px-1 md:px-4">
+        <MethodMoveTitle method={method} />
+      </div>
       <div className="flex px-1 md:px-4 overflow-x-auto">
         <MethodMoveTable
           method={method}
