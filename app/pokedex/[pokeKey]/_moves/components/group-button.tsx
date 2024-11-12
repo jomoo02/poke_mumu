@@ -1,7 +1,6 @@
 import React from 'react';
 import { Type } from '@/app/data/pokeType';
 import { Version } from '@/app/data/version';
-// import { Version } from '@/app/data/version';
 
 function Button({
   isActive,

@@ -82,7 +82,7 @@ export default function SearchResultPoke({ pokeInfo }: { pokeInfo: SearchPoke })
     <div className="px-2.5 sm:px-3 md:px-4 h-full">
       <div className="flex h-full justify-between items-center">
         <Link
-          href={`/detail/${pokeKey}`}
+          href={`/pokedex/${pokeKey}`}
           onClick={handleOnClick}
           onKeyDown={handleOnEnter}
           prefetch

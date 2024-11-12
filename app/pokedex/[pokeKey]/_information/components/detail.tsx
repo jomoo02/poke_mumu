@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import type { PokeDetail } from '@/app/models/Detail';
+import type { PokeDetail } from '@/app/models/detail.type';
 import useDetail from '../hooks/useDetail';
 import InfoItem from './info-item';
 

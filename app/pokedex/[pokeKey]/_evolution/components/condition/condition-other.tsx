@@ -1,9 +1,7 @@
 import React from 'react';
 import { useLanguage } from '@/app/language-provider';
-import {
-  localizedOtherPokeContents,
-  type OtherPoke,
-} from '../../data/conditionOther';
+import type { OtherPoke } from '@/app/models/chain.type';
+import { localizedOtherPokeContents } from '../../data/conditionOther';
 
 function Other({ value }: { value: OtherPoke }) {
   const { language } = useLanguage();

@@ -30,9 +30,9 @@ export default function NavigationSkeleton({ pokeKey }: { pokeKey: string }) {
   const isViewRight = pokeKey !== end;
 
   return (
-    <div className="grid gap-y-3 md:flex-row md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-12 lg:gap-x-20 xl:gap-x-0 animate-pulse">
+    <div className="grid gap-y-3 lg:grid-cols-2 xl:grid-cols-3 gap-x-12 lg:gap-x-20 xl:gap-x-0 animate-pulse">
       {isViewLeft && <Before />}
-      <div className="md:col-start-2 xl:col-span-1 lg:col-start-3 xl:col-start-4">
+      <div className="lg:col-start-2 xl:col-start-3">
         {isViewRight && <Next />}
       </div>
     </div>

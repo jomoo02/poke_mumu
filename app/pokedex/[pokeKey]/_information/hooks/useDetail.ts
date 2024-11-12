@@ -8,7 +8,7 @@ import {
   type GrowthRate,
 } from '@/app/data/growthRate';
 import { localizedStats } from '@/app/data/stats';
-import { PokeDetail } from '@/app/models/Detail';
+import { PokeDetail } from '@/app/models/detail.type';
 import { localizedSubjects } from '../data/subject';
 
 function setGrowthRate(language: Language, growthRate: GrowthRate = defaultGrowthRate) {

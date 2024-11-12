@@ -15,7 +15,7 @@ function checkVersionMoveEmpty(versionMove: VersionMove) {
 }
 
 function groupMachineMovesByMachineType(machineMoves: MachineMove[]) {
-  const machineTypes: MachineType[] = ['hm', 'tm', 'tr'];
+  const machineTypes: MachineType[] = ['tm', 'tr', 'hm'];
 
   const filterMoveByType = (machineType: MachineType) => (
     machineMoves

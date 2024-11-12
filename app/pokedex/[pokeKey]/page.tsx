@@ -7,6 +7,7 @@ import PokeInformation from './_information';
 import PokeEvolution from './_evolution';
 import PokeStats from './_stats';
 import PokeMoves from './_moves';
+import PageSkeleton from './components/page-skeleton';
 
 interface PageProps {
   params: {
@@ -21,14 +22,16 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div className="px-2.5 xs:px-4">
-      <Suspense fallback={<div>1</div>}>
-        <PokeNavigation pokeKey={pokeKey} />
-        <PokeAbilities pokeKey={pokeKey} />
-        <PokeDefenseCompatibility pokeKey={pokeKey} />
-        <PokeInformation pokeKey={pokeKey} />
-        <PokeEvolution pokeKey={pokeKey} />
-        <PokeStats pokeKey={pokeKey} />
-        <PokeMoves pokeKey={pokeKey} />
+      <Suspense fallback={<PageSkeleton pokeKey={pokeKey} />}>
+        <div className="grid gap-y-12">
+          <PokeNavigation pokeKey={pokeKey} />
+          <PokeInformation pokeKey={pokeKey} />
+          <PokeAbilities pokeKey={pokeKey} />
+          <PokeDefenseCompatibility pokeKey={pokeKey} />
+          <PokeStats pokeKey={pokeKey} />
+          <PokeEvolution pokeKey={pokeKey} />
+          <PokeMoves pokeKey={pokeKey} />
+        </div>
       </Suspense>
     </div>
   );

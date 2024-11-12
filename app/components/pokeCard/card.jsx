@@ -78,7 +78,7 @@ export default function Card({ basicInfo }) {
         </div>
         <Link
           onClick={handleClick}
-          href={`/detail/${pokeKey}`}
+          href={`/pokedex/${pokeKey}`}
           prefetch
         >
           <div className="flex xs:my-1 pr-4 xs:pr-0 justify-center poke-card">

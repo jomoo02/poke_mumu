@@ -1,29 +1,14 @@
 import React from 'react';
 import './styles/information.css';
-import Image from 'next/image';
 import { getPoke, getPokeDetail } from '../utils/get';
 import { headerKeys } from '../data/header';
 import Information from './components/information';
 import Header from '../components/header';
 import PokeIdentifiers from './components/poke-identifiers';
+import PokeImage from './components/poke-image';
 
 interface PokeInformationProps {
   pokeKey: string;
-}
-
-function PokeImage({ alt }: { alt: string }) {
-  const src = '/pokeball.svg';
-  return (
-    <div className="flex justify-center items-center py-3 md:py-0">
-      <Image
-        src={src}
-        alt={alt}
-        width={200}
-        height={200}
-        priority
-      />
-    </div>
-  );
 }
 
 export default async function PokeInformation({ pokeKey }: PokeInformationProps) {
@@ -40,6 +25,7 @@ export default async function PokeInformation({ pokeKey }: PokeInformationProps)
     types,
     name,
     pokedexNumbers,
+    sprite,
   } = poke;
 
   const type = types[0];
@@ -65,7 +51,7 @@ export default async function PokeInformation({ pokeKey }: PokeInformationProps)
       <div className={`border-2 border-t-0 ${type}-border grid xl:grid-cols-3 items-center`}>
         <div className="py-10">
           <PokeImage
-            // sprity={sprity}
+            sprite={sprite}
             alt={name.en}
           />
         </div>

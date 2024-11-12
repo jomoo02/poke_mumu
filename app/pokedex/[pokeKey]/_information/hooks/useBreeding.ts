@@ -1,5 +1,5 @@
 import { Language, useLanguage } from '@/app/language-provider';
-import type { PokeDetail } from '@/app/models/Detail';
+import type { PokeDetail } from '@/app/models/detail.type';
 import {
   noEggs,
   localizedEggGroups,

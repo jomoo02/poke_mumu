@@ -1,5 +1,5 @@
 import { useLanguage } from '@/app/language-provider';
-import type { Poke } from '@/app/models/PokeV2';
+import type { Poke } from '@/app/models/poke.type';
 
 export default function usePokeIdentifiers(poke: Poke) {
   const {

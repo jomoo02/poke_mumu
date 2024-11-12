@@ -1,6 +1,6 @@
 import { useLanguage } from '@/app/language-provider';
 import type { LanguageContent } from '@/app/types/languageContent.type';
-import type { Ability } from '@/app/models/Detail';
+import type { Ability } from '@/app/models/detail.type';
 
 export default function useAbility({
   name,

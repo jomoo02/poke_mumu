@@ -1,5 +1,5 @@
 import React from 'react';
-import { Move } from '@/app/models/detail.type';
+import type { Move } from '@/app/models/detail.type';
 import TableCell from './table-cell';
 import HeadCell from './table-head';
 import useMethodMoveTableHead from '../../hooks/useMethodMoveTableHead';

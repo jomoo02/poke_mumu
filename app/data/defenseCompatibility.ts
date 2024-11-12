@@ -45,7 +45,7 @@ const typeDefenseCompatibility: Record<Type, EffectiveItemList> = {
     notVeryEffective: [fire, water, ice, steel],
   },
   grass: {
-    superEffective: [fire, ice, flying, bug],
+    superEffective: [fire, ice, flying, bug, poison],
     notVeryEffective: [water, grass, electric, ground],
   },
   electric: {
