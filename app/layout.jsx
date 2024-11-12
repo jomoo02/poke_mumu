@@ -21,7 +21,7 @@ export default function RootLayout({ children, modal }) {
           <div>
             {modal}
           </div>
-          <main className="px-2.5 xs:px-4 sm:px-8 md:px-10 py-6 min-h-svh xl:px-16">
+          <main className="sm:px-8 md:px-10 py-6 min-h-svh xl:px-16">
             {children}
           </main>
           <div id="modal" />

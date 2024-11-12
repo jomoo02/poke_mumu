@@ -1,0 +1,35 @@
+.w-pokedex {
+  @apply w-full sm:w-[420px] md:w-[520px] lg:w-[920px] xl:w-[1100px];
+}
+
+.w-card-number {
+  @apply min-w-[4rem] w-[4rem] xl:min-w-[4.5rem] xl:w-[4.5rem] px-2.5;
+}
+
+.w-card-name {
+  @apply grow px-2;
+}
+
+.w-card-img {
+  @apply w-[50px] h-[48px] xl:w-[58px] xl:h-[56px] relative;
+}
+
+.w-card-type {
+  @apply min-w-24 w-24 px-2;
+}
+
+.w-card-stat {
+  @apply w-20 xl:w-24 px-3;
+}
+
+.pokedex-header {
+  @apply w-pokedex text-sm sticky flex h-10 items-stretch top-0 md:top-14 bg-slate-200 border-y border-sky-900 divide-sky-900 z-50 divide-x font-bold text-slate-700;
+}
+
+.pokedex-header-total {
+  @apply w-card-stat hidden md:flex items-center justify-center;
+}
+
+.pokedex-header-stat {
+  @apply w-card-stat hidden lg:flex items-center justify-center;
+}

@@ -9,9 +9,9 @@ const pokeScema = new mongoose.Schema({
   form: Object,
   order: {
     type: Number,
-    unique: true,
+    // unique: true,
   },
-  pokKey: String,
+  pokeKey: String,
   chainIndex: Number,
   height: Number,
   weight: Number,

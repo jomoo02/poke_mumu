@@ -3,6 +3,26 @@
 import { cache } from 'react';
 import PokeModel from '../models/Poke.mjs';
 import dbConnect from './db/connect.ts';
+import PokeV2Model from '../models/PokeV2.ts';
+
+export const fetchTestV2 = async () => {
+  const query = {};
+  const projection = { _id: 0 };
+
+  const res = await PokeV2Model.find(query, projection).sort({ order: 1 }).lean();
+  return res;
+};
+
+export const fetchTest = async () => {
+  const query = {};
+  const projection = {
+    _id: 0,
+  };
+
+  const pokes = await PokeModel.find(query, projection).sort({ order: 1 }).lean();
+
+  return pokes;
+};
 
 export const fetchPokeKey = cache(async (pokeKey) => {
   await dbConnect();
