@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useLanguage } from '@/app/language-provider';
-import typesKo from '@/app/translations/type';
+import { typesKo } from '@/app/data/pokeType';
 
 export type TypeItem =
   'normal'

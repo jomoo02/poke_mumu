@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { useLanguage } from '@/app/language-provider';
-import typesKo from '@/app/translations/type';
-import { PokeTypeItem } from '../data/pokeType';
+import { typesKo, type PokeTypeItem } from '../data/pokeType';
 
 interface PokeTypeProps {
   type: PokeTypeItem;

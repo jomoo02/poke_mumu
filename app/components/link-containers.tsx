@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { MOVE_KO, type MoveKey } from '@/app/translations/move';
+import { movesKo, type MoveKey } from '@/app/data/move';
 import {
   makeFirstUpperCaseTextArray,
   getKoreanParticle,
@@ -8,8 +8,9 @@ import {
   getKoreanParticleForAnd,
   getKoreanSubjectParticle,
 } from '@/app/utils/utils';
-import { ALL_ITEM_KO, ITEM_EN, type ItemKey } from '@/app/translations/item';
-import { POKE_KO, type PokeKey } from '@/app/translations/poke';
+import { totalItemsKo, itemsEn, type ItemKey } from '@/app/data/item';
+import { partySpecies, type PartySpeciesPoke } from '../data/partySpecies';
+import { tradeSpeciesKo, type TradeSpeciesPoke } from '../data/tradeSpecies';
 import { useLanguage } from '../language-provider';
 import type { Language } from '../language-provider';
 
@@ -25,8 +26,8 @@ export function MoveLink({ move }: {
 
   const MOVE_HANDLE: Record<Language, MoveLinkHandle> = {
     ko: {
-      getText: (target: MoveKey) => MOVE_KO[target],
-      getParticle: (target: MoveKey) => getKoreanParticle(MOVE_KO[target]),
+      getText: (target: MoveKey) => movesKo[target],
+      getParticle: (target: MoveKey) => getKoreanParticle(movesKo[target]),
     },
     en: {
       getText: (target: string) => makeFirstUpperCaseTextArray(target.split('-')),
@@ -53,8 +54,8 @@ export function ItemLink({
 }) {
   const { language } = useLanguage();
 
-  const itemKo = ALL_ITEM_KO[item];
-  const itemEn = item in ITEM_EN ? ITEM_EN[item as keyof typeof ITEM_EN] : item;
+  const itemKo = totalItemsKo[item];
+  const itemEn = item in itemsEn ? itemsEn[item as keyof typeof itemsEn] : item;
 
   const itemText = language === 'ko' ? itemKo : makeFirstUpperCaseTextArray(itemEn.split('-'));
 
@@ -71,7 +72,7 @@ export function ItmeLinkWithParticle({ item }: {
 }) {
   const { language } = useLanguage();
 
-  const particle = language === 'ko' ? getKoreanParticle(ALL_ITEM_KO[item]) : '';
+  const particle = language === 'ko' ? getKoreanParticle(totalItemsKo[item]) : '';
 
   return (
     <ItemLink item={item}>
@@ -81,28 +82,33 @@ export function ItmeLinkWithParticle({ item }: {
 }
 
 export function PokeLink({ poke, children }: {
-  poke: PokeKey,
+  poke: TradeSpeciesPoke | PartySpeciesPoke,
   children?: React.ReactNode,
 }) {
   const { language } = useLanguage();
 
+  const targetPokes = { ...partySpecies, ...tradeSpeciesKo };
+
   const pokeEn = poke;
-  const pokeKo = POKE_KO[poke];
+  const pokeKo = targetPokes[poke];
   const text = language === 'ko' ? pokeKo : makeFirstUpperCase(pokeEn);
 
   return (
     <>
-      <Link href={`/detail/${poke}`} className="underline hover:text-blue-400">{text}</Link>
+      <Link href={`/pokedex/${poke}`} className="underline hover:text-blue-400">{text}</Link>
       {children}
     </>
   );
 }
 
 export function PokeLinkWithSubjectParticle({ poke }: {
-  poke: PokeKey,
+  poke: TradeSpeciesPoke | PartySpeciesPoke,
 }) {
   const { language } = useLanguage();
-  const subjectParticle = language === 'ko' ? getKoreanSubjectParticle(POKE_KO[poke]) : '';
+
+  const targetPokes = { ...partySpecies, ...tradeSpeciesKo };
+  const pokeKo = targetPokes[poke];
+  const subjectParticle = language === 'ko' ? getKoreanSubjectParticle(pokeKo) : '';
 
   return (
     <PokeLink poke={poke}>
@@ -112,10 +118,12 @@ export function PokeLinkWithSubjectParticle({ poke }: {
 }
 
 export function PokeLinkWithParticleForAnd({ poke }: {
-  poke: PokeKey,
+  poke: TradeSpeciesPoke | PartySpeciesPoke,
 }) {
   const { language } = useLanguage();
-  const particleForAnd = language === 'ko' ? getKoreanParticleForAnd(POKE_KO[poke]) : '';
+  const targetPokes = { ...partySpecies, ...tradeSpeciesKo };
+  const pokeKo = targetPokes[poke];
+  const particleForAnd = language === 'ko' ? getKoreanParticleForAnd(pokeKo) : '';
 
   return (
     <PokeLink poke={poke}>
